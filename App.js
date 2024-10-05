@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -14,7 +14,49 @@ const MyButton = ({buttonText, onPress}) => {
 
 export default App = () => {
   const [showAnswer, setShowAnswer] = useState(false);
+  const [currQ, setCurrQ] = useState(null);
+  const [questionBag, setQuestionBag] = useState([]);
   const hideAnswer = !showAnswer;
+
+  const nextQuestion = () => {
+    // if bag empty
+      // refill bag
+    setShowAnswer(false); // hide answer before next question loaded
+    // setCurrQ(questionBag.pop())
+    // setQuestionBag(questionBag)
+  };
+
+  const getData = () => {
+    fetch(
+      'assets/questions.json',
+      {
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+      });
+  }
+
+  useEffect(()=>{
+    getData()
+  }, [])
+
+  /*
+  on init
+    - no question
+    - load json
+    - load first question
+    - now show question
+  */
+
   return (
     <View style={styles.container}>
       <View style={styles.topHalf}>
@@ -22,11 +64,13 @@ export default App = () => {
         <View><Text>text 2</Text></View>
         <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
       </View>
-      {showAnswer && (<View style={styles.bottomHalf}>
-      <View><Text>text 3</Text></View>
-      <View><Text>text 4</Text></View>
-      <MyButton onPress={() => setShowAnswer(false)} buttonText="Next Question"></MyButton>
-      </View>)}
+      {showAnswer && (
+        <View style={styles.bottomHalf}>
+          <View><Text>text 3</Text></View>
+          <View><Text>text 4</Text></View>
+          <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
+        </View>
+      )}
       {hideAnswer && (<View style={styles.bottomHalf}></View>)}
     </View>
   );
