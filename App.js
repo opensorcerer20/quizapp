@@ -14,19 +14,14 @@ const MyButton = ({buttonText, onPress}) => {
 
 export default App = () => {
   const [showAnswer, setShowAnswer] = useState(false);
-  const [currQ, setCurrQ] = useState(null);
-  const [questionBag, setQuestionBag] = useState([]);
-  const hideAnswer = !showAnswer;
+  const [currState, setCurrState] = useState({currQ: null, questionBag: null});
 
   const nextQuestion = () => {
-    // if bag empty
-      // refill bag
-    setShowAnswer(false); // hide answer before next question loaded
-    // setCurrQ(questionBag.pop())
-    // setQuestionBag(questionBag)
+    setShowAnswer(false);
+    setCurrState({...currState, currQ: null});
   };
 
-  const getData = () => {
+  const getData = async () => {
     fetch(
       'assets/questions.json',
       {
@@ -41,37 +36,55 @@ export default App = () => {
         return response.json();
       })
       .then(function(myJson) {
-        console.log(myJson);
+        setCurrState({...currState, questionBag: myJson});
       });
   }
 
-  useEffect(()=>{
-    getData()
+  useEffect(() => {
+    if (currState.questionBag) {
+      if (currState.questionBag.length > 0) {
+        if (!currState.currQ) {
+          // load next question
+          const newQuestionBag = currState.questionBag;
+          setCurrState({currQ: newQuestionBag.pop(), questionBag: newQuestionBag});
+        }
+      } else {
+        // out of questions, reset
+        const reset = async () => {
+          await getData();
+        }
+        reset();
+      }
+    }
+  }, [currState]);
+
+  useEffect(() => {
+    const init = async () => {
+      await getData();
+    }
+    init();
   }, [])
 
-  /*
-  on init
-    - no question
-    - load json
-    - load first question
-    - now show question
-  */
+  //console.log('currstate ' + JSON.stringify(currState));
 
   return (
     <View style={styles.container}>
-      <View style={styles.topHalf}>
-        <View><Text>text 1</Text></View>
-        <View><Text>text 2</Text></View>
-        <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
-      </View>
-      {showAnswer && (
-        <View style={styles.bottomHalf}>
-          <View><Text>text 3</Text></View>
-          <View><Text>text 4</Text></View>
-          <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
+      {currState.currQ ? (
+        <>
+        <View style={styles.topHalf}>
+          <View><Text>{currState.currQ.q}</Text></View>
+          <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
         </View>
+        {showAnswer ? (
+          <View style={styles.bottomHalf}>
+            <View><Text>{currState.currQ.a}</Text></View>
+            <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
+          </View>
+        ) : (<View style={styles.bottomHalf}></View>)}
+      </>
+      ) : (
+        <View><Text>Loading...</Text></View>
       )}
-      {hideAnswer && (<View style={styles.bottomHalf}></View>)}
     </View>
   );
 };
