@@ -36,7 +36,13 @@ export default App = () => {
         return response.json();
       })
       .then(function(myJson) {
-        setCurrState({...currState, questionBag: myJson});
+        // randomize questions
+        // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
+        const questionBag = myJson
+          .map(value => ({ value, sort: Math.random() }))
+          .sort((a, b) => a.sort - b.sort)
+          .map(({ value }) => value)
+        setCurrState({...currState, questionBag});
       });
   }
 
