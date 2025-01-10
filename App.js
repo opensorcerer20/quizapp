@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
+import * as DocumentPicker from 'expo-document-picker';
 
 const MyButton = ({buttonText, onPress}) => {
   const noop = () => {};
@@ -15,36 +16,68 @@ const MyButton = ({buttonText, onPress}) => {
 export default App = () => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
+  const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null});
 
   const nextQuestion = () => {
     setShowAnswer(false);
     setCurrState({...currState, currQ: null});
   };
 
-  const getData = async () => {
+  const getFileData = async (fileUri) => {
     fetch(
-      'assets/questions.json',
+      fileUri,
       {
         headers : {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'text/plain',
+          'Accept': 'text/plain'
         }
       }
     )
       .then((response) => {
-        console.log(response)
-        return response.json();
+        return response.text();
       })
-      .then(function(myJson) {
+      .then(function(text) {
+        // clean input that could have \r\n
+        var quizData = text.split("\n");
+        quizData = quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
+
+        // assume even number = qaqaqa etc
+        if (quizData.length % 2 === 1) {
+          quizData.pop();
+        }
+        
+        // make {q,a} object array
+        var questions = [];
+        for (var i = 0; i < quizData.length; i += 2) {
+          questions.push({q: quizData[i], a: quizData[i + 1]});
+        }
+
         // randomize questions
         // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
-        const questionBag = myJson
+
+        // now we have {q,a} array and can make a question bag
+        const questionBag = questions
           .map(value => ({ value, sort: Math.random() }))
           .sort((a, b) => a.sort - b.sort)
           .map(({ value }) => value)
         setCurrState({...currState, questionBag});
+
       });
   }
+
+  const pickQuestionFile = async () => {
+    try {
+      const docRes = await DocumentPicker.getDocumentAsync({
+        type: "text/plain",
+      });
+
+      setCurrSource(docRes.assets[0]);
+
+    } catch (error) {
+      console.log("Error while selecting file: ", error);
+    }
+  };
+
 
   useEffect(() => {
     if (currState.questionBag) {
@@ -57,7 +90,9 @@ export default App = () => {
       } else {
         // out of questions, reset
         const reset = async () => {
-          await getData();
+          // need to save questions {q,a}, then refill question bag
+          console.log('reset broken');
+          // await getData();
         }
         reset();
       }
@@ -65,13 +100,13 @@ export default App = () => {
   }, [currState]);
 
   useEffect(() => {
-    const init = async () => {
-      await getData();
+    const init = async (uri) => {
+      await getFileData(uri);
     }
-    init();
-  }, [])
-
-  //console.log('currstate ' + JSON.stringify(currState));
+    if (currSource.uri) {
+      init(currSource.uri);
+    }
+  }, [currSource])
 
   return (
     <View style={styles.container}>
@@ -89,14 +124,24 @@ export default App = () => {
         ) : (<View style={styles.bottomHalf}></View>)}
       </>
       ) : (
-        <View><Text>Loading...</Text></View>
+        <>
+            <View><Text>Loading...</Text></View>
+            <View style={styles.insideContainer}>
+              <MyButton onPress={pickQuestionFile} buttonText="Pick Question File" />
+            </View>
+        </>
       )}
+      <StatusBar style="dark" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    marginTop: 50,
+  },
+  insideContainer: {
     flex: 1,
   },
   topHalf: {
