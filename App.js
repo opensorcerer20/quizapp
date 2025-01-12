@@ -17,6 +17,7 @@ export default App = () => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null});
+  const [questionData, setQuestionData] = useState([]);
 
   const nextQuestion = () => {
     setShowAnswer(false);
@@ -41,7 +42,7 @@ export default App = () => {
         var quizData = text.split("\n");
         quizData = quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
 
-        // assume even number = qaqaqa etc
+        // assume even number with question/answer pairs
         if (quizData.length % 2 === 1) {
           quizData.pop();
         }
@@ -52,16 +53,7 @@ export default App = () => {
           questions.push({q: quizData[i], a: quizData[i + 1]});
         }
 
-        // randomize questions
-        // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
-
-        // now we have {q,a} array and can make a question bag
-        const questionBag = questions
-          .map(value => ({ value, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value)
-        setCurrState({...currState, questionBag});
-
+        setQuestionData(questions);
       });
   }
 
@@ -78,6 +70,15 @@ export default App = () => {
     }
   };
 
+  const fillQuestionBag = () => {
+    // randomize questions
+    // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
+    const questionBag = questionData
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value)
+    setCurrState({...currState, questionBag});
+  }
 
   useEffect(() => {
     if (currState.questionBag) {
@@ -88,13 +89,7 @@ export default App = () => {
           setCurrState({currQ: newQuestionBag.pop(), questionBag: newQuestionBag});
         }
       } else {
-        // out of questions, reset
-        const reset = async () => {
-          // need to save questions {q,a}, then refill question bag
-          console.log('reset broken');
-          // await getData();
-        }
-        reset();
+        fillQuestionBag();
       }
     }
   }, [currState]);
@@ -107,6 +102,12 @@ export default App = () => {
       init(currSource.uri);
     }
   }, [currSource])
+
+  useEffect(() => {
+    if (questionData.length > 0) {
+      fillQuestionBag();
+    }
+  }, [questionData]);
 
   return (
     <View style={styles.container}>
