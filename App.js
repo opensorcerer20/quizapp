@@ -3,12 +3,22 @@ import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const MyButton = ({buttonText, onPress}) => {
   const noop = () => {};
   return (
     <Pressable style={styles.button} onPress={onPress ?? noop}>
       <Text style={styles.buttonText}>{buttonText ?? "Next"}</Text>
+    </Pressable>
+  );
+};
+
+const MyButton2 = (props) => {
+  const noop = () => {};
+  return (
+    <Pressable onPress={props.onPress ?? noop}>
+      {props.children ?? null}
     </Pressable>
   );
 };
@@ -80,6 +90,10 @@ export default App = () => {
     setCurrState({...currState, questionBag});
   }
 
+  const clearQuestions = () => {
+    setQuestionData([]);
+  }
+
   useEffect(() => {
     if (currState.questionBag) {
       if (currState.questionBag.length > 0) {
@@ -111,19 +125,37 @@ export default App = () => {
 
   return (
     <View style={styles.container}>
-      {currState.currQ ? (
+      {questionData.length > 0 ? (
         <>
-        <View style={styles.topHalf}>
-          <View><Text>{currState.currQ.q}</Text></View>
-          <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
-        </View>
-        {showAnswer ? (
-          <View style={styles.bottomHalf}>
-            <View><Text>{currState.currQ.a}</Text></View>
-            <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
+          <View style={[styles.insideContainer, {flexDirection: "row"}]}>
+            <View style={{flex: 1}}>
+              <MyButton2 onPress={() => clearQuestions()}>
+                <Ionicons name="arrow-back-circle-outline" size={32} color="black"></Ionicons>
+              </MyButton2>
+            </View>
+            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
+              <MyButton2 onPress={() => console.log('gear press')}>
+                <Ionicons name="settings-outline" size={32} color="black"></Ionicons>
+              </MyButton2>
+            </View>
           </View>
-        ) : (<View style={styles.bottomHalf}></View>)}
-      </>
+          { currState.currQ && (
+            <>
+              <View style={styles.topHalf}>
+                <View><Text>{currState.currQ.q}</Text></View>
+                <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
+              </View>
+              {showAnswer ? (
+                <View style={styles.bottomHalf}>
+                  <View><Text>{currState.currQ.a}</Text></View>
+                  <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
+                </View>
+              ) : (
+                <View style={styles.bottomHalf}></View>
+              )}
+            </>
+          )}
+        </>
       ) : (
         <>
             <View><Text>Loading...</Text></View>
@@ -144,6 +176,7 @@ const styles = StyleSheet.create({
   },
   insideContainer: {
     flex: 1,
+    flexBasis: "auto",
   },
   topHalf: {
     flex: 1,
