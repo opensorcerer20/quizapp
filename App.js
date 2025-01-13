@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -24,6 +24,8 @@ const MyButton2 = (props) => {
 };
 
 export default App = () => {
+  //const colorScheme = useColorScheme();
+  const colorScheme = "light";
   const [showAnswer, setShowAnswer] = useState(false);
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null});
@@ -123,43 +125,44 @@ export default App = () => {
     }
   }, [questionData]);
 
+  const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, scheme.bg]}>
       {questionData.length > 0 ? (
         <>
-          <View style={[styles.insideContainer, {flexDirection: "row"}]}>
+          <View style={[styles.insideContainer, {flexDirection: "row"}, scheme.bg]}>
             <View style={{flex: 1}}>
               <MyButton2 onPress={() => clearQuestions()}>
-                <Ionicons name="arrow-back-circle-outline" size={32} color="black"></Ionicons>
+                <Ionicons name="arrow-back-circle-outline" size={32} color={scheme.txt.color}></Ionicons>
               </MyButton2>
             </View>
             <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
               <MyButton2 onPress={() => console.log('gear press')}>
-                <Ionicons name="settings-outline" size={32} color="black"></Ionicons>
+                <Ionicons name="settings-outline" size={32} color={scheme.txt.color}></Ionicons>
               </MyButton2>
             </View>
           </View>
           { currState.currQ && (
             <>
-              <View style={styles.topHalf}>
-                <View><Text>{currState.currQ.q}</Text></View>
+              <View style={[styles.topHalf, scheme.bg]}>
+                <View><Text style={scheme.txt}>{currState.currQ.q}</Text></View>
                 <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
               </View>
               {showAnswer ? (
-                <View style={styles.bottomHalf}>
-                  <View><Text>{currState.currQ.a}</Text></View>
+                <View style={[styles.bottomHalf, scheme.bg2]}>
+                  <View><Text style={scheme.txt}>{currState.currQ.a}</Text></View>
                   <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
                 </View>
               ) : (
-                <View style={styles.bottomHalf}></View>
+                <View style={[styles.bottomHalf, scheme.bg2]}></View>
               )}
             </>
           )}
         </>
       ) : (
         <>
-            <View><Text>Loading...</Text></View>
-            <View style={styles.insideContainer}>
+            <View style={[styles.insideContainer, scheme.bg]}>
               <MyButton onPress={pickQuestionFile} buttonText="Pick Question File" />
             </View>
         </>
@@ -179,13 +182,12 @@ const styles = StyleSheet.create({
     flexBasis: "auto",
   },
   topHalf: {
-    flex: 1,
-    backgroundColor: "#ffffff",
+    flex: 5,
     alignItems: "center",
     justifyContent: "center",
   },
   bottomHalf: {
-    flex: 1,
+    flex: 5,
     backgroundColor: "#aaaaaa",
     alignItems: "center",
     justifyContent: "center",
@@ -199,4 +201,26 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
+  schemeDark: {
+    bg: {
+      backgroundColor: "#555555",
+    },
+    bg2: {
+      backgroundColor: "#888888",
+    },
+    txt: {
+      color: "#dddddd",
+    }
+  },
+  schemeLight: {
+    bg: {
+      backgroundColor: "#ffffff",
+    },
+    bg2: {
+      backgroundColor: "#aaaaaa",
+    },
+    txt: {
+      color: "#333333",
+    }
+  }
 });
