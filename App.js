@@ -1,38 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { Pressable, useColorScheme } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
-import Ionicons from '@expo/vector-icons/Ionicons';
-
-const MyButton = ({buttonText, onPress}) => {
-  const noop = () => {};
-  return (
-    <Pressable style={styles.button} onPress={onPress ?? noop}>
-      <Text style={styles.buttonText}>{buttonText ?? "Next"}</Text>
-    </Pressable>
-  );
-};
-
-const MyButton2 = (props) => {
-  const noop = () => {};
-  return (
-    <Pressable onPress={props.onPress ?? noop}>
-      {props.children ?? null}
-    </Pressable>
-  );
-};
+import {MyButton, schemes} from "./lib";
+import FlashCard from "./FlashCard";
+import Toolbar from "./Toolbar";
 
 export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
-  const [showAnswer, setShowAnswer] = useState(false);
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null});
   const [questionData, setQuestionData] = useState([]);
 
   const nextQuestion = () => {
-    setShowAnswer(false);
     setCurrState({...currState, currQ: null});
   };
 
@@ -94,6 +75,7 @@ export default App = () => {
 
   const clearQuestions = () => {
     setQuestionData([]);
+    setCurrState({currQ: null, questionBag: null});
   }
 
   useEffect(() => {
@@ -127,45 +109,18 @@ export default App = () => {
 
   const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
 
+  const showFilePicker = questionData.length === 0 && !currState.currQ;
+
   return (
     <View style={[styles.container, scheme.bg]}>
-      {questionData.length > 0 ? (
-        <>
-          <View style={[styles.insideContainer, {flexDirection: "row"}, scheme.bg]}>
-            <View style={{flex: 1}}>
-              <MyButton2 onPress={() => clearQuestions()}>
-                <Ionicons name="arrow-back-circle-outline" size={32} color={scheme.txt.color}></Ionicons>
-              </MyButton2>
-            </View>
-            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-              <MyButton2 onPress={() => console.log('gear press')}>
-                <Ionicons name="settings-outline" size={32} color={scheme.txt.color}></Ionicons>
-              </MyButton2>
-            </View>
+      <Toolbar showBack={questionData.length > 0} backCallback={clearQuestions} colorScheme={colorScheme} />
+      { currState.currQ && (
+        <FlashCard currQ={currState.currQ} colorScheme={colorScheme} nextQuestion={nextQuestion} />
+      )}
+      { showFilePicker && (
+          <View style={[styles.insideContainer, scheme.bg]}>
+            <MyButton onPress={pickQuestionFile} buttonText="Pick Question File" />
           </View>
-          { currState.currQ && (
-            <>
-              <View style={[styles.topHalf, scheme.bg]}>
-                <View><Text style={scheme.txt}>{currState.currQ.q}</Text></View>
-                <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
-              </View>
-              {showAnswer ? (
-                <View style={[styles.bottomHalf, scheme.bg2]}>
-                  <View><Text style={scheme.txt}>{currState.currQ.a}</Text></View>
-                  <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
-                </View>
-              ) : (
-                <View style={[styles.bottomHalf, scheme.bg2]}></View>
-              )}
-            </>
-          )}
-        </>
-      ) : (
-        <>
-            <View style={[styles.insideContainer, scheme.bg]}>
-              <MyButton onPress={pickQuestionFile} buttonText="Pick Question File" />
-            </View>
-        </>
       )}
       <StatusBar style="dark" />
     </View>
@@ -178,49 +133,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   insideContainer: {
-    flex: 1,
-    flexBasis: "auto",
+    flex: 10,
   },
-  topHalf: {
-    flex: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bottomHalf: {
-    flex: 5,
-    backgroundColor: "#aaaaaa",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "darkblue",
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-  },
-  schemeDark: {
-    bg: {
-      backgroundColor: "#555555",
-    },
-    bg2: {
-      backgroundColor: "#888888",
-    },
-    txt: {
-      color: "#dddddd",
-    }
-  },
-  schemeLight: {
-    bg: {
-      backgroundColor: "#ffffff",
-    },
-    bg2: {
-      backgroundColor: "#aaaaaa",
-    },
-    txt: {
-      color: "#333333",
-    }
-  }
+  ...schemes
 });
