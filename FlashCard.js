@@ -6,7 +6,9 @@ import { Button, Card, Text as CardText } from 'react-native-paper';
 const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
     const [showAnswer, setShowAnswer] = useState(false);
 
+    // @todo
     const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
+    // @todo
     const cardScheme = colorScheme === "dark" ? styles.cardDark : styles.cardLight;
 
     useEffect(() => {
@@ -15,36 +17,24 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
 
     return (
         <View style={styles.container}>
-
-            {/*
-            <View style={[styles.card, cardScheme]}>
-                <View><Text style={scheme.txt}>{currQ.a}</Text></View>
-                <MyButton onPress={nextQuestion} buttonText="Next Question"></MyButton>
-            </View>
-            
-            <View style={[styles.card, cardScheme]}>
-                <View><Text style={scheme.txt}>{currQ.q}</Text></View>
-                <MyButton onPress={() => setShowAnswer(true)} buttonText="Show Answer"></MyButton>
-            </View>
-            */}
             {showAnswer ? (
-                <Card>
+                <Card style={{backgroundColor: "#ffcccc"}} onPress={() => setShowAnswer(false)}>
                     <Card.Content>
-                        <CardText variant="titleMedium">Front/Back</CardText>
+                        <CardText variant="titleMedium">Back</CardText>
                         <CardText variant="bodyMedium">{currQ.a}</CardText>
                     </Card.Content>
-                    <Card.Actions>
-                        <Button onPress={nextQuestion}>Next Question</Button>
+                    <Card.Actions style={{height: 80}}>
+                        <Button onPress={nextQuestion}>Next &gt;</Button>
                     </Card.Actions>
                 </Card>
             ) : (
-                <Card>
+                <Card style={{backgroundColor: "#ccccff"}} onPress={() => setShowAnswer(true)}>
                     <Card.Content>
-                        <CardText variant="titleMedium">Front/Back</CardText>
+                        <CardText variant="titleMedium">Front</CardText>
                         <CardText variant="bodyMedium">{currQ.q}</CardText>
                     </Card.Content>
-                    <Card.Actions>
-                        <Button onPress={() => setShowAnswer(true)}>Show Answer</Button>
+                    <Card.Actions style={{height: 80}}>
+                        <Text>&nbsp;</Text>
                     </Card.Actions>
                 </Card>
             )}
