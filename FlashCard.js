@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 import {schemes} from "./lib";
-import { Button, Card, Text as CardText } from 'react-native-paper';
+import {FlipCard} from "./FlipCard";
+import {useSharedValue} from "react-native-reanimated";
 
 const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
-    const [showAnswer, setShowAnswer] = useState(false);
+    const showAnswer = useSharedValue(false);
+
+    const flipCard = (reset = false) => {
+        showAnswer.value = reset ? false : !showAnswer.value;
+    };
 
     // @todo
     const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
@@ -12,32 +17,19 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
     const cardScheme = colorScheme === "dark" ? styles.cardDark : styles.cardLight;
 
     useEffect(() => {
-        setShowAnswer(false);
+        flipCard(true);
     }, [currQ]);
 
     return (
         <View style={styles.container}>
-            {showAnswer ? (
-                <Card style={{backgroundColor: "#ffcccc"}} onPress={() => setShowAnswer(false)}>
-                    <Card.Content>
-                        <CardText variant="titleMedium">Back</CardText>
-                        <CardText variant="bodyMedium">{currQ.a}</CardText>
-                    </Card.Content>
-                    <Card.Actions style={{height: 80}}>
-                        <Button onPress={nextQuestion}>Next &gt;</Button>
-                    </Card.Actions>
-                </Card>
-            ) : (
-                <Card style={{backgroundColor: "#ccccff"}} onPress={() => setShowAnswer(true)}>
-                    <Card.Content>
-                        <CardText variant="titleMedium">Front</CardText>
-                        <CardText variant="bodyMedium">{currQ.q}</CardText>
-                    </Card.Content>
-                    <Card.Actions style={{height: 80}}>
-                        <Text>&nbsp;</Text>
-                    </Card.Actions>
-                </Card>
-            )}
+            <Pressable style={styles.toggleButton} onPress={() => flipCard()}>
+                <FlipCard
+                    isFlipped={showAnswer}
+                    frontText={currQ.q}
+                    backText={currQ.a}
+                    goToNext={nextQuestion}
+                  />
+            </Pressable>
         </View>
     );
 };
