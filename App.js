@@ -144,7 +144,7 @@ answer 2
 
   return (
     <View style={[styles.container, scheme.bg]}>
-      <Toolbar showBack={questionData.length > 0} backCallback={clearQuestions} colorScheme={colorScheme} />
+      <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} backCallback={clearQuestions} colorScheme={colorScheme} />
       { currState.currQ && (
         <FlashCard currQ={currState.currQ} colorScheme={colorScheme} nextQuestion={nextQuestion} />
       )}
@@ -161,7 +161,11 @@ answer 2
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     marginTop: 50,
+  },
+  toolbarContainer: {
+    flex: 1,
   },
   insideContainer: {
     flex: 10,

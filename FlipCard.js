@@ -77,18 +77,15 @@ const flipCardStyles = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   flipCard: {
-    width: 300,
-    height: 200,
+    width: "100%",
+    height: 300,
     backfaceVisibility: 'hidden',
   },
   frontCard: {
     flex: 1,
-    backgroundColor: '#b6cff7',
+    backgroundColor: '#00cff7',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -98,7 +95,7 @@ const styles = StyleSheet.create({
   },
   backCard: {
     flex: 1,
-    backgroundColor: '#baeee5',
+    backgroundColor: '#77ee00',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',

@@ -30,27 +30,14 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
                     backText={currQ.a}
                   />
             </Pressable>
-            <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next &gt;</Button>
+            <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next Card &gt;</Button>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 10,
-    },
-    card: {
-      borderColor: "black",
-      borderWidth: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      width: "250px",
-    },
-    cardLight: {
-        backgroundColor: "#ffffff",
-    },
-    cardDark: {
-        backgroundColor: "#000000",
+        padding: 10
     },
     ...schemes
   });
