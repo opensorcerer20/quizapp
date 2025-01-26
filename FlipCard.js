@@ -1,19 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import {Button} from 'react-native-paper';
 import Animated, {
   interpolate,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
 
+// based on React Native Reanimated FlipCard example: https://docs.swmansion.com/react-native-reanimated/examples/flipCard
 export const FlipCard = ({
   isFlipped,
   direction='y',
   duration=300,
   frontText="Front Text",
   backText="Back Text",
-  goToNext,
 }) => {
   const isDirectionX = direction === 'x';
 
@@ -59,7 +58,6 @@ export const FlipCard = ({
         ]}>
         <View style={styles.backCard}>
           <Text style={styles.backText}>{backText}</Text>
-          <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={goToNext}>Next &gt;</Button>
         </View>
       </Animated.View>
     </View>

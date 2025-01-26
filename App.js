@@ -6,6 +6,32 @@ import {MyButton, schemes} from "./lib";
 import FlashCard from "./FlashCard";
 import Toolbar from "./Toolbar";
 
+const makeQuestionObject = (question, answer) => {
+  return {
+    q: question,
+    a: answer,
+  };
+}
+
+const makeQuestionData = (text) => {
+  // clean input that could have \r\n
+  var quizData = text.split("\n");
+  quizData = quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
+
+  // assume even number with question/answer pairs
+  if (quizData.length % 2 === 1) {
+    quizData.pop();
+  }
+  
+  // make {q,a} object array
+  var questions = [];
+  for (var i = 0; i < quizData.length; i += 2) {
+    questions.push(makeQuestionObject(quizData[i], quizData[i + 1]));
+  }
+
+  return questions;
+}
+
 export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
@@ -16,6 +42,18 @@ export default App = () => {
   const nextQuestion = () => {
     setCurrState({...currState, currQ: null});
   };
+
+  const getFileDataTest = async (fileUri) => {
+    console.log('getfiledata');
+    const text = `question 1
+answer 1
+question 2
+answer 2
+`;
+    questions = makeQuestionData(text);
+
+    setQuestionData(questions);
+  }
 
   const getFileData = async (fileUri) => {
     fetch(
@@ -31,20 +69,7 @@ export default App = () => {
         return response.text();
       })
       .then(function(text) {
-        // clean input that could have \r\n
-        var quizData = text.split("\n");
-        quizData = quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
-
-        // assume even number with question/answer pairs
-        if (quizData.length % 2 === 1) {
-          quizData.pop();
-        }
-        
-        // make {q,a} object array
-        var questions = [];
-        for (var i = 0; i < quizData.length; i += 2) {
-          questions.push({q: quizData[i], a: quizData[i + 1]});
-        }
+        questions = makeQuestionData(text);
 
         setQuestionData(questions);
       });
@@ -100,6 +125,12 @@ export default App = () => {
       init(currSource.uri);
     }
   }, [currSource])
+
+  // testing without file select
+  //useEffect(() => {
+  //  const runAsync = async () => await getFileDataTest('');
+  //  runAsync();
+  //}, []);
 
   useEffect(() => {
     if (questionData.length > 0) {

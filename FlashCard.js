@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 import {schemes} from "./lib";
 import {FlipCard} from "./FlipCard";
 import {useSharedValue} from "react-native-reanimated";
+import {Button} from "react-native-paper";
 
 const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
     const showAnswer = useSharedValue(false);
@@ -27,9 +28,9 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
                     isFlipped={showAnswer}
                     frontText={currQ.q}
                     backText={currQ.a}
-                    goToNext={nextQuestion}
                   />
             </Pressable>
+            <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next &gt;</Button>
         </View>
     );
 };
