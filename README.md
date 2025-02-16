@@ -3,10 +3,26 @@
 Generic React Native Expo app to ask questions from a given JSON file after shuffling them randomly. Once the quiz is done, reload and reshuffle.
 
 ## Planned future features
-- load local text file, in form of "question\nanswer\nquestion\nanswer"
+- [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
+- [x] allow user to choose local file and process (txt only)
+- [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
+- [ ] allow csv file (good for lists that go `q | a` in rows)
+- [ ] new "one deck only mode
+  - [ ] show cards remaining in deck
+  - [ ] button to restart deck (always shown)
+  - [ ] disable "next" button at end of deck
+- [ ] save file location of load file to local storage
+- [ ] list saved file locations
+- [ ] allow renaming saved file (modal)
+
+
+
+## Possible future dev
 - load Google Drive spreadsheet
-- Example of a question with a variable and its resolver
-  - e.g. "If John has {apples[0]} and Jane has {apples[1]} and she gives John {apples[2]}, how many does John have?" "Answer: {apples[3]}"
-  - resolver `apples()` fills question and answer after it fills in values such as ["2 apples", "1 apple", "1 apple", "3 apples"]
+- Questions with random content with a variable and its resolver
   - enables more variance in questions to prevent rote memorization, e.g. different numbers of apples each time
-  - in the case of language, have something like {noun1} with a list of acceptable nouns
+  - Example question "If John has `{apples[0]}` and Jane has `{apples[1]}` and she gives John `{apples[2]}`, how many does John have?" "Answer: `{apples[3]}`"
+  - resolver `apples()` fills question and answer after it fills in values such as `["2 apples", "1 apple", "1 apple", "3 apples"]`
+  - in the case of language, have something like `{noun}` with a list of nouns that can be used to make the question, and `{verb}` with a list of verbs they can choose from
+
+
