@@ -1,13 +1,15 @@
 # quizapp
-
 Generic React Native Expo app to ask questions from a given JSON file after shuffling them randomly. Once the quiz is done, reload and reshuffle.
+
+## Overall Aim
+Initial idea: someone going on a multi country tour, wants to learn the local language at each place, so they load a file of language each time, and can do a flip card quiz on the go
 
 ## Planned future features
 - [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
 - [x] allow user to choose local file and process (txt only)
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
 - [ ] allow csv file (good for lists that go `q | a` in rows)
-- [ ] new "one deck only mode
+- [ ] new "one deck only" mode
   - [ ] show cards remaining in deck
   - [ ] button to restart deck (always shown)
   - [ ] disable "next" button at end of deck
