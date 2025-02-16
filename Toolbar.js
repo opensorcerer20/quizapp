@@ -13,11 +13,13 @@ const Toolbar = ({showBack, backCallback, colorScheme = "light", }) => {
                 </MyButton2>
               )}
             </View>
+            { /*
             <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
               <MyButton2 onPress={() => console.log('gear press')}>
                 <Ionicons name="settings-outline" size={32} color={scheme.txt.color}></Ionicons>
               </MyButton2>
             </View>
+            */ }
       </View>
     );
 };

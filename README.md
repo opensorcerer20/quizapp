@@ -8,7 +8,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
 - [x] allow user to choose local file and process (txt only)
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
-- [ ] allow csv file (good for lists that go `q | a` in rows)
 - [ ] new "one deck only" mode
   - [ ] show cards remaining in deck
   - [ ] button to restart deck (always shown)
@@ -16,7 +15,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] save file location of load file to local storage
 - [ ] list saved file locations
 - [ ] allow renaming saved file (modal)
-
+- [ ] allow csv file (good for lists that go `q | a` in rows)
+  - issue: cant tell difference between csv and text
 
 
 ## Possible future dev

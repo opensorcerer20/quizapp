@@ -19,7 +19,7 @@ export default App = () => {
     setCurrState({...currState, currQ: null});
   };
 
-  const pickQuestionFile = async () => {
+  const pickQuestionFileTxt = async () => {
     try {
       const docRes = await DocumentPicker.getDocumentAsync({
         type: "text/plain",
@@ -28,7 +28,7 @@ export default App = () => {
       setCurrSource(docRes.assets[0]);
 
     } catch (error) {
-      console.log("Error while selecting file: ", error);
+      console.log("Error while selecting file: ", JSON.stringify(error));
     }
   };
 
@@ -94,7 +94,7 @@ export default App = () => {
       )}
       { showFilePicker && (
           <View style={[styles.insideContainer, scheme.bg]}>
-            <MyButton onPress={pickQuestionFile} buttonText="Pick Question File" />
+            <MyButton onPress={pickQuestionFileTxt} buttonText="Pick TXT Question File" />
           </View>
       )}
       <StatusBar style="dark" />
