@@ -7,6 +7,7 @@ import { getFileData } from "./util";
 import FlashCard from "./FlashCard";
 import Toolbar from "./Toolbar";
 import {FAB} from "react-native-paper";
+import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
 
 
 export default App = () => {
@@ -88,6 +89,8 @@ export default App = () => {
   const showFilePicker = questionData.length === 0 && !currState.currQ;
 
   return (
+    <SafeAreaProvider>
+    <SafeAreaView style={styles.container}>
     <View style={[styles.container, scheme.bg]}>
       <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
       { currState.currQ && (
@@ -96,6 +99,7 @@ export default App = () => {
       { showFilePicker && (
         <>
           <View style={[styles.insideContainer, scheme.bg]}>
+            <MyButton onPress={pickQuestionFileTxt} buttonText="Pick TXT Question File" />
             <Text>Please add a question file</Text>
           </View>
           <FAB
@@ -107,6 +111,8 @@ export default App = () => {
       )}
       <StatusBar style="dark" />
     </View>
+    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
@@ -114,7 +120,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    marginTop: 50,
+    //marginTop: 50,
   },
   toolbarContainer: {
     flex: 1,

@@ -9,7 +9,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - TBD (I remember trying to use tailwind and/or chakra but hit a problem; don't remember what problem)
 
 ## notes
-- issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash
+- issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash; just use numbers I guess?
 
 ## Planned future features
 - [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
@@ -18,6 +18,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] mode select: "continuous (grab bag)"
 - [ ] mode select: "continuous (full random)"
   - almost same as grab bag, but question is NOT popped off, next question full random
+- [ ] persist mode select
+  - [ ] might require context
 - [ ] mode select: "single time"
   - [ ] show number of cards remaining in deck
   - [ ] button to restart deck (always shown)
