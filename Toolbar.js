@@ -1,16 +1,19 @@
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {MyButton2, schemes} from "./lib";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const Toolbar = ({showBack, backCallback, colorScheme = "light", }) => {
+const Toolbar = ({title, showBack, backCallback, colorScheme = "light", }) => {
     const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
     return (
         <View style={[styles.toolbar, {flexDirection: "row"}, scheme.bg]}>
-            <View style={{flex: 1}}>
+            <View style={[{flex: 1}, {flexDirection: "row"}]}>
               {showBack && (
-                <MyButton2 onPress={() => backCallback()}>
+                <>
+                <MyButton2 style={{flex: 1}} onPress={() => backCallback()}>
                   <Ionicons name="arrow-back-circle-outline" size={32} color={scheme.txt.color}></Ionicons>
                 </MyButton2>
+                <Text style={{flex: 1, fontSize: "1.2em", paddingLeft: "10px"}}>{title}</Text>
+                </>
               )}
             </View>
             { /*
