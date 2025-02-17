@@ -32,6 +32,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] good ux design
   - [x] safeareaview
   - [ ] use react native paper appbar
+- [ ] last-ish step: apply themes
+  - [ ] light dark 
 
 ## Possible future dev
 - load Google Drive spreadsheet
