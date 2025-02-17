@@ -30,7 +30,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - issue: cant tell difference between csv and text
 - [ ] good ux design
-  - [ ] safeareaview
+  - [x] safeareaview
   - [ ] use react native paper appbar
 
 ## Possible future dev
