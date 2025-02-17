@@ -4,20 +4,12 @@ Generic React Native Expo app to ask questions from a given JSON file after shuf
 ## Overall Aim
 Initial idea: someone going on a multi country tour, wants to learn the local language at each place, so they load a file of language each time, and can do a flip card quiz on the go
 
-## FAQ
-- Why use react native paper?
-  - TBD (I remember trying to use tailwind and/or chakra but hit a problem; don't remember what problem)
-
-
 ## Planned future features
 - [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
 - [x] allow user to choose local file and process (txt only)
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
-- [x] mode select: "continuous (grab bag)"
-- [ ] mode select: "continuous (full random)"
-  - almost same as grab bag, but question is NOT popped off, next question full random
-- [ ] mode select: "single time"
-  - [ ] show number of cards remaining in deck
+- [ ] new "one deck only" mode
+  - [ ] show cards remaining in deck
   - [ ] button to restart deck (always shown)
   - [ ] disable "next" button at end of deck
 - [ ] save file location of load file to local storage
@@ -25,9 +17,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] allow renaming saved file (modal)
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - issue: cant tell difference between csv and text
-- [ ] good ux design
-  - [ ] safeareaview
-  - [ ] use react native paper appbar
+
 
 ## Possible future dev
 - load Google Drive spreadsheet

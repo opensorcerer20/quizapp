@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import {MyButton, schemes} from "./lib";
 import { getFileData } from "./util";
 import FlashCard from "./FlashCard";
 import Toolbar from "./Toolbar";
-import {FAB} from "react-native-paper";
 
 
 export default App = () => {
@@ -89,21 +88,14 @@ export default App = () => {
 
   return (
     <View style={[styles.container, scheme.bg]}>
-      <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
+      <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} backCallback={clearQuestions} colorScheme={colorScheme} />
       { currState.currQ && (
         <FlashCard currQ={currState.currQ} colorScheme={colorScheme} nextQuestion={nextQuestion} />
       )}
       { showFilePicker && (
-        <>
           <View style={[styles.insideContainer, scheme.bg]}>
-            <Text>Please add a question file</Text>
+            <MyButton onPress={pickQuestionFileTxt} buttonText="Pick TXT Question File" />
           </View>
-          <FAB
-            icon="plus"
-            style={styles.fab}
-            onPress={pickQuestionFileTxt}
-          />
-        </>
       )}
       <StatusBar style="dark" />
     </View>
@@ -121,12 +113,6 @@ const styles = StyleSheet.create({
   },
   insideContainer: {
     flex: 10,
-  },
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
   },
   ...schemes
 });

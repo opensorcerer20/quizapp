@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import {schemes} from "./lib";
 import {FlipCard} from "./FlipCard";
 import {useSharedValue} from "react-native-reanimated";
-import {Button, SegmentedButtons} from "react-native-paper";
+import {Button} from "react-native-paper";
 
 const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
-    const [pickOrder, setPickOrder] = useState('random');
-    const [pickMode, setPickMode] = useState('bag');
-    const [cardMode, setCardMode] = useState('repeat');
     const showAnswer = useSharedValue(false);
 
     const flipCard = (reset = false) => {
@@ -24,55 +21,8 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
         flipCard(true);
     }, [currQ]);
 
-    console.log('order, pick, card: ' + JSON.stringify({order: pickOrder, mode: pickMode, card: cardMode}));
-
     return (
         <View style={styles.container}>
-            <SegmentedButtons
-                style={{ padding: "5px" }}
-                value={pickOrder}
-                onValueChange={setPickOrder}
-                buttons={[
-                  {
-                    value: 'random',
-                    label: 'Random',
-                  },
-                  {
-                    value: 'sequential',
-                    label: 'Sequential',
-                  },
-                ]}
-            />
-            <SegmentedButtons
-                style={{ padding: "5px" }}
-                value={pickMode}
-                onValueChange={setPickMode}
-                buttons={[
-                  {
-                    value: 'bag',
-                    label: 'Grab Bag',
-                  },
-                  {
-                    value: 'continuous',
-                    label: 'Continuous',
-                  },
-                ]}
-            />
-            <SegmentedButtons
-                style={{ padding: "5px" }}
-                value={cardMode}
-                onValueChange={setCardMode}
-                buttons={[
-                  {
-                    value: 'repeat',
-                    label: 'Repeat',
-                  },
-                  { 
-                    value: 'once', 
-                    label: 'Once Only' 
-                  },
-                ]}
-            />
             <Pressable style={styles.toggleButton} onPress={() => flipCard()}>
                 <FlipCard
                     isFlipped={showAnswer}
