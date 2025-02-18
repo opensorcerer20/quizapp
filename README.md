@@ -28,8 +28,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] save file location of load file to local storage
 - [ ] list saved file locations
 - [ ] allow renaming saved file (modal)
+- [ ] new mode: show all cards at once
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - issue: cant tell difference between csv and text
+- [ ] settings drawer with gear access
+  - [ ] use small icons for settings 
 - [ ] good ux design
   - [x] safeareaview
   - [ ] use react native paper appbar
