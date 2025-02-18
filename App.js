@@ -9,6 +9,20 @@ import Toolbar from "./Toolbar";
 import {FAB} from "react-native-paper";
 import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
 
+// first item in array is default setting
+const deckSettings = {
+  pickOrder: ['random', 'sequential'],
+  pickMode: ['bag', 'continuous'],
+  cardMode: ['repeat', 'once'],
+};
+
+const cleanDeckSettings = (pickOrder, pickMode, cardMode) => {
+  return {
+    pickOrder: deckSettings.pickOrder.includes(pickOrder) ? pickOrder : deckSettings.pickOrder[0],
+    pickMode: deckSettings.pickMode.includes(pickMode) ? pickMode : deckSettings.pickMode[0],
+    cardMode: deckSettings.cardMode.includes(cardMode) ? cardMode : deckSettings.cardMode[0],
+  }
+}
 
 export default App = () => {
   //const colorScheme = useColorScheme();
@@ -16,6 +30,11 @@ export default App = () => {
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null});
   const [questionData, setQuestionData] = useState([]);
+  const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
+
+  const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
+
+  const showFilePicker = questionData.length === 0 && !currState.currQ;
 
   const nextQuestion = () => {
     setCurrState({...currState, currQ: null});
@@ -47,6 +66,10 @@ export default App = () => {
   const clearQuestions = () => {
     setQuestionData([]);
     setCurrState({currQ: null, questionBag: null});
+  }
+
+  const updateDeckSettings = (pickOrder, pickMode, cardMode) => {
+    setDeckSettings(cleanDeckSettings(pickOrder, pickMode, cardMode));
   }
 
   useEffect(() => {
@@ -84,9 +107,7 @@ export default App = () => {
     }
   }, [questionData]);
 
-  const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
-
-  const showFilePicker = questionData.length === 0 && !currState.currQ;
+  // console.log('parent order, pick, card: ' + JSON.stringify(deckSettings));
 
   return (
     <SafeAreaProvider>
@@ -94,12 +115,18 @@ export default App = () => {
     <View style={[styles.container, scheme.bg]}>
       <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
       { currState.currQ && (
-        <FlashCard currQ={currState.currQ} colorScheme={colorScheme} nextQuestion={nextQuestion} />
+        <FlashCard 
+          currQ={currState.currQ} 
+          colorScheme={colorScheme} 
+          nextQuestion={nextQuestion} 
+          numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length} 
+          deckSettings={deckSettings}
+          updateDeckSettings={updateDeckSettings}
+        />
       )}
       { showFilePicker && (
         <>
           <View style={[styles.insideContainer, scheme.bg]}>
-            <MyButton onPress={pickQuestionFileTxt} buttonText="Pick TXT Question File" />
             <Text>Please add a question file</Text>
           </View>
           <FAB

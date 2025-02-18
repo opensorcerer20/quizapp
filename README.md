@@ -19,9 +19,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] mode select: "continuous (full random)"
   - almost same as grab bag, but question is NOT popped off, next question full random
 - [ ] persist mode select
-  - [ ] might require context
+  - [x] persist in app memory
+  - [ ] persist in device storage
 - [ ] mode select: "single time"
-  - [ ] show number of cards remaining in deck
+  - [x] show number of cards remaining in deck
   - [ ] button to restart deck (always shown)
   - [ ] disable "next" button at end of deck
 - [ ] save file location of load file to local storage

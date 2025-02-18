@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import {schemes} from "./lib";
 import {FlipCard} from "./FlipCard";
 import {useSharedValue} from "react-native-reanimated";
 import {Button, SegmentedButtons} from "react-native-paper";
 
-const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
-    const [pickOrder, setPickOrder] = useState('random');
-    const [pickMode, setPickMode] = useState('bag');
-    const [cardMode, setCardMode] = useState('repeat');
+const FlashCard = ({
+    colorScheme = "light", 
+    currQ, 
+    nextQuestion, 
+    numLeft, 
+    deckSettings, 
+    updateDeckSettings
+}) => {
+    const [pickOrder, setPickOrder] = useState(deckSettings.pickOrder);
+    const [pickMode, setPickMode] = useState(deckSettings.pickMode);
+    const [cardMode, setCardMode] = useState(deckSettings.cardMode);
     const showAnswer = useSharedValue(false);
 
     const flipCard = (reset = false) => {
@@ -24,7 +31,11 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
         flipCard(true);
     }, [currQ]);
 
-    console.log('order, pick, card: ' + JSON.stringify({order: pickOrder, mode: pickMode, card: cardMode}));
+    useEffect(() => {
+        updateDeckSettings(pickOrder, pickMode, cardMode);
+    }, [pickOrder, pickMode, cardMode]);
+
+    // console.log('child order, pick, card: ' + JSON.stringify({order: pickOrder, mode: pickMode, card: cardMode}));
 
     return (
         <View style={styles.container}>
@@ -81,6 +92,7 @@ const FlashCard = ({colorScheme = "light", currQ, nextQuestion}) => {
                   />
             </Pressable>
             <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next Card &gt;</Button>
+            <Text>num left {numLeft}</Text>
         </View>
     );
 };
