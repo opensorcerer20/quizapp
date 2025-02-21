@@ -16,6 +16,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] allow user to choose local file and process (txt only)
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
 - [x] mode select: "continuous (grab bag)"
+- [ ] dont change mode unless "Apply" button clicked
+- [ ] reset deck when mode changes
 - [ ] mode select: "continuous (full random)"
   - almost same as grab bag, but question is NOT popped off, next question full random
 - [ ] persist mode select
@@ -25,6 +27,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - [x] show number of cards remaining in deck
   - [ ] button to restart deck (always shown)
   - [ ] disable "next" button at end of deck
+- [ ] gear opens drawer with mode selections
 - [ ] save file location of load file to local storage
 - [ ] list saved file locations
 - [ ] allow renaming saved file (modal)
@@ -32,12 +35,12 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - issue: cant tell difference between csv and text
 - [ ] settings drawer with gear access
-  - [ ] use small icons for settings 
+  - [ ] use small icons for settings
 - [ ] good ux design
   - [x] safeareaview
   - [ ] use react native paper appbar
 - [ ] last-ish step: apply themes
-  - [ ] light dark 
+  - [ ] light dark
 
 ## Possible future dev
 - load Google Drive spreadsheet
@@ -46,5 +49,3 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - Example question "If John has `{apples[0]}` and Jane has `{apples[1]}` and she gives John `{apples[2]}`, how many does John have?" "Answer: `{apples[3]}`"
   - resolver `apples()` fills question and answer after it fills in values such as `["2 apples", "1 apple", "1 apple", "3 apples"]`
   - in the case of language, have something like `{noun}` with a list of nouns that can be used to make the question, and `{verb}` with a list of verbs they can choose from
-
-
