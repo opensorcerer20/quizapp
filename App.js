@@ -2,12 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
-import {MyButton, schemes} from "./lib";
+import { schemes } from "./lib";
 import { getFileData } from "./util";
-import FlashCard from "./FlashCard";
+import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
-import {FAB} from "react-native-paper";
-import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
+import { FAB } from "react-native-paper";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 // first item in array is default setting
 const deckSettings = {
@@ -115,11 +115,11 @@ export default App = () => {
     <View style={[styles.container, scheme.bg]}>
       <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
       { currState.currQ && (
-        <FlashCard 
-          currQ={currState.currQ} 
-          colorScheme={colorScheme} 
-          nextQuestion={nextQuestion} 
-          numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length} 
+        <QuizScreen
+          currQ={currState.currQ}
+          colorScheme={colorScheme}
+          nextQuestion={nextQuestion}
+          numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length}
           deckSettings={deckSettings}
           updateDeckSettings={updateDeckSettings}
         />
