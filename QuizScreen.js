@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
 import { FlipCard } from "./FlipCard";
@@ -14,9 +14,6 @@ const QuizScreen = ({
     deckSettings,
     updateDeckSettings
 }) => {
-    const [pickOrder, setPickOrder] = useState(deckSettings.pickOrder);
-    const [pickMode, setPickMode] = useState(deckSettings.pickMode);
-    const [cardMode, setCardMode] = useState(deckSettings.cardMode);
     const showAnswer = useSharedValue(false);
 
     const flipCard = (reset = false) => {
@@ -32,16 +29,12 @@ const QuizScreen = ({
         flipCard(true);
     }, [currQ]);
 
-    useEffect(() => {
-        updateDeckSettings(pickOrder, pickMode, cardMode);
-    }, [pickOrder, pickMode, cardMode]);
-
     // console.log('child order, pick, card: ' + JSON.stringify({order: pickOrder, mode: pickMode, card: cardMode}));
     console.log('decksettings: ' + JSON.stringify(deckSettings));
 
     return (
         <View style={styles.container}>
-            <QuizSettings pickOrder={pickOrder} setPickOrder={setPickOrder} pickMode={pickMode} setPickMode={setPickMode} cardMode={cardMode} setCardMode={setCardMode} />
+            <QuizSettings deckSettings={deckSettings} updateDeckSettings={updateDeckSettings} />
             <Pressable style={styles.toggleButton} onPress={() => flipCard()}>
                 <FlipCard
                     isFlipped={showAnswer}

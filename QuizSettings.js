@@ -1,9 +1,13 @@
 import { StyleSheet, View } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
-import { schemes } from "./lib";
+import { MyButton, schemes } from "./lib";
+import {useState} from "react";
 
-const QuizSettings = ({pickOrder, setPickOrder, pickMode, setPickMode, cardMode, setCardMode}) => {
-
+const QuizSettings = ({deckSettings, updateDeckSettings}) => {
+    const [pickOrder, setPickOrder] = useState(deckSettings.pickOrder);
+    const [pickMode, setPickMode] = useState(deckSettings.pickMode);
+    const [cardMode, setCardMode] = useState(deckSettings.cardMode);
+    const settingsChanged = JSON.stringify(deckSettings) !== JSON.stringify({ pickOrder, pickMode, cardMode });
     return (
         <View>
             <SegmentedButtons
@@ -51,6 +55,9 @@ const QuizSettings = ({pickOrder, setPickOrder, pickMode, setPickMode, cardMode,
                     },
                 ]}
             />
+            { settingsChanged && (
+                <MyButton buttonText="Apply Settings" onPress={() => updateDeckSettings(pickOrder, pickMode, cardMode)} />
+            )}
         </View>
     );
 }

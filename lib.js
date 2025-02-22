@@ -59,3 +59,9 @@ const styles = StyleSheet.create({
     ...buttonStyles,
     ...schemes
 });
+
+export const deckSettingsType = {
+  pickOrder: ['random', 'sequential'],
+  pickMode: ['bag', 'continuous'],
+  cardMode: ['repeat', 'once'],
+};

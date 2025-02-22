@@ -2,25 +2,18 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
-import { schemes } from "./lib";
+import { schemes, deckSettingsType } from "./lib";
 import { getFileData } from "./util";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { FAB } from "react-native-paper";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-// first item in array is default setting
-const deckSettings = {
-  pickOrder: ['random', 'sequential'],
-  pickMode: ['bag', 'continuous'],
-  cardMode: ['repeat', 'once'],
-};
-
 const cleanDeckSettings = (pickOrder, pickMode, cardMode) => {
   return {
-    pickOrder: deckSettings.pickOrder.includes(pickOrder) ? pickOrder : deckSettings.pickOrder[0],
-    pickMode: deckSettings.pickMode.includes(pickMode) ? pickMode : deckSettings.pickMode[0],
-    cardMode: deckSettings.cardMode.includes(cardMode) ? cardMode : deckSettings.cardMode[0],
+    pickOrder: deckSettingsType.pickOrder.includes(pickOrder) ? pickOrder : deckSettingsType.pickOrder[0],
+    pickMode: deckSettingsType.pickMode.includes(pickMode) ? pickMode : deckSettingsType.pickMode[0],
+    cardMode: deckSettingsType.cardMode.includes(cardMode) ? cardMode : deckSettingsType.cardMode[0],
   }
 }
 

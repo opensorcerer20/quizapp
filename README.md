@@ -16,7 +16,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] allow user to choose local file and process (txt only)
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
 - [x] mode select: "continuous (grab bag)"
-- [ ] dont change mode unless "Apply" button clicked
+- [x] dont change mode unless "Apply" button clicked
 - [ ] reset deck when mode changes
 - [ ] mode select: "continuous (full random)"
   - almost same as grab bag, but question is NOT popped off, next question full random
@@ -27,15 +27,16 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - [x] show number of cards remaining in deck
   - [ ] button to restart deck (always shown)
   - [ ] disable "next" button at end of deck
-- [ ] gear opens drawer with mode selections
-- [ ] save file location of load file to local storage
-- [ ] list saved file locations
-- [ ] allow renaming saved file (modal)
-- [ ] new mode: show all cards at once
-- [ ] allow csv file (good for lists that go `q | a` in rows)
-  - issue: cant tell difference between csv and text
 - [ ] settings drawer with gear access
   - [ ] use small icons for settings
+- [ ] file location list
+  - [ ] save file location of load file to local storage
+  - [ ] list saved file locations
+  - [ ] allow renaming saved file (modal)
+- [ ] new mode: show all cards at once
+- [ ] allow csv file (good for lists that go `q | a` in rows)
+  - [ ] make user pick type of file
+  - [ ] if csv, parse according to csv rules
 - [ ] good ux design
   - [x] safeareaview
   - [ ] use react native paper appbar
