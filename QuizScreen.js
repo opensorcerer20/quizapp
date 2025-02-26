@@ -30,7 +30,7 @@ const QuizScreen = ({
     }, [currQ]);
 
     // console.log('child order, pick, card: ' + JSON.stringify({order: pickOrder, mode: pickMode, card: cardMode}));
-    console.log('decksettings: ' + JSON.stringify(deckSettings));
+    // console.log('decksettings: ' + JSON.stringify(deckSettings));
 
     return (
         <View style={styles.container}>

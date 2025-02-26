@@ -17,7 +17,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
 - [x] mode select: "continuous (grab bag)"
 - [x] dont change mode unless "Apply" button clicked
-- [ ] reset deck when mode changes
+- [x] reset deck when mode changes
 - [ ] mode select: "continuous (full random)"
   - almost same as grab bag, but question is NOT popped off, next question full random
 - [ ] persist mode select

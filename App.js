@@ -53,7 +53,7 @@ export default App = () => {
       .map(value => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value)
-    setCurrState({...currState, questionBag});
+    setCurrState({...currState, currQ: null, questionBag});
   }
 
   const clearQuestions = () => {
@@ -63,9 +63,21 @@ export default App = () => {
 
   const updateDeckSettings = (pickOrder, pickMode, cardMode) => {
     setDeckSettings(cleanDeckSettings(pickOrder, pickMode, cardMode));
+
+    // reset deck
+    //if (currSource.uri) {
+      setQuestionsFromFile(currSource.uri);
+      fillQuestionBag();
+    //}
+  }
+
+  const setQuestionsFromFile = async (uri) => {
+    setQuestionData(await getFileData(uri));
   }
 
   useEffect(() => {
+    // @todo need this odd complexity?
+    // @todo need the useeffect?
     if (currState.questionBag) {
       if (currState.questionBag.length > 0) {
         if (!currState.currQ) {
@@ -80,11 +92,8 @@ export default App = () => {
   }, [currState]);
 
   useEffect(() => {
-    const init = async (uri) => {
-      setQuestionData(await getFileData(uri));
-    }
     if (currSource.uri) {
-      init(currSource.uri);
+      setQuestionsFromFile(currSource.uri);
     }
   }, [currSource])
 
@@ -101,37 +110,38 @@ export default App = () => {
   }, [questionData]);
 
   // console.log('parent order, pick, card: ' + JSON.stringify(deckSettings));
+   console.log('currState: ' + JSON.stringify(currState));
 
   return (
     <SafeAreaProvider>
-    <SafeAreaView style={styles.container}>
-    <View style={[styles.container, scheme.bg]}>
-      <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
-      { currState.currQ && (
-        <QuizScreen
-          currQ={currState.currQ}
-          colorScheme={colorScheme}
-          nextQuestion={nextQuestion}
-          numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length}
-          deckSettings={deckSettings}
-          updateDeckSettings={updateDeckSettings}
-        />
-      )}
-      { showFilePicker && (
-        <>
-          <View style={[styles.insideContainer, scheme.bg]}>
-            <Text>Please add a question file</Text>
-          </View>
-          <FAB
-            icon="plus"
-            style={styles.fab}
-            onPress={pickQuestionFileTxt}
+      <SafeAreaView style={styles.container}>
+      <View style={[styles.container, scheme.bg]}>
+        <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
+        { currState.currQ && (
+          <QuizScreen
+            currQ={currState.currQ}
+            colorScheme={colorScheme}
+            nextQuestion={nextQuestion}
+            numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length}
+            deckSettings={deckSettings}
+            updateDeckSettings={updateDeckSettings}
           />
-        </>
-      )}
-      <StatusBar style="dark" />
-    </View>
-    </SafeAreaView>
+        )}
+        { showFilePicker && (
+          <>
+            <View style={[styles.insideContainer, scheme.bg]}>
+              <Text>Please add a question file</Text>
+            </View>
+            <FAB
+              icon="plus"
+              style={styles.fab}
+              onPress={pickQuestionFileTxt}
+            />
+          </>
+        )}
+        <StatusBar style="dark" />
+      </View>
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 };
