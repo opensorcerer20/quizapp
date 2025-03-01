@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from "react-native";
-import {MyButton2, schemes} from "./lib";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { schemes } from "./lib";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Toolbar = ({title, showBack, backCallback, colorScheme = "light", }) => {
@@ -9,18 +9,18 @@ const Toolbar = ({title, showBack, backCallback, colorScheme = "light", }) => {
             <View style={[{flex: 1}, {flexDirection: "row"}]}>
               {showBack && (
                 <>
-                <MyButton2 style={{flex: 1}} onPress={() => backCallback()}>
+                <Pressable style={{flex: 1}} onPress={() => backCallback()}>
                   <Ionicons name="arrow-back-circle-outline" size={32} color={scheme.txt.color}></Ionicons>
-                </MyButton2>
+                </Pressable>
                 <Text style={{flex: 1, paddingLeft: "10px"}}>{title}</Text>
                 </>
               )}
             </View>
             { /*
             <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-              <MyButton2 onPress={() => console.log('gear press')}>
+              <Pressable onPress={() => console.log('gear press')}>
                 <Ionicons name="settings-outline" size={32} color={scheme.txt.color}></Ionicons>
-              </MyButton2>
+              </Pressable>
             </View>
             */ }
       </View>

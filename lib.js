@@ -9,15 +9,6 @@ export const MyButton = ({buttonText, onPress}) => {
   );
 };
 
-export const MyButton2 = (props) => {
-  const noop = () => {};
-  return (
-    <Pressable onPress={props.onPress ?? noop}>
-      {props.children ?? null}
-    </Pressable>
-  );
-};
-
 export const schemes = {
   schemeDark: {
     bg: {

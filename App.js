@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import { schemes } from "./lib";
 import { getFileData } from "./util";
@@ -8,7 +8,15 @@ import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { FAB } from "react-native-paper";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import {cleanDeckSettings} from "./QuizDeck";
+import { cleanDeckSettings } from "./QuizDeck";
+import { DeckList } from "./DeckList";
+
+const DATA = [
+  { id: '1', title: 'Item 1' },
+  { id: '2', title: 'Item 2' },
+  { id: '3', title: 'Item 3' },
+  { id: '4', title: 'Item 4' },
+];
 
 export default App = () => {
   //const colorScheme = useColorScheme();
@@ -103,14 +111,16 @@ export default App = () => {
   }, [questionData]);
 
   // console.log('parent order, pick, card: ' + JSON.stringify(deckSettings));
-   console.log('currState: ' + JSON.stringify(currState));
+  //console.log('currState: ' + JSON.stringify(currState));
+
+  const currentView = questionData.length > 0 && currState.currQ ? 'quizView' : 'homeView';
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
       <View style={[styles.container, scheme.bg]}>
         <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
-        { currState.currQ && (
+        { currentView === 'quizView' && (
           <QuizScreen
             currQ={currState.currQ}
             colorScheme={colorScheme}
@@ -120,11 +130,12 @@ export default App = () => {
             updateDeckSettings={updateDeckSettings}
           />
         )}
-        { showFilePicker && (
+        { currentView === 'homeView' && (
           <>
-            <View style={[styles.insideContainer, scheme.bg]}>
+            <DeckList data={DATA} />
+            {/*<View style={[styles.insideContainer, scheme.bg]}>
               <Text>Please add a question file</Text>
-            </View>
+            </View>*/}
             <FAB
               icon="plus"
               style={styles.fab}
