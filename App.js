@@ -2,20 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
-import { schemes, deckSettingsType } from "./lib";
+import { schemes } from "./lib";
 import { getFileData } from "./util";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { FAB } from "react-native-paper";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-
-const cleanDeckSettings = (pickOrder, pickMode, cardMode) => {
-  return {
-    pickOrder: deckSettingsType.pickOrder.includes(pickOrder) ? pickOrder : deckSettingsType.pickOrder[0],
-    pickMode: deckSettingsType.pickMode.includes(pickMode) ? pickMode : deckSettingsType.pickMode[0],
-    cardMode: deckSettingsType.cardMode.includes(cardMode) ? cardMode : deckSettingsType.cardMode[0],
-  }
-}
+import {cleanDeckSettings} from "./QuizDeck";
 
 export default App = () => {
   //const colorScheme = useColorScheme();
