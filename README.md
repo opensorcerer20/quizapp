@@ -12,6 +12,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash; just use numbers I guess?
 
 ## Planned future features
+(**E**)asy, (**H**)ard
 - [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
 - [x] allow user to choose local file and process (txt only)
 - [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
@@ -19,42 +20,48 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] dont change mode unless "Apply" button clicked
 - [x] reset deck when mode changes
 
-- [ ] mode select: "continuous (full random)"
-  - almost same as grab bag, but question is NOT popped off, next question full random
-
-- [ ] persist mode select
-  - [x] persist in app memory
-  - [ ] persist in device storage
-
-- [ ] mode select: "single time"
-  - [x] show number of cards remaining in deck
-  - [ ] button to restart deck (always shown)
-  - [ ] disable "next" button at end of deck
-
-- [ ] settings drawer with gear access
-  - [ ] use small icons for settings
-
 - [ ] file location list
-  - [ ] save file location of load file to local storage
-  - [ ] list saved file locations
+  - [ ] (E) limit to 50 locations
+  - [ ] (H) save file location of load file to local storage
+  - [x] list saved file locations
   - [ ] allow renaming saved file (modal)
+    - [ ] (E) edit icon
+    - [ ] (E) modal to edit string
+    - [ ] (H) "save" to save edit
+    - [ ] (E) "cancel" or click away to cancel
 
-- [ ] new mode: show all cards at once
-
-- [ ] move deck functions into separate file
+- [ ] (H) move deck functions into separate file
 
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - [ ] make user pick type of file
-  - [ ] if csv, parse according to csv rules
+    - [ ] (E) extra FAB visible after pressing plus
+    - [ ] (E) extra FAB invsibile when anywhere clicked
+  - [ ] (E) if text, use current code
+  - [ ] (H) if csv, parse according to csv rules
 
 - [ ] good ux design
   - [x] safeareaview
-  - [ ] use react native paper appbar
+  - [ ] (H) use react native paper appbar
 
-- [ ] last-ish step: apply themes
-  - [ ] light dark
+- [ ] apply themes
+  - [ ] (H) light dark
+
+- [ ] launch 1.0
 
 ## Possible future dev
+- more modes
+  - [ ] mode select: "continuous (full random)"
+    - almost same as grab bag, but question is NOT popped off, next question full random
+  - [ ] persist mode select
+    - [x] persist in app memory
+    - [ ] persist in device storage
+  - [ ] mode select: "single time"
+    - [x] show number of cards remaining in deck
+    - [ ] button to restart deck (always shown)
+    - [ ] disable "next" button at end of deck
+  - [ ] settings drawer with gear access
+    - [ ] use small icons for settings 
+  - [ ] new mode: show all cards at once
 - load Google Drive spreadsheet
 - Questions with random content with a variable and its resolver
   - enables more variance in questions to prevent rote memorization, e.g. different numbers of apples each time
