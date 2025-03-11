@@ -12,10 +12,10 @@ import { cleanDeckSettings } from "./QuizDeck";
 import { DeckList } from "./DeckList";
 
 const DATA = [
-  { id: '1', title: 'Item 1' },
-  { id: '2', title: 'Item 2' },
-  { id: '3', title: 'Item 3' },
-  { id: '4', title: 'Item 4' },
+  //{ id: '1', title: 'Item 1' },
+  //{ id: '2', title: 'Item 2' },
+  //{ id: '3', title: 'Item 3' },
+  //{ id: '4', title: 'Item 4' },
 ];
 
 export default App = () => {
@@ -76,6 +76,23 @@ export default App = () => {
     setQuestionData(await getFileData(uri));
   }
 
+  const deckAdded = ({mimeType, name, size, uri}) => {
+    // @todo need unique id...
+    const newDeck = {mimeType, name, size, uri};
+    const id = DATA.length + 1;
+    DATA.push({id, ...newDeck});
+
+    const currentDeck = DATA.filter(deck => deck.id = id);
+    if (currentDeck.length === 1) {
+      //deckSelected(currentDeck[0]);
+    }
+    
+  }
+
+  const onDeckPress = (id) => {
+    console.log('deck press id ' + id);
+  }
+
   useEffect(() => {
     // @todo need this odd complexity?
     // @todo need the useeffect?
@@ -94,6 +111,7 @@ export default App = () => {
 
   useEffect(() => {
     if (currSource.uri) {
+      deckAdded(currSource);
       setQuestionsFromFile(currSource.uri);
     }
   }, [currSource])
@@ -110,8 +128,13 @@ export default App = () => {
     }
   }, [questionData]);
 
-  // console.log('parent order, pick, card: ' + JSON.stringify(deckSettings));
-  //console.log('currState: ' + JSON.stringify(currState));
+  console.log('state: ' + JSON.stringify({
+    currState,
+    currSource,
+    questionData,
+    deckSettings,
+  }
+  ));
 
   const currentView = questionData.length > 0 && currState.currQ ? 'quizView' : 'homeView';
 
@@ -132,7 +155,7 @@ export default App = () => {
         )}
         { currentView === 'homeView' && (
           <>
-            <DeckList data={DATA} />
+            <DeckList data={DATA} onPress={onDeckPress} />
             {/*<View style={[styles.insideContainer, scheme.bg]}>
               <Text>Please add a question file</Text>
             </View>*/}

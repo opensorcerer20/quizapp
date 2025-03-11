@@ -3,7 +3,7 @@ import { View, Text, FlatList, Pressable, Modal, StyleSheet } from 'react-native
 //import { Entypo } from '@expo/vector-icons'; // For 3-dot menu icon
 //import Ionicons from '@expo/vector-icons/Ionicons';
 
-export const DeckList = ({data}) => {
+export const DeckList = ({data, onPress}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const [selectedItem, setSelectedItem] = useState(null);
@@ -36,15 +36,20 @@ export const DeckList = ({data}) => {
     unSelectItem();
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }) => {
+    console.log('item ' + JSON.stringify(item));
+    return (
+      <Pressable onPress={() => onPress(item.id)} onLongPress={() => onPress(item.id)}>
     <View style={[styles.item, selectedItem && item.id === selectedItem.id ? styles.selectedItem : {}]}>
-      <Text>{item.title}</Text>
+      <Text>{item.name}</Text>
       <Pressable onLongPress={(event) => handleMenuPress(event, item)} onPress={(event) => handleMenuPress(event, item)}>
         <Text>...</Text>
         {/*<Entypo name="dots-three-vertical" size={20} color="black" />*/}
       </Pressable>
     </View>
-  );
+    </Pressable>
+    );
+  };
 
   return (
     <View style={styles.container}>
