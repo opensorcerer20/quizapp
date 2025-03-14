@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import { schemes } from "./lib";
-import { getFileData } from "./util";
+import { getFileData, getRandomInt } from "./util";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { FAB } from "react-native-paper";
@@ -22,7 +22,7 @@ export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
-  const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null});
+  const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, id: null});
   const [questionData, setQuestionData] = useState([]);
   const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
 
@@ -30,6 +30,7 @@ export default App = () => {
 
   const showFilePicker = questionData.length === 0 && !currState.currQ;
 
+  // @todo bug with this... next question doesnt work as expected
   const nextQuestion = () => {
     setCurrState({...currState, currQ: null});
   };
@@ -77,20 +78,20 @@ export default App = () => {
   }
 
   const deckAdded = ({mimeType, name, size, uri}) => {
-    // @todo need unique id...
     const newDeck = {mimeType, name, size, uri};
-    const id = DATA.length + 1;
-    DATA.push({id, ...newDeck});
+    const deckId = getRandomInt(10000000, 99999999);
+    DATA.push({deckId,  ...newDeck});
 
     const currentDeck = DATA.filter(deck => deck.id = id);
-    if (currentDeck.length === 1) {
-      //deckSelected(currentDeck[0]);
-    }
-    
   }
 
   const onDeckPress = (id) => {
-    console.log('deck press id ' + id);
+    const selectedDeck = DATA.find(deck => deck.deckId === id);
+    if (selectedDeck) {
+      setQuestionsFromFile(selectedDeck.uri)
+    } else {
+      clearQuestions();
+    }
   }
 
   useEffect(() => {

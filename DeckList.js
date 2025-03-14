@@ -37,17 +37,15 @@ export const DeckList = ({data, onPress}) => {
   };
 
   const renderItem = ({ item }) => {
-    console.log('item ' + JSON.stringify(item));
     return (
-      <Pressable onPress={() => onPress(item.id)} onLongPress={() => onPress(item.id)}>
-    <View style={[styles.item, selectedItem && item.id === selectedItem.id ? styles.selectedItem : {}]}>
-      <Text>{item.name}</Text>
-      <Pressable onLongPress={(event) => handleMenuPress(event, item)} onPress={(event) => handleMenuPress(event, item)}>
-        <Text>...</Text>
-        {/*<Entypo name="dots-three-vertical" size={20} color="black" />*/}
+      <Pressable key={item.deckId} onPress={() => onPress(item.deckId)} onLongPress={() => onPress(item.deckId)}>
+        <View style={[styles.item, selectedItem && item.deckId === selectedItem.deckId ? styles.selectedItem : {}]}>
+          <Text>{item.name}</Text>
+          <Pressable onLongPress={(event) => handleMenuPress(event, item)} onPress={(event) => handleMenuPress(event, item)}>
+            <Text>...</Text>
+          </Pressable>
+        </View>
       </Pressable>
-    </View>
-    </Pressable>
     );
   };
 
@@ -56,7 +54,7 @@ export const DeckList = ({data, onPress}) => {
       { data.length > 0 && (
         <>
           <Text>Saved Decks</Text>
-          <FlatList data={data} keyExtractor={(item) => item.id} renderItem={renderItem} />
+          <FlatList data={data} renderItem={renderItem} />
 
           {menuVisible && (
             <Modal transparent animationType="fade" visible={menuVisible}>
