@@ -10,19 +10,16 @@ import { FAB } from "react-native-paper";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { cleanDeckSettings } from "./QuizDeck";
 import { DeckList } from "./DeckList";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DATA = [
-  //{ id: '1', title: 'Item 1' },
-  //{ id: '2', title: 'Item 2' },
-  //{ id: '3', title: 'Item 3' },
-  //{ id: '4', title: 'Item 4' },
-];
+const DATA_STORAGE_KEY = "DATA";
 
 export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
+  const [deckData, setDeckData] = useState([]);
   const [currState, setCurrState] = useState({currQ: null, questionBag: null});
-  const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, id: null});
+  const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, deckId: null});
   const [questionData, setQuestionData] = useState([]);
   const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
 
@@ -80,17 +77,37 @@ export default App = () => {
   const deckAdded = ({mimeType, name, size, uri}) => {
     const newDeck = {mimeType, name, size, uri};
     const deckId = getRandomInt(10000000, 99999999);
-    DATA.push({deckId,  ...newDeck});
-
-    const currentDeck = DATA.filter(deck => deck.id = id);
+    const newDeckData = deckData;
+    deckData.push({deckId,  ...newDeck});
+    setDeckData(newDeckData);
+    saveData();
   }
 
-  const onDeckPress = (id) => {
-    const selectedDeck = DATA.find(deck => deck.deckId === id);
+  const onDeckPress = (deckId) => {
+    const selectedDeck = deckData.find(deck => deck.deckId === deckId);
     if (selectedDeck) {
       setQuestionsFromFile(selectedDeck.uri)
     } else {
       clearQuestions();
+    }
+  }
+
+  const loadData = async () => {
+    try {
+      const value = await AsyncStorage.getItem(DATA_STORAGE_KEY);
+      if (value !== null) {
+        setDeckData(JSON.parse(value));
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const saveData = async () => {
+    try {
+      await AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(deckData));
+    } catch (e) {
+      console.log('Error saving: ' + JSON.stringify(e));
     }
   }
 
@@ -129,13 +146,19 @@ export default App = () => {
     }
   }, [questionData]);
 
+  useEffect(() => {
+    const loadDeckData = async () => await loadData();
+    if (deckData.length === 0) {
+      loadDeckData();
+    }
+  }, []);
+
   console.log('state: ' + JSON.stringify({
     currState,
     currSource,
     questionData,
     deckSettings,
-  }
-  ));
+  }));
 
   const currentView = questionData.length > 0 && currState.currQ ? 'quizView' : 'homeView';
 
@@ -156,7 +179,7 @@ export default App = () => {
         )}
         { currentView === 'homeView' && (
           <>
-            <DeckList data={DATA} onPress={onDeckPress} />
+            <DeckList data={deckData} onPress={onDeckPress} />
             {/*<View style={[styles.insideContainer, scheme.bg]}>
               <Text>Please add a question file</Text>
             </View>*/}

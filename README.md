@@ -22,13 +22,12 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 - [ ] file location list
   - [ ] (E) limit to 50 locations
-  - [ ] (H) save file location of load file to local storage
+  - [x] (H) save file location of load file to local storage
+  - [ ] prevent adding same file twice
   - [x] list saved file locations
-  - [ ] allow renaming saved file (modal)
-    - [ ] (E) edit icon
-    - [ ] (E) modal to edit string
-    - [ ] (H) "save" to save edit
-    - [ ] (E) "cancel" or click away to cancel
+  - [x] load selected file
+  - [ ] allow deleting file (from list of course)
+
 
 - [ ] (H) move deck functions into separate file
 
@@ -49,6 +48,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] launch 1.0
 
 ## Possible future dev
+  - [ ] allow renaming saved file (modal)
+    - [ ] (E) edit icon
+    - [ ] (E) modal to edit string
+    - [ ] (H) "save" to save edit
+    - [ ] (E) "cancel" or click away to cancel
 - more modes
   - [ ] mode select: "continuous (full random)"
     - almost same as grab bag, but question is NOT popped off, next question full random
