@@ -20,16 +20,15 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] dont change mode unless "Apply" button clicked
 - [x] reset deck when mode changes
 
-- [ ] file location list
-  - [ ] (E) limit to 50 locations
+- [x] file location list
+  - [x] (E) limit to 50 locations
   - [x] (H) save file location of load file to local storage
-  - [ ] prevent adding same file twice
+  - [x] prevent adding same file twice
   - [x] list saved file locations
   - [x] load selected file
-  - [ ] allow deleting file (from list of course)
+  - [x] allow deleting file (from list of course)
 
-
-- [ ] (H) move deck functions into separate file
+- [x] hide settings for other modes
 
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - [ ] make user pick type of file
@@ -45,15 +44,19 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] apply themes
   - [ ] (H) light dark
 
+- [ ] (H) code cleanup
+
 - [ ] launch 1.0
 
 ## Possible future dev
+  - [ ] now that everything is done, can the code be redone for better organization?
   - [ ] allow renaming saved file (modal)
     - [ ] (E) edit icon
     - [ ] (E) modal to edit string
     - [ ] (H) "save" to save edit
     - [ ] (E) "cancel" or click away to cancel
 - more modes
+  - [ ] show settings for other modes
   - [ ] mode select: "continuous (full random)"
     - almost same as grab bag, but question is NOT popped off, next question full random
   - [ ] persist mode select

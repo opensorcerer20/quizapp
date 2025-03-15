@@ -3,7 +3,7 @@ import { View, Text, FlatList, Pressable, Modal, StyleSheet } from 'react-native
 //import { Entypo } from '@expo/vector-icons'; // For 3-dot menu icon
 //import Ionicons from '@expo/vector-icons/Ionicons';
 
-export const DeckList = ({data, onPress}) => {
+export const DeckList = ({data, onPress, onEdit, onDelete}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const [selectedItem, setSelectedItem] = useState(null);
@@ -27,12 +27,12 @@ export const DeckList = ({data, onPress}) => {
   };
 
   const handleEdit = () => {
-    console.log(`Edit ${selectedItem?.title}`);
+    //console.log(`Edit ${selectedItem?.title}`);
     unSelectItem();
   };
 
   const handleDelete = () => {
-    console.log(`Delete ${selectedItem?.title}`);
+    onDelete(selectedItem.deckId);
     unSelectItem();
   };
 
@@ -60,9 +60,9 @@ export const DeckList = ({data, onPress}) => {
             <Modal transparent animationType="fade" visible={menuVisible}>
               <Pressable style={styles.overlay} onPress={() => handleModalClickAway()}>
                 <View style={[styles.menu, { top: menuPosition.top, left: menuPosition.left }]}>
-                  <Pressable onPress={handleEdit}>
+                  {/*<Pressable onPress={handleEdit}>
                     <Text style={styles.menuItem}>Edit</Text>
-                  </Pressable>
+                  </Pressable>*/}
                   <Pressable onPress={handleDelete}>
                     <Text style={styles.menuItem}>Delete</Text>
                   </Pressable>

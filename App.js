@@ -75,12 +75,14 @@ export default App = () => {
   }
 
   const deckAdded = ({mimeType, name, size, uri}) => {
-    const newDeck = {mimeType, name, size, uri};
-    const deckId = getRandomInt(10000000, 99999999);
-    const newDeckData = deckData;
-    deckData.push({deckId,  ...newDeck});
-    setDeckData(newDeckData);
-    saveData();
+    if (!deckData.find(deckDatum => deckDatum.uri === uri)) {
+      const newDeck = {mimeType, name, size, uri};
+      const deckId = getRandomInt(10000000, 99999999);
+      const newDeckData = deckData;
+      deckData.push({deckId,  ...newDeck});
+      setDeckData(newDeckData);
+      saveData(newDeckData);
+    }
   }
 
   const onDeckPress = (deckId) => {
@@ -103,12 +105,18 @@ export default App = () => {
     }
   };
 
-  const saveData = async () => {
+  const saveData = async (newDeckData) => {
     try {
-      await AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(deckData));
+      await AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(newDeckData));
     } catch (e) {
       console.log('Error saving: ' + JSON.stringify(e));
     }
+  }
+
+  const onDelete = async (deckId) => {
+    const newDeckData = deckData.filter(deckDatum => deckDatum.deckId !== deckId);
+    setDeckData(newDeckData);
+    saveData(newDeckData);
   }
 
   useEffect(() => {
@@ -179,15 +187,19 @@ export default App = () => {
         )}
         { currentView === 'homeView' && (
           <>
-            <DeckList data={deckData} onPress={onDeckPress} />
+            <DeckList data={deckData} onPress={onDeckPress} onDelete={onDelete} />
             {/*<View style={[styles.insideContainer, scheme.bg]}>
               <Text>Please add a question file</Text>
             </View>*/}
-            <FAB
+            {deckData.length < 50 && (<FAB
               icon="plus"
               style={styles.fab}
               onPress={pickQuestionFileTxt}
-            />
+            />)}
+            {deckData.length >= 50 && (<FAB
+              icon="plus"
+              style={[styles.fab, {backgroundColor: "lightgrey"}]}
+            />)}
           </>
         )}
         <StatusBar style="dark" />
@@ -214,6 +226,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+    backgroundColor: "orange",
   },
   ...schemes
 });
