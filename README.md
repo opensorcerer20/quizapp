@@ -31,10 +31,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] hide settings for other modes
 
 - [ ] allow csv file (good for lists that go `q | a` in rows)
-  - [ ] make user pick type of file
-    - [ ] (E) extra FAB visible after pressing plus
-    - [ ] (E) extra FAB invsibile when anywhere clicked
-  - [ ] (E) if text, use current code
+  - [x] make user pick type of file
+    - [x] (E) extra FAB visible after pressing plus
+    - [x] (E) extra FAB invsibile when anywhere clicked
+  - [x] (E) if text, use current code
   - [ ] (H) if csv, parse according to csv rules
 
 - [ ] good ux design

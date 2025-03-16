@@ -6,11 +6,11 @@ import { schemes } from "./lib";
 import { getFileData, getRandomInt } from "./util";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
-import { FAB } from "react-native-paper";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { cleanDeckSettings } from "./QuizDeck";
 import { DeckList } from "./DeckList";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PaperProvider} from "react-native-paper";
 
 const DATA_STORAGE_KEY = "DATA";
 
@@ -64,10 +64,8 @@ export default App = () => {
     setDeckSettings(cleanDeckSettings(pickOrder, pickMode, cardMode));
 
     // reset deck
-    //if (currSource.uri) {
-      setQuestionsFromFile(currSource.uri);
-      fillQuestionBag();
-    //}
+    setQuestionsFromFile(currSource.uri);
+    fillQuestionBag();
   }
 
   const setQuestionsFromFile = async (uri) => {
@@ -85,7 +83,7 @@ export default App = () => {
     }
   }
 
-  const onDeckPress = (deckId) => {
+  const onPressDeck = (deckId) => {
     const selectedDeck = deckData.find(deck => deck.deckId === deckId);
     if (selectedDeck) {
       setQuestionsFromFile(selectedDeck.uri)
@@ -173,37 +171,25 @@ export default App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-      <View style={[styles.container, scheme.bg]}>
-        <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
-        { currentView === 'quizView' && (
-          <QuizScreen
-            currQ={currState.currQ}
-            colorScheme={colorScheme}
-            nextQuestion={nextQuestion}
-            numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length}
-            deckSettings={deckSettings}
-            updateDeckSettings={updateDeckSettings}
-          />
-        )}
-        { currentView === 'homeView' && (
-          <>
-            <DeckList data={deckData} onPress={onDeckPress} onDelete={onDelete} />
-            {/*<View style={[styles.insideContainer, scheme.bg]}>
-              <Text>Please add a question file</Text>
-            </View>*/}
-            {deckData.length < 50 && (<FAB
-              icon="plus"
-              style={styles.fab}
-              onPress={pickQuestionFileTxt}
-            />)}
-            {deckData.length >= 50 && (<FAB
-              icon="plus"
-              style={[styles.fab, {backgroundColor: "lightgrey"}]}
-            />)}
-          </>
-        )}
-        <StatusBar style="dark" />
-      </View>
+        <PaperProvider>
+          <View style={[styles.container, scheme.bg]}>
+            <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
+            { currentView === 'quizView' && (
+              <QuizScreen
+                currQ={currState.currQ}
+                colorScheme={colorScheme}
+                nextQuestion={nextQuestion}
+                numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length}
+                deckSettings={deckSettings}
+                updateDeckSettings={updateDeckSettings}
+              />
+            )}
+            { currentView === 'homeView' && (
+                <DeckList deckData={deckData} onPressDeck={onPressDeck} onPressText={pickQuestionFileTxt} onDelete={onDelete} />
+            )}
+            <StatusBar style="dark" />
+          </View>
+        </PaperProvider>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -220,13 +206,6 @@ const styles = StyleSheet.create({
   },
   insideContainer: {
     flex: 10,
-  },
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "orange",
   },
   ...schemes
 });

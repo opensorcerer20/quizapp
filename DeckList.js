@@ -2,11 +2,23 @@ import { useState } from 'react';
 import { View, Text, FlatList, Pressable, Modal, StyleSheet } from 'react-native';
 //import { Entypo } from '@expo/vector-icons'; // For 3-dot menu icon
 //import Ionicons from '@expo/vector-icons/Ionicons';
+import { FAB, Portal } from "react-native-paper";
 
-export const DeckList = ({data, onPress, onEdit, onDelete}) => {
+const MAX_DECKS = 50;
+
+export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const [selectedItem, setSelectedItem] = useState(null);
+
+
+
+  // @todo used when fab is clicked, need renaming
+  const [state, setState] = useState({ open: false });
+  const onStateChange = ({ open }) => setState({ open });
+  const { open } = state;
+
+
 
   const unSelectItem = () => {
     setSelectedItem(null);
@@ -38,7 +50,7 @@ export const DeckList = ({data, onPress, onEdit, onDelete}) => {
 
   const renderItem = ({ item }) => {
     return (
-      <Pressable key={item.deckId} onPress={() => onPress(item.deckId)} onLongPress={() => onPress(item.deckId)}>
+      <Pressable key={item.deckId} onPress={() => onPressDeck(item.deckId)} onLongPress={() => onPressDeck(item.deckId)}>
         <View style={[styles.item, selectedItem && item.deckId === selectedItem.deckId ? styles.selectedItem : {}]}>
           <Text>{item.name}</Text>
           <Pressable onLongPress={(event) => handleMenuPress(event, item)} onPress={(event) => handleMenuPress(event, item)}>
@@ -51,10 +63,10 @@ export const DeckList = ({data, onPress, onEdit, onDelete}) => {
 
   return (
     <View style={styles.container}>
-      { data.length > 0 && (
+      { deckData.length > 0 && (
         <>
           <Text>Saved Decks</Text>
-          <FlatList data={data} renderItem={renderItem} />
+          <FlatList data={deckData} renderItem={renderItem} />
 
           {menuVisible && (
             <Modal transparent animationType="fade" visible={menuVisible}>
@@ -72,9 +84,40 @@ export const DeckList = ({data, onPress, onEdit, onDelete}) => {
           )}
         </>
       )}
-      { data.length < 1 && (
+      { deckData.length < 1 && (
         <Text>No decks in memory, please add a deck</Text>
       )}
+      {deckData.length < MAX_DECKS && (
+      <Portal>
+        <FAB.Group
+          open={open}
+          visible
+          icon={'plus'}
+          actions={[
+            {
+              icon: 'text',
+              label: 'Text',
+              onPress: onPressText,
+            },
+            {
+              icon: 'table',
+              label: 'CSV',
+              onPress: () => console.log('Pressed csv'),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+      )}
+      {deckData.length >= MAX_DECKS && (<FAB
+        icon="plus"
+        style={[styles.fab, {backgroundColor: "lightgrey"}]}
+      />)}
     </View>
   );
 };
@@ -105,6 +148,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   menuItem: { paddingVertical: 5, paddingHorizontal: 10, fontSize: 16 },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "orange",
+  },
 });
 
 export default DeckList;
