@@ -30,6 +30,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 - [x] hide settings for other modes
 
+- [ ] move deck functions into QuizScreen and out of App
+
+- [ ] unit testing and fix issue with next question
+
 - [ ] allow csv file (good for lists that go `q | a` in rows)
   - [x] make user pick type of file
     - [x] (E) extra FAB visible after pressing plus

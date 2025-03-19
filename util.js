@@ -1,5 +1,5 @@
 
-const makeQuestionObject = (question, answer) => {
+export const makeQuestionObject = (question, answer) => {
     return {
       q: question,
       a: answer,
