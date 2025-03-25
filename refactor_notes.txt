@@ -1,0 +1,92 @@
+data stored
+
+const [currState, setCurrState] = useState({currQ: null, questionBag: null});
+-- current question (and answer), as well as remaining questions
+
+==
+
+state map
+
+user adds a deck
+- response
+  - deck added to memory
+    - if txt
+      - parse text file to question data
+    - if csv
+      - parse csv file to question data
+    - save question data to memory
+  - list reloads (useeffect)
+  - (new) deck clicked (function call)
+
+deck clicked
+- response
+  - load question data from file
+    - use uri from clicked deck to load questions
+  - random sorting of questions
+    - make a "bag" of questions
+    - randomly sort questions
+  - show first question on a card
+    - pop first question from bag array
+    - (now) viewing question
+- implementation thoughts
+  - maybe useeffect when deckData changes
+    - calls fillQuestionBag()
+    - this same function will be called when bag empty
+
+viewing question
+- response
+  - show ui
+    - back button
+    - question card
+    - next question button
+
+question showing, card clicked
+- response
+  - flip card to show answer
+
+answer showing, card clicked
+- response
+  - flip card to show question
+
+next button clicked, > 0 questions left
+- response
+  - pop question from bag array
+  - (now) viewing question
+
+next button clicked, 0 questions left
+- response
+  - calls fillQuestionBag()
+  - shows the first question after re-randomizing questions
+
+back button clicked
+- response
+  - calls method in parent to unset deckData
+  - when deckData is empty, deck list shows
+
+user clicks 3 dots on deck, then clicks delete
+- response
+  - deck removed from memory
+  - list reloads (useeffect)
+
+===
+
+flow
+
+- DeckList shows
+- action: deck added
+  - [parse incoming file to data app can consume for question/answer pairs]
+- action: deck selected
+- reaction: setDeckData(getDeck(id))
+  - note: does not "fill question bag" or randomize, simply has list of questions from data
+- reaction: deckData causes QuizScreen to show
+- useEffect: QuizScreen watches deckData
+- reaction: when deckData filled, runs startQuiz(), which calls fillQuestionBag() and fetchNextQuestion()
+- action: next question clicked
+  - if > 0 questions
+    - reaction: fetchNextQuestion()
+  - if 0 questions
+    - reaction: startQuiz() to reload deck
+- action: back button clicked
+- reaction: parent empties deckData
+- reaction: show DeckList
+

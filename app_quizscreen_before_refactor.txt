@@ -18,20 +18,19 @@ export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
   const [deckData, setDeckData] = useState([]);
-  const [currentDeck, setCurrentDeck] = useState([]);
-  //const [currState, setCurrState] = useState({currQ: null, questionBag: null});
+  const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, deckId: null});
   const [questionData, setQuestionData] = useState([]);
   const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
 
   const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
 
-  const showFilePicker = deckData.length === 0;
+  const showFilePicker = questionData.length === 0 && !currState.currQ;
 
   // @todo bug with this... next question doesnt work as expected
-  //const nextQuestion = () => {
-  //  setCurrState({...currState, currQ: null});
-  //};
+  const nextQuestion = () => {
+    setCurrState({...currState, currQ: null});
+  };
 
   const pickQuestionFileTxt = async () => {
     try {
@@ -46,20 +45,19 @@ export default App = () => {
     }
   };
 
-  //const fillQuestionBag = () => {
-  //  // randomize questions
-  //  // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
-  //  const questionBag = questionData
-  //    .map(value => ({ value, sort: Math.random() }))
-  //    .sort((a, b) => a.sort - b.sort)
-  //    .map(({ value }) => value)
-  //  setCurrState({...currState, currQ: null, questionBag});
-  //}
+  const fillQuestionBag = () => {
+    // randomize questions
+    // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
+    const questionBag = questionData
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value)
+    setCurrState({...currState, currQ: null, questionBag});
+  }
 
-  const clearDeck = () => {
-    setDeckData([]);
-    //setQuestionData([]);
-    //setCurrState({currQ: null, questionBag: null});
+  const clearQuestions = () => {
+    setQuestionData([]);
+    setCurrState({currQ: null, questionBag: null});
   }
 
   const updateDeckSettings = (pickOrder, pickMode, cardMode) => {
@@ -90,7 +88,7 @@ export default App = () => {
     if (selectedDeck) {
       setQuestionsFromFile(selectedDeck.uri)
     } else {
-      clearDeck();
+      clearQuestions();
     }
   }
 
@@ -119,21 +117,21 @@ export default App = () => {
     saveData(newDeckData);
   }
 
-  //useEffect(() => {
-  //  // @todo need this odd complexity?
-  //  // @todo need the useeffect?
-  //  if (currState.questionBag) {
-  //    if (currState.questionBag.length > 0) {
-  //      if (!currState.currQ) {
-  //        // load next question
-  //        const newQuestionBag = currState.questionBag;
-  //        setCurrState({currQ: newQuestionBag.pop(), questionBag: newQuestionBag});
-  //      }
-  //    } else {
-  //      fillQuestionBag();
-  //    }
-  //  }
-  //}, [currState]);
+  useEffect(() => {
+    // @todo need this odd complexity?
+    // @todo need the useeffect?
+    if (currState.questionBag) {
+      if (currState.questionBag.length > 0) {
+        if (!currState.currQ) {
+          // load next question
+          const newQuestionBag = currState.questionBag;
+          setCurrState({currQ: newQuestionBag.pop(), questionBag: newQuestionBag});
+        }
+      } else {
+        fillQuestionBag();
+      }
+    }
+  }, [currState]);
 
   useEffect(() => {
     if (currSource.uri) {
@@ -161,25 +159,27 @@ export default App = () => {
     }
   }, []);
 
-  //console.log('state: ' + JSON.stringify({
-  //  currState,
-  //  currSource,
-  //  questionData,
-  //  deckSettings,
-  //}));
+  console.log('state: ' + JSON.stringify({
+    currState,
+    currSource,
+    questionData,
+    deckSettings,
+  }));
 
-  const currentView = deckData.length > 0 ? 'quizView' : 'homeView';
+  const currentView = questionData.length > 0 && currState.currQ ? 'quizView' : 'homeView';
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <PaperProvider>
           <View style={[styles.container, scheme.bg]}>
-            <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearDeck} colorScheme={colorScheme} />
+            <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearQuestions} colorScheme={colorScheme} />
             { currentView === 'quizView' && (
               <QuizScreen
-                currentDeck={currentDeck}
+                currQ={currState.currQ}
                 colorScheme={colorScheme}
+                nextQuestion={nextQuestion}
+                numLeft={currState.questionBag.length === 7 ? 0 : currState.questionBag.length}
                 deckSettings={deckSettings}
                 updateDeckSettings={updateDeckSettings}
               />
@@ -209,3 +209,64 @@ const styles = StyleSheet.create({
   },
   ...schemes
 });
+
+===
+
+import { useEffect } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { schemes } from "./lib";
+import { FlipCard } from "./FlipCard";
+import { useSharedValue } from "react-native-reanimated";
+import { Button } from "react-native-paper";
+import QuizSettings from "./QuizSettings";
+
+const QuizScreen = ({
+    colorScheme = "light",
+    currQ,
+    nextQuestion,
+    numLeft,
+    deckSettings,
+    updateDeckSettings
+}) => {
+    const showAnswer = useSharedValue(false);
+
+    const flipCard = (reset = false) => {
+        showAnswer.value = reset ? false : !showAnswer.value;
+    };
+
+    // @todo
+    const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
+    // @todo
+    const cardScheme = colorScheme === "dark" ? styles.cardDark : styles.cardLight;
+
+    useEffect(() => {
+        flipCard(true);
+    }, [currQ]);
+
+    // console.log('child order, pick, card: ' + JSON.stringify({order: pickOrder, mode: pickMode, card: cardMode}));
+    // console.log('decksettings: ' + JSON.stringify(deckSettings));
+
+    return (
+        <View style={styles.container}>
+            <QuizSettings deckSettings={deckSettings} updateDeckSettings={updateDeckSettings} />
+            <Pressable style={styles.toggleButton} onPress={() => flipCard()}>
+                <FlipCard
+                    isFlipped={showAnswer}
+                    frontText={currQ.q}
+                    backText={currQ.a}
+                  />
+            </Pressable>
+            <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next Card &gt;</Button>
+            <Text>num left {numLeft}</Text>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 10
+    },
+    ...schemes
+  });
+
+export default QuizScreen;
