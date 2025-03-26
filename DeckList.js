@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, FlatList, Pressable, Modal, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Pressable, Modal, StyleSheet, Dimensions } from 'react-native';
 //import { Entypo } from '@expo/vector-icons'; // For 3-dot menu icon
 //import Ionicons from '@expo/vector-icons/Ionicons';
 import { FAB, Portal } from "react-native-paper";
@@ -7,6 +7,10 @@ import { FAB, Portal } from "react-native-paper";
 const MAX_DECKS = 50;
 
 export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete}) => {
+  const { width } = Dimensions.get("window");
+  const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
+  const MODAL_WIDTH = 100; // arbitrary for now
+
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const [selectedItem, setSelectedItem] = useState(null);
@@ -32,7 +36,8 @@ export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete})
   const handleMenuPress = (event, item) => {
     const { pageX, pageY } = event.nativeEvent;
     const modalWidth = 100;
-    const modalX = Math.max(pageX - modalWidth, 0);
+    let modalX = Math.max(pageX - modalWidth, 0);
+    modalX = Math.min(SAFE_WIDTH - MODAL_WIDTH, modalX);
     setMenuPosition({ top: pageY, left: modalX });
     setSelectedItem(item);
     setMenuVisible(true);

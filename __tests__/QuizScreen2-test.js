@@ -7,7 +7,7 @@ import { makeQuestionObject } from "../util.js";
 describe("<QuizScreen2 />", () => {
   it("shows empty deck text when no deck data", () => {
     const currentDeck = [];
-    const { getByText } = render(<QuizScreen2 currentDeck={selectedDeck} />);
+    const { getByText } = render(<QuizScreen2 currentDeck={null} />);
 
     getByText("No deck data");
   });

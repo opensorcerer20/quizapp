@@ -1,4 +1,4 @@
-//import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
 //import { FlipCard } from "./FlipCard";
@@ -91,11 +91,15 @@ NEW THING
         setQuestionBag(newBag);
     };
 
+    const hasQuestionData = Array.isArray(currentDeck) && currentDeck.length > 0;
+
     useEffect(() => {
+      if (hasQuestionData) {
         resetQuestionBag();
+      }
     }, [currentDeck])
 
-    const hasQuestionData = Array.isArray(currentDeck) && currentDeck.length > 0;
+    
 
     return (
         <>
