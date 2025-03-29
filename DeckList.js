@@ -6,7 +6,7 @@ import { FAB, Portal } from "react-native-paper";
 
 const MAX_DECKS = 50;
 
-export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete}) => {
+export const DeckList = ({deckListData, onPressDeck, onPressText, onEdit, onDelete}) => {
   const { width } = Dimensions.get("window");
   const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
   const MODAL_WIDTH = 100; // arbitrary for now
@@ -68,10 +68,10 @@ export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete})
 
   return (
     <View style={styles.container}>
-      { deckData.length > 0 && (
+      { deckListData.length > 0 && (
         <>
           <Text>Saved Decks</Text>
-          <FlatList data={deckData} renderItem={renderItem} />
+          <FlatList data={deckListData} renderItem={renderItem} />
 
           {menuVisible && (
             <Modal transparent animationType="fade" visible={menuVisible}>
@@ -89,10 +89,10 @@ export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete})
           )}
         </>
       )}
-      { deckData.length < 1 && (
+      { deckListData.length < 1 && (
         <Text>No decks in memory, please add a deck</Text>
       )}
-      {deckData.length < MAX_DECKS && (
+      {deckListData.length < MAX_DECKS && (
       <Portal>
         <FAB.Group
           open={open}
@@ -119,7 +119,7 @@ export const DeckList = ({deckData, onPressDeck, onPressText, onEdit, onDelete})
         />
       </Portal>
       )}
-      {deckData.length >= MAX_DECKS && (<FAB
+      {deckListData.length >= MAX_DECKS && (<FAB
         icon="plus"
         style={[styles.fab, {backgroundColor: "lightgrey"}]}
       />)}

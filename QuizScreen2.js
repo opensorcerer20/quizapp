@@ -1,21 +1,35 @@
 import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
-//import { FlipCard } from "./FlipCard";
 //import { useSharedValue } from "react-native-reanimated";
 import { Button } from "react-native-paper";
-import {cleanDeckSettings} from "./QuizDeck";
-import {makeQuestionObject} from "./util";
+// import {cleanDeckSettings} from "./QuizDeck";
+// import {makeQuestionObject} from "./util";
+import { FlipCard } from "./FlipCard";
 //import QuizSettings from "./QuizSettings";
+
+export const emptyQuestion = {
+  q: null,
+  a: null,
+};
+
+export const QuizScreenOrder = {
+  BAG_RANDOM: "BAG_RANDOM",
+  ALL_RANDOM: "ALL_RANDOM",
+  SEQUENTIAL: "SEQUENTIAL"
+};
 
 const QuizScreen2 = ({
     colorScheme = "light",
     currentDeck,
-    deckSettings = cleanDeckSettings(null, null, null),
-    updateDeckSettings = () => {}
+    questionOrder = QuizScreenOrder.BAG_RANDOM,
+    // deckSettings = cleanDeckSettings(null, null, null),
+    // updateDeckSettings = () => {}
 }) => {
     //const showAnswer = useSharedValue(false);
+    const [showAnswer, setShowAnswer] = useState(false);
     const [questionBag, setQuestionBag] = useState([]);
+    const [currentQuestion, setCurrentQuestion] = useState(emptyQuestion);
 /*
 deck clicked
 - response
@@ -35,8 +49,8 @@ deck clicked
 ^^^ this means deck is randomized in parent according to settings
 vvv might not have to randomize in parent, just pass q & a
 
-*** what does deckData actually represent?
-- deckData is actually "deck list data"
+*** what does deckListData actually represent?
+- deckListData is actually "deck list data"
 
 viewing question
 - response
@@ -63,35 +77,47 @@ next button clicked, 0 questions left
   - calls fillQuestionBag()
   - shows the first question after re-randomizing questions
 
-v back button clicked
-- response
-  - calls method in parent to unset currentDeck
-  - when currentDeck is empty, deck list shows
-
-
 NEW THING
 - when currentDeck changes, empty question bag
 - if question bag empty, fill
 
 */
-    const nextQuestion = () => {
-        if (questionBag.length) {
-            const newBag = questionBag;
+    const nextQuestion = (incomingBag = null) => {
+      const currentBag = incomingBag ?? questionBag;
+        if (currentBag.length) {
+          if (questionOrder === QuizScreenOrder.BAG_RANDOM || questionOrder === QuizScreenOrder.SEQUENTIAL) {
+            // pop quesiton off
+            const newBag = currentBag;
+  
+            // duplicate code
+            setShowAnswer(false);
             setCurrentQuestion(newBag.pop());
             setQuestionBag(newBag);
+          } else if (questionOrder === QuizScreenOrder.ALL_RANDOM) {
+            // @todo pick a random item, do not pop off
+          }
         } else {
             resetQuestionBag();
         }
     }
 
     const resetQuestionBag = () => {
+      let newBag = currentDeck;
         // fill bag with questions randomized according to settings
-        const newBag = [];
-        currentDeck.map(questionData => newBag.push(makeQuestionObject(questionData.q, questionData.a)));
-        setQuestionBag(newBag);
+        if (questionOrder === QuizScreenOrder.ALL_RANDOM || questionOrder === QuizScreenOrder.BAG_RANDOM) {
+          // randomize questions
+          // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
+
+          newBag = newBag
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
+        }
+
+        nextQuestion(newBag);
     };
 
-    const hasQuestionData = Array.isArray(currentDeck) && currentDeck.length > 0;
+    const hasQuestionData = !!currentQuestion.q;
 
     useEffect(() => {
       if (hasQuestionData) {
@@ -99,13 +125,25 @@ NEW THING
       }
     }, [currentDeck])
 
-    
+    useEffect(() => {
+      if (currentDeck && Array.isArray(currentDeck) && currentDeck.length > 0) {
+        resetQuestionBag();
+      }
+    }, [])
 
     return (
         <>
             {hasQuestionData && (
                 <View style={styles.container}>
-                    <Text>num left</Text>
+                  <Pressable style={styles.toggleButton} onPress={() => setShowAnswer(!showAnswer)}>
+                      <FlipCard
+                          isFlipped={showAnswer}
+                          frontText={currentQuestion.q}
+                          backText={currentQuestion.a}
+                        />
+                  </Pressable>
+                  <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next Card &gt;</Button>
+                  <Text>num left {questionBag.length}</Text>
                 </View>
             )}
             {!hasQuestionData && (

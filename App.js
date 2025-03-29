@@ -17,7 +17,7 @@ const DATA_STORAGE_KEY = "DATA";
 export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
-  const [deckData, setDeckData] = useState([]);
+  const [deckListData, setDeckListData] = useState([]);
   const [currentDeck, setCurrentDeck] = useState([]);
   //const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, deckId: null});
@@ -25,8 +25,6 @@ export default App = () => {
   const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
 
   const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
-
-  const showFilePicker = deckData.length === 0;
 
   // @todo bug with this... next question doesnt work as expected
   //const nextQuestion = () => {
@@ -57,7 +55,7 @@ export default App = () => {
   //}
 
   const clearDeck = () => {
-    setDeckData([]);
+    setCurrentDeck([]);
     //setQuestionData([]);
     //setCurrState({currQ: null, questionBag: null});
   }
@@ -75,18 +73,18 @@ export default App = () => {
   }
 
   const deckAdded = ({mimeType, name, size, uri}) => {
-    if (!deckData.find(deckDatum => deckDatum.uri === uri)) {
+    if (!deckListData.find(deckDatum => deckDatum.uri === uri)) {
       const newDeck = {mimeType, name, size, uri};
       const deckId = getRandomInt(10000000, 99999999);
-      const newDeckData = deckData;
-      deckData.push({deckId,  ...newDeck});
-      setDeckData(newDeckData);
-      saveData(newDeckData);
+      const newDeckListData = deckListData;
+      deckListData.push({deckId,  ...newDeck});
+      setDeckListData(newDeckListData);
+      saveData(newDeckListData);
     }
   }
 
   const onPressDeck = (deckId) => {
-    const selectedDeck = deckData.find(deck => deck.deckId === deckId);
+    const selectedDeck = deckListData.find(deck => deck.deckId === deckId);
     if (selectedDeck) {
       setQuestionsFromFile(selectedDeck.uri)
     } else {
@@ -94,29 +92,29 @@ export default App = () => {
     }
   }
 
-  const loadData = async () => {
+  const loadDeckListData = async () => {
     try {
       const value = await AsyncStorage.getItem(DATA_STORAGE_KEY);
       if (value !== null) {
-        setDeckData(JSON.parse(value));
+        setDeckListData(JSON.parse(value));
       }
     } catch (e) {
       // error reading value
     }
   };
 
-  const saveData = async (newDeckData) => {
+  const saveData = async (newDeckListData) => {
     try {
-      await AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(newDeckData));
+      await AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(newDeckListData));
     } catch (e) {
       console.log('Error saving: ' + JSON.stringify(e));
     }
   }
 
   const onDelete = async (deckId) => {
-    const newDeckData = deckData.filter(deckDatum => deckDatum.deckId !== deckId);
-    setDeckData(newDeckData);
-    saveData(newDeckData);
+    const newDeckListData = deckListData.filter(deckDatum => deckDatum.deckId !== deckId);
+    setDeckListData(newDeckListData);
+    saveData(newDeckListData);
   }
 
   //useEffect(() => {
@@ -155,8 +153,8 @@ export default App = () => {
   }, [questionData]);
 
   useEffect(() => {
-    const loadDeckData = async () => await loadData();
-    if (deckData.length === 0) {
+    const loadDeckData = async () => await loadDeckListData();
+    if (deckListData.length === 0) {
       loadDeckData();
     }
   }, []);
@@ -168,7 +166,7 @@ export default App = () => {
   //  deckSettings,
   //}));
 
-  const currentView = deckData.length > 0 ? 'quizView' : 'homeView';
+  const currentView = currentDeck.length > 0 ? 'quizView' : 'homeView';
 
   return (
     <SafeAreaProvider>
@@ -185,7 +183,7 @@ export default App = () => {
               />
             )}
             { currentView === 'homeView' && (
-                <DeckList deckData={deckData} onPressDeck={onPressDeck} onPressText={pickQuestionFileTxt} onDelete={onDelete} />
+                <DeckList deckListData={deckListData} onPressDeck={onPressDeck} onPressText={pickQuestionFileTxt} onDelete={onDelete} />
             )}
             <StatusBar style="dark" />
           </View>
