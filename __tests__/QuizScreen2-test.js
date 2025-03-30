@@ -66,9 +66,14 @@ describe("<QuizScreen2 />", () => {
     expect(getByText("answer 1")).toBeTruthy();
     expect(getByText("num left 0")).toBeTruthy();
 
-    // @todo test that deck refreshes with zero questions left
-
+    // test that deck refreshes with zero questions left
+    fireEvent.press(getByTestId("button"));
+    expect(getByText("question 2")).toBeTruthy();
+    expect(getByText("answer 2")).toBeTruthy();
+    expect(getByText("num left 1")).toBeTruthy();
   });
+
+  // test random sort
 
   /*
   viewing question

@@ -83,7 +83,10 @@ NEW THING
 
 */
     const nextQuestion = (incomingBag = null) => {
+      // console.log('incoming ' + JSON.stringify(incomingBag))
+      // console.log('questionBag ' + JSON.stringify(questionBag))
       const currentBag = incomingBag ?? questionBag;
+      // console.log('currentBag ' + JSON.stringify(currentBag))
         if (currentBag.length) {
           if (questionOrder === QuizScreenOrder.BAG_RANDOM || questionOrder === QuizScreenOrder.SEQUENTIAL) {
             // pop quesiton off
@@ -97,12 +100,14 @@ NEW THING
             // @todo pick a random item, do not pop off
           }
         } else {
-            resetQuestionBag();
+          // console.log('reset bag');
+          resetQuestionBag();
         }
     }
 
     const resetQuestionBag = () => {
-      let newBag = currentDeck;
+      // currentDeck shouldnt be modified without cloning, but it is for some reason
+      let newBag = JSON.parse(JSON.stringify(currentDeck));
         // fill bag with questions randomized according to settings
         if (questionOrder === QuizScreenOrder.ALL_RANDOM || questionOrder === QuizScreenOrder.BAG_RANDOM) {
           // randomize questions
@@ -114,6 +119,8 @@ NEW THING
             .map(({ value }) => value);
         }
 
+        // console.log('currentDeck ' + JSON.stringify(currentDeck));
+        // console.log('newbag ' + JSON.stringify(newBag));
         nextQuestion(newBag);
     };
 
