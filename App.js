@@ -19,17 +19,10 @@ export default App = () => {
   const colorScheme = "light";
   const [deckListData, setDeckListData] = useState([]);
   const [currentDeck, setCurrentDeck] = useState([]);
-  //const [currState, setCurrState] = useState({currQ: null, questionBag: null});
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, deckId: null});
-  const [questionData, setQuestionData] = useState([]);
   const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
 
   const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
-
-  // @todo bug with this... next question doesnt work as expected
-  //const nextQuestion = () => {
-  //  setCurrState({...currState, currQ: null});
-  //};
 
   const pickQuestionFileTxt = async () => {
     try {
@@ -44,20 +37,8 @@ export default App = () => {
     }
   };
 
-  //const fillQuestionBag = () => {
-  //  // randomize questions
-  //  // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
-  //  const questionBag = questionData
-  //    .map(value => ({ value, sort: Math.random() }))
-  //    .sort((a, b) => a.sort - b.sort)
-  //    .map(({ value }) => value)
-  //  setCurrState({...currState, currQ: null, questionBag});
-  //}
-
   const clearDeck = () => {
     setCurrentDeck([]);
-    //setQuestionData([]);
-    //setCurrState({currQ: null, questionBag: null});
   }
 
   const updateDeckSettings = (pickOrder, pickMode, cardMode) => {
@@ -69,7 +50,7 @@ export default App = () => {
   }
 
   const setQuestionsFromFile = async (uri) => {
-    setQuestionData(await getFileData(uri));
+    setCurrentDeck(await getFileData(uri));
   }
 
   const deckAdded = ({mimeType, name, size, uri}) => {
@@ -99,6 +80,7 @@ export default App = () => {
         setDeckListData(JSON.parse(value));
       }
     } catch (e) {
+      console.log('error loading deck list data');
       // error reading value
     }
   };
@@ -117,40 +99,12 @@ export default App = () => {
     saveData(newDeckListData);
   }
 
-  //useEffect(() => {
-  //  // @todo need this odd complexity?
-  //  // @todo need the useeffect?
-  //  if (currState.questionBag) {
-  //    if (currState.questionBag.length > 0) {
-  //      if (!currState.currQ) {
-  //        // load next question
-  //        const newQuestionBag = currState.questionBag;
-  //        setCurrState({currQ: newQuestionBag.pop(), questionBag: newQuestionBag});
-  //      }
-  //    } else {
-  //      fillQuestionBag();
-  //    }
-  //  }
-  //}, [currState]);
-
   useEffect(() => {
     if (currSource.uri) {
       deckAdded(currSource);
       setQuestionsFromFile(currSource.uri);
     }
   }, [currSource])
-
-  // testing without file select
-  //useEffect(() => {
-  //  const runAsync = async () => setQuestionData(await getFileDataTest(''));
-  //  runAsync();
-  //}, []);
-
-  useEffect(() => {
-    if (questionData.length > 0) {
-      fillQuestionBag();
-    }
-  }, [questionData]);
 
   useEffect(() => {
     const loadDeckData = async () => await loadDeckListData();
@@ -160,9 +114,8 @@ export default App = () => {
   }, []);
 
   //console.log('state: ' + JSON.stringify({
-  //  currState,
+  //  currentDeck,
   //  currSource,
-  //  questionData,
   //  deckSettings,
   //}));
 
@@ -173,7 +126,7 @@ export default App = () => {
       <SafeAreaView style={styles.container}>
         <PaperProvider>
           <View style={[styles.container, scheme.bg]}>
-            <Toolbar style={styles.toolbarContainer} showBack={questionData.length > 0} title={"@TODO deck name goes here"} backCallback={clearDeck} colorScheme={colorScheme} />
+            <Toolbar style={styles.toolbarContainer} showBack={currentDeck.length > 0} title={"@TODO deck name goes here"} backCallback={clearDeck} colorScheme={colorScheme} />
             { currentView === 'quizView' && (
               <QuizScreen
                 currentDeck={currentDeck}

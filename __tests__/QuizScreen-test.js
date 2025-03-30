@@ -4,7 +4,7 @@ import { fireEvent, render, screen, userEvent } from '@testing-library/react-nat
 
 jest.useFakeTimers();
 
-import QuizScreen2, { QuizScreenOrder } from "../QuizScreen2";
+import QuizScreen, { QuizScreenOrder } from "../QuizScreen";
 
 import { makeQuestionObject } from "../util.js";
 
@@ -18,11 +18,11 @@ jest.useFakeTimers(userEvent);
   });
 */
 
-describe("<QuizScreen2 />", () => {
+describe("<QuizScreen />", () => {
 
   it("shows empty deck text when no deck data", () => {
     const currentDeck = [];
-    const { getByText } = render(<QuizScreen2 currentDeck={currentDeck} />);
+    const { getByText } = render(<QuizScreen currentDeck={currentDeck} />);
 
     expect(getByText("No deck data")).toBeTruthy();
   });
@@ -34,7 +34,7 @@ describe("<QuizScreen2 />", () => {
     ];
 
     // use sequential order so we know which question happens first
-    const { getByText } = render(<QuizScreen2 currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
+    const { getByText } = render(<QuizScreen currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
 
     // test question card with quesiton showing
     expect(getByText("question 2")).toBeTruthy();
@@ -54,7 +54,7 @@ describe("<QuizScreen2 />", () => {
     ];
 
     // use sequential order so we know which question happens first
-    const { getByText, getByTestId } = render(<QuizScreen2 currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
+    const { getByText, getByTestId } = render(<QuizScreen currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
 
     expect(getByText("question 2")).toBeTruthy();
     expect(getByText("answer 2")).toBeTruthy();
