@@ -13,6 +13,7 @@ const makeQuestionData = (text) => {
   
     // assume even number with question/answer pairs
     if (quizData.length % 2 === 1) {
+      // pop odd row off of the end
       quizData.pop();
     }
     

@@ -37,11 +37,8 @@ describe("<QuizScreen />", () => {
     const { getByText } = render(<QuizScreen currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
 
     // test question card with quesiton showing
-    expect(getByText("question 2")).toBeTruthy();
-    // @todo test answer hidden
-    expect(getByText("answer 2")).toBeTruthy();
-
-    // @todo test click to show answer
+    expect(getByText("question 1")).toBeTruthy();
+    expect(getByText("answer 1")).toBeTruthy();
 
     // test num left
     expect(getByText("num left 1")).toBeTruthy();
@@ -56,74 +53,24 @@ describe("<QuizScreen />", () => {
     // use sequential order so we know which question happens first
     const { getByText, getByTestId } = render(<QuizScreen currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
 
-    expect(getByText("question 2")).toBeTruthy();
-    expect(getByText("answer 2")).toBeTruthy();
+    expect(getByText("question 1")).toBeTruthy();
+    expect(getByText("answer 1")).toBeTruthy();
 
     // test next question
     // @todo this "getByTestId" for "button" seems very unreliable
+    // note: "button-next" does not work, even though it's in the output
     fireEvent.press(getByTestId("button"));
-    expect(getByText("question 1")).toBeTruthy();
-    expect(getByText("answer 1")).toBeTruthy();
+    expect(getByText("question 2")).toBeTruthy();
+    expect(getByText("answer 2")).toBeTruthy();
     expect(getByText("num left 0")).toBeTruthy();
 
     // test that deck refreshes with zero questions left
     fireEvent.press(getByTestId("button"));
-    expect(getByText("question 2")).toBeTruthy();
-    expect(getByText("answer 2")).toBeTruthy();
+    expect(getByText("question 1")).toBeTruthy();
+    expect(getByText("answer 1")).toBeTruthy();
     expect(getByText("num left 1")).toBeTruthy();
   });
 
-  // test random sort
-
-  /*
-  viewing question
-- response
-  - show ui
-    - back button
-    - question card
-    - next question button
-*/
-
-
-
-  /*
-question showing, card clicked
-- response
-  - flip card to show answer
-*/
-
-
-
-  /*
-answer showing, card clicked
-- response
-  - flip card to show question
-*/
-
-
-
-  /*
-next button clicked, > 0 questions left
-- response
-  - pop question from bag array
-  - (now) viewing question
-*/
-
-
-
-  /*
-next button clicked, 0 questions left
-- response
-  - calls fillQuestionBag()
-  - shows the first question after re-randomizing questions
-*/
-
-
-
-// - when currentDeck changes, empty question bag
-
-
-
-// - if question bag empty, fill
+  // note: did not test random on purpose; no simple/quick way to do so
 
 });

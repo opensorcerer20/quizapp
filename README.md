@@ -7,9 +7,12 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 ## FAQ
 - Why use react native paper?
   - TBD (I remember trying to use tailwind and/or chakra but hit a problem; don't remember what problem)
+- Why is the unit testing not robust, eg testing for precise button ids?
+  - I tried to get this working, but the immediate issue is that it doesn't response to specific ids. For example i tried data-testid="button-next" but it didn't see it
 
 ## notes
 - issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash; just use numbers I guess?
+- couldn't see a way to test random sort
 
 ## Planned future features
 (**E**)asy, (**H**)ard
@@ -30,8 +33,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 - [x] hide settings for other modes
 
-- [ ] move deck functions into QuizScreen and out of App
-
+- [x] move deck functions into QuizScreen and out of App
+- [ ] use shift for next question, unit test random sort
 - [ ] unit testing and fix issue with next question
 
 - [ ] allow csv file (good for lists that go `q | a` in rows)

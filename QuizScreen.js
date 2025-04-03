@@ -94,7 +94,7 @@ NEW THING
   
             // duplicate code
             setShowAnswer(false);
-            setCurrentQuestion(newBag.pop());
+            setCurrentQuestion(newBag.shift());
             setQuestionBag(newBag);
           } else if (questionOrder === QuizScreenOrder.ALL_RANDOM) {
             // @todo pick a random item, do not pop off
