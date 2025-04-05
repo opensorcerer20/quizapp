@@ -6,7 +6,7 @@ import { FAB, Portal } from "react-native-paper";
 
 const MAX_DECKS = 50;
 
-export const DeckList = ({deckListData, onPressDeck, onPressText, onEdit, onDelete}) => {
+export const DeckList = ({deckListData, onPressDeck, onPressText, onPressCsv, onEdit, onDelete}) => {
   const { width } = Dimensions.get("window");
   const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
   const MODAL_WIDTH = 100; // arbitrary for now
@@ -17,7 +17,7 @@ export const DeckList = ({deckListData, onPressDeck, onPressText, onEdit, onDele
 
 
 
-  // @todo used when fab is clicked, need renaming
+  // @todo this is used when fab is clicked, need renaming
   const [state, setState] = useState({ open: false });
   const onStateChange = ({ open }) => setState({ open });
   const { open } = state;
@@ -66,6 +66,8 @@ export const DeckList = ({deckListData, onPressDeck, onPressText, onEdit, onDele
     );
   };
 
+  //console.log('do we have mimetype for csv ' + JSON.stringify(deckListData));
+
   return (
     <View style={styles.container}>
       { deckListData.length > 0 && (
@@ -107,7 +109,7 @@ export const DeckList = ({deckListData, onPressDeck, onPressText, onEdit, onDele
             {
               icon: 'table',
               label: 'CSV',
-              onPress: () => console.log('Pressed csv'),
+              onPress: onPressCsv,
             },
           ]}
           onStateChange={onStateChange}

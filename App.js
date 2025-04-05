@@ -33,7 +33,20 @@ export default App = () => {
       setCurrSource(docRes.assets[0]);
 
     } catch (error) {
-      console.log("Error while selecting file: ", JSON.stringify(error));
+      console.log("Error while selecting text file: ", JSON.stringify(error));
+    }
+  };
+
+  const pickQuestionFileCsv = async () => {
+    try {
+      const docRes = await DocumentPicker.getDocumentAsync({
+        type: "text/csv",
+      });
+
+      setCurrSource(docRes.assets[0]);
+
+    } catch (error) {
+      console.log("Error while selecting csv file: ", JSON.stringify(error));
     }
   };
 
@@ -54,10 +67,16 @@ export default App = () => {
   }
 
   const deckAdded = ({mimeType, name, size, uri}) => {
+    // see if selected deck is already in memory
     if (!deckListData.find(deckDatum => deckDatum.uri === uri)) {
+      // random id for new deck
       const newDeck = {mimeType, name, size, uri};
       const deckId = getRandomInt(10000000, 99999999);
       const newDeckListData = deckListData;
+
+      //console.log('newdeck ' + JSON.stringify(newDeck));
+
+      // save data
       deckListData.push({deckId,  ...newDeck});
       setDeckListData(newDeckListData);
       saveData(newDeckListData);
@@ -99,6 +118,7 @@ export default App = () => {
     saveData(newDeckListData);
   }
 
+  // actions after source specified
   useEffect(() => {
     if (currSource.uri) {
       deckAdded(currSource);
@@ -136,7 +156,7 @@ export default App = () => {
               />
             )}
             { currentView === 'homeView' && (
-                <DeckList deckListData={deckListData} onPressDeck={onPressDeck} onPressText={pickQuestionFileTxt} onDelete={onDelete} />
+                <DeckList deckListData={deckListData} onPressDeck={onPressDeck} onPressText={pickQuestionFileTxt} onPressCsv={pickQuestionFileCsv} onDelete={onDelete} />
             )}
             <StatusBar style="dark" />
           </View>
