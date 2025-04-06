@@ -7,7 +7,7 @@ export const makeQuestionObject = (question, answer) => {
 }
 
 /**
- * clean input that could have \r\n
+ * clean input that could have \r\n, remove empty lines
  * @param {*} fileData 
  * @returns 
  */
@@ -16,7 +16,6 @@ const convertFileToArray = (fileData) => {
   return quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
 } 
 
-// @todo unit test
 export const makeQuestionDataCsv = (quizData) => {
   const parsedData = quizData.map(line => {
     let parsed = line.split('","');
@@ -25,6 +24,10 @@ export const makeQuestionDataCsv = (quizData) => {
       // remove first/last character which is assumed to be a quotation mark
       parsed[0] = parsed[0].substring(1);
       parsed[1] = parsed[1].substring(0, parsed[1].length - 1);
+
+      // remove remaining escaped quotes
+      parsed[0] = parsed[0].replace(/\\"|""/g, '"');
+      parsed[1] = parsed[1].replace(/\\"|""/g, '"');
     } else {
       parsed = line.split(',');
     }
@@ -69,18 +72,18 @@ export const getFileData = async (fileData) => {
   // need to determine what type is
   const fileResponse = await fetch(fileData.uri); // returns Response object
   const rawQuestionData = await fileResponse.text();
-  return getQuestionObjectsFromFile(rawQuestionData);
+  return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
 }
 
 // @todo integration test
-export const getQuestionObjectsFromFile = (rawQuestionData) => {
+export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   let questions = [];
   
-  const quizData = convertFileToArray(rawQuestionData);
+  questions = convertFileToArray(rawQuestionData);
 
   // plain text does not require additional processing (at this time)
-  if (fileData.mimeType === "text/csv") {
-    questions = makeQuestionDataCsv(quizData);
+  if (mimeType === "text/csv") {
+    questions = makeQuestionDataCsv(questions);
   }
 
   return makeQuestionObjects(questions);

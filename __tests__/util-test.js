@@ -8,17 +8,17 @@ describe('makeQuestionDataCsv', () => {
     expect(output).toEqual(['What is 2+2?', '4']);
   });
 
-//  it('parses lines with escaped quoted values', () => {
-//    const input = ['"\"What is 2+2?\"","\"4\""'];
-//    const output = makeQuestionDataCsv(input);
-//    expect(output).toEqual(['"What is 2+2?"', '"4"']);
-//  });
+  it('parses lines with escaped quoted values', () => {
+    const input = ['"\"What is 2+2?\"","\"4\""'];
+    const output = makeQuestionDataCsv(input);
+    expect(output).toEqual(['"What is 2+2?"', '"4"']);
+  });
 
-//  it('parses lines with triple quoted values', () => {
-//    const input = ['"""What is 2+2?""","""4"""'];
-//    const output = makeQuestionDataCsv(input);
-//    expect(output).toEqual(['"What is 2+2?"', '"4"']);
-//  });
+  it('parses lines with triple quoted values', () => {
+    const input = ['"""What is 2+2?""","""4"""'];
+    const output = makeQuestionDataCsv(input);
+    expect(output).toEqual(['"What is 2+2?"', '"4"']);
+  });
 
   it('parses lines with simple comma-separated values (no quotes)', () => {
     const input = ['Question,Answer'];
