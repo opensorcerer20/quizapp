@@ -14,6 +14,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash; just use numbers I guess?
 - couldn't see a way to test random sort
 - if you get error "you probably forgot to export..." make sure you use the right import eg "import {FlipCard}..." or "import FlipCard..."
+- cant console log the "response" when fetching a file
 
 ## Planned future features
 (**E**)asy, (**H**)ard
@@ -47,6 +48,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 - [ ] flip card not working
 - [ ] grab bag not working; getting full random instead
+- [ ] loading from memory not working
 
 - [ ] good ux design
   - [x] safeareaview
