@@ -6,6 +6,7 @@ import { Button } from "react-native-paper";
 // import {cleanDeckSettings} from "./QuizDeck";
 // import {makeQuestionObject} from "./util";
 import { FlipCard } from "./FlipCard";
+import FlipCard2 from "./FlipCard2";
 //import QuizSettings from "./QuizSettings";
 
 export const emptyQuestion = {
@@ -30,58 +31,7 @@ const QuizScreen = ({
     const [showAnswer, setShowAnswer] = useState(false);
     const [questionBag, setQuestionBag] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(emptyQuestion);
-/*
-deck clicked
-- response
-  - load question data from file
-    - use uri from clicked deck to load questions
-  - random sorting of questions
-    - make a "bag" of questions
-    - randomly sort questions
-  - show first question on a card
-    - pop first question from bag array
-    - (now) viewing question
-- implementation thoughts
-  - maybe useeffect when currentDeck changes
-    - calls fillQuestionBag()
-    - this same function will be called when bag empty
 
-^^^ this means deck is randomized in parent according to settings
-vvv might not have to randomize in parent, just pass q & a
-
-*** what does deckListData actually represent?
-- deckListData is actually "deck list data"
-
-viewing question
-- response
-  - show ui
-    - back button
-    - question card
-    - next question button
-
-question showing, card clicked
-- response
-  - flip card to show answer
-
-answer showing, card clicked
-- response
-  - flip card to show question
-
-next button clicked, > 0 questions left
-- response
-  - pop question from bag array
-  - (now) viewing question
-
-next button clicked, 0 questions left
-- response
-  - calls fillQuestionBag()
-  - shows the first question after re-randomizing questions
-
-NEW THING
-- when currentDeck changes, empty question bag
-- if question bag empty, fill
-
-*/
     const nextQuestion = (incomingBag = null) => {
       // console.log('incoming ' + JSON.stringify(incomingBag))
       // console.log('questionBag ' + JSON.stringify(questionBag))
@@ -143,10 +93,14 @@ NEW THING
             {hasQuestionData && (
                 <View style={styles.container}>
                   <Pressable style={styles.toggleButton} onPress={() => setShowAnswer(!showAnswer)}>
-                      <FlipCard
+                      {/*<FlipCard
                           isFlipped={showAnswer}
                           frontText={currentQuestion.q}
                           backText={currentQuestion.a}
+                        />*/}
+                      <FlipCard2
+                          regularText={currentQuestion.q}
+                          flippedText={currentQuestion.a}
                         />
                   </Pressable>
                   <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next Card &gt;</Button>

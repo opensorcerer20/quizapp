@@ -13,6 +13,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 ## notes
 - issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash; just use numbers I guess?
 - couldn't see a way to test random sort
+- if you get error "you probably forgot to export..." make sure you use the right import eg "import {FlipCard}..." or "import FlipCard..."
 
 ## Planned future features
 (**E**)asy, (**H**)ard
@@ -34,15 +35,18 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] hide settings for other modes
 
 - [x] move deck functions into QuizScreen and out of App
-- [ ] use shift for next question, unit test random sort
-- [ ] unit testing and fix issue with next question
+- [x] use shift for next question, unit test random sort
+- [x] unit testing and fix issue with next question
 
-- [ ] allow csv file (good for lists that go `q | a` in rows)
+- [x] allow csv file (good for lists that go `q | a` in rows)
   - [x] make user pick type of file
     - [x] (E) extra FAB visible after pressing plus
     - [x] (E) extra FAB invsibile when anywhere clicked
   - [x] (E) if text, use current code
-  - [ ] (H) if csv, parse according to csv rules
+  - [x] (H) if csv, parse according to csv rules
+
+- [ ] flip card not working
+- [ ] grab bag not working; getting full random instead
 
 - [ ] good ux design
   - [x] safeareaview

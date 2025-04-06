@@ -58,12 +58,12 @@ export default App = () => {
     setDeckSettings(cleanDeckSettings(pickOrder, pickMode, cardMode));
 
     // reset deck
-    setQuestionsFromFile(currSource.uri);
+    setQuestionsFromFile();
     fillQuestionBag();
   }
 
-  const setQuestionsFromFile = async (uri) => {
-    setCurrentDeck(await getFileData(uri));
+  const setQuestionsFromFile = async () => {
+    setCurrentDeck(await getFileData(currSource));
   }
 
   const deckAdded = ({mimeType, name, size, uri}) => {
