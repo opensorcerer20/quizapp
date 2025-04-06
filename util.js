@@ -20,13 +20,16 @@ const convertFileToArray = (fileData) => {
 export const makeQuestionDataCsv = (quizData) => {
   const parsedData = quizData.map(line => {
     let parsed = line.split('","');
+
     if (parsed.length === 2) {
       // remove first/last character which is assumed to be a quotation mark
       parsed[0] = parsed[0].substring(1);
-      parsed[1] = parsed[1].substring(0, parsed[1].length - 2);
+      parsed[1] = parsed[1].substring(0, parsed[1].length - 1);
     } else {
       parsed = line.split(',');
     }
+
+    return parsed;
   });
 
   return parsedData.flat();
