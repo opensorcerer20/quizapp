@@ -1,18 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { Pressable, SafeAreaView, View, StyleSheet, Text } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 
-// based on React Native Reanimated FlipCard example: https://docs.swmansion.com/react-native-reanimated/examples/flipCard
-export const FlipCard = ({
+/**
+ * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
+ */
+
+const CardContent = ({cardText, cardStyle, textStyle}) => {
+  return (
+    <View style={cardStyle}>
+      <Text style={textStyle}>{cardText}</Text>
+    </View>
+  );
+};
+
+const TheCard = ({
   isFlipped,
-  direction='y',
-  duration=300,
-  frontText="Front Text",
-  backText="Back Text",
+  cardStyle,
+  direction = 'y',
+  duration = 500,
+  regularText,
+  flippedText,
 }) => {
   const isDirectionX = direction === 'x';
 
@@ -42,65 +55,98 @@ export const FlipCard = ({
     <View>
       <Animated.View
         style={[
-          flipCardStyles.regularCard,
-          styles.flipCard,
+          styles.regularCardContainer,
+          cardStyle,
           regularCardAnimatedStyle,
         ]}>
-        <View style={styles.frontCard}>
-          <Text style={styles.frontText}>{frontText}</Text>
-        </View>
+        <CardContent cardText={regularText} cardStyle={styles.regularCard} textStyle={styles.regularText} />
       </Animated.View>
       <Animated.View
         style={[
-          flipCardStyles.flippedCard,
-          styles.flipCard,
+          styles.flippedCardContainer,
+          cardStyle,
           flippedCardAnimatedStyle,
         ]}>
-        <View style={styles.backCard}>
-          <Text style={styles.backText}>{backText}</Text>
-        </View>
+        <CardContent cardText={flippedText} cardStyle={styles.flippedCard} textStyle={styles.flippedText} />
       </Animated.View>
     </View>
   );
 };
 
-const flipCardStyles = StyleSheet.create({
-  regularCard: {
-    position: 'absolute',
-    zIndex: 1,
-  },
-  flippedCard: {
-    zIndex: 2,
-  },
-});
+const FlipCard = ({answerText, questionText}) => {
+  const isFlipped = useSharedValue(false);
+
+  const handlePress = () => {
+    isFlipped.value = !isFlipped.value;
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+        <Pressable onPress={handlePress}>
+          <TheCard
+                isFlipped={isFlipped}
+                cardStyle={styles.flipCard}
+                flippedText={answerText}
+                regularText={questionText}
+          />
+        </Pressable>
+    </SafeAreaView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    marginTop: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  toggleButton: {
+    backgroundColor: '#b58df1',
+    padding: 12,
+    borderRadius: 48,
+  },
+  toggleButtonText: {
+    color: '#fff',
+    textAlign: 'center',
   },
   flipCard: {
-    width: "100%",
-    height: 300,
+    width: 170,
+    height: 200,
     backfaceVisibility: 'hidden',
   },
-  frontCard: {
+  regularCard: {
     flex: 1,
     backgroundColor: '#00cff7',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  frontText: {
+  regularText: {
     color: '#001a72',
   },
-  backCard: {
+  flippedCard: {
     flex: 1,
     backgroundColor: '#77ee00',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  backText: {
+  flippedText: {
     color: '#001a72',
   },
+  regularCardContainer: {
+    position: 'absolute',
+    zIndex: 1,
+  },
+  flippedCardContainer: {
+    zIndex: 2,
+  },
 });
+
+export default FlipCard;

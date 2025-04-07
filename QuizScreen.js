@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
-//import { useSharedValue } from "react-native-reanimated";
 import { Button } from "react-native-paper";
-// import {cleanDeckSettings} from "./QuizDeck";
-// import {makeQuestionObject} from "./util";
-import { FlipCard } from "./FlipCard";
-import FlipCard2 from "./FlipCard2";
-//import QuizSettings from "./QuizSettings";
+import FlipCard from "./FlipCard";
 
 export const emptyQuestion = {
   q: null,
@@ -24,33 +19,21 @@ const QuizScreen = ({
     colorScheme = "light",
     currentDeck,
     questionOrder = QuizScreenOrder.BAG_RANDOM,
-    // deckSettings = cleanDeckSettings(null, null, null),
-    // updateDeckSettings = () => {}
 }) => {
-    //const showAnswer = useSharedValue(false);
-    const [showAnswer, setShowAnswer] = useState(false);
-    const [questionBag, setQuestionBag] = useState([]);
-    const [currentQuestion, setCurrentQuestion] = useState(emptyQuestion);
+    const [currentState, setCurrentState] = useState({questionBag: [], currentQuestion: emptyQuestion });
 
     const nextQuestion = (incomingBag = null) => {
-      // console.log('incoming ' + JSON.stringify(incomingBag))
-      // console.log('questionBag ' + JSON.stringify(questionBag))
-      const currentBag = incomingBag ?? questionBag;
-      // console.log('currentBag ' + JSON.stringify(currentBag))
+      const currentBag = incomingBag ?? currentState.questionBag;
         if (currentBag.length) {
           if (questionOrder === QuizScreenOrder.BAG_RANDOM || questionOrder === QuizScreenOrder.SEQUENTIAL) {
-            // pop quesiton off
-            const newBag = currentBag;
-  
-            // duplicate code
-            setShowAnswer(false);
-            setCurrentQuestion(newBag.shift());
-            setQuestionBag(newBag);
+            // shift quesiton off
+            // setCurrentQuestion(currentBag.shift());
+            // setQuestionBag(currentBag.slice(1));
+            setCurrentState({questionBag: currentBag.slice(1), currentQuestion: currentBag.shift()}); 
           } else if (questionOrder === QuizScreenOrder.ALL_RANDOM) {
             // @todo pick a random item, do not pop off
           }
         } else {
-          // console.log('reset bag');
           resetQuestionBag();
         }
     }
@@ -69,12 +52,10 @@ const QuizScreen = ({
             .map(({ value }) => value);
         }
 
-        // console.log('currentDeck ' + JSON.stringify(currentDeck));
-        // console.log('newbag ' + JSON.stringify(newBag));
         nextQuestion(newBag);
     };
 
-    const hasQuestionData = !!currentQuestion.q;
+    const hasQuestionData = !!currentState.currentQuestion.q;
 
     useEffect(() => {
       if (hasQuestionData) {
@@ -92,19 +73,12 @@ const QuizScreen = ({
         <>
             {hasQuestionData && (
                 <View style={styles.container}>
-                  <Pressable style={styles.toggleButton} onPress={() => setShowAnswer(!showAnswer)}>
-                      {/*<FlipCard
-                          isFlipped={showAnswer}
-                          frontText={currentQuestion.q}
-                          backText={currentQuestion.a}
-                        />*/}
-                      <FlipCard2
-                          regularText={currentQuestion.q}
-                          flippedText={currentQuestion.a}
-                        />
-                  </Pressable>
-                  <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={nextQuestion}>Next Card &gt;</Button>
-                  <Text>num left {questionBag.length}</Text>
+                  <FlipCard
+                      questionText={currentState.currentQuestion.q}
+                      answerText={currentState.currentQuestion.a}
+                    />
+                  <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={() => nextQuestion()}>Next Card &gt;</Button>
+                  <Text>num left {currentState.questionBag.length}</Text>
                 </View>
             )}
             {!hasQuestionData && (

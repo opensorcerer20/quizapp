@@ -46,9 +46,14 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - [x] (E) if text, use current code
   - [x] (H) if csv, parse according to csv rules
 
-- [ ] flip card not working
-- [ ] grab bag not working; getting full random instead
-- [ ] loading from memory not working
+- [x] bug: flip card not working (i bet this was working, but it was the memory bug i saw)
+- [x] bug: grab bag not working; getting full random instead
+  - [x] looks like bag resets when next question pressed
+- [x] chore: not sure if bag resets when empty
+- [ ] bug: loading from memory not working
+  - [ ] actually, memory works until page refreshed
+- [ ] chore: icon to delete list too small
+- [ ] bug: clicking next question when answer showing should reset
 
 - [ ] good ux design
   - [x] safeareaview

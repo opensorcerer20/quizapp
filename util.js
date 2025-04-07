@@ -35,9 +35,7 @@ export const makeQuestionDataCsv = (quizData) => {
     return parsed;
   });
 
-  console.log('csv parsed ' + JSON.stringify(parsedData));
   return parsedData.flat();
-  //return parsedData;
 };
 
 /**
@@ -71,13 +69,10 @@ const makeQuestionObjects = (questionData) => {
 //}
 
 export const getFileData = async (fileData) => {
-  console.log('fileData ' + JSON.stringify(fileData));
   // need to determine what type is
   const fileResponse = await fetch(fileData.uri); // returns Response object
-  //console.log('fileResponse ' + JSON.stringify(fileResponse));
   //if (JSON.stringify(fileResponse) !== '{}') {
     const rawQuestionData = await fileResponse.text();
-    console.log('rawQuestionData ' + JSON.stringify(rawQuestionData));
     return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
   //} else {
   //  throw new Error('Error: no response reading from file');
