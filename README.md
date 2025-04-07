@@ -53,7 +53,9 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] bug: loading from memory not working
   - [ ] actually, memory works until page refreshed
 - [ ] chore: icon to delete list too small
-- [ ] bug: clicking next question when answer showing should reset
+- [x] bug: clicking next question when answer showing should reset
+- [x] bug: answer visible when switching to next question
+- [ ] bug: delay loading next question (side effect of hiding answer to next question)
 
 - [ ] good ux design
   - [x] safeareaview

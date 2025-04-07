@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, SafeAreaView, View, StyleSheet, Text } from 'react-native';
+import { Button } from 'react-native-paper';
 import Animated, {
   interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { delay } from './util';
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -73,12 +75,22 @@ const TheCard = ({
   );
 };
 
-const FlipCard = ({answerText, questionText}) => {
+const FlipCard = ({answerText, questionText, nextQuestion}) => {
   const isFlipped = useSharedValue(false);
 
   const handlePress = () => {
     isFlipped.value = !isFlipped.value;
   };
+
+  const clickNext = async () => {
+    isFlipped.value = false;
+    await delay(1000);
+    nextQuestion();
+  }
+
+  useEffect(() => {
+    isFlipped.value = false;
+  }, [answerText])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -90,6 +102,7 @@ const FlipCard = ({answerText, questionText}) => {
                 regularText={questionText}
           />
         </Pressable>
+        <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={() => clickNext()}>Next Card &gt;</Button>
     </SafeAreaView>
   );
 }

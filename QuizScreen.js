@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
-import { Button } from "react-native-paper";
 import FlipCard from "./FlipCard";
 
 export const emptyQuestion = {
@@ -76,8 +75,8 @@ const QuizScreen = ({
                   <FlipCard
                       questionText={currentState.currentQuestion.q}
                       answerText={currentState.currentQuestion.a}
+                      nextQuestion={nextQuestion}
                     />
-                  <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={() => nextQuestion()}>Next Card &gt;</Button>
                   <Text>num left {currentState.questionBag.length}</Text>
                 </View>
             )}
