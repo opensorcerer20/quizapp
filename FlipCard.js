@@ -102,7 +102,7 @@ const FlipCard = ({answerText, questionText, nextQuestion}) => {
   }, [questionText])
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
         <Pressable onPress={handlePress}>
           <TheCard
                 isFlipped={isFlipped}
@@ -112,7 +112,7 @@ const FlipCard = ({answerText, questionText, nextQuestion}) => {
           />
         </Pressable>
         <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={() => clickNext()}>Next Card &gt;</Button>
-    </SafeAreaView>
+    </>
   );
 }
 

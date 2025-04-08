@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import { schemes } from "./lib";
-import { getFileData, getRandomInt } from "./util";
+import { getRandomInt } from "./util";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { cleanDeckSettings } from "./QuizDeck";
+import { cleanDeckSettings, getFileData } from "./QuizDeck";
 import { DeckList } from "./DeckList";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PaperProvider} from "react-native-paper";
@@ -21,6 +21,8 @@ export default App = () => {
   const [currentDeck, setCurrentDeck] = useState([]);
   const [currSource, setCurrSource] = useState({mimeType: null, name: null, size: null, uri: null, deckId: null});
   const [deckSettings, setDeckSettings] = useState(cleanDeckSettings(null, null, null));
+
+  //console.log('deckListData: ' + JSON.stringify(deckListData));
 
   const scheme = colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
 
@@ -79,7 +81,7 @@ export default App = () => {
       // save data
       deckListData.push({deckId,  ...newDeck});
       setDeckListData(newDeckListData);
-      saveData(newDeckListData);
+      saveDeckListData(newDeckListData);
     }
   }
 
@@ -96,6 +98,7 @@ export default App = () => {
     try {
       const value = await AsyncStorage.getItem(DATA_STORAGE_KEY);
       if (value !== null) {
+        //console.log('loading: ' + JSON.stringify(value));
         setDeckListData(JSON.parse(value));
       }
     } catch (e) {
@@ -104,8 +107,9 @@ export default App = () => {
     }
   };
 
-  const saveData = async (newDeckListData) => {
+  const saveDeckListData = async (newDeckListData) => {
     try {
+      //console.log('saving: ' + JSON.stringify(newDeckListData));
       await AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(newDeckListData));
     } catch (e) {
       console.log('Error saving: ' + JSON.stringify(e));
@@ -115,7 +119,7 @@ export default App = () => {
   const onDelete = async (deckId) => {
     const newDeckListData = deckListData.filter(deckDatum => deckDatum.deckId !== deckId);
     setDeckListData(newDeckListData);
-    saveData(newDeckListData);
+    saveDeckListData(newDeckListData);
   }
 
   // actions after source specified

@@ -15,6 +15,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - couldn't see a way to test random sort
 - if you get error "you probably forgot to export..." make sure you use the right import eg "import {FlipCard}..." or "import FlipCard..."
 - cant console log the "response" when fetching a file
+- oops, dont nest "safe area"
 
 ## Planned future features
 (**E**)asy, (**H**)ard
@@ -56,6 +57,14 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] bug: clicking next question when answer showing should reset
 - [x] bug: answer visible when switching to next question
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
+
+- [ ] test alpha version in android
+  - [x] flip card not working
+    - [x] ~~issue with absolute~~
+  - [x] flip card showing outside safe container
+  - [x] no next button
+  - [ ] loading deck from start doesnt work (cant click)
+  - [ ] cant load csv file
 
 - [ ] test question length, limit as needed
 
