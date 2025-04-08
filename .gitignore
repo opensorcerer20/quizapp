@@ -5,3 +5,4 @@ package-lock.json
 android/
 !android/local.properties
 eslint.config.mjs
+builds/
