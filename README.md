@@ -53,10 +53,12 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] chore: not sure if bag resets when empty
 - [ ] bug: loading from memory not working
   - [ ] actually, memory works until page refreshed
-- [ ] chore: icon to delete list too small
+- [x] chore: icon to delete list too small
 - [x] bug: clicking next question when answer showing should reset
 - [x] bug: answer visible when switching to next question
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
+- [ ] bug: (recent?) sometimes "next question" at end ends up as blank card
+- [ ] bug: clicking on deck does not load it; uses last deck 
 
 - [ ] test alpha version in android
   - [x] flip card not working
@@ -66,6 +68,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - [ ] loading deck from start doesnt work (cant click)
   - [ ] cant load csv file
 
+- [x] test question line length, limit as needed
 - [ ] test question length, limit as needed
 
 - [ ] apply themes
