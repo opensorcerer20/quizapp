@@ -57,6 +57,12 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] bug: answer visible when switching to next question
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
 
+- [x] test android build (cant click anything)
+- [ ] test building the app piece by piece
+  - [ ] flip card
+  - [ ] next button
+  - [ ] FAB
+
 - [ ] test question length, limit as needed
 
 - [ ] apply themes
