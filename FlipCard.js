@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import Animated, {
@@ -76,6 +76,9 @@ const TheCard = ({
 };
 
 const FlipCard = ({answerText, questionText, nextQuestion}) => {
+  const [localQuestion, setLocalQuestion] = useState("");
+  const [localAnswer, setLocalAnswer] = useState("");
+
   const isFlipped = useSharedValue(false);
 
   const handlePress = () => {
@@ -84,13 +87,19 @@ const FlipCard = ({answerText, questionText, nextQuestion}) => {
 
   const clickNext = async () => {
     isFlipped.value = false;
-    await delay(1000);
+    setLocalQuestion("");
+    setLocalAnswer("");
+    await delay(500);
     nextQuestion();
   }
 
   useEffect(() => {
-    isFlipped.value = false;
+    setLocalAnswer(answerText);
   }, [answerText])
+
+  useEffect(() => {
+    setLocalQuestion(questionText);
+  }, [questionText])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -98,8 +107,8 @@ const FlipCard = ({answerText, questionText, nextQuestion}) => {
           <TheCard
                 isFlipped={isFlipped}
                 cardStyle={styles.flipCard}
-                flippedText={answerText}
-                regularText={questionText}
+                flippedText={localAnswer}
+                regularText={localQuestion}
           />
         </Pressable>
         <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={() => clickNext()}>Next Card &gt;</Button>

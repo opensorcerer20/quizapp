@@ -55,14 +55,16 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] chore: icon to delete list too small
 - [x] bug: clicking next question when answer showing should reset
 - [x] bug: answer visible when switching to next question
-- [ ] bug: delay loading next question (side effect of hiding answer to next question)
+- [x] bug: delay loading next question (side effect of hiding answer to next question)
+
+- [ ] test question length, limit as needed
+
+- [ ] apply themes
+  - [ ] (H) light dark
 
 - [ ] good ux design
   - [x] safeareaview
   - [ ] (H) use react native paper appbar
-
-- [ ] apply themes
-  - [ ] (H) light dark
 
 - [ ] (H) code cleanup
 

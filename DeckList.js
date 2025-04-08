@@ -59,7 +59,7 @@ export const DeckList = ({deckListData, onPressDeck, onPressText, onPressCsv, on
         <View style={[styles.item, selectedItem && item.deckId === selectedItem.deckId ? styles.selectedItem : {}]}>
           <Text>{item.name}</Text>
           <Pressable onLongPress={(event) => handleMenuPress(event, item)} onPress={(event) => handleMenuPress(event, item)}>
-            <Text>...</Text>
+            <Text>MENU</Text>
           </Pressable>
         </View>
       </Pressable>
