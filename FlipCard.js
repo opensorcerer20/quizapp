@@ -7,7 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { delay } from './util';
+import { delay, formatCardText } from './util';
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -16,7 +16,7 @@ import { delay } from './util';
 const CardContent = ({cardText, cardStyle, textStyle}) => {
   return (
     <View style={cardStyle}>
-      <Text style={textStyle}>{cardText}</Text>
+      <Text style={textStyle}>{formatCardText(cardText)}</Text>
     </View>
   );
 };
