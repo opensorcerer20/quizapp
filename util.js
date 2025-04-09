@@ -6,97 +6,52 @@ export const makeQuestionObject = (question, answer) => {
     };
 }
 
-/**
- * clean input that could have \r\n, remove empty lines
- * @param {*} fileData 
- * @returns 
- */
-const convertFileToArray = (fileData) => {
-  let quizData = fileData.split("\n");
-  return quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
-} 
-
-export const makeQuestionDataCsv = (quizData) => {
-  const parsedData = quizData.map(line => {
-    let parsed = line.split('","');
-
-    if (parsed.length === 2) {
-      // remove first/last character which is assumed to be a quotation mark
-      parsed[0] = parsed[0].substring(1);
-      parsed[1] = parsed[1].substring(0, parsed[1].length - 1);
-
-      // remove remaining escaped quotes
-      parsed[0] = parsed[0].replace(/\\"|""/g, '"');
-      parsed[1] = parsed[1].replace(/\\"|""/g, '"');
-    } else {
-      parsed = line.split(',');
-    }
-
-    return parsed;
-  });
-
-  return parsedData.flat();
-};
-
-/**
- * assumes array of lines with alternating question/answer
- * @param {*} questionData 
- * @returns 
- */
-const makeQuestionObjects = (questionData) => {
-  // assume even number with question/answer pairs
-  if (questionData.length % 2 === 1) {
-    // pop odd row off of the end
-    questionData.pop();
-  }
-  
-  // make {q,a} object array
-  let questions = [];
-  for (let i = 0; i < questionData.length; i += 2) {
-    questions.push(makeQuestionObject(questionData[i], questionData[i + 1]));
-  }
-
-  return questions;
-}
-
-//export const getFileDataTest = async (fileUri) => {
-//    const text = `question 1
-//answer 1
-//question 2
-//answer 2
-//`;
-//    return makeQuestionData(text);
-//}
-
-export const getFileData = async (fileData) => {
-  // need to determine what type is
-  const fileResponse = await fetch(fileData.uri); // returns Response object
-  //if (JSON.stringify(fileResponse) !== '{}') {
-    const rawQuestionData = await fileResponse.text();
-    return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
-  //} else {
-  //  throw new Error('Error: no response reading from file');
-  //}
-}
-
-// @todo integration test
-export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
-  let questions = [];
-  
-  questions = convertFileToArray(rawQuestionData);
-
-  // plain text does not require additional processing (at this time)
-  if (mimeType === "text/csv") {
-    questions = makeQuestionDataCsv(questions);
-  }
-
-  return makeQuestionObjects(questions);
-}
-
 export const getRandomInt = (min, max) => { // min and max included 
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export const delay = async (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export const formatCardText = (text) => {
+  text = text.trim();
+  if (text.length === 0) {
+    return "";
+  }
+
+  const charLimit = 20;
+  let textPieces = [];
+  let failsafe = 0;
+  // console.log('text before loop :' + text);
+  do {
+    if (text.length > charLimit) {
+      // get charLimit chars
+      let thisPiece = text.substring(0, charLimit);
+
+      // get last break
+      let lastSpace = thisPiece.lastIndexOf(" ");
+      let lastDash = thisPiece.lastIndexOf("-");
+      let lastPos = lastSpace > lastDash ? lastSpace : lastDash;
+
+      // store up to last break or all 20 chars
+      if (lastPos > -1 && lastPos <= charLimit - 1) {
+        // keep dash
+        let substringEnd = lastPos === lastDash ? lastPos + 1 : lastPos;
+        textPieces.push(thisPiece.substring(0, substringEnd));
+        text = text.substring(substringEnd);
+      } else {
+        textPieces.push(thisPiece);
+        text = text.substring(charLimit);
+      }
+    } else {
+      textPieces.push(text);
+      text = "";
+    }
+    text = text.trim();
+    // console.log('text in loop: ' + text);
+    failsafe++;
+  } while (text.length > 0 && failsafe < 30);
+
+  return textPieces.join("\n");
 }
