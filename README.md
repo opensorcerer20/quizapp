@@ -51,12 +51,24 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] bug: grab bag not working; getting full random instead
   - [x] looks like bag resets when next question pressed
 - [x] chore: not sure if bag resets when empty
-- [ ] bug: loading from memory not working
-  - [ ] actually, memory works until page refreshed
 - [x] chore: icon to delete list too small
 - [x] bug: clicking next question when answer showing should reset
 - [x] bug: answer visible when switching to next question
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
+
+(shifting focus to ui first)
+
+- [ ] apply themes
+  - [ ] (H) light dark
+
+- [ ] good ux design
+  - [x] safeareaview
+  - [ ] (H) use react native paper appbar
+
+- [ ] utilize custom hooks (same as react component but returns value not component)
+
+- [ ] bug: loading from memory not working
+  - [ ] actually, memory works until page refreshed
 - [ ] bug: (recent?) sometimes "next question" at end ends up as blank card
 - [ ] bug: clicking on deck does not load it; uses last deck 
 
@@ -70,13 +82,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 - [x] test question line length, limit as needed
 - [ ] test question length, limit as needed
-
-- [ ] apply themes
-  - [ ] (H) light dark
-
-- [ ] good ux design
-  - [x] safeareaview
-  - [ ] (H) use react native paper appbar
 
 - [ ] (H) code cleanup
 
