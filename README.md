@@ -57,7 +57,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
 
 - [ ] simpler version of app for 1.0
-
+test
 - [ ] new idea: pre-render cards, swipe to change
 
 (shifting focus to ui first)
