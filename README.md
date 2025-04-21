@@ -56,9 +56,15 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] bug: answer visible when switching to next question
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
 
+- [ ] new idea: pre-render cards, click to next and previous, reset when leaving screen
+  - [ ] create all cards, only show current one
+  - [ ] card functions normally
+  - [ ] on next/previous
+    - [ ] hide current
+    - [ ] show next/previous
+    - [ ] reset current
+
 - [ ] simpler version of app for 1.0
-test
-- [ ] new idea: pre-render cards, swipe to change
 
 (shifting focus to ui first)
 
@@ -92,6 +98,7 @@ test
 - [ ] launch 1.0
 
 ## Possible future dev
+  - [ ] swipe to next card (oddly hard to find documentation for this)
   - [ ] now that everything is done, can the code be redone for better organization?
   - [ ] allow renaming saved file (modal)
     - [ ] (E) edit icon
