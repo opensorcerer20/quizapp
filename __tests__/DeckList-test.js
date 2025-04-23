@@ -1,11 +1,13 @@
-import { render } from '@testing-library/react-native';
+import { render } from "@testing-library/react-native";
 
-import DeckList from '../DeckList';
+import DeckList from "../DeckList";
 
-describe('<DeckList />', () => {
-  it('renders empty list correctly', () => {
-    const { getByText } = render(<DeckList data={[]} onPress={() => {}} onDelete={() => {}} />);
+describe("<DeckList />", () => {
+  it("renders empty list correctly", () => {
+    const { getByText } = render(
+      <DeckList data={[]} onPress={() => {}} onDelete={() => {}} />
+    );
 
-    getByText('No decks in memory, please add a deck');
+    getByText("No decks in memory, please add a deck");
   });
 });

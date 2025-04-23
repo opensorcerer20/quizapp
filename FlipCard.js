@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Pressable, SafeAreaView, View, StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-paper';
+import React, { useEffect, useState } from "react";
+import { Pressable, SafeAreaView, View, StyleSheet, Text } from "react-native";
+import { Button } from "react-native-paper";
 import Animated, {
   interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
-import { delay, formatCardText } from './util';
+} from "react-native-reanimated";
+import { delay, formatCardText } from "./util";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
  */
 
-const CardContent = ({cardText, cardStyle, textStyle}) => {
+const CardContent = ({ cardText, cardStyle, textStyle }) => {
   return (
     <View style={cardStyle}>
       <Text style={textStyle}>{formatCardText(cardText)}</Text>
@@ -24,12 +24,12 @@ const CardContent = ({cardText, cardStyle, textStyle}) => {
 const TheCard = ({
   isFlipped,
   cardStyle,
-  direction = 'y',
+  direction = "y",
   duration = 500,
   regularText,
   flippedText,
 }) => {
-  const isDirectionX = direction === 'x';
+  const isDirectionX = direction === "x";
 
   const regularCardAnimatedStyle = useAnimatedStyle(() => {
     const spinValue = interpolate(Number(isFlipped.value), [0, 1], [0, 180]);
@@ -60,110 +60,154 @@ const TheCard = ({
           styles.regularCardContainer,
           cardStyle,
           regularCardAnimatedStyle,
-        ]}>
-        <CardContent cardText={regularText} cardStyle={styles.regularCard} textStyle={styles.regularText} />
+        ]}
+      >
+        <CardContent
+          cardText={regularText}
+          cardStyle={styles.regularCard}
+          textStyle={styles.regularText}
+        />
       </Animated.View>
       <Animated.View
         style={[
           styles.flippedCardContainer,
           cardStyle,
           flippedCardAnimatedStyle,
-        ]}>
-        <CardContent cardText={flippedText} cardStyle={styles.flippedCard} textStyle={styles.flippedText} />
+        ]}
+      >
+        <CardContent
+          cardText={flippedText}
+          cardStyle={styles.flippedCard}
+          textStyle={styles.flippedText}
+        />
       </Animated.View>
     </View>
   );
 };
 
-const FlipCard = ({answerText, questionText, nextQuestion}) => {
+const SimpleCard = ({ isFlipped, cardStyle, regularText, flippedText }) => {
+  return (
+    <View>
+      {isFlipped.value && (
+        <View style={[styles.flippedCardContainer, cardStyle]}>
+          <CardContent
+            cardText={flippedText}
+            cardStyle={styles.flippedCard}
+            textStyle={styles.flippedText}
+          />
+        </View>
+      )}
+      {!isFlipped.value && (
+        <View style={[styles.regularCardContainer, cardStyle]}>
+          <CardContent
+            cardText={regularText}
+            cardStyle={styles.regularCard}
+            textStyle={styles.regularText}
+          />
+        </View>
+      )}
+    </View>
+  );
+};
+
+const FlipCard = ({ answerText, questionText, nextQuestion }) => {
   const [localQuestion, setLocalQuestion] = useState("");
   const [localAnswer, setLocalAnswer] = useState("");
+  const [isFlipped, setIsFlipped] = useState({ value: false });
 
-  const isFlipped = useSharedValue(false);
+  // const isFlipped = useSharedValue(false);
 
   const handlePress = () => {
-    isFlipped.value = !isFlipped.value;
+    setIsFlipped({ value: !isFlipped.value });
   };
 
-  const clickNext = async () => {
-    isFlipped.value = false;
-    setLocalQuestion("");
-    setLocalAnswer("");
-    await delay(500);
-    nextQuestion();
-  }
+  // const clickNext = async () => {
+  //   isFlipped.value = false;
+  //   setLocalQuestion("");
+  //   setLocalAnswer("");
+  //   await delay(500);
+  //   nextQuestion();
+  // }
 
   useEffect(() => {
     setLocalAnswer(answerText);
-  }, [answerText])
+    setLocalQuestion(questionText);
+  }, [isFlipped]);
 
   useEffect(() => {
-    setLocalQuestion(questionText);
-  }, [questionText])
+    setIsFlipped({ value: false });
+  }, [answerText, questionText]);
 
   return (
     <>
-        <Pressable onPress={handlePress}>
-          <TheCard
-                isFlipped={isFlipped}
-                cardStyle={styles.flipCard}
-                flippedText={localAnswer}
-                regularText={localQuestion}
-          />
-        </Pressable>
-        <Button style={{marginTop: 10}} buttonColor="#0000ff" textColor="#e0e0e0" onPress={() => clickNext()}>Next Card &gt;</Button>
+      <Pressable onPress={handlePress}>
+        <SimpleCard
+          isFlipped={isFlipped}
+          cardStyle={styles.flipCard}
+          flippedText={localAnswer}
+          regularText={localQuestion}
+        />
+      </Pressable>
+      <Button
+        style={{ marginTop: 10 }}
+        buttonColor="#0000ff"
+        textColor="#e0e0e0"
+        onPress={() => nextQuestion()}
+      >
+        Next Card &gt;
+      </Button>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonContainer: {
     marginTop: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   toggleButton: {
-    backgroundColor: '#b58df1',
+    backgroundColor: "#b58df1",
     padding: 12,
     borderRadius: 48,
   },
   toggleButtonText: {
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
   },
   flipCard: {
     width: 170,
     height: 200,
-    backfaceVisibility: 'hidden',
+    backfaceVisibility: "hidden",
   },
   regularCard: {
     flex: 1,
-    backgroundColor: '#00cff7',
+    backgroundColor: "#00cff7",
     borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   regularText: {
-    color: '#001a72',
+    color: "#001a72",
   },
   flippedCard: {
     flex: 1,
-    backgroundColor: '#77ee00',
+    backgroundColor: "#77ee00",
     borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   flippedText: {
-    color: '#001a72',
+    color: "#001a72",
   },
   regularCardContainer: {
-    position: 'absolute',
+    // position: "absolute",
     zIndex: 1,
   },
   flippedCardContainer: {

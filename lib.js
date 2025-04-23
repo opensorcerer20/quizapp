@@ -1,6 +1,6 @@
-import {Pressable, StyleSheet, Text} from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-export const MyButton = ({buttonText, onPress}) => {
+export const MyButton = ({ buttonText, onPress }) => {
   const noop = () => {};
   return (
     <Pressable style={styles.button} onPress={onPress ?? noop}>
@@ -19,7 +19,7 @@ export const schemes = {
     },
     txt: {
       color: "#dddddd",
-    }
+    },
   },
   schemeLight: {
     bg: {
@@ -30,23 +30,23 @@ export const schemes = {
     },
     txt: {
       color: "#333333",
-    }
-  }
-}
+    },
+  },
+};
 
 export const buttonStyles = {
-    button: {
-        backgroundColor: "darkblue",
-        padding: 10,
-        borderRadius: 5,
-    },
-    buttonText: {
-        color: "white",
-        textAlign: "center",
-    },
-}
+  button: {
+    backgroundColor: "darkblue",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+  },
+};
 
 const styles = StyleSheet.create({
-    ...buttonStyles,
-    ...schemes
+  ...buttonStyles,
+  ...schemes,
 });

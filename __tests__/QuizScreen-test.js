@@ -1,6 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { fireEvent, render, screen, userEvent } from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+  screen,
+  userEvent,
+} from "@testing-library/react-native";
 
 jest.useFakeTimers();
 
@@ -19,7 +24,6 @@ jest.useFakeTimers(userEvent);
 */
 
 describe("<QuizScreen />", () => {
-
   it("shows empty deck text when no deck data", () => {
     const currentDeck = [];
     const { getByText } = render(<QuizScreen currentDeck={currentDeck} />);
@@ -29,12 +33,17 @@ describe("<QuizScreen />", () => {
 
   it("sets up screen to show first question with one more left", () => {
     const currentDeck = [
-      makeQuestionObject("question 1", "answer 1"),
-      makeQuestionObject("question 2", "answer 2"),
+      makeQuestionObject(1, "question 1", "answer 1"),
+      makeQuestionObject(2, "question 2", "answer 2"),
     ];
 
     // use sequential order so we know which question happens first
-    const { getByText } = render(<QuizScreen currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
+    const { getByText } = render(
+      <QuizScreen
+        currentDeck={currentDeck}
+        questionOrder={QuizScreenOrder.SEQUENTIAL}
+      />
+    );
 
     // test question card with quesiton showing
     expect(getByText("question 1")).toBeTruthy();
@@ -46,12 +55,17 @@ describe("<QuizScreen />", () => {
 
   it("next question when next is clicked", () => {
     const currentDeck = [
-      makeQuestionObject("question 1", "answer 1"),
-      makeQuestionObject("question 2", "answer 2"),
+      makeQuestionObject(1, "question 1", "answer 1"),
+      makeQuestionObject(2, "question 2", "answer 2"),
     ];
 
     // use sequential order so we know which question happens first
-    const { getByText, getByTestId } = render(<QuizScreen currentDeck={currentDeck} questionOrder={QuizScreenOrder.SEQUENTIAL} />);
+    const { getByText, getByTestId } = render(
+      <QuizScreen
+        currentDeck={currentDeck}
+        questionOrder={QuizScreenOrder.SEQUENTIAL}
+      />
+    );
 
     expect(getByText("question 1")).toBeTruthy();
     expect(getByText("answer 1")).toBeTruthy();
@@ -72,5 +86,4 @@ describe("<QuizScreen />", () => {
   });
 
   // note: did not test random on purpose; no simple/quick way to do so
-
 });

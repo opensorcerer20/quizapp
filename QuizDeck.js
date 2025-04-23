@@ -1,31 +1,39 @@
 import { makeQuestionObject } from "./util";
 
 export const deckSettingsType = {
-    pickOrder: ['random', 'sequential'],
-    pickMode: ['bag', 'continuous'],
-    cardMode: ['repeat', 'once'],
+  pickOrder: ["random", "sequential"],
+  pickMode: ["bag", "continuous"],
+  cardMode: ["repeat", "once"],
 };
 
 export const cleanDeckSettings = (pickOrder, pickMode, cardMode) => {
   return {
-    pickOrder: deckSettingsType.pickOrder.includes(pickOrder) ? pickOrder : deckSettingsType.pickOrder[0],
-    pickMode: deckSettingsType.pickMode.includes(pickMode) ? pickMode : deckSettingsType.pickMode[0],
-    cardMode: deckSettingsType.cardMode.includes(cardMode) ? cardMode : deckSettingsType.cardMode[0],
-  }
-}
+    pickOrder: deckSettingsType.pickOrder.includes(pickOrder)
+      ? pickOrder
+      : deckSettingsType.pickOrder[0],
+    pickMode: deckSettingsType.pickMode.includes(pickMode)
+      ? pickMode
+      : deckSettingsType.pickMode[0],
+    cardMode: deckSettingsType.cardMode.includes(cardMode)
+      ? cardMode
+      : deckSettingsType.cardMode[0],
+  };
+};
 
 /**
  * clean input that could have \r\n, remove empty lines
- * @param {*} fileData 
- * @returns 
+ * @param {*} fileData
+ * @returns
  */
 const convertFileToArray = (fileData) => {
   let quizData = fileData.split("\n");
-  return quizData.map(datum => datum.trim()).filter(datum => datum.length > 0);
-} 
+  return quizData
+    .map((datum) => datum.trim())
+    .filter((datum) => datum.length > 0);
+};
 
 export const makeQuestionDataCsv = (quizData) => {
-  const parsedData = quizData.map(line => {
+  const parsedData = quizData.map((line) => {
     let parsed = line.split('","');
 
     if (parsed.length === 2) {
@@ -37,7 +45,7 @@ export const makeQuestionDataCsv = (quizData) => {
       parsed[0] = parsed[0].replace(/\\"|""/g, '"');
       parsed[1] = parsed[1].replace(/\\"|""/g, '"');
     } else {
-      parsed = line.split(',');
+      parsed = line.split(",");
     }
 
     return parsed;
@@ -48,8 +56,8 @@ export const makeQuestionDataCsv = (quizData) => {
 
 /**
  * assumes array of lines with alternating question/answer
- * @param {*} questionData 
- * @returns 
+ * @param {*} questionData
+ * @returns
  */
 const makeQuestionObjects = (questionData) => {
   // assume even number with question/answer pairs
@@ -57,15 +65,21 @@ const makeQuestionObjects = (questionData) => {
     // pop odd row off of the end
     questionData.pop();
   }
-  
+
   // make {q,a} object array
   let questions = [];
   for (let i = 0; i < questionData.length; i += 2) {
-    questions.push(makeQuestionObject(questionData[i], questionData[i + 1]));
+    questions.push(
+      makeQuestionObject(
+        questions.length + 1,
+        questionData[i],
+        questionData[i + 1]
+      )
+    );
   }
 
   return questions;
-}
+};
 
 //export const getFileDataTest = async (fileUri) => {
 //    const text = `question 1
@@ -80,17 +94,17 @@ export const getFileData = async (fileData) => {
   // need to determine what type is
   const fileResponse = await fetch(fileData.uri); // returns Response object
   //if (JSON.stringify(fileResponse) !== '{}') {
-    const rawQuestionData = await fileResponse.text();
-    return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
+  const rawQuestionData = await fileResponse.text();
+  return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
   //} else {
   //  throw new Error('Error: no response reading from file');
   //}
-}
+};
 
 // @todo integration test
 export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   let questions = [];
-  
+
   questions = convertFileToArray(rawQuestionData);
 
   // plain text does not require additional processing (at this time)
@@ -99,4 +113,4 @@ export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   }
 
   return makeQuestionObjects(questions);
-}
+};

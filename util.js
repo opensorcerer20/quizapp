@@ -1,18 +1,19 @@
+export const makeQuestionObject = (id, question, answer) => {
+  return {
+    id: id,
+    q: question,
+    a: answer,
+  };
+};
 
-export const makeQuestionObject = (question, answer) => {
-    return {
-      q: question,
-      a: answer,
-    };
-}
-
-export const getRandomInt = (min, max) => { // min and max included 
+export const getRandomInt = (min, max) => {
+  // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
-}
+};
 
 export const delay = async (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 export const formatCardText = (text) => {
   text = text.trim();
@@ -54,4 +55,4 @@ export const formatCardText = (text) => {
   } while (text.length > 0 && failsafe < 30);
 
   return textPieces.join("\n");
-}
+};
