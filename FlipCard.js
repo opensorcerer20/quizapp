@@ -85,63 +85,32 @@ const TheCard = ({
   );
 };
 
-const SimpleCard = ({ isFlipped, cardStyle, regularText, flippedText }) => {
-  return (
-    <View>
-      {isFlipped.value && (
-        <View style={[styles.flippedCardContainer, cardStyle]}>
-          <CardContent
-            cardText={flippedText}
-            cardStyle={styles.flippedCard}
-            textStyle={styles.flippedText}
-          />
-        </View>
-      )}
-      {!isFlipped.value && (
-        <View style={[styles.regularCardContainer, cardStyle]}>
-          <CardContent
-            cardText={regularText}
-            cardStyle={styles.regularCard}
-            textStyle={styles.regularText}
-          />
-        </View>
-      )}
-    </View>
-  );
-};
-
 const FlipCard = ({ answerText, questionText, nextQuestion }) => {
   const [localQuestion, setLocalQuestion] = useState("");
   const [localAnswer, setLocalAnswer] = useState("");
-  const [isFlipped, setIsFlipped] = useState({ value: false });
 
-  // const isFlipped = useSharedValue(false);
+  const isFlipped = useSharedValue(false);
 
   const handlePress = () => {
-    setIsFlipped({ value: !isFlipped.value });
+    isFlipped.value = !isFlipped.value;
   };
 
-  // const clickNext = async () => {
-  //   isFlipped.value = false;
-  //   setLocalQuestion("");
-  //   setLocalAnswer("");
-  //   await delay(500);
-  //   nextQuestion();
-  // }
+  const clickNext = async () => {
+    nextQuestion();
+  };
 
   useEffect(() => {
     setLocalAnswer(answerText);
-    setLocalQuestion(questionText);
-  }, [isFlipped]);
+  }, [answerText]);
 
   useEffect(() => {
-    setIsFlipped({ value: false });
-  }, [answerText, questionText]);
+    setLocalQuestion(questionText);
+  }, [questionText]);
 
   return (
     <>
       <Pressable onPress={handlePress}>
-        <SimpleCard
+        <TheCard
           isFlipped={isFlipped}
           cardStyle={styles.flipCard}
           flippedText={localAnswer}
@@ -152,7 +121,7 @@ const FlipCard = ({ answerText, questionText, nextQuestion }) => {
         style={{ marginTop: 10 }}
         buttonColor="#0000ff"
         textColor="#e0e0e0"
-        onPress={() => nextQuestion()}
+        onPress={() => clickNext()}
       >
         Next Card &gt;
       </Button>
@@ -207,7 +176,7 @@ const styles = StyleSheet.create({
     color: "#001a72",
   },
   regularCardContainer: {
-    // position: "absolute",
+    position: "absolute",
     zIndex: 1,
   },
   flippedCardContainer: {

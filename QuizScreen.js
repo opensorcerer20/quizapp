@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
 import FlipCard from "./FlipCard";
+import { getRandomInt } from "./util";
 
 export const emptyQuestion = {
   q: null,
@@ -85,6 +86,7 @@ const QuizScreen = ({
       {hasQuestionData && (
         <View style={styles.container}>
           <FlipCard
+            key={getRandomInt(100000, 999999)}
             questionText={currentState.currentQuestion.q}
             answerText={currentState.currentQuestion.a}
             nextQuestion={nextQuestion}

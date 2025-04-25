@@ -20,6 +20,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - if you get error "you probably forgot to export..." make sure you use the right import eg "import {FlipCard}..." or "import FlipCard..."
 - cant console log the "response" when fetching a file
 - oops, dont nest "safe area"
+- how to "reset" a reused react component: change the key="" attribute; that tells react that it's a totally different component, and it discards the previous
+  - this was needed for when a card is flipped, then the next question clicked; the card was still flipped, so the answer for the next question was visible
 
 ## Planned future features
 
@@ -64,14 +66,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [x] bug: answer visible when switching to next question
 - [x] bug: delay loading next question (side effect of hiding answer to next question)
 
-- [ ] new idea: pre-render cards, click to next and previous, reset when leaving screen
+- [ ] ~~new idea: pre-render cards, click to next and previous, reset when leaving screen~~
 
-  - [ ] create all cards, only show current one
-  - [ ] card functions normally
-  - [ ] on next/previous
-    - [ ] hide current
-    - [ ] show next/previous
-    - [ ] reset current
+- [ ] ~~create all cards, only show current one~~
+
+- [x] fix issue with answer showing for next question
 
 - [ ] simpler version of app for 1.0
 
