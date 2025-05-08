@@ -85,10 +85,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
   - [x] safeareaview
   - [ ] (H) use react native paper appbar
 
-- [ ] utilize custom hooks (same as react component but returns value not component)
+- [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
-- [ ] bug: loading from memory not working
-  - [ ] actually, memory works until page refreshed
+- [ ] bug: loading from memory not working on refresh
+  - [ ] make sure you are only storing text data or something else that is simple
 - [ ] bug: (recent?) sometimes "next question" at end ends up as blank card
 - [ ] bug: clicking on deck does not load it; uses last deck
 
@@ -110,6 +110,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 ## Possible future dev
 
+- [ ] text box for input
 - [ ] swipe to next card (does not exist?)
 - [ ] now that everything is done, can the code be redone for better organization?
 - [ ] allow renaming saved file (modal)
