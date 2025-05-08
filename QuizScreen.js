@@ -3,11 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { schemes } from "./lib";
 import FlipCard from "./FlipCard";
 import { getRandomInt } from "./util";
-
-export const emptyQuestion = {
-  q: null,
-  a: null,
-};
+import {emptyQuestion} from "./QuizDeck";
 
 export const QuizScreenOrder = {
   BAG_RANDOM: "BAG_RANDOM",

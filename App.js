@@ -5,10 +5,9 @@ import * as DocumentPicker from "expo-document-picker";
 import { schemes } from "./lib";
 import { getRandomInt } from "./util";
 import QuizScreen from "./QuizScreen";
-import TestQuizScreen from "./TestQuizScreen";
 import Toolbar from "./Toolbar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { cleanDeckSettings, getFileData } from "./QuizDeck";
+import { addQuestionToDeck, cleanDeckSettings, getFileData, makeNewDeck } from "./QuizDeck";
 import { DeckList } from "./DeckList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PaperProvider } from "react-native-paper";
@@ -19,6 +18,7 @@ export default App = () => {
   //const colorScheme = useColorScheme();
   const colorScheme = "light";
   const [deckListData, setDeckListData] = useState([]);
+  const [deckListData2, setDeckListData2] = useState([]);
   const [currentDeck, setCurrentDeck] = useState([]);
   const [currSource, setCurrSource] = useState({
     mimeType: null,
@@ -90,6 +90,11 @@ export default App = () => {
       deckListData.push({ deckId, ...newDeck });
       setDeckListData(newDeckListData);
       saveDeckListData(newDeckListData);
+
+
+      let newDeck2 = makeNewDeck(1, "deck one");
+      newDeck2 = addQuestionToDeck(newDeck2, "test question one", "test answer one");
+      saveDeckListData2(newDeck2);
     }
   };
 
@@ -115,11 +120,36 @@ export default App = () => {
     }
   };
 
+  const loadDeckListData2 = async () => {
+    try {
+      const value = await AsyncStorage.getItem("DATA2");
+      if (value !== null) {
+        //console.log('loading: ' + JSON.stringify(value));
+        setDeckListData2(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log("error loading deck list data 2 " + JSON.stringify(Object.keys(e)));
+      // error reading value
+    }
+  };
+
   const saveDeckListData = async (newDeckListData) => {
     try {
       //console.log('saving: ' + JSON.stringify(newDeckListData));
       await AsyncStorage.setItem(
         DATA_STORAGE_KEY,
+        JSON.stringify(newDeckListData)
+      );
+    } catch (e) {
+      console.log("Error saving: " + JSON.stringify(e));
+    }
+  };
+
+  const saveDeckListData2 = async (newDeckListData) => {
+    try {
+      //console.log('saving: ' + JSON.stringify(newDeckListData));
+      await AsyncStorage.setItem(
+        "DATA2",
         JSON.stringify(newDeckListData)
       );
     } catch (e) {
@@ -145,12 +175,15 @@ export default App = () => {
 
   useEffect(() => {
     const loadDeckData = async () => await loadDeckListData();
+    const loadDeckData2 = async () => await loadDeckListData2();
     if (deckListData.length === 0) {
       loadDeckData();
+      loadDeckData2();
     }
   }, []);
 
   //console.log('state: ' + JSON.stringify({
+  console.log('state: ' + JSON.stringify(deckListData2));
   //  currentDeck,
   //  currSource,
   //  deckSettings,

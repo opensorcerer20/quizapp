@@ -6,6 +6,31 @@ export const deckSettingsType = {
   cardMode: ["repeat", "once"],
 };
 
+export const emptyQuestion = {
+  q: null,
+  a: null,
+};
+
+export const emptyDeck = {
+  id: null,
+  name: null,
+  data: [],
+};
+
+export const makeNewDeck = (id, name) => {
+  let deck = JSON.parse(JSON.stringify(emptyDeck));
+  deck.id = id;
+  deck.name = name;
+  return deck;
+}
+
+export const addQuestionToDeck = (deck, question, answer) => {
+  let newQ = JSON.parse(JSON.stringify(emptyQuestion));
+  newQ.question = question;
+  newQ.answer = answer;
+  return deck.data.push(newQ);
+}
+
 export const cleanDeckSettings = (pickOrder, pickMode, cardMode) => {
   return {
     pickOrder: deckSettingsType.pickOrder.includes(pickOrder)

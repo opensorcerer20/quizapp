@@ -88,7 +88,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 - [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
 - [ ] bug: loading from memory not working on refresh
-  - [ ] make sure you are only storing text data or something else that is simple
+  - [ ] shift from storing file info to just saving question/answers
 - [ ] bug: (recent?) sometimes "next question" at end ends up as blank card
 - [ ] bug: clicking on deck does not load it; uses last deck
 
