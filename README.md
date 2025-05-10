@@ -72,13 +72,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] cut version 0.1 to reorg and clean up
 
--   [ ] make prototype with fake data
+-   [x] make prototype with fake data
 
 (shifting focus to ui first)
 
--   [ ] apply themes
-
-    -   [ ] light dark
+-   [ ] apply light dark
 
 -   [ ] good ux design
 
