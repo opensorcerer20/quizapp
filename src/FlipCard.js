@@ -163,16 +163,16 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     flipCard: {
-        width: 170,
-        height: 200,
+        width: "100%",
+        height: 250,
         backfaceVisibility: "hidden",
+        // margin: "auto", // <-- this works for flipped card, but not unflipped
     },
     regularCard: {
         flex: 1,
         backgroundColor: "#00cff7",
         borderRadius: 16,
-        justifyContent: "center",
-        alignItems: "center",
+        padding: 10,
     },
     regularText: {
         color: "#001a72",
@@ -181,8 +181,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#77ee00",
         borderRadius: 16,
-        justifyContent: "center",
-        alignItems: "center",
+        padding: 10,
     },
     flippedText: {
         color: "#001a72",

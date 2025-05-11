@@ -76,6 +76,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 (shifting focus to ui first)
 
+-   [ ] name of app is "flashcard library"
+
+-   [ ] add info to deck list: filename, date added
+
 -   [ ] apply light dark
 
 -   [ ] good ux design

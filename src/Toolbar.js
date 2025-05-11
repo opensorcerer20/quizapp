@@ -20,7 +20,13 @@ const Toolbar = ({ title, showBack, backCallback, colorScheme = "light" }) => {
                                 color={scheme.txt.color}
                             ></Ionicons>
                         </Pressable>
-                        <Text style={{ flex: 1, paddingLeft: "10px" }}>
+                        <Text
+                            style={{
+                                flex: 10,
+                                paddingLeft: "10px",
+                                alignItems: "center",
+                            }}
+                        >
                             {title}
                         </Text>
                     </>
