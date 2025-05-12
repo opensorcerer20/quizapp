@@ -1,6 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+    Appearance,
+    StyleSheet,
+    Text,
+    useColorScheme,
+    View,
+} from "react-native";
 import { schemes } from "./lib";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
@@ -13,10 +19,14 @@ addQuestionToDeck(staticDeckListData[0], 2, "question 2", "answer 2");
 addQuestionToDeck(staticDeckListData[0], 3, "question 3", "answer 3");
 
 export default App = () => {
-    //const colorScheme = useColorScheme();
-    const colorScheme = "light";
+    // const colorScheme = useColorScheme();
+    const [colorScheme, setColorScheme] = useState("light");
     const [deckListData, setDeckListData] = useState([]);
     const [currentDeck, setCurrentDeck] = useState([]);
+    const switchScheme = () =>
+        setColorScheme((colorScheme) =>
+            colorScheme === "light" ? "dark" : "light"
+        );
 
     //console.log('deckListData: ' + JSON.stringify(deckListData));
 
@@ -59,9 +69,7 @@ export default App = () => {
 
     const currentView = !!currentDeck.data?.length ? "quizView" : "homeView";
 
-    // console.log(
-    //     "quizapp state " + JSON.stringify({ deckListData, currentDeck })
-    // );
+    console.log("quizapp state " + JSON.stringify({ colorScheme }));
 
     return (
         <View style={[styles.container, scheme.bg]}>
@@ -71,6 +79,7 @@ export default App = () => {
                 title={"@TODO deck name goes here"}
                 backCallback={clearDeck}
                 colorScheme={colorScheme}
+                switchScheme={switchScheme}
             />
             {currentView === "quizView" && (
                 <QuizScreen

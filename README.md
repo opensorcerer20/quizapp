@@ -78,6 +78,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] name of app is "flashcard library"
 
+-   [ ] toolbar should show different things, needs adjustment
+
 -   [ ] add info to deck list: filename, date added
 
 -   [ ] apply light dark
