@@ -1,37 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import {
-    Appearance,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import { schemes } from "./lib";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { DeckList } from "./DeckList";
 import { addQuestionToDeck, makeNewDeck } from "./QuizDeck";
+import { useTheme } from "./ThemeProvider";
 
+/* TESTING */
 let staticDeckListData = [makeNewDeck(1, "deck one")];
 addQuestionToDeck(staticDeckListData[0], 1, "question 1", "answer 1");
 addQuestionToDeck(staticDeckListData[0], 2, "question 2", "answer 2");
 addQuestionToDeck(staticDeckListData[0], 3, "question 3", "answer 3");
+/* END TESTING */
 
-export default App = () => {
-    // const colorScheme = useColorScheme();
-    const [colorScheme, setColorScheme] = useState("light");
+export default QuizApp = () => {
+    const { theme, toggleTheme } = useTheme();
     const [deckListData, setDeckListData] = useState([]);
     const [currentDeck, setCurrentDeck] = useState([]);
-    const switchScheme = () =>
-        setColorScheme((colorScheme) =>
-            colorScheme === "light" ? "dark" : "light"
-        );
 
-    //console.log('deckListData: ' + JSON.stringify(deckListData));
-
-    const scheme =
-        colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
+    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
 
     const clearDeck = () => {
         setCurrentDeck([]);
@@ -48,10 +37,8 @@ export default App = () => {
 
     const loadDeckListData = async () => {
         try {
-            // const value = await AsyncStorage.getItem(DATA_STORAGE_KEY);
             value = staticDeckListData;
             if (value !== null) {
-                //console.log('loading: ' + JSON.stringify(value));
                 setDeckListData(value);
             }
         } catch (e) {
@@ -69,23 +56,19 @@ export default App = () => {
 
     const currentView = !!currentDeck.data?.length ? "quizView" : "homeView";
 
-    console.log("quizapp state " + JSON.stringify({ colorScheme }));
+    // console.log("quizapp state " + JSON.stringify({ colorScheme }));
 
     return (
-        <View style={[styles.container, scheme.bg]}>
+        <View style={[styles.container, scheme.bg, scheme.txt]}>
             <Toolbar
                 style={styles.toolbarContainer}
                 showBack={!!currentDeck.data?.length}
-                title={"@TODO deck name goes here"}
+                title={currentDeck.name || ""}
                 backCallback={clearDeck}
-                colorScheme={colorScheme}
-                switchScheme={switchScheme}
+                switchScheme={toggleTheme}
             />
             {currentView === "quizView" && (
-                <QuizScreen
-                    currentDeck={currentDeck}
-                    colorScheme={colorScheme}
-                />
+                <QuizScreen currentDeck={currentDeck} />
             )}
             {currentView === "homeView" && (
                 <DeckList

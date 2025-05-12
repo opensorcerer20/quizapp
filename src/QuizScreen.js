@@ -4,8 +4,10 @@ import { schemes } from "./lib";
 import FlipCard from "./FlipCard";
 import { getRandomInt } from "./util";
 import { emptyQuestion } from "./QuizDeck";
+import { useTheme } from "./ThemeProvider";
 
-const QuizScreen = ({ colorScheme = "light", currentDeck }) => {
+const QuizScreen = ({ currentDeck }) => {
+    const { theme, toggleTheme } = useTheme();
     const [currentState, setCurrentState] = useState({
         questionBag: [],
         currentQuestion: emptyQuestion,

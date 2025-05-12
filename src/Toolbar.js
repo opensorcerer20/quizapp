@@ -2,18 +2,20 @@ import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import { schemes } from "./lib";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
+import { useTheme } from "./ThemeProvider";
 
-const Toolbar = ({
-    title,
-    showBack,
-    backCallback,
-    colorScheme,
-    switchScheme,
-}) => {
-    const scheme =
-        colorScheme === "dark" ? styles.schemeDark : styles.schemeLight;
+const Toolbar = ({ title, showBack, backCallback, switchScheme }) => {
+    const { theme, toggleTheme } = useTheme();
+    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
     return (
-        <View style={[styles.toolbar, { flexDirection: "row" }, scheme.bg]}>
+        <View
+            style={[
+                styles.toolbar,
+                { flexDirection: "row" },
+                scheme.bg,
+                scheme.txt,
+            ]}
+        >
             {showBack && (
                 <>
                     <Pressable
@@ -41,10 +43,10 @@ const Toolbar = ({
             <View style={{ flex: 1, padding: 5 }}>
                 <Switch
                     trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={colorScheme === "dark" ? "#f5dd4b" : "#f4f3f4"}
+                    thumbColor={theme === "dark" ? "#f5dd4b" : "#f4f3f4"}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={switchScheme}
-                    value={colorScheme === "dark"}
+                    value={theme === "dark"}
                 />
             </View>
         </View>

@@ -13,10 +13,18 @@ import { delay, formatCardText } from "./util";
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
  */
 
-const CardContent = ({ cardText, cardStyle, textStyle }) => {
+const CARDTYPE_QUESTION = "question";
+const CARDTYPE_ANSWER = "answer";
+
+const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
     return (
         <View style={cardStyle}>
-            <Text style={textStyle}>{formatCardText(cardText)}</Text>
+            <Text style={{ fontWeight: "bold" }}>
+                {cardType === CARDTYPE_ANSWER ? "Answer:" : "Question:"}
+            </Text>
+            <Text style={[textStyle, { marginTop: 20 }]}>
+                {formatCardText(cardText)}
+            </Text>
         </View>
     );
 };
@@ -75,6 +83,7 @@ const TheCard = ({
                 ]}
             >
                 <CardContent
+                    cardType={CARDTYPE_QUESTION}
                     cardText={regularText}
                     cardStyle={styles.regularCard}
                     textStyle={styles.regularText}
@@ -88,6 +97,7 @@ const TheCard = ({
                 ]}
             >
                 <CardContent
+                    cardType={CARDTYPE_ANSWER}
                     cardText={flippedText}
                     cardStyle={styles.flippedCard}
                     textStyle={styles.flippedText}
