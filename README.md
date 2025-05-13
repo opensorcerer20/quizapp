@@ -82,7 +82,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] add info to deck list: filename, date added
 
--   [ ] apply light dark
+-   [x] apply light dark
 
 -   [ ] good ux design
 

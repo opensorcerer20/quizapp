@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 
-const Toolbar = ({ title, showBack, backCallback, switchScheme }) => {
+const Toolbar = ({ title, showBack, backCallback }) => {
     const { theme, toggleTheme } = useTheme();
     const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
     return (
@@ -29,11 +29,14 @@ const Toolbar = ({ title, showBack, backCallback, switchScheme }) => {
                         ></Ionicons>
                     </Pressable>
                     <Text
-                        style={{
-                            flex: 4,
-                            paddingLeft: "10px",
-                            alignItems: "center",
-                        }}
+                        style={[
+                            {
+                                flex: 4,
+                                paddingLeft: "10px",
+                                alignItems: "center",
+                            },
+                            scheme.txt,
+                        ]}
                     >
                         {title}
                     </Text>
@@ -45,7 +48,7 @@ const Toolbar = ({ title, showBack, backCallback, switchScheme }) => {
                     trackColor={{ false: "#767577", true: "#81b0ff" }}
                     thumbColor={theme === "dark" ? "#f5dd4b" : "#f4f3f4"}
                     ios_backgroundColor="#3e3e3e"
-                    onValueChange={switchScheme}
+                    onValueChange={toggleTheme}
                     value={theme === "dark"}
                 />
             </View>

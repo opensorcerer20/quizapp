@@ -7,7 +7,8 @@ import { emptyQuestion } from "./QuizDeck";
 import { useTheme } from "./ThemeProvider";
 
 const QuizScreen = ({ currentDeck }) => {
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
+    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
     const [currentState, setCurrentState] = useState({
         questionBag: [],
         currentQuestion: emptyQuestion,
@@ -73,12 +74,14 @@ const QuizScreen = ({ currentDeck }) => {
                         answerText={currentState.currentQuestion.a}
                         nextQuestion={nextQuestion}
                     />
-                    <Text>num left {currentState.questionBag.length}</Text>
+                    <Text style={scheme.txt}>
+                        num left {currentState.questionBag.length}
+                    </Text>
                 </View>
             )}
             {!hasQuestionData && (
                 <View>
-                    <Text>No deck data</Text>
+                    <Text style={scheme.txt}>No deck data</Text>
                 </View>
             )}
         </>

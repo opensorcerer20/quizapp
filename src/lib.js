@@ -20,6 +20,10 @@ export const schemes = {
         txt: {
             color: "#dddddd",
         },
+        deck: {
+            backgroundColor: "#393939",
+            borderBottomColor: "#222",
+        },
     },
     schemeLight: {
         bg: {
@@ -30,6 +34,10 @@ export const schemes = {
         },
         txt: {
             color: "#333333",
+        },
+        deck: {
+            backgroundColor: "#f9f9f9",
+            borderBottomColor: "#ddd",
         },
     },
 };

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
+import { useTheme } from "./ThemeProvider";
+import { schemes } from "./lib";
 
 export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null); // used when menu is pressed to show which was selected
+    const { theme } = useTheme();
+    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
 
     const renderItem = ({ item }) => {
         // console.log("item " + JSON.stringify(item));
@@ -18,14 +22,15 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
                         selectedItem && item.id === selectedItem.id
                             ? styles.selectedItem
                             : {},
+                        scheme.deck,
                     ]}
                 >
-                    <Text>{item.name}</Text>
+                    <Text style={scheme.txt}>{item.name}</Text>
                     <Pressable
                         onLongPress={(event) => handleMenuPress(event, item)}
                         onPress={(event) => handleMenuPress(event, item)}
                     >
-                        <Text>MENU</Text>
+                        <Text style={scheme.txt}>MENU</Text>
                     </Pressable>
                 </View>
             </Pressable>
@@ -38,12 +43,14 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
         <View style={styles.container}>
             {deckListData.length > 0 && (
                 <>
-                    <Text>Saved Decks</Text>
+                    <Text style={scheme.txt}>Saved Decks</Text>
                     <FlatList data={deckListData} renderItem={renderItem} />
                 </>
             )}
             {deckListData.length < 1 && (
-                <Text>No decks in memory, please add a deck</Text>
+                <Text style={scheme.txt}>
+                    No decks in memory, please add a deck
+                </Text>
             )}
         </View>
     );
@@ -63,6 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffcccc",
     },
     overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.2)" },
+    ...schemes,
 });
 
 export default DeckList;

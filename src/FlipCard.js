@@ -8,6 +8,8 @@ import Animated, {
     withTiming,
 } from "react-native-reanimated";
 import { delay, formatCardText } from "./util";
+import { useTheme } from "./ThemeProvider";
+import { schemes } from "./lib";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -19,7 +21,7 @@ const CARDTYPE_ANSWER = "answer";
 const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
     return (
         <View style={cardStyle}>
-            <Text style={{ fontWeight: "bold" }}>
+            <Text style={[{ fontWeight: "bold" }, textStyle]}>
                 {cardType === CARDTYPE_ANSWER ? "Answer:" : "Question:"}
             </Text>
             <Text style={[textStyle, { marginTop: 20 }]}>
@@ -37,6 +39,8 @@ const TheCard = ({
     regularText,
     flippedText,
 }) => {
+    const { theme } = useTheme();
+    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
     const isDirectionX = direction === "x";
 
     const regularCardAnimatedStyle = useAnimatedStyle(() => {
@@ -86,7 +90,7 @@ const TheCard = ({
                     cardType={CARDTYPE_QUESTION}
                     cardText={regularText}
                     cardStyle={styles.regularCard}
-                    textStyle={styles.regularText}
+                    textStyle={scheme.txt}
                 />
             </Animated.View>
             <Animated.View
@@ -100,7 +104,7 @@ const TheCard = ({
                     cardType={CARDTYPE_ANSWER}
                     cardText={flippedText}
                     cardStyle={styles.flippedCard}
-                    textStyle={styles.flippedText}
+                    textStyle={scheme.txt}
                 />
             </Animated.View>
         </View>
@@ -203,6 +207,7 @@ const styles = StyleSheet.create({
     flippedCardContainer: {
         zIndex: 2,
     },
+    ...schemes,
 });
 
 export default FlipCard;

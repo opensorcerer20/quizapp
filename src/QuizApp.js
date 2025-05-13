@@ -65,7 +65,6 @@ export default QuizApp = () => {
                 showBack={!!currentDeck.data?.length}
                 title={currentDeck.name || ""}
                 backCallback={clearDeck}
-                switchScheme={toggleTheme}
             />
             {currentView === "quizView" && (
                 <QuizScreen currentDeck={currentDeck} />
