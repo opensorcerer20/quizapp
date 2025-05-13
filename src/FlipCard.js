@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
     },
     flipCard: {
         width: "100%",
-        height: 250,
+        height: "auto",
+        minHeight: 250,
         backfaceVisibility: "hidden",
         // margin: "auto", // <-- this works for flipped card, but not unflipped
     },

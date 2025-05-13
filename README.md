@@ -88,8 +88,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [x] safeareaview
     -   [ ] use react native paper appbar
-    -   [ ] test question line length, limit as needed
-    -   [ ] test question length, limit as needed
+    -   [x] test question line length, limit as needed
+    -   [x] test question length, limit as needed
 
 -   [ ] save static data to local storage
 -   [ ] test data load from storage

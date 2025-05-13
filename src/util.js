@@ -12,8 +12,12 @@ export const formatCardText = (text) => {
     if (text.length === 0) {
         return "";
     }
+    const maxLimit = 197;
+    if (text.length > maxLimit) {
+        text = text.slice(0, maxLimit) + "...";
+    }
 
-    const charLimit = 20;
+    const charLimit = 20; // limit per line, seems to work well with "MW" test
     let textPieces = [];
     let failsafe = 0;
     // console.log('text before loop :' + text);
