@@ -1,7 +1,16 @@
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View, Text } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
-import { MyButton, schemes } from "./lib";
+import { buttonStyles, lightDarkStyles } from "./lib";
 import { useState } from "react";
+
+export const MyButton = ({ buttonText, onPress }) => {
+    const noop = () => {};
+    return (
+        <Pressable style={styles.button} onPress={onPress ?? noop}>
+            <Text style={styles.buttonText}>{buttonText ?? "Next"}</Text>
+        </Pressable>
+    );
+};
 
 const QuizSettings = ({ deckSettings, updateDeckSettings }) => {
     const [pickOrder, setPickOrder] = useState(deckSettings.pickOrder);
@@ -79,7 +88,8 @@ const QuizSettings = ({ deckSettings, updateDeckSettings }) => {
 };
 
 const styles = StyleSheet.create({
-    ...schemes,
+    ...buttonStyles,
+    ...lightDarkStyles,
 });
 
 export default QuizSettings;

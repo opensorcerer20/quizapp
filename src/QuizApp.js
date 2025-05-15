@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { schemes } from "./lib";
+import { lightDarkStyles } from "./lib";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { DeckList } from "./DeckList";
@@ -11,14 +11,8 @@ import { useTheme } from "./ThemeProvider";
 /* TESTING */
 let staticDeckListData = [makeNewDeck(1, "deck one")];
 addQuestionToDeck(staticDeckListData[0], 1, "question 1", "answer 1");
-// addQuestionToDeck(staticDeckListData[0], 2, "question 2", "answer 2");
-// addQuestionToDeck(staticDeckListData[0], 3, "question 3", "answer 3");
-addQuestionToDeck(
-    staticDeckListData[0],
-    4,
-    "MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW",
-    "MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW"
-);
+addQuestionToDeck(staticDeckListData[0], 2, "question 2", "answer 2");
+addQuestionToDeck(staticDeckListData[0], 3, "question 3", "answer 3");
 addQuestionToDeck(
     staticDeckListData[0],
     4,
@@ -26,6 +20,11 @@ addQuestionToDeck(
     "MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW"
 );
 /* END TESTING */
+
+export const VIEWS = {
+    homeView: "homeView",
+    quizView: "quizView",
+};
 
 export default QuizApp = () => {
     const { theme, toggleTheme } = useTheme();
@@ -74,7 +73,7 @@ export default QuizApp = () => {
         <View style={[styles.container, scheme.bg, scheme.txt]}>
             <Toolbar
                 style={styles.toolbarContainer}
-                showBack={!!currentDeck.data?.length}
+                currentView={currentView}
                 title={currentDeck.name || ""}
                 backCallback={clearDeck}
             />
@@ -104,5 +103,5 @@ const styles = StyleSheet.create({
     insideContainer: {
         flex: 10,
     },
-    ...schemes,
+    ...lightDarkStyles,
 });

@@ -1,15 +1,4 @@
-import { Pressable, StyleSheet, Text } from "react-native";
-
-export const MyButton = ({ buttonText, onPress }) => {
-    const noop = () => {};
-    return (
-        <Pressable style={styles.button} onPress={onPress ?? noop}>
-            <Text style={styles.buttonText}>{buttonText ?? "Next"}</Text>
-        </Pressable>
-    );
-};
-
-export const schemes = {
+export const lightDarkStyles = {
     schemeDark: {
         bg: {
             backgroundColor: "#222222",
@@ -53,8 +42,3 @@ export const buttonStyles = {
         textAlign: "center",
     },
 };
-
-const styles = StyleSheet.create({
-    ...buttonStyles,
-    ...schemes,
-});

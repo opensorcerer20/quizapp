@@ -9,7 +9,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { delay, formatCardText } from "./util";
 import { useTheme } from "./ThemeProvider";
-import { schemes } from "./lib";
+import { lightDarkStyles } from "./lib";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -111,7 +111,7 @@ const TheCard = ({
     );
 };
 
-const FlipCard = ({ answerText, questionText, nextQuestion }) => {
+const FlipCard = ({ answerText, questionText, nextQuestion, buttonText }) => {
     const [localQuestion, setLocalQuestion] = useState("");
     const [localAnswer, setLocalAnswer] = useState("");
 
@@ -149,7 +149,7 @@ const FlipCard = ({ answerText, questionText, nextQuestion }) => {
                 textColor="#e0e0e0"
                 onPress={() => clickNext()}
             >
-                Next Card &gt;
+                {buttonText}
             </Button>
         </>
     );
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     flippedCardContainer: {
         zIndex: 2,
     },
-    ...schemes,
+    ...lightDarkStyles,
 });
 
 export default FlipCard;

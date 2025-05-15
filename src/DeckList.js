@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "./ThemeProvider";
-import { schemes } from "./lib";
+import { lightDarkStyles } from "./lib";
 
 export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
     const [selectedItem, setSelectedItem] = useState(null); // used when menu is pressed to show which was selected
@@ -26,12 +26,12 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
                     ]}
                 >
                     <Text style={scheme.txt}>{item.name}</Text>
-                    <Pressable
+                    {/* <Pressable
                         onLongPress={(event) => handleMenuPress(event, item)}
                         onPress={(event) => handleMenuPress(event, item)}
                     >
                         <Text style={scheme.txt}>MENU</Text>
-                    </Pressable>
+                    </Pressable> */}
                 </View>
             </Pressable>
         );
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffcccc",
     },
     overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.2)" },
-    ...schemes,
+    ...lightDarkStyles,
 });
 
 export default DeckList;

@@ -76,20 +76,25 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 (shifting focus to ui first)
 
--   [ ] name of app is "flashcard library"
+-   [x] name of app is "flashcard library"
 
--   [ ] toolbar should show different things, needs adjustment
+-   [x] toolbar should show different things, needs adjustment
 
 -   [ ] add info to deck list: filename, date added
 
--   [x] apply light dark
+-   [x] initial working light dark
 
--   [ ] good ux design
+-   [x] good ux design
 
     -   [x] safeareaview
-    -   [ ] use react native paper appbar
+    -   [x] use react native paper appbar
     -   [x] test question line length, limit as needed
     -   [x] test question length, limit as needed
+    -   [ ] ~~bottom appbar? https://callstack.github.io/react-native-paper/docs/components/Appbar/~~
+
+-   [ ] app drawer (hamburger)
+
+    -   [ ] light dark
 
 -   [ ] save static data to local storage
 -   [ ] test data load from storage
@@ -103,12 +108,23 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] no app reload
     -   [ ] app reload
 
+-   [ ] limit imports to 100 questions
+
+-   [ ] deck list menu
+
+    -   [ ] delete
+    -   [ ] edit deck name
+
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
 -   [ ] bug: loading from memory not working on refresh
     -   [ ] shift from storing file info to just saving question/answers
 -   [ ] bug: (recent?) sometimes "next question" at end ends up as blank card
 -   [ ] bug: clicking on deck does not load it; uses last deck
+
+-   [ ] settings (3 dots) (focused on language flash cards)
+
+    -   [ ] reverse questions/answers
 
 -   [ ] test alpha version in android
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { schemes } from "./lib";
+import { lightDarkStyles } from "./lib";
 import FlipCard from "./FlipCard";
 import { getRandomInt } from "./util";
 import { emptyQuestion } from "./QuizDeck";
@@ -59,24 +59,37 @@ const QuizScreen = ({ currentDeck }) => {
         }
     }, []);
 
-    // console.log(
-    //     "quizscreen state " +
-    //         JSON.stringify({ currentDeck, hasQuestionData, currentState })
-    // );
+    const buttonText = currentState.questionBag.length
+        ? "Next Card >"
+        : "Start Over";
 
     return (
         <>
             {hasQuestionData && (
                 <View style={styles.container}>
+                    <Text
+                        style={[
+                            scheme.txt,
+                            {
+                                margin: "auto",
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                                padding: 5,
+                            },
+                        ]}
+                    >
+                        Card{" "}
+                        {currentDeck.data.length -
+                            currentState.questionBag.length}{" "}
+                        of {currentDeck.data.length}
+                    </Text>
                     <FlipCard
                         key={getRandomInt(100000, 999999)}
                         questionText={currentState.currentQuestion.q}
                         answerText={currentState.currentQuestion.a}
                         nextQuestion={nextQuestion}
+                        buttonText={buttonText}
                     />
-                    <Text style={scheme.txt}>
-                        num left {currentState.questionBag.length}
-                    </Text>
                 </View>
             )}
             {!hasQuestionData && (
@@ -92,7 +105,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
     },
-    ...schemes,
+    ...lightDarkStyles,
 });
 
 export default QuizScreen;
