@@ -5,10 +5,12 @@ import FlipCard from "./FlipCard";
 import { getRandomInt } from "./util";
 import { emptyQuestion } from "./QuizDeck";
 import { useTheme } from "./ThemeProvider";
+import { THEMES } from "./constants";
 
 const QuizScreen = ({ currentDeck }) => {
     const { theme } = useTheme();
-    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
+    const scheme =
+        theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
     const [currentState, setCurrentState] = useState({
         questionBag: [],
         currentQuestion: emptyQuestion,
@@ -72,7 +74,7 @@ const QuizScreen = ({ currentDeck }) => {
                             scheme.txt,
                             {
                                 margin: "auto",
-                                fontSize: "16px",
+                                fontSize: 16,
                                 fontWeight: "bold",
                                 padding: 5,
                             },

@@ -18,10 +18,18 @@ export const emptyDeck = {
     data: [],
 };
 
-export const makeNewDeck = (id, name) => {
+export const makeNewDeck = (id, name, questions) => {
     let deck = JSON.parse(JSON.stringify(emptyDeck));
     deck.id = id;
     deck.name = name;
+    if (Array.isArray(questions)) {
+        questions.map((questionObj) => {
+            // validation in lieu of strict typing
+            if (questionObj.id && questionObj.q && questionObj.a) {
+                deck.data.push(questionObj);
+            }
+        });
+    }
     return deck;
 };
 

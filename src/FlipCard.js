@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, SafeAreaView, View, StyleSheet, Text } from "react-native";
+import { Pressable, View, StyleSheet, Text } from "react-native";
 import { Button } from "react-native-paper";
 import Animated, {
     interpolate,
@@ -7,9 +7,10 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
-import { delay, formatCardText } from "./util";
+import { formatCardText } from "./util";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
+import { THEMES } from "./constants";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -40,7 +41,8 @@ const TheCard = ({
     flippedText,
 }) => {
     const { theme } = useTheme();
-    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
+    const scheme =
+        theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
     const isDirectionX = direction === "x";
 
     const regularCardAnimatedStyle = useAnimatedStyle(() => {

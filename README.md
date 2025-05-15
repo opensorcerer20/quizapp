@@ -11,7 +11,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   Why use react native paper?
     -   TBD (I remember trying to use tailwind and/or chakra but hit a problem; don't remember what problem)
 -   Why is the unit testing not robust, eg testing for precise button ids?
-    -   I tried to get this working, but the immediate issue is that it doesn't response to specific ids. For example i tried data-testid="button-next" but it didn't see it
+    -   I think this refers to enzyme, which is outdated. React Testing Library seems to be the way to go, and you can work around the lack of precise element targeting
 
 ## notes
 
@@ -92,6 +92,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] ~~bottom appbar? https://callstack.github.io/react-native-paper/docs/components/Appbar/~~
 
 -   [x] light dark in appbar
+
+-   [x] test hardcoded 50 decks
 
 -   [ ] save static data to local storage
 -   [ ] test data load from storage

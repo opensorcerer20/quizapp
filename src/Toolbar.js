@@ -3,7 +3,7 @@ import { lightDarkStyles } from "./lib";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { Appbar, Menu } from "react-native-paper";
-import { VIEWS } from "./QuizApp";
+import { THEMES, VIEWS } from "./constants";
 
 const Toolbar = ({ title, currentView, backCallback }) => {
     // const [visible, setVisible] = useState(false);
@@ -11,9 +11,10 @@ const Toolbar = ({ title, currentView, backCallback }) => {
     // const closeMenu = () => setVisible(false);
 
     const { theme, toggleTheme } = useTheme();
-    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
+    const scheme =
+        theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
     const themeIcon =
-        theme === "dark" ? "moon-waning-crescent" : "weather-sunny";
+        theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
 
     const showBack = currentView === VIEWS.quizView;
     return (

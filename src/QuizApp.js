@@ -5,33 +5,35 @@ import { lightDarkStyles } from "./lib";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { DeckList } from "./DeckList";
-import { addQuestionToDeck, makeNewDeck } from "./QuizDeck";
+import { makeNewDeck, makeQuestionObject } from "./QuizDeck";
 import { useTheme } from "./ThemeProvider";
+import { THEMES, VIEWS } from "./constants";
 
 /* TESTING */
-let staticDeckListData = [makeNewDeck(1, "deck one")];
-addQuestionToDeck(staticDeckListData[0], 1, "question 1", "answer 1");
-addQuestionToDeck(staticDeckListData[0], 2, "question 2", "answer 2");
-addQuestionToDeck(staticDeckListData[0], 3, "question 3", "answer 3");
-addQuestionToDeck(
-    staticDeckListData[0],
-    4,
-    "MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW",
-    "MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW"
-);
+const staticDeckListData = [];
+for (let i = 1; i < 50; i++) {
+    staticDeckListData.push(
+        makeNewDeck(i, `deck ${i}`, [
+            makeQuestionObject(1, `deck ${i} question 1`, `deck ${i} answer 1`),
+            makeQuestionObject(2, `deck ${i} question 2`, `deck ${i} answer 2`),
+            makeQuestionObject(3, `deck ${i} question 3`, `deck ${i} answer 3`),
+            makeQuestionObject(
+                4,
+                `deck ${i} ` + "MW".repeat(200),
+                "MW".repeat(200)
+            ),
+        ])
+    );
+}
 /* END TESTING */
-
-export const VIEWS = {
-    homeView: "homeView",
-    quizView: "quizView",
-};
 
 export default QuizApp = () => {
     const { theme, toggleTheme } = useTheme();
     const [deckListData, setDeckListData] = useState([]);
     const [currentDeck, setCurrentDeck] = useState([]);
 
-    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
+    const scheme =
+        theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
 
     const clearDeck = () => {
         setCurrentDeck([]);
@@ -65,7 +67,9 @@ export default QuizApp = () => {
         loadData();
     }, []);
 
-    const currentView = !!currentDeck.data?.length ? "quizView" : "homeView";
+    const currentView = !!currentDeck.data?.length
+        ? VIEWS.quizView
+        : VIEWS.homeView;
 
     // console.log("quizapp state " + JSON.stringify({ colorScheme }));
 
@@ -77,10 +81,10 @@ export default QuizApp = () => {
                 title={currentDeck.name || ""}
                 backCallback={clearDeck}
             />
-            {currentView === "quizView" && (
+            {currentView === VIEWS.quizView && (
                 <QuizScreen currentDeck={currentDeck} />
             )}
-            {currentView === "homeView" && (
+            {currentView === VIEWS.homeView && (
                 <DeckList
                     deckListData={deckListData}
                     onPressDeck={onPressDeck}

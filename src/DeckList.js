@@ -2,11 +2,21 @@ import { useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
+import { FAB, Portal } from "react-native-paper";
+import { THEMES } from "./constants";
+
+const MAX_DECKS = 50;
 
 export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
     const [selectedItem, setSelectedItem] = useState(null); // used when menu is pressed to show which was selected
     const { theme } = useTheme();
-    const scheme = theme === "dark" ? styles.schemeDark : styles.schemeLight;
+    const scheme =
+        theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+
+    // @todo this is used when fab is clicked, need renaming
+    const [state, setState] = useState({ open: false });
+    const onStateChange = ({ open }) => setState({ open });
+    const { open } = state;
 
     const renderItem = ({ item }) => {
         // console.log("item " + JSON.stringify(item));
@@ -48,9 +58,35 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
                 </>
             )}
             {deckListData.length < 1 && (
-                <Text style={scheme.txt}>
-                    No decks in memory, please add a deck
-                </Text>
+                <Text>No decks in memory, please add a deck</Text>
+            )}
+            {deckListData.length < MAX_DECKS && (
+                <Portal>
+                    <FAB.Group
+                        open={open}
+                        visible
+                        icon={"plus"}
+                        actions={[
+                            {
+                                icon: "text",
+                                label: "Text",
+                                onPress: () => console.log("txt pressed"),
+                            },
+                            {
+                                icon: "table",
+                                label: "CSV",
+                                onPress: () => console.log("csv pressed"),
+                            },
+                        ]}
+                        onStateChange={onStateChange}
+                    />
+                </Portal>
+            )}
+            {deckListData.length >= MAX_DECKS && (
+                <FAB
+                    icon="plus"
+                    style={[styles.fab, { backgroundColor: "grey" }]}
+                />
             )}
         </View>
     );
@@ -70,6 +106,25 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffcccc",
     },
     overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.2)" },
+    menu: {
+        position: "absolute",
+        backgroundColor: "white",
+        padding: 10,
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    menuItem: { paddingVertical: 5, paddingHorizontal: 10, fontSize: 16 },
+    fab: {
+        position: "absolute",
+        margin: 16,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "orange",
+    },
     ...lightDarkStyles,
 });
 
