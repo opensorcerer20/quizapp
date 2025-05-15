@@ -22,6 +22,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   oops, dont nest "safe area"
 -   how to "reset" a reused react component: change the key="" attribute; that tells react that it's a totally different component, and it discards the previous
     -   this was needed for when a card is flipped, then the next question clicked; the card was still flipped, so the answer for the next question was visible
+-   how to get a drawer: for expo, it has documentation at https://docs.expo.dev/router/advanced/drawer/
 
 ## Planned future features
 
@@ -80,8 +81,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] toolbar should show different things, needs adjustment
 
--   [ ] add info to deck list: filename, date added
-
 -   [x] initial working light dark
 
 -   [x] good ux design
@@ -92,9 +91,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] test question length, limit as needed
     -   [ ] ~~bottom appbar? https://callstack.github.io/react-native-paper/docs/components/Appbar/~~
 
--   [ ] app drawer (hamburger)
-
-    -   [ ] light dark
+-   [x] light dark in appbar
 
 -   [ ] save static data to local storage
 -   [ ] test data load from storage
@@ -109,6 +106,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] app reload
 
 -   [ ] limit imports to 100 questions
+
+-   [ ] add info to deck list: filename, date added
 
 -   [ ] deck list menu
 

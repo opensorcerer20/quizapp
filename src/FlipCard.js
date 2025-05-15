@@ -90,7 +90,8 @@ const TheCard = ({
                     cardType={CARDTYPE_QUESTION}
                     cardText={regularText}
                     cardStyle={styles.regularCard}
-                    textStyle={scheme.txt}
+                    // textStyle={scheme.txt}
+                    textStyle={styles.cardText}
                 />
             </Animated.View>
             <Animated.View
@@ -104,7 +105,8 @@ const TheCard = ({
                     cardType={CARDTYPE_ANSWER}
                     cardText={flippedText}
                     cardStyle={styles.flippedCard}
-                    textStyle={scheme.txt}
+                    // textStyle={scheme.txt}
+                    textStyle={styles.cardText}
                 />
             </Animated.View>
         </View>
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         padding: 10,
     },
-    regularText: {
+    cardText: {
         color: "#001a72",
     },
     flippedCard: {
@@ -197,9 +199,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#77ee00",
         borderRadius: 16,
         padding: 10,
-    },
-    flippedText: {
-        color: "#001a72",
     },
     regularCardContainer: {
         position: "absolute",
