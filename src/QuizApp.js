@@ -7,7 +7,7 @@ import Toolbar from "./Toolbar";
 import { DeckList } from "./DeckList";
 import { makeNewDeck, makeQuestionObject } from "./QuizDeck";
 import { useTheme } from "./ThemeProvider";
-import { THEMES, VIEWS } from "./constants";
+import { DECK_DATA_KEY, THEMES, VIEWS } from "./constants";
 
 /* TESTING */
 const staticDeckListData = [];
@@ -50,12 +50,15 @@ export default QuizApp = () => {
 
     const loadDeckListData = async () => {
         try {
-            value = staticDeckListData;
+            const value = await AsyncStorage.getItem(DECK_DATA_KEY);
             if (value !== null) {
-                setDeckListData(value);
+                //console.log('loading: ' + JSON.stringify(value));
+                setDeckListData(JSON.parse(value));
             }
         } catch (e) {
-            console.log("error loading deck list data");
+            console.log(
+                "error loading deck list data " + JSON.stringify(Object.keys(e))
+            );
             // error reading value
         }
     };

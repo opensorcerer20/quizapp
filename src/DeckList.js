@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
 import { FAB, Portal } from "react-native-paper";
 import { THEMES } from "./constants";
+import { getFileData } from "./fileLib";
 
 const MAX_DECKS = 50;
 
 export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
+    const [importSource, setImportSource] = useState({
+        mimeType: null,
+        name: null,
+        size: null,
+        uri: null,
+        deckId: null,
+    });
     const [selectedItem, setSelectedItem] = useState(null); // used when menu is pressed to show which was selected
     const { theme } = useTheme();
     const scheme =
@@ -47,6 +55,57 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
         );
     };
 
+    const fetchFileDataTxt = () => {
+        // get link to file
+        // read file data from txt (double line)
+        // return extracted question data
+    };
+
+    const fetchFileDataCsv = () => {
+        // copy fetchFileDataTxt
+        // read file data from csv (single line)
+    };
+
+    const addDeckToData = () => {
+        // properly add deck
+        // save deck to memory
+    };
+
+    const onPressImport = async (type) => {
+        const fileType = type === "csv" ? "text/csv" : "text/plain";
+        try {
+            const docRes = await DocumentPicker.getDocumentAsync({
+                type: fileType,
+            });
+
+            setImportSource(docRes.assets[0]);
+        } catch (error) {
+            console.log(
+                "Error while selecting text file: ",
+                JSON.stringify(error)
+            );
+        }
+    };
+
+    // const onPressImport = (type) => {
+    //
+    // addDeckToData()
+    // simulate onPressDeck for new deck
+    // };
+
+    const setQuestionsFromFile = async () => {
+        console.log(await getFileData(importSource));
+        // setCurrentDeck(await getFileData(currSource));
+    };
+
+    // actions after source specified
+    useEffect(() => {
+        if (importSource.uri) {
+            //   deckAdded(importSource);
+            setQuestionsFromFile(importSource.uri);
+        }
+    }, [importSource]);
+
     // console.log("decklistdata " + JSON.stringify(deckListData));
 
     return (
@@ -70,12 +129,12 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
                             {
                                 icon: "text",
                                 label: "Text",
-                                onPress: () => console.log("txt pressed"),
+                                onPress: () => onPressImport("txt"),
                             },
                             {
                                 icon: "table",
                                 label: "CSV",
-                                onPress: () => console.log("csv pressed"),
+                                onPress: () => onPressImport("csv"),
                             },
                         ]}
                         onStateChange={onStateChange}

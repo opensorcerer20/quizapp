@@ -23,6 +23,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   how to "reset" a reused react component: change the key="" attribute; that tells react that it's a totally different component, and it discards the previous
     -   this was needed for when a card is flipped, then the next question clicked; the card was still flipped, so the answer for the next question was visible
 -   how to get a drawer: for expo, it has documentation at https://docs.expo.dev/router/advanced/drawer/
+    -   requires react navigation
+-   for expo document picker, requires useeffect after we get source
 
 ## Planned future features
 
