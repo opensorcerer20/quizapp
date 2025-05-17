@@ -1,3 +1,5 @@
+import {MAX_CHAR_LIMIT} from "./constants";
+
 export const getRandomInt = (min, max) => {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -12,7 +14,7 @@ export const formatCardText = (text) => {
     if (text.length === 0) {
         return "";
     }
-    const maxLimit = 197;
+    const maxLimit = MAX_CHAR_LIMIT;
     if (text.length > maxLimit) {
         text = text.slice(0, maxLimit) + "...";
     }

@@ -3,14 +3,12 @@ import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
 import { FAB, Portal } from "react-native-paper";
-import { DECK_DATA_KEY, THEMES } from "./constants";
+import { DECK_DATA_KEY, MAX_DECKS, THEMES } from "./constants";
 import { getFileData } from "./fileLib";
 import * as DocumentPicker from 'expo-document-picker';
 import { makeNewDeck } from "./QuizDeck";
 import { getRandomInt } from "./util";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const MAX_DECKS = 50;
 
 export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) => {
     const [importSource, setImportSource] = useState({

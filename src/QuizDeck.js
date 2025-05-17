@@ -1,3 +1,5 @@
+import {MAX_QUESTIONS} from "./constants";
+
 export const emptyQuestion = {
     id: null,
     q: null,
@@ -27,7 +29,7 @@ export const makeNewDeck = (id, name, questions) => {
     if (Array.isArray(questions)) {
         questions.map((questionObj) => {
             // validation in lieu of strict typing
-            if (questionObj.id && questionObj.q && questionObj.a) {
+            if (questionObj.id && questionObj.q && questionObj.a && deck.data.length <= MAX_QUESTIONS) {
                 deck.data.push(questionObj);
             }
         });

@@ -95,19 +95,24 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] test hardcoded 50 decks
 
--   [ ] save static data to local storage
--   [ ] test data load from storage
+-   [x] save static data to local storage
+-   [x] test data load from storage
+
+    -   [x] no app reload
+    -   [x] app reload
+
+-   [x] implement importing list from txt file
+-   [x] test data load from storage
+
+    -   [x] no app reload
+    -   [x] app reload
+
+-   [ ] implement import from CSV
 
     -   [ ] no app reload
     -   [ ] app reload
 
--   [ ] implement importing list from txt file
--   [ ] test data load from storage
-
-    -   [ ] no app reload
-    -   [ ] app reload
-
--   [ ] limit imports to 100 questions
+-   [x] limit imports to 50 questions
 
 -   [ ] add info to deck list: filename, date added
 
@@ -127,6 +132,9 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [ ] reverse questions/answers
 
+-   [ ] swipe gesture to change question
+    -   [ ] test that when you go back the answer isnt showing
+
 -   [ ] test alpha version in android
 
     -   [x] flip card not working
@@ -139,8 +147,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [ ] code cleanup
 
 -   [ ] launch 1.0
-
--   [ ] implement import from CSV
 
 ## Possible future dev
 

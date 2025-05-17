@@ -1,4 +1,5 @@
 import { makeQuestionObject } from "./QuizDeck";
+import {MAX_QUESTIONS} from "./constants";
 
 export const getFileData = async (fileData) => {
     // need to determine what type is
@@ -76,13 +77,15 @@ const makeQuestionObjects = (questionData) => {
     // make {q,a} object array
     let questions = [];
     for (let i = 0; i < questionData.length; i += 2) {
-        questions.push(
-            makeQuestionObject(
-                questions.length + 1,
-                questionData[i],
-                questionData[i + 1]
-            )
-        );
+        if (questions.length <= MAX_QUESTIONS) {
+            questions.push(
+                makeQuestionObject(
+                    questions.length + 1,
+                    questionData[i],
+                    questionData[i + 1]
+                )
+            );
+        }
     }
 
     return questions;
