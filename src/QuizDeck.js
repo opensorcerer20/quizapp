@@ -15,6 +15,7 @@ export const makeQuestionObject = (id, question, answer) => {
 export const emptyDeck = {
     id: null,
     name: null,
+    createdAt: null,
     data: [],
 };
 
@@ -22,6 +23,7 @@ export const makeNewDeck = (id, name, questions) => {
     let deck = JSON.parse(JSON.stringify(emptyDeck));
     deck.id = id;
     deck.name = name;
+    deck.createdAt = Date.now();
     if (Array.isArray(questions)) {
         questions.map((questionObj) => {
             // validation in lieu of strict typing
@@ -37,3 +39,19 @@ export const addQuestionToDeck = (deck, id, question, answer) => {
     let newQ = makeQuestionObject(id, question, answer);
     return deck.data.push(newQ);
 };
+
+const staticDeckListData = [];
+for (let i = 1; i < 50; i++) {
+    staticDeckListData.push(
+        makeNewDeck(i, `deck ${i}`, [
+            makeQuestionObject(1, `deck ${i} question 1`, `deck ${i} answer 1`),
+            makeQuestionObject(2, `deck ${i} question 2`, `deck ${i} answer 2`),
+            makeQuestionObject(3, `deck ${i} question 3`, `deck ${i} answer 3`),
+            makeQuestionObject(
+                4,
+                `deck ${i} ` + "MW".repeat(200),
+                "MW".repeat(200)
+            ),
+        ])
+    );
+}

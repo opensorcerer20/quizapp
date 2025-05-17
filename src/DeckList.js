@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
 import { FAB, Portal } from "react-native-paper";
-import { THEMES } from "./constants";
+import { DECK_DATA_KEY, THEMES } from "./constants";
+import { getFileData } from "./fileLib";
+import * as DocumentPicker from 'expo-document-picker';
+import { makeNewDeck } from "./QuizDeck";
+import { getRandomInt } from "./util";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MAX_DECKS = 50;
 
-export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
-    const [selectedItem, setSelectedItem] = useState(null); // used when menu is pressed to show which was selected
+export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) => {
+    const [importSource, setImportSource] = useState({
+        mimeType: null,
+        name: null,
+        size: null,
+        uri: null,
+        deckId: null,
+    });
+
+    // used when deck menu is pressed
+    const [selectedItem, setSelectedItem] = useState(null); 
+    
     const { theme } = useTheme();
     const scheme =
         theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
@@ -47,6 +62,70 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
         );
     };
 
+    const onPressImport = async (type) => {
+        const fileType = type === "csv" ? "text/csv" : "text/plain";
+        try {
+            const docRes = await DocumentPicker.getDocumentAsync({
+                type: fileType,
+            });
+
+            setImportSource(docRes.assets[0]);
+        } catch (error) {
+            console.log(
+                "Error while selecting text file: ",
+                JSON.stringify(error)
+            );
+        }
+    };
+
+    const importDeck = async () => {
+        let newDeckId;
+        let limit = 0;
+        do {
+            newDeckId = getRandomInt(100000, 999999);
+            limit++;
+        } while (deckListData.filter(deck => deck.id === newDeckId).length > 0 && limit < 10);
+        if (limit >= 10) {
+            console.log('loop limit for deck id, last id: ' + newDeckId);
+            return;
+        }
+
+        const newQuestionArray = await getFileData(importSource);
+        const newDeck = makeNewDeck(newDeckId, importSource.name, newQuestionArray);
+        let newDeckListData = deckListData.slice();
+        newDeckListData.push(newDeck);
+
+        await saveNewDeckListData(newDeckListData);
+        
+        // signal parent to reload deck list from memory
+        onLoadDeck();
+    };
+
+    const saveNewDeckListData = async (newDeckListData) => {
+        try {
+            await AsyncStorage.setItem(
+              DECK_DATA_KEY,
+              JSON.stringify(newDeckListData),
+            );
+        } catch (error) {
+            console.log(
+                "error saving deck list data, error keys " + JSON.stringify(Object.keys(error))
+            );
+        }
+    }
+
+    // actions after source specified
+    useEffect(() => {
+        if (importSource.uri) {
+            importDeck(importSource.uri);
+        }
+    }, [importSource]);
+
+    // use to clear memory
+    //useEffect(() => {
+    //    saveNewDeckListData([]);
+    //}, []);
+
     // console.log("decklistdata " + JSON.stringify(deckListData));
 
     return (
@@ -70,12 +149,12 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete }) => {
                             {
                                 icon: "text",
                                 label: "Text",
-                                onPress: () => console.log("txt pressed"),
+                                onPress: () => onPressImport("txt"),
                             },
                             {
                                 icon: "table",
                                 label: "CSV",
-                                onPress: () => console.log("csv pressed"),
+                                onPress: () => onPressImport("csv"),
                             },
                         ]}
                         onStateChange={onStateChange}

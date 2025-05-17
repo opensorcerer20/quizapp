@@ -5,32 +5,15 @@ import { lightDarkStyles } from "./lib";
 import QuizScreen from "./QuizScreen";
 import Toolbar from "./Toolbar";
 import { DeckList } from "./DeckList";
-import { makeNewDeck, makeQuestionObject } from "./QuizDeck";
 import { useTheme } from "./ThemeProvider";
-import { THEMES, VIEWS } from "./constants";
-
-/* TESTING */
-const staticDeckListData = [];
-for (let i = 1; i < 50; i++) {
-    staticDeckListData.push(
-        makeNewDeck(i, `deck ${i}`, [
-            makeQuestionObject(1, `deck ${i} question 1`, `deck ${i} answer 1`),
-            makeQuestionObject(2, `deck ${i} question 2`, `deck ${i} answer 2`),
-            makeQuestionObject(3, `deck ${i} question 3`, `deck ${i} answer 3`),
-            makeQuestionObject(
-                4,
-                `deck ${i} ` + "MW".repeat(200),
-                "MW".repeat(200)
-            ),
-        ])
-    );
-}
-/* END TESTING */
+import { DECK_DATA_KEY, THEMES, VIEWS } from "./constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default QuizApp = () => {
     const { theme, toggleTheme } = useTheme();
     const [deckListData, setDeckListData] = useState([]);
     const [currentDeck, setCurrentDeck] = useState([]);
+    const [reload, setReload] = useState(false);
 
     const scheme =
         theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
@@ -50,16 +33,38 @@ export default QuizApp = () => {
 
     const loadDeckListData = async () => {
         try {
-            value = staticDeckListData;
+            const value = await AsyncStorage.getItem(DECK_DATA_KEY);
             if (value !== null) {
-                setDeckListData(value);
+                //console.log('loading: ' + JSON.stringify(value));
+                let newDeckListData = JSON.parse(value);
+                newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
+                console.log('setting decklist');
+                setDeckListData(newDeckListData);
+                setReload(false);
             }
         } catch (e) {
-            console.log("error loading deck list data");
-            // error reading value
+            console.log(
+                "error loading deck list data, error keys " + JSON.stringify(Object.keys(e))
+            );
         }
     };
 
+    const onLoadDeck = () => {
+        setReload(true);
+    }
+
+    // load data if either first time or reload is tripped
+    useEffect(() => {
+        console.log('useeffect reload: ' + reload);
+        if (reload) {
+            const loadData = async () => {
+                await loadDeckListData();
+            };
+            loadData();
+        }
+    }, [reload]);
+
+    // load data first time
     useEffect(() => {
         const loadData = async () => {
             await loadDeckListData();
@@ -88,6 +93,7 @@ export default QuizApp = () => {
                 <DeckList
                     deckListData={deckListData}
                     onPressDeck={onPressDeck}
+                    onLoadDeck={onLoadDeck}
                 />
             )}
             <StatusBar style="dark" />
