@@ -123,10 +123,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
--   [ ] bug: loading from memory not working on refresh
-    -   [ ] shift from storing file info to just saving question/answers
--   [ ] bug: (recent?) sometimes "next question" at end ends up as blank card
--   [ ] bug: clicking on deck does not load it; uses last deck
+-   [x] bug: loading from memory not working on refresh
+    -   [x] shift from storing file info to just saving question/answers
+-   [x] bug: (recent?) sometimes "next question" at end ends up as blank card
+-   [x] bug: clicking on deck does not load it; uses last deck
 
 -   [ ] settings (3 dots) (focused on language flash cards)
 
@@ -141,8 +141,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
         -   [x] ~~issue with absolute~~
     -   [x] flip card showing outside safe container
     -   [x] no next button
-    -   [ ] loading deck from start doesnt work (cant click)
-    -   [ ] cant load csv file
+    -   [ ] ~~loading deck from start doesnt work (cant click)~~
+    -   [x] cant load csv file
 
 -   [ ] code cleanup
 
