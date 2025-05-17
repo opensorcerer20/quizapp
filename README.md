@@ -107,10 +107,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] no app reload
     -   [x] app reload
 
--   [ ] implement import from CSV
+-   [x] implement import from CSV
 
-    -   [ ] no app reload
-    -   [ ] app reload
+    -   [x] no app reload
+    -   [x] app reload
 
 -   [x] limit imports to 50 questions
 

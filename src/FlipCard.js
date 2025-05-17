@@ -142,6 +142,7 @@ const FlipCard = ({ answerText, questionText, nextQuestion, buttonText }) => {
             <Pressable onPress={handlePress}>
                 <TheCard
                     isFlipped={isFlipped}
+                    duration={250}
                     cardStyle={styles.flipCard}
                     flippedText={localAnswer}
                     regularText={localQuestion}
