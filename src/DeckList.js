@@ -1,27 +1,45 @@
 import { useEffect, useState } from "react";
-import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
+import {
+    View,
+    Text,
+    FlatList,
+    Pressable,
+    StyleSheet,
+    Dimensions,
+    Modal,
+} from "react-native";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
-import { FAB, Portal } from "react-native-paper";
+import { Button, FAB, Portal } from "react-native-paper";
 import { DECK_DATA_KEY, MAX_DECKS, THEMES } from "./constants";
 import { getFileData } from "./fileLib";
-import * as DocumentPicker from 'expo-document-picker';
+import * as DocumentPicker from "expo-document-picker";
 import { makeNewDeck } from "./QuizDeck";
 import { getRandomInt } from "./util";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) => {
+export const DeckList = ({
+    deckListData,
+    onPressDeck,
+    onDeleteDeck,
+    onAddDeck,
+}) => {
+    const { width } = Dimensions.get("window");
+    const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
+    const MODAL_WIDTH = 100; // arbitrary for now
+
     const [importSource, setImportSource] = useState({
         mimeType: null,
         name: null,
         size: null,
         uri: null,
-        deckId: null,
     });
 
     // used when deck menu is pressed
-    const [selectedItem, setSelectedItem] = useState(null); 
-    
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+    const [selectedItem, setSelectedItem] = useState(null);
+
     const { theme } = useTheme();
     const scheme =
         theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
@@ -31,13 +49,43 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) =>
     const onStateChange = ({ open }) => setState({ open });
     const { open } = state;
 
+    const unSelectItem = () => {
+        setSelectedItem(null);
+        setMenuVisible(false);
+    };
+
+    const handleModalClickAway = () => {
+        unSelectItem();
+    };
+
+    const handleMenuPress = (event, item) => {
+        console.log("handlemenupress");
+        const { pageX, pageY } = event.nativeEvent;
+        const modalWidth = 100;
+        let modalX = Math.max(pageX - modalWidth, 0);
+        modalX = Math.min(SAFE_WIDTH - MODAL_WIDTH, modalX);
+        setMenuPosition({ top: pageY, left: modalX });
+        setSelectedItem(item);
+        setMenuVisible(true);
+    };
+
+    const handleEdit = () => {
+        //console.log(`Edit ${selectedItem?.title}`);
+        unSelectItem();
+    };
+
+    const handleDelete = () => {
+        onDeleteDeck(selectedItem.id);
+        unSelectItem();
+    };
+
     const renderItem = ({ item }) => {
         // console.log("item " + JSON.stringify(item));
         return (
             <Pressable
                 key={item.id}
                 onPress={() => onPressDeck(item.id)}
-                onLongPress={() => onPressDeck(item.id)}
+                onLongPress={(event) => handleMenuPress(event, item)}
             >
                 <View
                     style={[
@@ -49,12 +97,6 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) =>
                     ]}
                 >
                     <Text style={scheme.txt}>{item.name}</Text>
-                    {/* <Pressable
-                        onLongPress={(event) => handleMenuPress(event, item)}
-                        onPress={(event) => handleMenuPress(event, item)}
-                    >
-                        <Text style={scheme.txt}>MENU</Text>
-                    </Pressable> */}
                 </View>
             </Pressable>
         );
@@ -82,35 +124,24 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) =>
         do {
             newDeckId = getRandomInt(100000, 999999);
             limit++;
-        } while (deckListData.filter(deck => deck.id === newDeckId).length > 0 && limit < 10);
+        } while (
+            deckListData.filter((deck) => deck.id === newDeckId).length > 0 &&
+            limit < 10
+        );
         if (limit >= 10) {
-            console.log('loop limit for deck id, last id: ' + newDeckId);
+            console.log("loop limit for deck id, last id: " + newDeckId);
             return;
         }
 
         const newQuestionArray = await getFileData(importSource);
-        const newDeck = makeNewDeck(newDeckId, importSource.name, newQuestionArray);
-        let newDeckListData = deckListData.slice();
-        newDeckListData.push(newDeck);
+        const newDeck = makeNewDeck(
+            newDeckId,
+            importSource.name,
+            newQuestionArray
+        );
 
-        await saveNewDeckListData(newDeckListData);
-        
-        // signal parent to reload deck list from memory
-        onLoadDeck();
+        await onAddDeck(newDeck);
     };
-
-    const saveNewDeckListData = async (newDeckListData) => {
-        try {
-            await AsyncStorage.setItem(
-              DECK_DATA_KEY,
-              JSON.stringify(newDeckListData),
-            );
-        } catch (error) {
-            console.log(
-                "error saving deck list data, error keys " + JSON.stringify(Object.keys(error))
-            );
-        }
-    }
 
     // actions after source specified
     useEffect(() => {
@@ -132,6 +163,38 @@ export const DeckList = ({ deckListData, onPressDeck, onDelete, onLoadDeck }) =>
                 <>
                     <Text style={scheme.txt}>Saved Decks</Text>
                     <FlatList data={deckListData} renderItem={renderItem} />
+
+                    {menuVisible && (
+                        <Modal
+                            transparent
+                            animationType="fade"
+                            visible={menuVisible}
+                        >
+                            <Pressable
+                                style={styles.overlay}
+                                onPress={() => handleModalClickAway()}
+                            >
+                                <View
+                                    style={[
+                                        styles.menu,
+                                        {
+                                            top: menuPosition.top,
+                                            left: menuPosition.left,
+                                        },
+                                    ]}
+                                >
+                                    {/*<Pressable onPress={handleEdit}>
+                    <Text style={styles.menuItem}>Edit</Text>
+                  </Pressable>*/}
+                                    <Pressable onPress={handleDelete}>
+                                        <Text style={styles.menuItem}>
+                                            Delete
+                                        </Text>
+                                    </Pressable>
+                                </View>
+                            </Pressable>
+                        </Modal>
+                    )}
                 </>
             )}
             {deckListData.length < 1 && (

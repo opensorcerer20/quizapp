@@ -114,12 +114,22 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] limit imports to 50 questions
 
--   [ ] add info to deck list: filename, date added
+-   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
--   [ ] deck list menu
+-   [ ] deck info: filename, date added
 
-    -   [ ] delete
+-   [ ] deck menu
+
+    -   [x] delete
     -   [ ] edit deck name
+
+-   [ ] save settings (light/dark) to storage
+
+-   [ ] button to "reverse" values on demand
+
+-   [ ] quiz settings (3 dots)?
+
+    -   [ ] reverse questions/answers
 
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
@@ -127,13 +137,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] shift from storing file info to just saving question/answers
 -   [x] bug: (recent?) sometimes "next question" at end ends up as blank card
 -   [x] bug: clicking on deck does not load it; uses last deck
-
--   [ ] settings (3 dots) (focused on language flash cards)
-
-    -   [ ] reverse questions/answers
-
--   [ ] swipe gesture to change question
-    -   [ ] test that when you go back the answer isnt showing
 
 -   [ ] test alpha version in android
 
@@ -152,7 +155,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] different settings for modes
 -   [ ] text box for input
--   [ ] swipe to next card (does not exist?)
+-   [ ] swipe to next card ("swipe gesture" plus animation)
 -   [ ] now that everything is done, can the code be redone for better organization?
 -   [ ] allow renaming saved file (modal)
     -   [ ] edit icon

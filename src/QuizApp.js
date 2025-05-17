@@ -38,24 +38,50 @@ export default QuizApp = () => {
                 //console.log('loading: ' + JSON.stringify(value));
                 let newDeckListData = JSON.parse(value);
                 newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
-                console.log('setting decklist');
+                console.log("setting decklist");
                 setDeckListData(newDeckListData);
                 setReload(false);
             }
         } catch (e) {
             console.log(
-                "error loading deck list data, error keys " + JSON.stringify(Object.keys(e))
+                "error loading deck list data, error keys " +
+                    JSON.stringify(Object.keys(e))
             );
         }
     };
 
-    const onLoadDeck = () => {
-        setReload(true);
-    }
+    const onAddDeck = async (newDeck) => {
+        let newDeckListData = deckListData.slice();
+        newDeckListData.push(newDeck);
+        await saveNewDeckListData(newDeckListData);
+    };
+
+    const saveNewDeckListData = async (newDeckListData) => {
+        try {
+            await AsyncStorage.setItem(
+                DECK_DATA_KEY,
+                JSON.stringify(newDeckListData)
+            );
+            setReload(true);
+        } catch (error) {
+            console.log(
+                "error saving deck list data, error keys " +
+                    JSON.stringify(Object.keys(error))
+            );
+        }
+    };
+
+    const onDeleteDeck = async (deckId) => {
+        const newDeckListData = deckListData.filter(
+            (deckDatum) => deckDatum.id !== deckId
+        );
+        setDeckListData(newDeckListData);
+        saveNewDeckListData(newDeckListData);
+    };
 
     // load data if either first time or reload is tripped
     useEffect(() => {
-        console.log('useeffect reload: ' + reload);
+        console.log("useeffect reload: " + reload);
         if (reload) {
             const loadData = async () => {
                 await loadDeckListData();
@@ -76,7 +102,7 @@ export default QuizApp = () => {
         ? VIEWS.quizView
         : VIEWS.homeView;
 
-    // console.log("quizapp state " + JSON.stringify({ colorScheme }));
+    console.log("quizapp state " + JSON.stringify({ deckListData }));
 
     return (
         <View style={[styles.container, scheme.bg, scheme.txt]}>
@@ -93,7 +119,8 @@ export default QuizApp = () => {
                 <DeckList
                     deckListData={deckListData}
                     onPressDeck={onPressDeck}
-                    onLoadDeck={onLoadDeck}
+                    onAddDeck={onAddDeck}
+                    onDeleteDeck={onDeleteDeck}
                 />
             )}
             <StatusBar style="dark" />
