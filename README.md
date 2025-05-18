@@ -125,11 +125,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] save settings (light/dark) to storage
 
--   [ ] button to "reverse" values on demand
-
--   [ ] quiz settings (3 dots)?
-
-    -   [ ] reverse questions/answers
+-   [x] button to "reverse" values on demand
 
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
@@ -147,12 +143,16 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] ~~loading deck from start doesnt work (cant click)~~
     -   [x] cant load csv file
 
+-   [ ] add themes for cards
+    -   [ ] note card
+
 -   [ ] code cleanup
 
 -   [ ] launch 1.0
 
 ## Possible future dev
 
+-   [ ] custom card themes
 -   [ ] different settings for modes
 -   [ ] text box for input
 -   [ ] swipe to next card ("swipe gesture" plus animation)

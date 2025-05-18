@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import { lightDarkStyles } from "./lib";
 import FlipCard from "./FlipCard";
 import { getRandomInt } from "./util";
@@ -8,6 +8,7 @@ import { useTheme } from "./ThemeProvider";
 import { THEMES } from "./constants";
 
 const QuizScreen = ({ currentDeck }) => {
+    const [isReversed, setIsReversed] = useState(false);
     const { theme } = useTheme();
     const scheme =
         theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
@@ -69,6 +70,20 @@ const QuizScreen = ({ currentDeck }) => {
         <>
             {hasQuestionData && (
                 <View style={styles.container}>
+                    <View style={{margin: "auto"}}>
+                        <Switch
+                            trackColor={{false: '#767577', true: '#81b0ff'}}
+                            thumbColor={isReversed ? '#f5dd4b' : '#f4f3f4'}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={() => setIsReversed(!isReversed)}
+                            value={isReversed}
+                        />
+                    </View>
+                    <View style={{width: 100, margin: "auto"}}>
+                        <Pressable onPress={() => setIsReversed(!isReversed)} onLongPress={() => setIsReversed(!isReversed)}>
+                            Reverse Q & A
+                        </Pressable>
+                    </View>
                     <Text
                         style={[
                             scheme.txt,
@@ -91,6 +106,7 @@ const QuizScreen = ({ currentDeck }) => {
                         answerText={currentState.currentQuestion.a}
                         nextQuestion={nextQuestion}
                         buttonText={buttonText}
+                        isReversed={isReversed}
                     />
                 </View>
             )}

@@ -39,6 +39,7 @@ const TheCard = ({
     duration = 500,
     regularText,
     flippedText,
+    isReversed,
 }) => {
     const { theme } = useTheme();
     const scheme =
@@ -79,6 +80,22 @@ const TheCard = ({
         };
     });
 
+    const questionCard = (<CardContent
+        cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
+        cardText={regularText}
+        cardStyle={isReversed ? styles.flippedCard : styles.regularCard}
+        // textStyle={scheme.txt}
+        textStyle={styles.cardText}
+    />);
+
+    const answerCard = (<CardContent
+        cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
+        cardText={flippedText}
+        cardStyle={isReversed ? styles.regularCard : styles.flippedCard}
+        // textStyle={scheme.txt}
+        textStyle={styles.cardText}
+    />);
+
     return (
         <View>
             <Animated.View
@@ -88,13 +105,7 @@ const TheCard = ({
                     regularCardAnimatedStyle,
                 ]}
             >
-                <CardContent
-                    cardType={CARDTYPE_QUESTION}
-                    cardText={regularText}
-                    cardStyle={styles.regularCard}
-                    // textStyle={scheme.txt}
-                    textStyle={styles.cardText}
-                />
+                { isReversed ? answerCard : questionCard }
             </Animated.View>
             <Animated.View
                 style={[
@@ -103,19 +114,13 @@ const TheCard = ({
                     flippedCardAnimatedStyle,
                 ]}
             >
-                <CardContent
-                    cardType={CARDTYPE_ANSWER}
-                    cardText={flippedText}
-                    cardStyle={styles.flippedCard}
-                    // textStyle={scheme.txt}
-                    textStyle={styles.cardText}
-                />
+                { isReversed ? questionCard : answerCard }
             </Animated.View>
         </View>
     );
 };
 
-const FlipCard = ({ answerText, questionText, nextQuestion, buttonText }) => {
+const FlipCard = ({ answerText, questionText, nextQuestion, buttonText, isReversed }) => {
     const [localQuestion, setLocalQuestion] = useState("");
     const [localAnswer, setLocalAnswer] = useState("");
 
@@ -146,6 +151,7 @@ const FlipCard = ({ answerText, questionText, nextQuestion, buttonText }) => {
                     cardStyle={styles.flipCard}
                     flippedText={localAnswer}
                     regularText={localQuestion}
+                    isReversed={isReversed}
                 />
             </Pressable>
             <Button
