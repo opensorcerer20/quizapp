@@ -154,6 +154,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 ## Possible future dev
 
+-   [ ] menu when clicking on deck for review, quiz, audible, etc
 -   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
 -   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
 -   [ ] custom card themes
