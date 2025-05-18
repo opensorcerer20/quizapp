@@ -127,6 +127,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] button to "reverse" values on demand
 
+-   [ ] sanitize input
+
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
 -   [x] bug: loading from memory not working on refresh
