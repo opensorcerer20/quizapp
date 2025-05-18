@@ -59,7 +59,6 @@ export const DeckList = ({
     };
 
     const handleMenuPress = (event, item) => {
-        console.log("handlemenupress");
         const { pageX, pageY } = event.nativeEvent;
         const modalWidth = 100;
         let modalX = Math.max(pageX - modalWidth, 0);

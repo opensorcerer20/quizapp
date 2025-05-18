@@ -70,18 +70,21 @@ const QuizScreen = ({ currentDeck }) => {
         <>
             {hasQuestionData && (
                 <View style={styles.container}>
-                    <View style={{margin: "auto"}}>
+                    <View style={{ margin: "auto" }}>
                         <Switch
-                            trackColor={{false: '#767577', true: '#81b0ff'}}
-                            thumbColor={isReversed ? '#f5dd4b' : '#f4f3f4'}
+                            trackColor={{ false: "#767577", true: "#81b0ff" }}
+                            thumbColor={isReversed ? "#f5dd4b" : "#f4f3f4"}
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={() => setIsReversed(!isReversed)}
                             value={isReversed}
                         />
                     </View>
-                    <View style={{width: 100, margin: "auto"}}>
-                        <Pressable onPress={() => setIsReversed(!isReversed)} onLongPress={() => setIsReversed(!isReversed)}>
-                            Reverse Q & A
+                    <View style={{ width: 100, margin: "auto" }}>
+                        <Pressable
+                            onPress={() => setIsReversed(!isReversed)}
+                            onLongPress={() => setIsReversed(!isReversed)}
+                        >
+                            <Text>Reverse Q & A</Text>
                         </Pressable>
                     </View>
                     <Text

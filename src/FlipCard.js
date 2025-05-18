@@ -10,7 +10,7 @@ import Animated, {
 import { formatCardText } from "./util";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
-import { THEMES } from "./constants";
+import { MAX_CHAR_LIMIT_L, MAX_CHAR_LIMIT_XL, THEMES } from "./constants";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -20,13 +20,27 @@ const CARDTYPE_QUESTION = "question";
 const CARDTYPE_ANSWER = "answer";
 
 const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
+    const finalCardText = formatCardText(cardText);
+
+    let textSizeStyle = {};
+    if (finalCardText.length <= MAX_CHAR_LIMIT_XL) {
+        textSizeStyle = styles.xl;
+    } else if (finalCardText.length <= MAX_CHAR_LIMIT_L) {
+        textSizeStyle = styles.l;
+    }
+
+    // console.log(
+    //     "flipcard status " +
+    //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
+    // );
+
     return (
         <View style={cardStyle}>
-            <Text style={[{ fontWeight: "bold" }, textStyle]}>
+            <Text style={[{ fontWeight: "bold" }, styles.cardTypeText]}>
                 {cardType === CARDTYPE_ANSWER ? "Answer:" : "Question:"}
             </Text>
-            <Text style={[textStyle, { marginTop: 20 }]}>
-                {formatCardText(cardText)}
+            <Text style={[textStyle, textSizeStyle, { marginTop: 20 }]}>
+                {finalCardText}
             </Text>
         </View>
     );
@@ -80,21 +94,23 @@ const TheCard = ({
         };
     });
 
-    const questionCard = (<CardContent
-        cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
-        cardText={regularText}
-        cardStyle={isReversed ? styles.flippedCard : styles.regularCard}
-        // textStyle={scheme.txt}
-        textStyle={styles.cardText}
-    />);
+    const questionCard = (
+        <CardContent
+            cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
+            cardText={regularText}
+            cardStyle={isReversed ? styles.flippedCard : styles.regularCard}
+            textStyle={styles.cardText}
+        />
+    );
 
-    const answerCard = (<CardContent
-        cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
-        cardText={flippedText}
-        cardStyle={isReversed ? styles.regularCard : styles.flippedCard}
-        // textStyle={scheme.txt}
-        textStyle={styles.cardText}
-    />);
+    const answerCard = (
+        <CardContent
+            cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
+            cardText={flippedText}
+            cardStyle={isReversed ? styles.regularCard : styles.flippedCard}
+            textStyle={styles.cardText}
+        />
+    );
 
     return (
         <View>
@@ -105,7 +121,7 @@ const TheCard = ({
                     regularCardAnimatedStyle,
                 ]}
             >
-                { isReversed ? answerCard : questionCard }
+                {isReversed ? answerCard : questionCard}
             </Animated.View>
             <Animated.View
                 style={[
@@ -114,13 +130,19 @@ const TheCard = ({
                     flippedCardAnimatedStyle,
                 ]}
             >
-                { isReversed ? questionCard : answerCard }
+                {isReversed ? questionCard : answerCard}
             </Animated.View>
         </View>
     );
 };
 
-const FlipCard = ({ answerText, questionText, nextQuestion, buttonText, isReversed }) => {
+const FlipCard = ({
+    answerText,
+    questionText,
+    nextQuestion,
+    buttonText,
+    isReversed,
+}) => {
     const [localQuestion, setLocalQuestion] = useState("");
     const [localAnswer, setLocalAnswer] = useState("");
 
@@ -200,8 +222,19 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         padding: 10,
     },
+    cardTypeText: {
+        color: "#001a72",
+        fontSize: 16,
+    },
     cardText: {
         color: "#001a72",
+        fontSize: 16,
+    },
+    l: {
+        fontSize: 24,
+    },
+    xl: {
+        fontSize: 32,
     },
     flippedCard: {
         flex: 1,

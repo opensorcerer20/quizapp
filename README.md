@@ -114,9 +114,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] limit imports to 50 questions
 
--   [ ] char limit 150
+-   [x] char limit 90
 
--   [ ] prev card
+-   [x] change font size based on text length
+
+-   [ ] prev card, start over, grey out buttons
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
@@ -150,7 +152,13 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] cant load csv file
 
 -   [ ] add themes for cards
+
     -   [ ] note card
+
+-   [ ] tips
+
+    -   [ ] tip button
+    -   [ ] after certain amount of uses, tip popup with option to "dont show again"
 
 -   [ ] code cleanup
 

@@ -1,4 +1,4 @@
-import {MAX_QUESTIONS} from "./constants";
+import { MAX_QUESTIONS } from "./constants";
 
 export const emptyQuestion = {
     id: null,
@@ -29,7 +29,12 @@ export const makeNewDeck = (id, name, questions) => {
     if (Array.isArray(questions)) {
         questions.map((questionObj) => {
             // validation in lieu of strict typing
-            if (questionObj.id && questionObj.q && questionObj.a && deck.data.length <= MAX_QUESTIONS) {
+            if (
+                questionObj.id &&
+                questionObj.q &&
+                questionObj.a &&
+                deck.data.length <= MAX_QUESTIONS
+            ) {
                 deck.data.push(questionObj);
             }
         });
@@ -42,18 +47,29 @@ export const addQuestionToDeck = (deck, id, question, answer) => {
     return deck.data.push(newQ);
 };
 
-const staticDeckListData = [];
-for (let i = 1; i < 50; i++) {
-    staticDeckListData.push(
-        makeNewDeck(i, `deck ${i}`, [
-            makeQuestionObject(1, `deck ${i} question 1`, `deck ${i} answer 1`),
-            makeQuestionObject(2, `deck ${i} question 2`, `deck ${i} answer 2`),
-            makeQuestionObject(3, `deck ${i} question 3`, `deck ${i} answer 3`),
-            makeQuestionObject(
-                4,
-                `deck ${i} ` + "MW".repeat(200),
-                "MW".repeat(200)
-            ),
-        ])
-    );
-}
+export const getStaticData = () => {
+    const staticDeckListData = [];
+    for (let i = 1; i < 50; i++) {
+        staticDeckListData.push(
+            makeNewDeck(i, `deck ${i}`, [
+                makeQuestionObject(
+                    1,
+                    `deck ${i} question 1`,
+                    `deck ${i} answer 1`
+                ),
+                makeQuestionObject(
+                    2,
+                    `deck ${i} question 2`,
+                    `deck ${i} answer 2`
+                ),
+                makeQuestionObject(
+                    3,
+                    `deck ${i} question 3`,
+                    `deck ${i} answer 3`
+                ),
+                makeQuestionObject(4, "MW".repeat(200), "MW".repeat(200)),
+            ])
+        );
+    }
+    return staticDeckListData;
+};

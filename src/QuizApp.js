@@ -8,8 +8,10 @@ import { DeckList } from "./DeckList";
 import { useTheme } from "./ThemeProvider";
 import { DECK_DATA_KEY, THEMES, VIEWS } from "./constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getStaticData } from "./QuizDeck";
 
 export default QuizApp = () => {
+    const USE_STATIC_DATA = false;
     const { theme, toggleTheme } = useTheme();
     const [deckListData, setDeckListData] = useState([]);
     const [currentDeck, setCurrentDeck] = useState([]);
@@ -32,21 +34,25 @@ export default QuizApp = () => {
     };
 
     const loadDeckListData = async () => {
-        try {
-            const value = await AsyncStorage.getItem(DECK_DATA_KEY);
-            if (value !== null) {
-                //console.log('loading: ' + JSON.stringify(value));
-                let newDeckListData = JSON.parse(value);
-                newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
-                console.log("setting decklist");
-                setDeckListData(newDeckListData);
-                setReload(false);
+        if (USE_STATIC_DATA) {
+            setDeckListData(getStaticData());
+        } else {
+            try {
+                const value = await AsyncStorage.getItem(DECK_DATA_KEY);
+                if (value !== null) {
+                    //console.log('loading: ' + JSON.stringify(value));
+                    let newDeckListData = JSON.parse(value);
+                    newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
+                    // console.log("setting decklist");
+                    setDeckListData(newDeckListData);
+                    setReload(false);
+                }
+            } catch (e) {
+                console.log(
+                    "error loading deck list data, error keys " +
+                        JSON.stringify(Object.keys(e))
+                );
             }
-        } catch (e) {
-            console.log(
-                "error loading deck list data, error keys " +
-                    JSON.stringify(Object.keys(e))
-            );
         }
     };
 
@@ -81,7 +87,7 @@ export default QuizApp = () => {
 
     // load data if either first time or reload is tripped
     useEffect(() => {
-        console.log("useeffect reload: " + reload);
+        // console.log("useeffect reload: " + reload);
         if (reload) {
             const loadData = async () => {
                 await loadDeckListData();
@@ -102,7 +108,7 @@ export default QuizApp = () => {
         ? VIEWS.quizView
         : VIEWS.homeView;
 
-    console.log("quizapp state " + JSON.stringify({ deckListData }));
+    // console.log("quizapp state " + JSON.stringify({ deckListData }));
 
     return (
         <View style={[styles.container, scheme.bg, scheme.txt]}>

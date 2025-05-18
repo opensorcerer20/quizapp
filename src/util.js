@@ -1,4 +1,11 @@
-import {MAX_CHAR_LIMIT} from "./constants";
+import {
+    LINE_CHAR_LIMIT,
+    LINE_CHAR_LIMIT_L,
+    LINE_CHAR_LIMIT_XL,
+    MAX_CHAR_LIMIT,
+    MAX_CHAR_LIMIT_L,
+    MAX_CHAR_LIMIT_XL,
+} from "./constants";
 
 export const getRandomInt = (min, max) => {
     // min and max included
@@ -19,7 +26,17 @@ export const formatCardText = (text) => {
         text = text.slice(0, maxLimit) + "...";
     }
 
-    const charLimit = 20; // limit per line, seems to work well with "MW" test
+    let charLimit;
+    if (text.length <= MAX_CHAR_LIMIT_XL) {
+        charLimit = LINE_CHAR_LIMIT_XL;
+    } else if (text.length <= MAX_CHAR_LIMIT_L) {
+        charLimit = LINE_CHAR_LIMIT_L;
+    } else {
+        charLimit = LINE_CHAR_LIMIT;
+    }
+    // console.log(
+    //     "test data " + JSON.stringify({ textlength: text.length, charLimit })
+    // );
     let textPieces = [];
     let failsafe = 0;
     // console.log('text before loop :' + text);
