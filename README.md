@@ -114,6 +114,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] limit imports to 50 questions
 
+-   [ ] char limit 150
+
+-   [ ] prev card
+
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
 -   [ ] deck info: filename, date added

@@ -1,0 +1,556 @@
+人間,human 
+人類,humanity 
+人,person 
+男,male 
+男の人,man 
+男の子,boy 
+女,female 
+女の人,woman 
+女の子,girl 
+赤ちゃん,baby 
+若者,"youth, young person "
+私,"I, myself "
+私,"I, myself "
+僕,"I, myself "
+俺,"I, myself "
+私,"I, myself "
+少女,girl 
+少年,boy 
+医者,doctor 
+看護師,nurse 
+看護婦,female nurse 
+歯科医 / 歯医者,dentist 
+政治家,politician 
+弁護士,lawyer 
+消防士,firefighter 
+警察官,police officer 
+兵士,soldier 
+建築家,architect 
+先生,teacher 
+教師,academic teacher 
+歌手,singer 
+足 / 脚,"foot, leg "
+踵,heel 
+脛,shin 
+膝,knee 
+腿,thigh 
+頭,head 
+顔,face 
+口,mouth 
+唇,lips 
+歯,tooth 
+鼻,nose 
+目,eye 
+髭 / 鬚 / 髯,"moustache, beard "
+髪,hair 
+耳,ear 
+御腹,stomach 
+腕,arm 
+肘,elbow 
+肩,shoulder 
+爪,nail 
+手,hand 
+手首,wrist 
+掌 / 手の平,palm of hand 
+指,"finger, toe "
+尻,buttocks 
+お腹 / 腹,abdomen 
+肝臓,liver 
+肝,liver 
+筋肉,muscle 
+首,neck 
+心,heart [as in feelings] 
+腰,"waist, hip "
+心臓,heart 
+背中,back 
+血,blood 
+肉,meat 
+肌 / 膚,skin 
+皮膚,skin 
+骨,bone 
+胸,chest 
+風邪,cold [illness] 
+下痢,diarrhea 
+病気,illness 
+家族,family 
+両親,parents 
+子供,"children, child "
+父,father 
+母,mother 
+妻,wife 
+夫,husband 
+兄,older brother 
+姉,older sister 
+弟,younger brother 
+妹,younger sister 
+兄弟,"brothers, siblings "
+姉妹,sisters 
+祖父,grandfather 
+祖母,grandmother 
+孫,grandchild 
+伯父 / 叔父,uncle 
+伯母 / 叔母,aunt 
+従兄弟 / 従姉妹 / 従兄 / 従弟 / 従姉 / 従妹,cousin 
+姪,niece 
+甥,nephew 
+生き物,living creatures 
+化け物,monster 
+動物,animal 
+犬,dog 
+猫,cat 
+牛,cow 
+豚,pig 
+馬,horse 
+羊,sheep 
+猿,monkey 
+鼠,"mouse, rat "
+虎,tiger 
+狼,wolf 
+兎,rabbit 
+竜,dragon 
+鹿,deer 
+蛙,frog 
+蟇,toad 
+獅子,lion 
+麒麟,giraffe 
+象,elephant 
+鳥,bird 
+鶏,chicken 
+雀,sparrow 
+烏,"crow, raven "
+鷲,eagle 
+鷹,"hawk, falcon "
+魚,fish 
+鯛,red snapper 
+海老,"shrimp, lobster "
+鰯,sardine 
+鮪,tuna 
+鰹,bonito 
+秋刀魚,pike 
+鰺,horse mackerel 
+鯖,mackerel 
+烏賊,squid 
+蛸 / 章魚,octopus 
+虫,insect 
+蝶,butterfly 
+蛾,moth 
+蝉,cicada 
+蜻蛉,dragonfly 
+飛蝗,grasshopper 
+蜘蛛,spider 
+蛍,firefly 
+蝿 / 蠅,housefly 
+蚊,"mosquito, gnat "
+蜚蠊,cockroach 
+蝸牛,snail 
+蛞蝓,slug 
+蚯蚓,earthworm 
+貝,shellfish 
+貝殻,shell 
+蜥蜴,lizard 
+蛇,snake 
+熊,bear
+植物,plants 
+草,grass 
+花,flower 
+実,fruit 
+木,tree 
+葉 / 葉っぱ,leaf 
+根 / 根っ子,root 
+茎,stem 
+茸,mushroom 
+菊,chrysanthemum 
+桜,cherry blossom 
+松,pine tree 
+梅,japanese plum or apricot 
+米,uncooked rice 
+稲,rice growing in a field 
+麦,"wheat, barley, oats "
+野菜,vegetable 
+果物,fruit for eating 
+芋,"yam, potato, taro "
+豆,"beans, peas "
+大根,Japanese white radish 
+人参,carrot 
+林檎,apple 
+蜜柑,mandarin orange 
+甘蕉,banana 
+梨,pear 
+栗,chestnut tree 
+桃,peach 
+蕃茄,tomato 
+西瓜,watermelon 
+食べ物,food 
+朝食,breakfast 
+昼御飯,lunch 
+晩御飯,dinner 
+御飯,cooked rice or meal 
+味噌,miso 
+料理,cooking 
+間食,snack 
+たこ焼き,octopus dumpling 
+飲み物,drink / beverage 
+茶,tea 
+お茶,green tea 
+珈琲,coffee 
+牛乳,milk 
+水,water 
+砂糖,sugar 
+塩,salt 
+醤油,soy sauce 
+時間,time 
+時,~hours 
+暦,calendar 
+分,minute 
+秒,second 
+日,day 
+月,month 
+年,year 
+昨日,yesterday 
+今日,today 
+明日,tomorrow 
+朝,morning 
+昼,afternoon 
+夕方,evening 
+晩,evening 
+夜,"evening, night "
+曜日,~day 
+週,week 
+一週間,one week 
+日曜日,Sunday 
+月曜日,Monday 
+火曜日,Tuesday 
+水曜日,Wednesday 
+木曜日,Thursday 
+金曜日,Friday 
+土曜日,Saturday 
+太陽,sun 
+月,moon 
+星,star 
+天気,weather 
+晴れ,clear weather 
+雨,rain 
+曇り,cloudy 
+雪,snow 
+風,wind 
+雷,"thunder, lightning "
+台風,typhoon 
+嵐,storm 
+空,sky 
+北,north 
+東,east 
+南,south 
+西,west 
+右,right 
+左,left 
+上,"above, up "
+下,"below, down "
+前,front 
+後,behind 
+向こう,"the other side, opposite side "
+斜め,diagonal 
+手前,"nearer, more in front "
+遠い,far 
+近い,"near, close "
+水,water 
+湯,hot water 
+氷,ice 
+湯気,steam 
+火,fire 
+空気,"air, atmosphere "
+土,"earth, ground "
+金属,"metal, metallic "
+泥,"mud, mire, clay, plaster "
+煙,"smoke, tobacco, opium "
+鉄,iron [Fe] 
+銅,copper [Cu] 
+金,gold [Au]; money 
+銀,silver [Ag]; wealth 
+鉛,lead [Pb] 
+塩,salt [NaCl] 
+社会,society 
+経済,"economy, economics "
+会社,company 
+会議,meeting 
+学校,school 
+役所,local government office 
+店,store 
+工場,factory 
+金,money 
+札,"bill [of money, e.g., a thousand-yen bill] "
+小銭,small change 
+釣り銭 / お釣り,change 
+自動販売機,"vending machine, slot machine "
+切符,ticket / public transport / fine 
+切手,stamp 
+机,desk 
+椅子,"chair, position "
+畳,a tatami mat 
+戸,"door, family "
+扉,door panel 
+窓,window 
+布団,futon 
+玄関,entrance 
+家,"house, home "
+電気,electricity 
+釘,"nail, spike "
+紐,"string, cord "
+縄,"rope, string "
+袋,"pocket, bag "
+鞄,leather bag 
+傘,"umbrella, parasol "
+鍵,"door bolt, key "
+彫刻,"sculpture, engraving "
+文房具,stationery ​
+万年筆,fountain pen 
+鉛筆,pencil 
+筆,brush for writing or painting 
+消しゴム,eraser 
+鉛筆削り,pencil sharpener 
+定規,ruler 
+日記,diary 
+封筒,envelope 
+鋏,scissors 
+服,clothes 
+洋服,western clothing 
+着物,kimono 
+和服,Japanese clothing 
+袖,sleeve 
+襟,"lapel, collar "
+靴,shoe 
+靴下,sock 
+眼鏡,glasses 
+鉄道,railway 
+駅,station 
+飛行機,airplane 
+空港 / 飛行場,airport 
+道,"street, way, road "
+道路,road 
+バス停,bus-stop 
+通り,avenue 
+電車,train 
+車 / 自動車,car 
+自転車,bicycle 
+文字,"letter, character, script "
+字,"a letter, character "
+漢字,Chinese character 
+平仮名,hiragana syllabary characters 
+片仮名,katakana syllabary characters 
+数字,numbers 
+外国語,foreign language 
+日本語 / 国語,Japanese [language] 
+英語,English [language] 
+中国語,Chinese [language] 
+ドイツ語,German [language] 
+スペイン語,Spanish [language] 
+フランス語,French [language] 
+朝鮮語 / 韓国語,"Korean [language], South Korean [language] "
+本,book 
+紙,paper 
+手紙,letter 
+新聞,newspaper 
+辞書,dictionary 
+色,color 
+赤,red 
+黄色,yellow 
+緑,green 
+青,blue 
+紫,purple 
+白,white 
+黒,black 
+茶色,brown 
+灰色 / 鼠色,grey 
+絵,picture 
+音楽,music 
+理科,science 
+算数,arithmetic 
+歴史,history 
+地理,geography 
+体育,physical education 
+情報,"information, news "
+必要,necessity 
+勉強,study 
+依頼,request 
+ゼロ / 零,zero 
+一,one 
+二,two 
+三,three 
+四,four 
+五,five 
+六,six 
+七,seven 
+八,eight 
+九,nine 
+十,ten 
+百,hundred 
+千,thousand 
+万,ten thousand 
+億,one hundred million 
+一つ,"one, one thing "
+二つ,"two, two things "
+三つ,"three, three things "
+四つ,"four, four things "
+五つ,"five, five things "
+六つ,"six, six things "
+七つ,"seven, seven things "
+八つ,"eight, eight things "
+九つ,"nine, nine things "
+十,"ten, ten things "
+秘密,secret 
+自動,automatic 
+内容,content 
+幅,"width, breadth, free room, difference between two substances "
+正式,formality 
+結婚,marriage 
+現在,now 
+今,now 
+過去,past 
+未来,future 
+良い,good 
+凄い,amazing 
+素晴らしい,wonderful 
+悪い,"bad, inferior "
+高い,"expensive, high "
+低い,low 
+安い,cheap 
+大きい,big 
+小さい,small 
+細い,thin 
+太い,thick 
+古い,old 
+新しい,new 
+若い,young 
+軽い,"light, easy "
+重い,heavy 
+易しい,"easy, simple "
+難しい,difficult 
+柔らかい,soft 
+硬い / 堅い,hard 
+熱い / 暑い,hot 
+冷たい,cold 
+寒い,cold 
+美味しい,delicious 
+美味い / 旨い,"delicious, appetizing "
+不味い,tastes awful 
+甘い,sweet 
+辛い,hot [spicy] 
+塩っぱい,salty 
+苦い,bitter 
+美しい,beautiful 
+嬉しい,happy 
+楽しい,fun 
+悲しい,sad 
+寂しい / 淋しい,lonely 
+寂しい / 淋しい,"sad, lonely "
+怖い / 恐い,scary 
+痛い,painful 
+痒い,itchy 
+臭い,stinky 
+辛い,"painful, heart-breaking "
+起こる / 興る,to occur 
+現れる,to appear 
+生きる,to live 
+生む / 産む,to give birth 
+死ぬ,to die 
+壊れる,to breakin 
+行く,to go 
+来る,to come 
+帰る / 返る,to return 
+歩く,to walk 
+飛ぶ,"to jump, to fly "
+泳ぐ,to swim 
+動く,to movein 
+踊る,to dance 
+寝る,to sleep 
+歌う,to sing 
+噛む,to bite 
+食べる,to eat 
+飲む,to drink 
+触る,to touch 
+投げる,to throw 
+持つ,to hold 
+打つ,"to hit, to strike "
+殴る,"to hit, to strike "
+指す,to point 
+刺す,to stab 
+差す,to raise or extend one's hands 
+蹴る,to kick 
+座る,to sit 
+立つ,to stand 
+走る,to run 
+空く,to become unoccupied 
+込む,to be crowded 
+要る,to need 
+乾く,to become dry 
+乱す,"to disturb, to disarrange "
+乱れる,"to be disturbed, to become confused "
+仕える,"to serve, to work for "
+備わる,to be furnished with 
+優れる,"to excel, to surpass "
+冷える,"to grow cold, to get chilly, to cool down "
+覚める,"to wake, to become sober, to be disillusioned "
+冷める,to cool down 
+向く,"to face, to turn toward "
+倒れる,"to fall, to collapse "
+固まる,"to harden, to solidify, to become firm "
+埋まる,"to be filled, to be surrounded, to overflow "
+埋もれる,"to be buried, to be covered "
+増す,"to increase, to grow "
+増える,"to increase, to multiply "
+減る,to decrease 
+外れる,to deviate 
+太る,to grow fat 
+始まる,to begin 
+終わる,"to finish, to close "
+決める,to decide 
+見る,to see 
+聞く / 聴く,"to hear, to listen "
+触る,"to touch, to feel "
+嗅ぐ,to smell 
+言う,to say 
+話す,to speak 
+語る,to tell 
+書く,to write 
+読む,to read 
+使う,to use 
+作る / 造る / 創る,to make 
+直す / 治す,"to fix, repair "
+捨てる,"to discard, throw away "
+取る / 撮る / 採る,to take 
+置く,to put 
+悲しむ / 哀しむ,to be sad 
+泣く,to cry 
+笑う,to laugh 
+怒る,to be angry 
+褒める,to encourage 
+叱る,to scold 
+喜ぶ,"to celebrate, to be jubilant, to have joy, to have delight, to have rapture "
+喜び,"joy, delight, rapture "
+慰める,"to console, to consolate, to provide empathy "
+飽きる,"to be disinterested, to be bored, to be tired of, to be weary "
+驚く,"to be astonished, to be surprised, to be scared "
+会う,"to meet, to interview "
+開ける,"to opentr, to unwraptr "
+遊ぶ,to play 
+集まる,to gatherin 
+売る,to sell 
+得る,to obtain [some benefit or knowledge] 
+折る,"to breaktr, to foldtr "
+買う,to buy 
+切る,to cut 
+着る,to wear [on the upper body] 
+履く,to wear [on the lower body] 
+変える,to changetr 
+代える,"to exchange, to substitute, to replace "
+閉める,to closetr 
+締める,"to tie, to fasten "
+占める,"to comprise, to account for "
+知る,to know 
+疲れる,to get tired 
+出掛ける,"to go out, to depart "
+働く,"to work [e.g., at a job] "
+放す / 離す,to let go of 
+休む,"to rest, to take a break, to go to bed "
+分かれる,"to split intoin, to be divided "
+別れる,"to partin, to separatein, to break upin "
+及び,and; as well as 
