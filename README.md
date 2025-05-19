@@ -142,6 +142,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] save settings (light/dark) to storage
 
+    -   [x] save setting and load setting
+    -   [ ] test on android
+    -   [ ] test on iphone
+
 -   [x] button to "reverse" values on demand
 
 -   [ ] sanitize input

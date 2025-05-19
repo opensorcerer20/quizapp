@@ -1,4 +1,6 @@
 export const DECK_DATA_KEY = "DECK_DATA";
+export const THEME_KEY = "THEME";
+
 export const MAX_DECKS = 20;
 export const MAX_QUESTIONS = 50;
 
