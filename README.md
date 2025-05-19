@@ -26,6 +26,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   how does flex work for react native
     -   the container has flex, flexDirection, justifyContent
     -   the children do NOT have flex
+-   flex box and buttons
+    -   need additional "alignItems" to "center" for vertical centering
 
 ## Planned future features
 
@@ -133,6 +135,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [x] add "sm" text size
 
 -   [x] prev card, start over, grey out buttons
+
+-   [ ] "start over" button should reset current deck, not re-scramble
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
