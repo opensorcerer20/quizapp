@@ -65,6 +65,13 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [x] bug: answer visible when switching to next question
 -   [x] bug: delay loading next question (side effect of hiding answer to next question)
 
+-   [x] flip card not working
+    -   [x] ~~issue with absolute~~
+-   [x] flip card showing outside safe container
+-   [x] no next button
+-   [ ] ~~loading deck from start doesnt work (cant click)~~
+-   [x] cant load csv file
+
 -   [ ] ~~new idea: pre-render cards, click to next and previous, reset when leaving screen~~
 
 -   [ ] ~~create all cards, only show current one~~
@@ -95,6 +102,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] test hardcoded 50 decks
 
+(back to using file imports)
+
 -   [x] save static data to local storage
 -   [x] test data load from storage
 
@@ -120,7 +129,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] add "sm" text size
 
--   [ ] prev card, start over, grey out buttons
+-   [x] prev card, start over, grey out buttons
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
@@ -149,13 +158,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] android
     -   [ ] iphone
 
-    -   [x] flip card not working
-        -   [x] ~~issue with absolute~~
-    -   [x] flip card showing outside safe container
-    -   [x] no next button
-    -   [ ] ~~loading deck from start doesnt work (cant click)~~
-    -   [x] cant load csv file
-
 -   [ ] add themes for cards
 
     -   [ ] note card
@@ -164,7 +166,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] tips
 
-    -   [ ] tip button
+    -   [ ] tip button (https://buymeacoffee.com/)
     -   [ ] after certain amount of uses, tip popup with option to "dont show again"
 
 -   [ ] code cleanup

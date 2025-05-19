@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, View, StyleSheet, Text } from "react-native";
-import { Button } from "react-native-paper";
 import Animated, {
     interpolate,
     useAnimatedStyle,
@@ -32,8 +31,17 @@ const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
 
     return (
         <View style={cardStyle}>
-            <Text style={[{ fontWeight: "bold" }, styles.cardTypeText]}>
-                {cardType === CARDTYPE_ANSWER ? "Answer:" : "Question:"}
+            <Text
+                style={[
+                    { fontWeight: "bold" },
+                    styles.cardTypeText,
+                    {
+                        textAlign:
+                            cardType === CARDTYPE_ANSWER ? "right" : "left",
+                    },
+                ]}
+            >
+                {cardType === CARDTYPE_ANSWER ? "Answer" : "Question"}
             </Text>
             <Text style={[textStyle, textSizeStyle, { marginTop: 20 }]}>
                 {finalCardText}
@@ -132,13 +140,7 @@ const TheCard = ({
     );
 };
 
-const FlipCard = ({
-    answerText,
-    questionText,
-    nextQuestion,
-    buttonText,
-    isReversed,
-}) => {
+const FlipCard = ({ answerText, questionText, isReversed }) => {
     const [localQuestion, setLocalQuestion] = useState("");
     const [localAnswer, setLocalAnswer] = useState("");
 
@@ -146,10 +148,6 @@ const FlipCard = ({
 
     const handlePress = () => {
         isFlipped.value = !isFlipped.value;
-    };
-
-    const clickNext = async () => {
-        nextQuestion();
     };
 
     useEffect(() => {
@@ -172,14 +170,6 @@ const FlipCard = ({
                     isReversed={isReversed}
                 />
             </Pressable>
-            <Button
-                style={{ marginTop: 10 }}
-                buttonColor="#0000ff"
-                textColor="#e0e0e0"
-                onPress={() => clickNext()}
-            >
-                {buttonText}
-            </Button>
         </>
     );
 };
@@ -190,20 +180,6 @@ const styles = StyleSheet.create({
         height: 300,
         alignItems: "center",
         justifyContent: "center",
-    },
-    buttonContainer: {
-        marginTop: 16,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    toggleButton: {
-        backgroundColor: "#b58df1",
-        padding: 12,
-        borderRadius: 48,
-    },
-    toggleButtonText: {
-        color: "#fff",
-        textAlign: "center",
     },
     flipCard: {
         width: "100%",

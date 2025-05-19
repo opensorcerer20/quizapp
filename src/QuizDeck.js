@@ -73,3 +73,12 @@ export const getStaticData = () => {
     }
     return staticDeckListData;
 };
+
+// randomize questions
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
+export const randomizeQBag = (bag) => {
+    return bag
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+};
