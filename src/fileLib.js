@@ -1,5 +1,5 @@
-import { makeQuestionObject } from "./QuizDeck";
-import {MAX_QUESTIONS} from "./constants";
+import { makeQuestionObject } from "./Deck/QuizDeck";
+import { MAX_QUESTIONS } from "./constants";
 
 export const getFileData = async (fileData) => {
     // need to determine what type is

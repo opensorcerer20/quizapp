@@ -1,4 +1,4 @@
-import { MAX_QUESTIONS } from "./constants";
+import { MAX_QUESTIONS } from "../constants";
 
 export const emptyQuestion = {
     id: null,

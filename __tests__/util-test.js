@@ -56,4 +56,6 @@ describe("formatCardText", () => {
         const result = formatCardText(input);
         expect(result).toBe("averyveryverylongwor\nd");
     });
+
+    // @todo test different line maxes
 });

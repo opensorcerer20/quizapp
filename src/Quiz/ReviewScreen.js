@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
-import { lightDarkStyles } from "./lib";
-import FlipCard from "./FlipCard";
-import { getRandomInt } from "./util";
-import { emptyQuestion, randomizeQBag } from "./QuizDeck";
-import { useTheme } from "./ThemeProvider";
-import { THEMES } from "./constants";
-import { Button } from "react-native-paper";
+import { StyleSheet, Text, View } from "react-native";
+import { lightDarkStyles } from "../lib";
+import FlipCard from "../Deck/FlipCard";
+import { getRandomInt } from "../util";
+import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
+import { useTheme } from "../Providers/ThemeProvider";
+import { THEMES } from "../constants";
 import { difference } from "lodash";
+import { DeckNav } from "../Deck/DeckNav";
+import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
 
 export const ReviewScreen = ({ currentDeck }) => {
     const [isReversed, setIsReversed] = useState(false);
@@ -21,32 +22,21 @@ export const ReviewScreen = ({ currentDeck }) => {
     });
 
     const prevQuestion = () => {
-        // get length of current bag
-        // count backwards from end of original bag
-        // unshift current question to bag
-        // set prev question
-        /*
-        original
-        [1, 2, 3, 4, 5]
-        current
-        [3, 4, 5]
-        currq
-    [2]
-        get diff
-        [1, 2]
-        current.unshift(2)
-        currq = 1
-        */
         if (
             currentState.originalBag.length - currentState.questionBag.length >=
             2
         ) {
+            // get questions already run through
             const diff = difference(
                 currentState.originalBag,
                 currentState.questionBag
             );
+
+            // put current question back on stack
             const newBag = currentState.questionBag.slice();
             newBag.unshift(diff[diff.length - 1]);
+
+            // put previous question as current
             setCurrentState({
                 ...currentState,
                 questionBag: newBag,
@@ -55,6 +45,7 @@ export const ReviewScreen = ({ currentDeck }) => {
         }
     };
 
+    // if bag passed in, use it, otherwise use currentState bags
     const nextQuestion = (incomingBag = null) => {
         const originalBag = incomingBag
             ? incomingBag.slice()
@@ -74,10 +65,8 @@ export const ReviewScreen = ({ currentDeck }) => {
     };
 
     const resetQuestionBag = () => {
-        let newBag = JSON.parse(JSON.stringify(currentDeck.data));
-
+        let newBag = currentDeck.data.slice();
         newBag = randomizeQBag(newBag);
-
         nextQuestion(newBag);
     };
 
@@ -101,54 +90,17 @@ export const ReviewScreen = ({ currentDeck }) => {
         }
     }, []);
 
-    const prevEnabled =
-        currentState.originalBag.length - currentState.questionBag.length > 1;
-    const prevButton = (
-        <Button
-            style={{ marginTop: 10 }}
-            buttonColor={prevEnabled ? "#0000ff" : "#999999"}
-            textColor="#e0e0e0"
-            onPress={prevEnabled ? () => prevQuestion() : () => {}}
-        >
-            &lt; Previous
-        </Button>
-    );
-
-    const nextEnabled = !!currentState.questionBag.length;
-    const nextButton = (
-        <Button
-            style={{ marginTop: 10 }}
-            buttonColor={nextEnabled ? "#0000ff" : "#999999"}
-            textColor="#e0e0e0"
-            onPress={nextEnabled ? () => nextQuestion() : () => {}}
-        >
-            Next &gt;
-        </Button>
-    );
-
     // console.log("state " + JSON.stringify({ currentState }));
 
     return (
         <>
             {hasQuestionData && (
                 <View style={styles.container}>
-                    <View style={{ margin: "auto" }}>
-                        <Switch
-                            trackColor={{ false: "#767577", true: "#81b0ff" }}
-                            thumbColor={isReversed ? "#f5dd4b" : "#f4f3f4"}
-                            ios_backgroundColor="#3e3e3e"
-                            onValueChange={() => setIsReversed(!isReversed)}
-                            value={isReversed}
-                        />
-                    </View>
-                    <View style={{ width: 100, margin: "auto" }}>
-                        <Pressable
-                            onPress={() => setIsReversed(!isReversed)}
-                            onLongPress={() => setIsReversed(!isReversed)}
-                        >
-                            <Text>Reverse Q & A</Text>
-                        </Pressable>
-                    </View>
+                    <ReverseDeckButton
+                        txtStyle={scheme.txt}
+                        isReversed={isReversed}
+                        onClick={() => setIsReversed(!isReversed)}
+                    />
                     <Text
                         style={[
                             scheme.txt,
@@ -171,16 +123,17 @@ export const ReviewScreen = ({ currentDeck }) => {
                         answerText={currentState.currentQuestion.a}
                         isReversed={isReversed}
                     />
-                    {prevButton}
-                    {nextButton}
-                    <Button
-                        style={{ marginTop: 10 }}
-                        buttonColor="#0000ff"
-                        textColor="#e0e0e0"
-                        onPress={resetQuestionBag}
-                    >
-                        &lt;-- Start over
-                    </Button>
+                    <DeckNav
+                        prevEnabled={
+                            currentState.originalBag.length -
+                                currentState.questionBag.length >
+                            1
+                        }
+                        onPrevClick={prevQuestion}
+                        nextEnabled={!!currentState.questionBag.length}
+                        onNextClick={nextQuestion}
+                        onResetClick={resetQuestionBag}
+                    />
                 </View>
             )}
             {!hasQuestionData && (

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { THEME_KEY, THEMES } from "./constants";
+import { THEME_KEY, THEMES } from "../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // createContext() can accept a value for testing the context without wrapping, but undefined is fine

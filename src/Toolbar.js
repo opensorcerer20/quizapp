@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { lightDarkStyles } from "./lib";
 import { useState } from "react";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "./Providers/ThemeProvider";
 import { Appbar, Menu } from "react-native-paper";
 import { THEMES, VIEWS } from "./constants";
 

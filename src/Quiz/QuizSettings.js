@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, View, Text } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
-import { buttonStyles, lightDarkStyles } from "./lib";
+import { buttonStyles, lightDarkStyles } from "../lib";
 import { useState } from "react";
 
 export const MyButton = ({ buttonText, onPress }) => {

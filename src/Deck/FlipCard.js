@@ -6,10 +6,10 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
-import { formatCardText, getFontSize } from "./util";
-import { useTheme } from "./ThemeProvider";
-import { lightDarkStyles } from "./lib";
-import { THEMES } from "./constants";
+import { formatCardText, getFontSize } from "../util";
+import { useTheme } from "../Providers/ThemeProvider";
+import { lightDarkStyles } from "../lib";
+import { THEMES } from "../constants";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/

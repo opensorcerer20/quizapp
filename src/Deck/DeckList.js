@@ -8,15 +8,14 @@ import {
     Dimensions,
     Modal,
 } from "react-native";
-import { useTheme } from "./ThemeProvider";
-import { lightDarkStyles } from "./lib";
-import { Button, FAB, Portal } from "react-native-paper";
-import { DECK_DATA_KEY, MAX_DECKS, THEMES } from "./constants";
-import { getFileData } from "./fileLib";
+import { useTheme } from "../Providers/ThemeProvider";
+import { lightDarkStyles } from "../lib";
+import { FAB, Portal } from "react-native-paper";
+import { MAX_DECKS, THEMES } from "../constants";
+import { getFileData } from "../fileLib";
 import * as DocumentPicker from "expo-document-picker";
-import { makeNewDeck } from "./QuizDeck";
-import { getRandomInt } from "./util";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { makeNewDeck } from "../Deck/QuizDeck";
+import { getRandomInt } from "../util";
 
 export const DeckList = ({
     deckListData,

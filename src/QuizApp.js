@@ -2,13 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { lightDarkStyles } from "./lib";
-import QuizScreen from "./QuizScreen";
+import QuizScreen from "./Quiz/QuizScreen";
 import Toolbar from "./Toolbar";
-import { DeckList } from "./DeckList";
-import { useTheme } from "./ThemeProvider";
+import { DeckList } from "./Deck/DeckList";
+import { useTheme } from "./Providers/ThemeProvider";
 import { DECK_DATA_KEY, THEMES, VIEWS } from "./constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getStaticData } from "./QuizDeck";
+import { getStaticData } from "./Deck/QuizDeck";
 
 export default QuizApp = () => {
     const USE_STATIC_DATA = false;
