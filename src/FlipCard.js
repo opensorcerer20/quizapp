@@ -7,10 +7,10 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
-import { formatCardText } from "./util";
+import { formatCardText, getFontSize } from "./util";
 import { useTheme } from "./ThemeProvider";
 import { lightDarkStyles } from "./lib";
-import { MAX_CHAR_LIMIT_L, MAX_CHAR_LIMIT_XL, THEMES } from "./constants";
+import { THEMES } from "./constants";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -22,12 +22,8 @@ const CARDTYPE_ANSWER = "answer";
 const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
     const finalCardText = formatCardText(cardText);
 
-    let textSizeStyle = {};
-    if (finalCardText.length <= MAX_CHAR_LIMIT_XL) {
-        textSizeStyle = styles.xl;
-    } else if (finalCardText.length <= MAX_CHAR_LIMIT_L) {
-        textSizeStyle = styles.l;
-    }
+    const fontSize = getFontSize(finalCardText.length);
+    const textSizeStyle = fontSize !== "" ? styles[fontSize] : {};
 
     // console.log(
     //     "flipcard status " +
@@ -228,12 +224,15 @@ const styles = StyleSheet.create({
     },
     cardText: {
         color: "#001a72",
-        fontSize: 16,
+        fontSize: 12,
     },
     l: {
-        fontSize: 24,
+        fontSize: 16,
     },
     xl: {
+        fontSize: 24,
+    },
+    xxl: {
         fontSize: 32,
     },
     flippedCard: {

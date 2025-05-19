@@ -118,6 +118,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] change font size based on text length
 
+-   [x] add "sm" text size
+
 -   [ ] prev card, start over, grey out buttons
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
@@ -142,7 +144,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [x] bug: (recent?) sometimes "next question" at end ends up as blank card
 -   [x] bug: clicking on deck does not load it; uses last deck
 
--   [ ] test alpha version in android
+-   [ ] test alpha version self
+
+    -   [ ] android
+    -   [ ] iphone
 
     -   [x] flip card not working
         -   [x] ~~issue with absolute~~
@@ -155,12 +160,16 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [ ] note card
 
+-   [ ] beta testing by other ppl
+
 -   [ ] tips
 
     -   [ ] tip button
     -   [ ] after certain amount of uses, tip popup with option to "dont show again"
 
 -   [ ] code cleanup
+
+-   [ ] LLC
 
 -   [ ] launch 1.0
 

@@ -2,9 +2,11 @@ import {
     LINE_CHAR_LIMIT,
     LINE_CHAR_LIMIT_L,
     LINE_CHAR_LIMIT_XL,
+    LINE_CHAR_LIMIT_XXL,
     MAX_CHAR_LIMIT,
     MAX_CHAR_LIMIT_L,
     MAX_CHAR_LIMIT_XL,
+    MAX_CHAR_LIMIT_XXL,
 } from "./constants";
 
 export const getRandomInt = (min, max) => {
@@ -14,6 +16,32 @@ export const getRandomInt = (min, max) => {
 
 export const delay = async (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const getLineLimit = (length) => {
+    if (length <= MAX_CHAR_LIMIT_XXL) {
+        return LINE_CHAR_LIMIT_XXL;
+    }
+    if (length <= MAX_CHAR_LIMIT_XL) {
+        return LINE_CHAR_LIMIT_XL;
+    }
+    if (length <= MAX_CHAR_LIMIT_L) {
+        return LINE_CHAR_LIMIT_L;
+    }
+    return LINE_CHAR_LIMIT;
+};
+
+export const getFontSize = (length) => {
+    if (length <= MAX_CHAR_LIMIT_XXL) {
+        return "xxl";
+    }
+    if (length <= MAX_CHAR_LIMIT_XL) {
+        return "xl";
+    }
+    if (length <= MAX_CHAR_LIMIT_L) {
+        return "l";
+    }
+    return "";
 };
 
 export const formatCardText = (text) => {
@@ -26,14 +54,7 @@ export const formatCardText = (text) => {
         text = text.slice(0, maxLimit) + "...";
     }
 
-    let charLimit;
-    if (text.length <= MAX_CHAR_LIMIT_XL) {
-        charLimit = LINE_CHAR_LIMIT_XL;
-    } else if (text.length <= MAX_CHAR_LIMIT_L) {
-        charLimit = LINE_CHAR_LIMIT_L;
-    } else {
-        charLimit = LINE_CHAR_LIMIT;
-    }
+    const charLimit = getLineLimit(text.length);
     // console.log(
     //     "test data " + JSON.stringify({ textlength: text.length, charLimit })
     // );
