@@ -136,6 +136,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] prev card, start over, grey out buttons
 
+(tackle nagging issues)
+
 -   [ ] "start over" button should reset current deck, not re-scramble
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
@@ -147,6 +149,15 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] delete
     -   [ ] edit deck name
 
+-   [ ] sanitize input
+
+-   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
+
+(end nagging issues)
+
+-   [ ] slide menu for deck list
+-   [ ] turn off long press for deck list
+
 -   [ ] save settings (light/dark) to storage
 
     -   [x] save setting and load setting
@@ -154,10 +165,6 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] test on iphone
 
 -   [x] button to "reverse" values on demand
-
--   [ ] sanitize input
-
--   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
 -   [x] bug: loading from memory not working on refresh
     -   [x] shift from storing file info to just saving question/answers
@@ -177,14 +184,14 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [ ] note card
 
--   [ ] beta testing by other ppl
+-   [ ] code cleanup
 
 -   [ ] tips
 
     -   [ ] tip button (https://buymeacoffee.com/)
     -   [ ] after certain amount of uses, tip popup with option to "dont show again"
 
--   [ ] code cleanup
+-   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
 
 -   [ ] LLC
 
