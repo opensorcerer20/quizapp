@@ -148,11 +148,6 @@ export const DeckList = ({
         }
     }, [importSource]);
 
-    // use to clear memory
-    //useEffect(() => {
-    //    saveNewDeckListData([]);
-    //}, []);
-
     // console.log("decklistdata " + JSON.stringify(deckListData));
 
     return (

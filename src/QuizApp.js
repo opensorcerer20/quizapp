@@ -7,12 +7,12 @@ import Toolbar from "./Toolbar";
 import { DeckList } from "./Deck/DeckList";
 import { useTheme } from "./Providers/ThemeProvider";
 import { DECK_DATA_KEY, THEMES, VIEWS } from "./constants";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStaticData } from "./Deck/QuizDeck";
+import { loadStorageData, saveStorageData } from "./fileLib";
 
 export default QuizApp = () => {
     const USE_STATIC_DATA = false;
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
     const [deckListData, setDeckListData] = useState([]);
     const [currentDeck, setCurrentDeck] = useState([]);
     const [reload, setReload] = useState(false);
@@ -37,43 +37,23 @@ export default QuizApp = () => {
         if (USE_STATIC_DATA) {
             setDeckListData(getStaticData());
         } else {
-            try {
-                const value = await AsyncStorage.getItem(DECK_DATA_KEY);
-                if (value !== null) {
-                    //console.log('loading: ' + JSON.stringify(value));
-                    let newDeckListData = JSON.parse(value);
-                    newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
-                    // console.log("setting decklist");
-                    setDeckListData(newDeckListData);
-                    setReload(false);
-                }
-            } catch (e) {
-                console.log(
-                    "error loading deck list data, error keys " +
-                        JSON.stringify(Object.keys(e))
-                );
-            }
+            let newDeckListData = await loadStorageData(DECK_DATA_KEY);
+            newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
+            setDeckListData(newDeckListData);
+            setReload(false);
         }
     };
 
     const onAddDeck = async (newDeck) => {
         let newDeckListData = deckListData.slice();
         newDeckListData.push(newDeck);
-        await saveNewDeckListData(newDeckListData);
+        await saveDeckListData(newDeckListData);
     };
 
-    const saveNewDeckListData = async (newDeckListData) => {
-        try {
-            await AsyncStorage.setItem(
-                DECK_DATA_KEY,
-                JSON.stringify(newDeckListData)
-            );
+    const saveDeckListData = async (deckListData) => {
+        const result = await saveStorageData(DECK_DATA_KEY, deckListData);
+        if (result === true) {
             setReload(true);
-        } catch (error) {
-            console.log(
-                "error saving deck list data, error keys " +
-                    JSON.stringify(Object.keys(error))
-            );
         }
     };
 
@@ -82,7 +62,7 @@ export default QuizApp = () => {
             (deckDatum) => deckDatum.id !== deckId
         );
         setDeckListData(newDeckListData);
-        saveNewDeckListData(newDeckListData);
+        saveDeckListData(newDeckListData);
     };
 
     // load data if either first time or reload is tripped
@@ -103,6 +83,11 @@ export default QuizApp = () => {
         };
         loadData();
     }, []);
+
+    // use to clear memory
+    //useEffect(() => {
+    //    saveDeckListData([]);
+    //}, []);
 
     const currentView = !!currentDeck.data?.length
         ? VIEWS.quizView

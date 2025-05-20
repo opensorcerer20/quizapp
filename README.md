@@ -138,7 +138,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 (tackle nagging issues)
 
--   [ ] "start over" button should reset current deck, not re-scramble
+-   [x] "start over" button should reset current deck, not re-scramble
+
+-   [ ] store QA data separate from deck list
+
+    -   [ ] solution one: use keys similar to "user.email" "user.phone"
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
@@ -152,6 +156,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [ ] sanitize input
 
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
+
+-   [ ] use react testing library
 
 (end nagging issues)
 
