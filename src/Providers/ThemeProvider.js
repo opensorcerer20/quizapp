@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ThemeContext = createContext(THEMES.light);
 
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState(THEMES.dark);
+    const [theme, setTheme] = useState(null); // set to null to avoid triggering theme change save
 
     useEffect(() => {
         const saveTheme = async () => {
@@ -19,7 +19,9 @@ export const ThemeProvider = ({ children }) => {
                 );
             }
         };
-        saveTheme();
+        if (theme) {
+            saveTheme();
+        }
     }, [theme]);
 
     useEffect(() => {

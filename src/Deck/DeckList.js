@@ -132,13 +132,13 @@ export const DeckList = ({
         }
 
         const newQuestionArray = await getFileData(importSource);
-        const newDeck = makeNewDeck(
-            newDeckId,
-            importSource.name,
-            newQuestionArray
-        );
+        const newDeck = makeNewDeck(newDeckId, importSource.name);
+        const newDeckData = {
+            id: newDeckId,
+            questions: newQuestionArray,
+        };
 
-        await onAddDeck(newDeck);
+        await onAddDeck(newDeck, newDeckData);
     };
 
     // actions after source specified
@@ -191,7 +191,9 @@ export const DeckList = ({
                 </>
             )}
             {deckListData.length < 1 && (
-                <Text>No decks in memory, please add a deck</Text>
+                <Text style={scheme.txt}>
+                    No decks in memory, please add a deck
+                </Text>
             )}
             {deckListData.length < MAX_DECKS && (
                 <Portal>

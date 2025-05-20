@@ -21,54 +21,59 @@ export const emptyDeck = {
     data: [],
 };
 
-export const makeNewDeck = (id, name, questions) => {
+export const makeNewDeck = (id, name) => {
     let deck = JSON.parse(JSON.stringify(emptyDeck));
     deck.id = id;
     deck.name = name;
     deck.createdAt = Date.now();
-    if (Array.isArray(questions)) {
-        questions.map((questionObj) => {
-            // validation in lieu of strict typing
-            if (
-                questionObj.id &&
-                questionObj.q &&
-                questionObj.a &&
-                deck.data.length <= MAX_QUESTIONS
-            ) {
-                deck.data.push(questionObj);
-            }
-        });
-    }
+    // if (Array.isArray(questions)) {
+    //     questions.map((questionObj) => {
+    //         // validation in lieu of strict typing
+    //         if (
+    //             questionObj.id &&
+    //             questionObj.q &&
+    //             questionObj.a &&
+    //             deck.data.length <= MAX_QUESTIONS
+    //         ) {
+    //             deck.data.push(questionObj);
+    //         }
+    //     });
+    // }
     return deck;
 };
 
-export const addQuestionToDeck = (deck, id, question, answer) => {
-    let newQ = makeQuestionObject(id, question, answer);
-    return deck.data.push(newQ);
-};
+// export const addQuestionToDeck = (deck, id, question, answer) => {
+//     let newQ = makeQuestionObject(id, question, answer);
+//     return deck.data.push(newQ);
+// };
 
+// @deprecated
 export const getStaticData = () => {
+    // @todo need to separate decks(decklistdata.data) and decklistdata
+
     const staticDeckListData = [];
     for (let i = 1; i < 50; i++) {
         staticDeckListData.push(
-            makeNewDeck(i, `deck ${i}`, [
-                makeQuestionObject(
-                    1,
-                    `deck ${i} question 1`,
-                    `deck ${i} answer 1`
-                ),
-                makeQuestionObject(
-                    2,
-                    `deck ${i} question 2`,
-                    `deck ${i} answer 2`
-                ),
-                makeQuestionObject(
-                    3,
-                    `deck ${i} question 3`,
-                    `deck ${i} answer 3`
-                ),
-                makeQuestionObject(4, "MW".repeat(200), "MW".repeat(200)),
-            ])
+            // makeNewDeck(i, `deck ${i}`, [
+            makeNewDeck(i, `deck ${i}`)
+            // [
+            //     makeQuestionObject(
+            //         1,
+            //         `deck ${i} question 1`,
+            //         `deck ${i} answer 1`
+            //     ),
+            //     makeQuestionObject(
+            //         2,
+            //         `deck ${i} question 2`,
+            //         `deck ${i} answer 2`
+            //     ),
+            //     makeQuestionObject(
+            //         3,
+            //         `deck ${i} question 3`,
+            //         `deck ${i} answer 3`
+            //     ),
+            //     makeQuestionObject(4, "MW".repeat(200), "MW".repeat(200)),
+            // ]
         );
     }
     return staticDeckListData;

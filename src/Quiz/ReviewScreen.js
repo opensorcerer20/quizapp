@@ -10,7 +10,10 @@ import { difference } from "lodash";
 import { DeckNav } from "../Deck/DeckNav";
 import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
 
-export const ReviewScreen = ({ currentDeck }) => {
+export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
+    console.log("deck " + JSON.stringify(currentDeck));
+    console.log("deck data " + JSON.stringify(currentDeckData));
+
     const [isReversed, setIsReversed] = useState(false);
     const { theme } = useTheme();
     const scheme =
@@ -67,7 +70,7 @@ export const ReviewScreen = ({ currentDeck }) => {
     const resetQuestionBag = (remix = false) => {
         // console.log("reset remix " + JSON.stringify(remix));
         let newBag = remix
-            ? currentDeck.data.slice()
+            ? currentDeckData.slice()
             : currentState.originalBag.slice();
         if (remix) {
             newBag = randomizeQBag(newBag);
@@ -88,14 +91,14 @@ export const ReviewScreen = ({ currentDeck }) => {
     useEffect(() => {
         if (
             currentDeck &&
-            Array.isArray(currentDeck.data) &&
-            currentDeck.data.length > 0
+            Array.isArray(currentDeckData) &&
+            currentDeckData.length > 0
         ) {
             resetQuestionBag(true);
         }
     }, []);
 
-    // console.log("state " + JSON.stringify({ currentState }));
+    // console.log("state " + JSON.stringify({ currentState, currentDeckData }));
 
     return (
         <>
@@ -118,9 +121,9 @@ export const ReviewScreen = ({ currentDeck }) => {
                         ]}
                     >
                         Card{" "}
-                        {currentDeck.data.length -
+                        {currentDeckData.length -
                             currentState.questionBag.length}{" "}
-                        of {currentDeck.data.length}
+                        of {currentDeckData.length}
                     </Text>
                     <FlipCard
                         key={getRandomInt(100000, 999999)}

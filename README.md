@@ -140,9 +140,9 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] "start over" button should reset current deck, not re-scramble
 
--   [ ] store QA data separate from deck list
+-   [x] store QA data separate from deck list
 
-    -   [ ] solution one: use keys similar to "user.email" "user.phone"
+    -   [x] solution one: use keys similar to "user.email" "user.phone"
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
@@ -164,7 +164,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [ ] slide menu for deck list
 -   [ ] turn off long press for deck list
 
--   [ ] save settings (light/dark) to storage
+-   [x] save settings (light/dark) to storage
 
     -   [x] save setting and load setting
     -   [ ] test on android

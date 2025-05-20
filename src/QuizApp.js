@@ -6,48 +6,68 @@ import QuizScreen from "./Quiz/QuizScreen";
 import Toolbar from "./Toolbar";
 import { DeckList } from "./Deck/DeckList";
 import { useTheme } from "./Providers/ThemeProvider";
-import { DECK_DATA_KEY, THEMES, VIEWS } from "./constants";
-import { getStaticData } from "./Deck/QuizDeck";
-import { loadStorageData, saveStorageData } from "./fileLib";
+import { DECK_DATA_KEY, DECK_QA_KEY, THEMES, VIEWS } from "./constants";
+// import { getStaticData } from "./Deck/QuizDeck";
+import { loadStorageData, removeStorageData, saveStorageData } from "./fileLib";
 
 export default QuizApp = () => {
-    const USE_STATIC_DATA = false;
+    // const USE_STATIC_DATA = false;
     const { theme } = useTheme();
     const [deckListData, setDeckListData] = useState([]);
-    const [currentDeck, setCurrentDeck] = useState([]);
+    const [currentDeck, setCurrentDeck] = useState(null);
+    const [currentDeckData, setCurrentDeckData] = useState([]);
     const [reload, setReload] = useState(false);
 
     const scheme =
         theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
 
     const clearDeck = () => {
-        setCurrentDeck([]);
+        setCurrentDeck(null);
+        setCurrentDeckData([]);
     };
 
-    const onPressDeck = (id) => {
+    const onPressDeck = async (id) => {
         const selectedDeck = deckListData.find((deck) => deck.id === id);
-        if (selectedDeck) {
+        const selectedDeckData = await loadStorageData(DECK_QA_KEY + `_${id}`);
+        // console.log("test " + JSON.stringify({ selectedDeckData }));
+        if (
+            selectedDeck &&
+            Array.isArray(selectedDeckData?.questions) &&
+            selectedDeckData.questions.length
+        ) {
             setCurrentDeck(selectedDeck);
+            setCurrentDeckData(selectedDeckData.questions);
         } else {
+            console.log("on press clear deck");
             clearDeck();
         }
     };
 
     const loadDeckListData = async () => {
-        if (USE_STATIC_DATA) {
-            setDeckListData(getStaticData());
-        } else {
-            let newDeckListData = await loadStorageData(DECK_DATA_KEY);
+        // not working, doesnt separate decklist and deckdata
+        // if (USE_STATIC_DATA) {
+        //     const staticDeckInfo = getStaticData();
+        //     setDeckListData(staticDeckInfo.staticDeckListData);
+        // } else {
+        let newDeckListData = await loadStorageData(DECK_DATA_KEY);
+        if (Array.isArray(newDeckListData)) {
             newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
             setDeckListData(newDeckListData);
-            setReload(false);
+        } else {
+            setDeckListData([]);
         }
+        setReload(false);
+        // }
     };
 
-    const onAddDeck = async (newDeck) => {
+    const onAddDeck = async (newDeck, newDeckData) => {
         let newDeckListData = deckListData.slice();
+
+        // @todo only save deck data not qa data
+
         newDeckListData.push(newDeck);
         await saveDeckListData(newDeckListData);
+        await saveStorageData(DECK_QA_KEY + `_${newDeck.id}`, newDeckData);
     };
 
     const saveDeckListData = async (deckListData) => {
@@ -62,12 +82,12 @@ export default QuizApp = () => {
             (deckDatum) => deckDatum.id !== deckId
         );
         setDeckListData(newDeckListData);
+        await removeStorageData(DECK_QA_KEY + `_${deckId}`);
         saveDeckListData(newDeckListData);
     };
 
     // load data if either first time or reload is tripped
     useEffect(() => {
-        // console.log("useeffect reload: " + reload);
         if (reload) {
             const loadData = async () => {
                 await loadDeckListData();
@@ -89,22 +109,26 @@ export default QuizApp = () => {
     //    saveDeckListData([]);
     //}, []);
 
-    const currentView = !!currentDeck.data?.length
-        ? VIEWS.quizView
-        : VIEWS.homeView;
+    const currentView = !!currentDeck ? VIEWS.quizView : VIEWS.homeView;
 
-    // console.log("quizapp state " + JSON.stringify({ deckListData }));
+    // console.log(
+    //     "quizapp state " +
+    //         JSON.stringify({ deckListData, currentView, currentDeck })
+    // );
 
     return (
         <View style={[styles.container, scheme.bg, scheme.txt]}>
             <Toolbar
                 style={styles.toolbarContainer}
                 currentView={currentView}
-                title={currentDeck.name || ""}
+                title={currentDeck?.name || ""}
                 backCallback={clearDeck}
             />
             {currentView === VIEWS.quizView && (
-                <QuizScreen currentDeck={currentDeck} />
+                <QuizScreen
+                    currentDeck={currentDeck}
+                    currentDeckData={currentDeckData}
+                />
             )}
             {currentView === VIEWS.homeView && (
                 <DeckList

@@ -13,8 +13,11 @@ const Toolbar = ({ title, currentView, backCallback }) => {
     const { theme, toggleTheme } = useTheme();
     const scheme =
         theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
-    const themeIcon =
-        theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
+    let themeIcon = null;
+    if (theme) {
+        themeIcon =
+            theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
+    }
 
     const showBack = currentView === VIEWS.quizView;
     return (
@@ -28,7 +31,9 @@ const Toolbar = ({ title, currentView, backCallback }) => {
                 />
             )} */}
             <Appbar.Content title={title || "Flashcard Library"} />
-            <Appbar.Action icon={themeIcon} onPress={toggleTheme} />
+            {themeIcon && (
+                <Appbar.Action icon={themeIcon} onPress={toggleTheme} />
+            )}
             {/* <Menu
                 visible={visible}
                 onDismiss={closeMenu}

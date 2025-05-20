@@ -117,3 +117,15 @@ export const saveStorageData = async (key, value) => {
         );
     }
 };
+
+export const removeStorageData = async (key) => {
+    try {
+        const value = await AsyncStorage.removeItem(key);
+        return true;
+    } catch (e) {
+        console.log(
+            `error loading data with key ${key}, error keys ` +
+                JSON.stringify(Object.keys(e))
+        );
+    }
+};
