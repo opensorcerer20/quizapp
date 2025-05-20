@@ -60,13 +60,18 @@ export const ReviewScreen = ({ currentDeck }) => {
                 currentQuestion,
             });
         } else {
-            resetQuestionBag();
+            resetQuestionBag(true);
         }
     };
 
-    const resetQuestionBag = () => {
-        let newBag = currentDeck.data.slice();
-        newBag = randomizeQBag(newBag);
+    const resetQuestionBag = (remix = false) => {
+        // console.log("reset remix " + JSON.stringify(remix));
+        let newBag = remix
+            ? currentDeck.data.slice()
+            : currentState.originalBag.slice();
+        if (remix) {
+            newBag = randomizeQBag(newBag);
+        }
         nextQuestion(newBag);
     };
 
@@ -75,7 +80,7 @@ export const ReviewScreen = ({ currentDeck }) => {
     // if deck changes, reset question bag
     useEffect(() => {
         if (hasQuestionData) {
-            resetQuestionBag();
+            resetQuestionBag(true);
         }
     }, [currentDeck]);
 
@@ -86,7 +91,7 @@ export const ReviewScreen = ({ currentDeck }) => {
             Array.isArray(currentDeck.data) &&
             currentDeck.data.length > 0
         ) {
-            resetQuestionBag();
+            resetQuestionBag(true);
         }
     }, []);
 
@@ -132,7 +137,8 @@ export const ReviewScreen = ({ currentDeck }) => {
                         onPrevClick={prevQuestion}
                         nextEnabled={!!currentState.questionBag.length}
                         onNextClick={nextQuestion}
-                        onResetClick={resetQuestionBag}
+                        onResetClick={() => resetQuestionBag(true)}
+                        onStartOverClick={() => resetQuestionBag(false)}
                     />
                 </View>
             )}

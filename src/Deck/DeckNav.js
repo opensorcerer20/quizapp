@@ -20,6 +20,7 @@ export const DeckNav = ({
     nextEnabled,
     onNextClick,
     onResetClick,
+    onStartOverClick,
 }) => {
     return (
         <>
@@ -43,6 +44,14 @@ export const DeckNav = ({
                     buttonText="Next >"
                 />
             </View>
+            <Button
+                style={{ marginTop: 10 }}
+                buttonColor="#0000ff"
+                textColor="#e0e0e0"
+                onPress={onStartOverClick}
+            >
+                Start Over
+            </Button>
             <Button
                 style={{ marginTop: 10 }}
                 buttonColor="#0000ff"
