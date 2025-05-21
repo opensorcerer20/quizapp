@@ -143,7 +143,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [x] store QA data separate from deck list
 
     -   [x] solution one: use keys similar to "user.email" "user.phone"
-    -   [ ] new func "makeNewDeckData" with {id, questions}
+    -   [x] new func "makeNewDeckData" with {id, questions}
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 

@@ -14,7 +14,7 @@ import { FAB, Portal } from "react-native-paper";
 import { MAX_DECKS, THEMES } from "../constants";
 import { getFileData } from "../fileLib";
 import * as DocumentPicker from "expo-document-picker";
-import { makeNewDeck } from "../Deck/QuizDeck";
+import { makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
 import { getRandomInt } from "../util";
 
 export const DeckList = ({
@@ -133,10 +133,7 @@ export const DeckList = ({
 
         const newQuestionArray = await getFileData(importSource);
         const newDeck = makeNewDeck(newDeckId, importSource.name);
-        const newDeckData = {
-            id: newDeckId,
-            questions: newQuestionArray,
-        };
+        const newDeckData = makeNewDeckData(newDeckId, newQuestionArray); 
 
         await onAddDeck(newDeck, newDeckData);
     };

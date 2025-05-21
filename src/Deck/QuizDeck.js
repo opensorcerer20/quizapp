@@ -18,7 +18,6 @@ export const emptyDeck = {
     id: null,
     name: null,
     createdAt: null,
-    data: [],
 };
 
 export const makeNewDeck = (id, name) => {
@@ -41,6 +40,17 @@ export const makeNewDeck = (id, name) => {
     // }
     return deck;
 };
+
+export const makeNewDeckData = (id, questions) => {
+    if (typeof id === 'number' && Array.isArray(questions) && questions.length > 0) {
+        return {
+            id,
+            questions,
+        };
+    }
+
+    return false;
+}
 
 // export const addQuestionToDeck = (deck, id, question, answer) => {
 //     let newQ = makeQuestionObject(id, question, answer);

@@ -3,7 +3,7 @@ import { THEME_KEY, THEMES } from "../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // createContext() can accept a value for testing the context without wrapping, but undefined is fine
-const ThemeContext = createContext(THEMES.light);
+const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState(null); // set to null to avoid triggering theme change save
@@ -32,6 +32,9 @@ export const ThemeProvider = ({ children }) => {
                     setTheme(
                         storedTheme === THEMES.dark ? THEMES.dark : THEMES.light
                     );
+                } else {
+                    // default theme
+                    setTheme(THEMES.light);
                 }
             } catch (e) {
                 console.log(
