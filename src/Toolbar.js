@@ -23,13 +23,6 @@ const Toolbar = ({ title, currentView, backCallback }) => {
     return (
         <Appbar.Header>
             {showBack && <Appbar.BackAction onPress={() => backCallback()} />}
-            {/* {!showBack && (
-                <Appbar.Action
-                    icon="menu"
-                    onPress={() => {}}
-                    isLeading={true}
-                />
-            )} */}
             <Appbar.Content title={title || "Flashcard Library"} />
             {themeIcon && (
                 <Appbar.Action icon={themeIcon} onPress={toggleTheme} />

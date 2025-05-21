@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Dimensions,
     Modal,
+    Alert,
 } from "react-native";
 import { useTheme } from "../Providers/ThemeProvider";
 import { lightDarkStyles } from "../lib";
@@ -16,6 +17,7 @@ import { getFileData } from "../fileLib";
 import * as DocumentPicker from "expo-document-picker";
 import { makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
 import { getRandomInt } from "../util";
+import QuizModal from "../components/QuizModal";
 
 export const DeckList = ({
     deckListData,
@@ -38,6 +40,8 @@ export const DeckList = ({
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
     const [selectedItem, setSelectedItem] = useState(null);
+
+    const [editModalVisible, setEditModalVisible] = useState(false);
 
     const { theme } = useTheme();
     const scheme =
@@ -133,9 +137,10 @@ export const DeckList = ({
 
         const newQuestionArray = await getFileData(importSource);
         const newDeck = makeNewDeck(newDeckId, importSource.name);
-        const newDeckData = makeNewDeckData(newDeckId, newQuestionArray); 
+        const newDeckData = makeNewDeckData(newDeckId, newQuestionArray);
 
         await onAddDeck(newDeck, newDeckData);
+        setEditModalVisible(true);
     };
 
     // actions after source specified
@@ -154,37 +159,48 @@ export const DeckList = ({
                     <Text style={scheme.txt}>Saved Decks</Text>
                     <FlatList data={deckListData} renderItem={renderItem} />
 
-                    {menuVisible && (
-                        <Modal
-                            transparent
-                            animationType="fade"
-                            visible={menuVisible}
-                        >
-                            <Pressable
-                                style={styles.overlay}
-                                onPress={() => handleModalClickAway()}
-                            >
-                                <View
-                                    style={[
-                                        styles.menu,
-                                        {
-                                            top: menuPosition.top,
-                                            left: menuPosition.left,
-                                        },
-                                    ]}
+                    {/* edit modal */}
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={editModalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setEditModalVisible(false);
+                        }}
+                    >
+                        <View style={[styles.centeredView, styles.overlay]}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>
+                                    Hello World!
+                                </Text>
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => setEditModalVisible(false)}
                                 >
-                                    {/*<Pressable onPress={handleEdit}>
-                    <Text style={styles.menuItem}>Edit</Text>
-                  </Pressable>*/}
-                                    <Pressable onPress={handleDelete}>
-                                        <Text style={styles.menuItem}>
-                                            Delete
-                                        </Text>
-                                    </Pressable>
-                                </View>
-                            </Pressable>
-                        </Modal>
-                    )}
+                                    <Text style={styles.textStyle}>
+                                        Hide Modal
+                                    </Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </Modal>
+
+                    <QuizModal
+                        modalVisible={menuVisible}
+                        handleModalClickAway={handleModalClickAway}
+                        modalContainerStyle={[
+                            styles.menu,
+                            {
+                                top: menuPosition.top,
+                                left: menuPosition.left,
+                            },
+                        ]}
+                    >
+                        <Pressable onPress={handleDelete}>
+                            <Text style={styles.menuItem}>Delete</Text>
+                        </Pressable>
+                    </QuizModal>
                 </>
             )}
             {deckListData.length < 1 && (
@@ -257,6 +273,50 @@ const styles = StyleSheet.create({
         bottom: 0,
         backgroundColor: "orange",
     },
+
+    // start copy/paste styles
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+    },
+    // end copy/paste styles
+
     ...lightDarkStyles,
 });
 

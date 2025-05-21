@@ -136,7 +136,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [x] prev card, start over, grey out buttons
 
-(tackle nagging issues)
+(issues requiring concentration)
 
 -   [x] "start over" button should reset current deck, not re-scramble
 
@@ -146,6 +146,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] new func "makeNewDeckData" with {id, questions}
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
+
+    -   [x] working modal
+    -   [ ] finished edit modal
+    -   [ ] see if a generic modal component can be made
 
 -   [ ] deck info: filename, date added
 
@@ -160,7 +164,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] use react testing library
 
-(end nagging issues)
+(continue to do list)
 
 -   [ ] slide menu for deck list
 -   [ ] turn off long press for deck list
