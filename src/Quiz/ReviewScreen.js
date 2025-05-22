@@ -11,8 +11,8 @@ import { DeckNav } from "../Deck/DeckNav";
 import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
 
 export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
-    console.log("deck " + JSON.stringify(currentDeck));
-    console.log("deck data " + JSON.stringify(currentDeckData));
+    // console.log("deck " + JSON.stringify(currentDeck));
+    // console.log("deck data " + JSON.stringify(currentDeckData));
 
     const [isReversed, setIsReversed] = useState(false);
     const { theme } = useTheme();

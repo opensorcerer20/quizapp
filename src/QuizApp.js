@@ -38,7 +38,7 @@ export default QuizApp = () => {
             setCurrentDeck(selectedDeck);
             setCurrentDeckData(selectedDeckData.questions);
         } else {
-            console.log("on press clear deck");
+            // console.log("on press clear deck");
             clearDeck();
         }
     };

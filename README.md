@@ -28,6 +28,15 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   the children do NOT have flex
 -   flex box and buttons
     -   need additional "alignItems" to "center" for vertical centering
+-   fixing "uselatestcallback" error
+    -   had to add an override in package.json: "overrides": { "use-latest-callback": "^0.2.3" }
+-   default theme vs saved theme
+    -   to have a default theme that doesnt override saved them
+        -   use default value of "null"
+        -   useeffect to run code at start
+        -   try to load theme value from memory
+        -   if not null, use that value
+        -   else use a specified default value
 
 ## Planned future features
 
@@ -173,7 +182,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [x] save setting and load setting
     -   [ ] test on android
-    -   [ ] test on iphone
+    -   [x] test on iphone
 
 -   [x] button to "reverse" values on demand
 
@@ -181,6 +190,14 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] shift from storing file info to just saving question/answers
 -   [x] bug: (recent?) sometimes "next question" at end ends up as blank card
 -   [x] bug: clicking on deck does not load it; uses last deck
+
+-   [x] fab.group causes error "Warning: TypeError: 0, \_useLatestCallback.default is not a function (it is undefined)"
+
+-   [ ] iphone (and galaxy) bugs
+
+    -   [x] next/prev not showing
+    -   [x] text for "swap q&a" not showing
+    -   [x] switch for "swap q&a" colliding with "card x of y"
 
 -   [ ] test alpha version self
 
@@ -190,6 +207,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [ ] launch critical bugs
 
     -   [ ] csv must have all quotes or it doesnt work right
+    -   [ ] handle different text sizes (eg android text size is bigger than iphone for "reverse q&a")
 
 -   [ ] add themes for cards
 

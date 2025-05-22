@@ -24,6 +24,14 @@ export const ThemeProvider = ({ children }) => {
         }
     }, [theme]);
 
+    /*
+     * how default theme works
+     * - initial value null
+     * - useeffect runs once
+     * - get stored value
+     * - if not null, use that value
+     * - else use default value
+     */
     useEffect(() => {
         const getTheme = async () => {
             try {

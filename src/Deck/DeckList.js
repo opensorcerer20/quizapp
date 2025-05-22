@@ -209,6 +209,7 @@ export const DeckList = ({
                 </Text>
             )}
             {deckListData.length < MAX_DECKS && (
+                // this is broken for iphone, specifically fab.group
                 <Portal>
                     <FAB.Group
                         open={open}
@@ -229,6 +230,11 @@ export const DeckList = ({
                         onStateChange={onStateChange}
                     />
                 </Portal>
+                // <FAB
+                //     icon="plus"
+                //     style={[styles.fab]}
+                //     onPress={() => onPressImport("txt")}
+                // />
             )}
             {deckListData.length >= MAX_DECKS && (
                 <FAB
