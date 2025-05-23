@@ -86,6 +86,23 @@ export default QuizApp = () => {
         saveDeckListData(newDeckListData);
     };
 
+    const onUpdateDeck = async (deckId, data) => {
+        // console.log("handlerenamedeck id " + deckId + " name " + name);
+        let updatedDeck = deckListData.filter((deck) => deck.id === deckId);
+        if (updatedDeck.length === 1) {
+            updatedDeck[0].name = data.name;
+            const newDeckListData = deckListData.map((deck) => {
+                if (deck.id === deckId) {
+                    return updatedDeck[0];
+                }
+                return deck;
+            });
+            setDeckListData(newDeckListData);
+        } else {
+            console.log("couldnt edit single deck with id " + deckId);
+        }
+    };
+
     // load data if either first time or reload is tripped
     useEffect(() => {
         if (reload) {
@@ -136,6 +153,7 @@ export default QuizApp = () => {
                     onPressDeck={onPressDeck}
                     onAddDeck={onAddDeck}
                     onDeleteDeck={onDeleteDeck}
+                    onUpdateDeck={onUpdateDeck}
                 />
             )}
             <StatusBar style="dark" />

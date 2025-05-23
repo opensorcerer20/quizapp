@@ -6,3 +6,6 @@ android/
 !android/local.properties
 eslint.config.mjs
 builds/
+.DS_Store
+assets/.DS_Store
+temp/

@@ -156,8 +156,9 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
-    -   [x] working modal
-    -   [ ] finished edit modal
+    -   [x] functional modal
+    -   [x] working modal (both add and edit deck)
+    -   [ ] polished modal
     -   [ ] see if a generic modal component can be made
 
 -   [ ] deck info: filename, date added
@@ -172,6 +173,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
 
 -   [ ] use react testing library
+
+-   [ ] add quiz screen i.e. questions with multiple answers
 
 (continue to do list)
 
@@ -208,6 +211,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [ ] csv must have all quotes or it doesnt work right
     -   [ ] handle different text sizes (eg android text size is bigger than iphone for "reverse q&a")
+    -   [ ] deck name doesnt fit in toolbar
 
 -   [ ] add themes for cards
 

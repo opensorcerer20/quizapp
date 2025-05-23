@@ -8,6 +8,7 @@ import {
     Dimensions,
     Modal,
     Alert,
+    TextInput,
 } from "react-native";
 import { useTheme } from "../Providers/ThemeProvider";
 import { lightDarkStyles } from "../lib";
@@ -15,7 +16,7 @@ import { FAB, Portal } from "react-native-paper";
 import { MAX_DECKS, THEMES } from "../constants";
 import { getFileData } from "../fileLib";
 import * as DocumentPicker from "expo-document-picker";
-import { makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
+import { emptyDeck, makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
 import { getRandomInt } from "../util";
 import QuizModal from "../components/QuizModal";
 
@@ -24,6 +25,7 @@ export const DeckList = ({
     onPressDeck,
     onDeleteDeck,
     onAddDeck,
+    onUpdateDeck,
 }) => {
     const { width } = Dimensions.get("window");
     const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
@@ -40,6 +42,8 @@ export const DeckList = ({
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
     const [selectedItem, setSelectedItem] = useState(null);
+    const [editingDeck, setEditingDeck] = useState(emptyDeck);
+    const [deckName, setDeckName] = useState("");
 
     const [editModalVisible, setEditModalVisible] = useState(false);
 
@@ -71,12 +75,22 @@ export const DeckList = ({
         setMenuVisible(true);
     };
 
-    const handleEdit = () => {
-        //console.log(`Edit ${selectedItem?.title}`);
-        unSelectItem();
+    const handleEditClick = () => {
+        console.log("edit " + JSON.stringify(selectedItem));
+        const selected = deckListData.filter(
+            (deck) => deck.id === selectedItem.id
+        );
+        if (selected.length === 1) {
+            setEditingDeck(selected[0]);
+            setDeckName(selectedItem.name);
+            setEditModalVisible(true);
+            setMenuVisible(false);
+        } else {
+            console.log("Error editing deck with id " + selectedItem.id);
+        }
     };
 
-    const handleDelete = () => {
+    const handleDeleteClick = () => {
         onDeleteDeck(selectedItem.id);
         unSelectItem();
     };
@@ -136,11 +150,29 @@ export const DeckList = ({
         }
 
         const newQuestionArray = await getFileData(importSource);
-        const newDeck = makeNewDeck(newDeckId, importSource.name);
+        const [newDeckName] = importSource.name.split(".");
+        const newDeck = makeNewDeck(newDeckId, newDeckName);
         const newDeckData = makeNewDeckData(newDeckId, newQuestionArray);
 
         await onAddDeck(newDeck, newDeckData);
+
+        // @todo this is too big for useState
+        setEditingDeck(newDeck);
+        setDeckName(newDeckName);
         setEditModalVisible(true);
+    };
+
+    const handleCancelClick = () => {
+        setEditModalVisible(false);
+        setEditingDeck(emptyDeck);
+        setDeckName("");
+        setSelectedItem(null);
+    };
+
+    const handleRenameDeck = (deckId, name) => {
+        // @todo this is too big for useState
+        onUpdateDeck(deckId, { name });
+        handleCancelClick();
     };
 
     // actions after source specified
@@ -165,22 +197,38 @@ export const DeckList = ({
                         transparent={true}
                         visible={editModalVisible}
                         onRequestClose={() => {
-                            Alert.alert("Modal has been closed.");
                             setEditModalVisible(false);
                         }}
                     >
                         <View style={[styles.centeredView, styles.overlay]}>
                             <View style={styles.modalView}>
                                 <Text style={styles.modalText}>
-                                    Hello World!
+                                    <TextInput
+                                        placeholder={editingDeck.name}
+                                        onChangeText={setDeckName}
+                                        value={deckName}
+                                    />
                                 </Text>
                                 <Pressable
-                                    style={[styles.button, styles.buttonClose]}
-                                    onPress={() => setEditModalVisible(false)}
+                                    style={[
+                                        styles.button,
+                                        styles.buttonClose,
+                                        { backgroundColor: "grey" },
+                                    ]}
+                                    onPress={handleCancelClick}
                                 >
-                                    <Text style={styles.textStyle}>
-                                        Hide Modal
-                                    </Text>
+                                    <Text style={styles.textStyle}>Cancel</Text>
+                                </Pressable>
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() =>
+                                        handleRenameDeck(
+                                            editingDeck.id,
+                                            deckName
+                                        )
+                                    }
+                                >
+                                    <Text style={styles.textStyle}>Submit</Text>
                                 </Pressable>
                             </View>
                         </View>
@@ -197,7 +245,10 @@ export const DeckList = ({
                             },
                         ]}
                     >
-                        <Pressable onPress={handleDelete}>
+                        <Pressable onPress={handleEditClick}>
+                            <Text style={styles.menuItem}>Edit</Text>
+                        </Pressable>
+                        <Pressable onPress={handleDeleteClick}>
                             <Text style={styles.menuItem}>Delete</Text>
                         </Pressable>
                     </QuizModal>

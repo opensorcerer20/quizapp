@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { lightDarkStyles } from "./lib";
+import { DARK_THEME_COLOR, LIGHT_THEME_COLOR, lightDarkStyles } from "./lib";
 import { useState } from "react";
 import { useTheme } from "./Providers/ThemeProvider";
 import { Appbar, Menu } from "react-native-paper";
@@ -22,7 +22,12 @@ const Toolbar = ({ title, currentView, backCallback }) => {
     const showBack = currentView === VIEWS.quizView;
     return (
         <Appbar.Header>
-            {showBack && <Appbar.BackAction onPress={() => backCallback()} />}
+            {showBack && (
+                <Appbar.BackAction
+                    color={"#dddddd"}
+                    onPress={() => backCallback()}
+                />
+            )}
             <Appbar.Content title={title || "Flashcard Library"} />
             {themeIcon && (
                 <Appbar.Action icon={themeIcon} onPress={toggleTheme} />
