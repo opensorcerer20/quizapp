@@ -20,6 +20,13 @@ import { emptyDeck, makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
 import { getRandomInt } from "../util";
 import QuizModal from "../components/QuizModal";
 
+const emptyImportSource = {
+    mimeType: null,
+    name: null,
+    size: null,
+    uri: null,
+};
+
 export const DeckList = ({
     deckListData,
     onPressDeck,
@@ -31,12 +38,7 @@ export const DeckList = ({
     const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
     const MODAL_WIDTH = 100; // arbitrary for now
 
-    const [importSource, setImportSource] = useState({
-        mimeType: null,
-        name: null,
-        size: null,
-        uri: null,
-    });
+    const [importSource, setImportSource] = useState(emptyImportSource);
 
     // used when deck menu is pressed
     const [menuVisible, setMenuVisible] = useState(false);
@@ -119,11 +121,18 @@ export const DeckList = ({
     };
 
     const onPressImport = async (type) => {
-        const fileType = type === "csv" ? "text/csv" : "text/plain";
+        const fileType =
+            type === "csv"
+                ? ["text/csv", "text/comma-separated-values"]
+                : "text/plain";
         try {
             const docRes = await DocumentPicker.getDocumentAsync({
                 type: fileType,
             });
+
+            if (!docRes.assets[0].uri) {
+                throw new Error("No URI for document source");
+            }
 
             setImportSource(docRes.assets[0]);
         } catch (error) {
@@ -156,6 +165,8 @@ export const DeckList = ({
 
         await onAddDeck(newDeck, newDeckData);
 
+        setImportSource(emptyImportSource);
+
         // @todo this is too big for useState
         setEditingDeck(newDeck);
         setDeckName(newDeckName);
@@ -182,7 +193,9 @@ export const DeckList = ({
         }
     }, [importSource]);
 
-    // console.log("decklistdata " + JSON.stringify(deckListData));
+    // console.log(
+    //     "testing console log (show debug data here) " + JSON.stringify({})
+    // );
 
     return (
         <View style={styles.container}>

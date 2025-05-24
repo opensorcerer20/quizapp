@@ -1,73 +1,61 @@
-// import { makeQuestionDataCsv } from "../QuizDeck";
+import { makeQuestionDataCsv } from "../src/Deck/QuizDeck";
 
-// // initial tests courtesy of chatgpt
-// describe("makeQuestionDataCsv", () => {
-//     it("parses lines with properly quoted values", () => {
-//         const input = ['"What is 2+2?","4"'];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual(["What is 2+2?", "4"]);
-//     });
+describe("makeQuestionDataCsv", () => {
+    it("parses lines with no quotes", () => {
+        const questions = ["sí,yes"];
+        expect(makeQuestionDataCsv(questions)).toEqual(["sí", "yes"]);
+    });
+    it("parses lines with no quotes and 3 items to 2 items", () => {
+        const questions = ["sí,yes,extra"];
+        expect(makeQuestionDataCsv(questions)).toEqual(["sí", "yes"]);
+    });
 
-//     it("parses lines with escaped quoted values", () => {
-//         const input = ['""What is 2+2?"",""4""'];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual(['"What is 2+2?"', '"4"']);
-//     });
+    it("parses lines with full quotes", () => {
+        const questions = ['"sí","yes"'];
+        expect(makeQuestionDataCsv(questions)).toEqual(["sí", "yes"]);
+    });
 
-//     it("parses lines with triple quoted values", () => {
-//         const input = ['"""What is 2+2?""","""4"""'];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual(['"What is 2+2?"', '"4"']);
-//     });
+    it("parses lines with full quotes and 3 items to 2 items", () => {
+        const questions = ['"sí","yes"'];
+        expect(makeQuestionDataCsv(questions)).toEqual(["sí", "yes"]);
+    });
 
-//     it("parses lines with simple comma-separated values (no quotes)", () => {
-//         const input = ["Question,Answer"];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual(["Question", "Answer"]);
-//     });
+    it("parses lines with partial quotes", () => {
+        const questions = ['"sí",yes'];
+        expect(makeQuestionDataCsv(questions)).toEqual(["sí", "yes"]);
+    });
 
-//     it("test multiple quote lines", () => {
-//         const input = ['"What is 3+5?","8"', '"Capital of France","Paris"'];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual([
-//             "What is 3+5?",
-//             "8",
-//             "Capital of France",
-//             "Paris",
-//         ]);
-//     });
+    it("parses lines with triple escaped quotes", () => {
+        const questions = ['"""sí""",yes'];
+        expect(makeQuestionDataCsv(questions)).toEqual(['"sí"', "yes"]);
+    });
 
-//     it("test multiple non-quote lines", () => {
-//         const input = ["What is 3+5?,8", "Capital of France,Paris"];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual([
-//             "What is 3+5?",
-//             "8",
-//             "Capital of France",
-//             "Paris",
-//         ]);
-//     });
+    it("parses lines with slash escaped quotes", () => {
+        const questions = ['"\\"sí"\\",yes'];
+        expect(makeQuestionDataCsv(questions)).toEqual(['"sí"', "yes"]);
+    });
 
-//     it("handles mix of quoted and unquoted lines", () => {
-//         const input = ['"What is 3+5?","8"', "Capital of France,Paris"];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual([
-//             "What is 3+5?",
-//             "8",
-//             "Capital of France",
-//             "Paris",
-//         ]);
-//     });
+    it("handles improperly quoted lines gracefully", () => {
+        const questions = ['"Badly quoted line,Still included'];
+        expect(makeQuestionDataCsv(questions)).toEqual([
+            "Badly quoted line",
+            "Still included",
+        ]);
+    });
 
-//     it("returns an empty array when given empty input", () => {
-//         const input = [];
-//         const output = makeQuestionDataCsv(input);
-//         expect(output).toEqual([]);
-//     });
+    it("handles improperly quoted lines gracefully 2", () => {
+        const questions = ['Badly quoted line",Still included'];
+        expect(makeQuestionDataCsv(questions)).toEqual([
+            "Badly quoted line",
+            "Still included",
+        ]);
+    });
 
-//     //  it('handles improperly quoted lines gracefully', () => {
-//     //    const input = ['"Badly quoted line,Still included'];
-//     //    const output = makeQuestionDataCsv(input);
-//     //    expect(output).toEqual(['"Badly quoted line', 'Still included']);
-//     //  });
-// });
+    it("handles improperly quoted lines gracefully 2", () => {
+        const questions = ['Badly quot"ed line,Still included'];
+        expect(makeQuestionDataCsv(questions)).toEqual([
+            'Badly quot"ed line',
+            "Still included",
+        ]);
+    });
+});

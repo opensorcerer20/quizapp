@@ -155,12 +155,21 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] solution one: use keys similar to "user.email" "user.phone"
     -   [x] new func "makeNewDeckData" with {id, questions}
 
+-   [ ] confirm csv import is working
+
+    -   [x] no quotes
+    -   [x] full quotes
+    -   [x] mixed quotes
+    -   [x] escaped quotes
+    -   [x] bad quotes
+    -   [ ] make my csv parsing public
+
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
 
     -   [x] functional modal
     -   [x] working modal (both add and edit deck)
     -   [ ] remove "cancel" when adding deck
-    -   [ ] possible refresh issue: if done after adding deck, it adds it again
+    -   [x] possible refresh issue: if done after adding deck, it adds it again
     -   [ ] polished modal
     -   [ ] see if a generic modal component can be made
 
