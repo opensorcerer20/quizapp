@@ -37,6 +37,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
         -   try to load theme value from memory
         -   if not null, use that value
         -   else use a specified default value
+-   for android, the csv mime type is "text/comma-separated-values"
 
 ## Planned future features
 
@@ -158,15 +159,17 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [x] functional modal
     -   [x] working modal (both add and edit deck)
+    -   [ ] remove "cancel" when adding deck
+    -   [ ] possible refresh issue: if done after adding deck, it adds it again
     -   [ ] polished modal
     -   [ ] see if a generic modal component can be made
 
--   [ ] deck info: filename, date added
+-   [ ] ~~deck info: filename, date added~~
 
--   [ ] deck menu
+-   [x] deck menu
 
     -   [x] delete
-    -   [ ] edit deck name
+    -   [x] edit deck name
 
 -   [ ] sanitize input
 
@@ -176,7 +179,11 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 -   [ ] add quiz screen i.e. questions with multiple answers
 
-(continue to do list)
+-   [ ] issue w android importing csv
+
+(continue list)
+
+-   [ ] char limit for deck list
 
 -   [ ] slide menu for deck list
 -   [ ] turn off long press for deck list
@@ -184,7 +191,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   [x] save settings (light/dark) to storage
 
     -   [x] save setting and load setting
-    -   [ ] test on android
+    -   [x] test on android
     -   [x] test on iphone
 
 -   [x] button to "reverse" values on demand
@@ -212,10 +219,15 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [ ] csv must have all quotes or it doesnt work right
     -   [ ] handle different text sizes (eg android text size is bigger than iphone for "reverse q&a")
     -   [ ] deck name doesnt fit in toolbar
+    -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
 
 -   [ ] add themes for cards
 
     -   [ ] note card
+
+-   [ ] last chance to add before beta
+
+    -   [ ] import big file into smaller decks?
 
 -   [ ] code cleanup
 
