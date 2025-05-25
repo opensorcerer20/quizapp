@@ -1,4 +1,4 @@
-import { MAX_QUESTIONS } from "../constants";
+import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../constants";
 
 export const emptyQuestion = {
     id: null,
@@ -119,14 +119,15 @@ export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
 
     questions = convertFileToArray(rawQuestionData);
 
-    console.log("questions[0] " + JSON.stringify(questions[0]));
-    console.log("questions 0 type " + JSON.stringify(typeof questions[0]));
-
+    // console.log("questions[0] " + JSON.stringify(questions[0]));
+    // console.log("questions 0 type " + JSON.stringify(typeof questions[0]));
     // plain text does not require additional processing (at this time)
-    if (mimeType === "text/csv") {
+    if (MIME_TYPE_CSV.indexOf(mimeType) > -1) {
         questions = makeQuestionDataCsv(questions);
     }
+    // else assume text
 
+    // console.log("questions[0] 2 " + JSON.stringify(questions[0]));
     return makeQuestionObjects(questions);
 };
 
@@ -143,8 +144,13 @@ const convertFileToArray = (fileData) => {
 };
 
 export const makeQuestionDataCsv = (quizData) => {
+    // TESTING ONLY
+    // quizData = quizData.slice(0, 2);
+    // END TESTING ONLY
+
     const parsedData = quizData.map((line) => {
         if (line.indexOf('"') > -1) {
+            // console.log("has quote");
             // replace escaped quotes (remember this will end up with a string with quotes in it)
             let parsed = line.replaceAll('"""', '""');
             parsed = parsed.replaceAll('"\\"', '""');
@@ -164,13 +170,17 @@ export const makeQuestionDataCsv = (quizData) => {
                 return el;
             });
 
+            // console.log("parsed " + JSON.stringify(parsed));
             return parsed;
         }
 
         // split on plain commas
+        // console.log("plain");
         return line.split(",").slice(0, 2);
     });
 
+    // console.log("parsedData 2 " + JSON.stringify(parsedData));
+    // console.log("parsedData flat " + JSON.stringify(parsedData.flat()));
     return parsedData.flat();
 };
 

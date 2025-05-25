@@ -13,10 +13,14 @@ import {
 import { useTheme } from "../Providers/ThemeProvider";
 import { lightDarkStyles } from "../lib";
 import { FAB, Portal } from "react-native-paper";
-import { MAX_DECKS, THEMES } from "../constants";
-import { getFileData } from "../fileLib";
+import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../constants";
 import * as DocumentPicker from "expo-document-picker";
-import { emptyDeck, makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
+import {
+    emptyDeck,
+    getFileData,
+    makeNewDeck,
+    makeNewDeckData,
+} from "../Deck/QuizDeck";
 import { getRandomInt } from "../util";
 import QuizModal from "../components/QuizModal";
 
@@ -121,10 +125,7 @@ export const DeckList = ({
     };
 
     const onPressImport = async (type) => {
-        const fileType =
-            type === "csv"
-                ? ["text/csv", "text/comma-separated-values"]
-                : "text/plain";
+        const fileType = type === "csv" ? MIME_TYPE_CSV : MIME_TYPE_TEXT;
         try {
             const docRes = await DocumentPicker.getDocumentAsync({
                 type: fileType,

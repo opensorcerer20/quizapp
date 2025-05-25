@@ -24,3 +24,6 @@ export const THEMES = {
     light: "light",
     dark: "dark",
 };
+
+export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
+export const MIME_TYPE_TEXT = ["text/plain"];
