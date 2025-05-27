@@ -176,9 +176,9 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [x] functional modal
     -   [x] working modal (both add and edit deck)
-    -   [ ] remove "cancel" when adding deck
+    -   [x] remove "cancel" when adding deck
     -   [x] possible refresh issue: if done after adding deck, it adds it again
-    -   [ ] polished modal
+    -   [x] polished modal
     -   [ ] see if a generic modal component can be made
 
 -   [ ] ~~deck info: filename, date added~~
