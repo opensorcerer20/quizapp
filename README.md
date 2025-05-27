@@ -12,6 +12,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   TBD (I remember trying to use tailwind and/or chakra but hit a problem; don't remember what problem)
 -   Why is the unit testing not robust, eg testing for precise button ids?
     -   I think this refers to enzyme, which is outdated. React Testing Library seems to be the way to go, and you can work around the lack of precise element targeting
+-   Why not support mixed quotes for csv parsing?
+    -   I only support either zero quotes or full quotes for csv. Attempting to code for a combination of quoted and unquoted values increases the required parsing logic, so I put that off.
 
 ## notes
 
@@ -162,6 +164,10 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] mixed quotes
     -   [x] escaped quotes
     -   [x] bad quotes
+    -   [x] quotes include commas
+    -   [x] confirm
+        -   [x] android
+        -   [x] ios
     -   [ ] make my csv parsing public
 
 -   [ ] when adding deck, modal to edit name (use filename as default, without extension)
@@ -192,7 +198,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
 (continue list)
 
--   [ ] char limit for deck list
+-   [ ] char limit for deck list name
 
 -   [ ] slide menu for deck list
 -   [ ] turn off long press for deck list

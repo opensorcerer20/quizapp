@@ -25,19 +25,6 @@ export const makeNewDeck = (id, name) => {
     deck.id = id;
     deck.name = name;
     deck.createdAt = Date.now();
-    // if (Array.isArray(questions)) {
-    //     questions.map((questionObj) => {
-    //         // validation in lieu of strict typing
-    //         if (
-    //             questionObj.id &&
-    //             questionObj.q &&
-    //             questionObj.a &&
-    //             deck.data.length <= MAX_QUESTIONS
-    //         ) {
-    //             deck.data.push(questionObj);
-    //         }
-    //     });
-    // }
     return deck;
 };
 
@@ -55,11 +42,6 @@ export const makeNewDeckData = (id, questions) => {
 
     return false;
 };
-
-// export const addQuestionToDeck = (deck, id, question, answer) => {
-//     let newQ = makeQuestionObject(id, question, answer);
-//     return deck.data.push(newQ);
-// };
 
 // @deprecated
 export const getStaticData = () => {
@@ -123,7 +105,7 @@ export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
     // console.log("questions 0 type " + JSON.stringify(typeof questions[0]));
     // plain text does not require additional processing (at this time)
     if (MIME_TYPE_CSV.indexOf(mimeType) > -1) {
-        questions = makeQuestionDataCsv(questions);
+        questions = makeQuestionDataCsv(questions, 2);
     }
     // else assume text
 
@@ -143,44 +125,37 @@ const convertFileToArray = (fileData) => {
         .filter((datum) => datum.length > 0);
 };
 
-export const makeQuestionDataCsv = (quizData) => {
-    // TESTING ONLY
-    // quizData = quizData.slice(0, 2);
-    // END TESTING ONLY
-
+/*
+only handles either zero quotes or all quotes
+*/
+export const makeQuestionDataCsv = (quizData, expectedCount) => {
     const parsedData = quizData.map((line) => {
         if (line.indexOf('"') > -1) {
-            // console.log("has quote");
             // replace escaped quotes (remember this will end up with a string with quotes in it)
-            let parsed = line.replaceAll('"""', '""');
-            parsed = parsed.replaceAll('"\\"', '""');
+            let parsed = line;
+            // let parsed = line.replaceAll('"""', '""');
+            // parsed = parsed.replaceAll('"\\"', '""');
 
             // attempt to split on quoted values
-            parsed = parsed.split('","').slice(0, 2);
+            parsed = parsed.split('","').slice(0, expectedCount);
 
-            // handle mixed quotes and no quotes
-            if (parsed.length === 1) {
-                parsed = parsed[0].split(",");
+            if (parsed.length !== expectedCount) {
+                return ["could not parse csv line", parsed.join(',')];
+            } else {
+                // remove start/end quotes for each
+                parsed = parsed.map((el) => {
+                    el = el.replace(/(^"|"$)/, "");
+                    return el;
+                });
+
+                return parsed;
             }
-
-            // remove start/end quotes for each
-            parsed = parsed.map((el) => {
-                el = el.replace(/^"/, "");
-                el = el.replace(/"$/, "");
-                return el;
-            });
-
-            // console.log("parsed " + JSON.stringify(parsed));
-            return parsed;
         }
 
         // split on plain commas
-        // console.log("plain");
-        return line.split(",").slice(0, 2);
+        return line.split(",").slice(0, expectedCount);
     });
 
-    // console.log("parsedData 2 " + JSON.stringify(parsedData));
-    // console.log("parsedData flat " + JSON.stringify(parsedData.flat()));
     return parsedData.flat();
 };
 
