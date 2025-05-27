@@ -165,6 +165,8 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
     -   [x] escaped quotes
     -   [x] bad quotes
     -   [x] quotes include commas
+    -   [x] support triple quote (from sheets)
+    -   [x] support slashed quote
     -   [x] confirm
         -   [x] android
         -   [x] ios

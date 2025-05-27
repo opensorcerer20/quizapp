@@ -132,9 +132,8 @@ export const makeQuestionDataCsv = (quizData, expectedCount) => {
     const parsedData = quizData.map((line) => {
         if (line.indexOf('"') > -1) {
             // replace escaped quotes (remember this will end up with a string with quotes in it)
-            let parsed = line;
-            // let parsed = line.replaceAll('"""', '""');
-            // parsed = parsed.replaceAll('"\\"', '""');
+            let parsed = line.replaceAll('"""', '""');
+            parsed = parsed.replaceAll('\\"', '"');
 
             // attempt to split on quoted values
             parsed = parsed.split('","').slice(0, expectedCount);
@@ -143,10 +142,8 @@ export const makeQuestionDataCsv = (quizData, expectedCount) => {
                 return ["could not parse csv line", parsed.join(',')];
             } else {
                 // remove start/end quotes for each
-                parsed = parsed.map((el) => {
-                    el = el.replace(/(^"|"$)/, "");
-                    return el;
-                });
+                parsed[0] = parsed[0].replace(/^"/, "");
+                parsed[1] = parsed[1].replace(/"$/, "");
 
                 return parsed;
             }

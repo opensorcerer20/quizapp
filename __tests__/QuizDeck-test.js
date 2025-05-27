@@ -31,16 +31,6 @@ describe("makeQuestionDataCsv", () => {
     //     expect(makeQuestionDataCsv(questions, 2)).toEqual(["sí", "yes"]);
     // });
 
-    // it("parses lines with triple escaped quotes", () => {
-    //     const questions = ['"""sí""","""yes"""'];
-    //     expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí"', "yes"]);
-    // });
-
-    // it("parses lines with slash escaped quotes", () => {
-    //     const questions = ['"\\"sí\\"","\\"yes\\""'];
-    //     expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí"', "yes"]);
-    // });
-
     it("handles improperly quoted lines gracefully", () => {
         const questions = ['"Badly quoted line,Still included'];
         expect(makeQuestionDataCsv(questions)).toEqual([
@@ -80,13 +70,23 @@ describe("makeQuestionDataCsv", () => {
     //     expect(makeQuestionDataCsv(questions, 2)).toEqual(["sí", ",yes"]);
     // });
 
-    // it("parses lines with triple escaped quotes and commas", () => {
-    //     const questions = ['"""sí,""","""yes"""'];
-    //     expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí,"', "yes"]);
-    // });
+    it("parses lines with triple escaped quotes", () => {
+        const questions = ['"""sí""","""yes"""'];
+        expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí"', '"yes"']);
+    });
 
-    // it("parses lines with slash escaped quotes and commas", () => {
-    //     const questions = ['"\\"sí,\\"","\\"yes\\""'];
-    //     expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí,"', "yes"]);
-    // });
+    it("parses lines with triple escaped quotes and commas", () => {
+        const questions = ['"""sí,""","""yes"""'];
+        expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí,"', '"yes"']);
+    });
+
+    it("parses lines with slash escaped quotes", () => {
+        const questions = ['"\\"sí\\"","\\"yes\\""'];
+        expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí"', '"yes"']);
+    });
+
+    it("parses lines with slash escaped quotes and commas", () => {
+        const questions = ['"\\"sí,\\"","\\"yes\\""'];
+        expect(makeQuestionDataCsv(questions, 2)).toEqual(['"sí,"', '"yes"']);
+    });
 });
