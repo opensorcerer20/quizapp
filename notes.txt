@@ -1,0 +1,11 @@
+- To use EAS CLI without installing it globally, you can use the npx command. This command executes a package from the npm registry without installing it globally. You can then use `npx eas-cli@latest` to run EAS CLI commands.
+- building a standalone app for testing
+- Prepare for building: Generate the native Android and iOS directories using npx expo prebuild: npx expo prebuild
+- Build the app locally: Use npx expo run:ios (for iOS) or npx expo run:android (for Android) to build and run the app locally
+- Distribute your app: After building, you can either:
+  - Distribute through app stores: Prepare your app for app store distribution using EAS Build and EAS Submit. 
+  - Internally distribute: Use EAS Build with internal distribution options like Ad Hoc or Enterprise. 
+  - Test on simulators/emulators: Build for and install on iOS simulators or Android emulators using EAS Build. 
+- android port not available, kill adb
+  - ps aux | grep adb
+  - kill [processId]
