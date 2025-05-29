@@ -1,5 +1,6 @@
 import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../constants";
 import { sanitizeAll } from "../util";
+import { parseCsv } from "./parseCsv";
 
 export const emptyQuestion = {
   id: null,
@@ -97,12 +98,14 @@ export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   let questions = [];
 
   questions = convertFileToArray(rawQuestionData);
+  questions.map((line) => sanitizeAll(line));
 
   // console.log("questions[0] " + JSON.stringify(questions[0]));
   // console.log("questions 0 type " + JSON.stringify(typeof questions[0]));
   // plain text does not require additional processing (at this time)
   if (MIME_TYPE_CSV.indexOf(mimeType) > -1) {
-    questions = makeQuestionDataCsv(questions, 2);
+    questions = parseCsv(questions, 2);
+    questions = questions.flat(); // change [[1, 2],[3, 4]]] to [1,2,3,4]
   }
   // else assume text
 
@@ -120,42 +123,10 @@ const convertFileToArray = (fileData) => {
   return quizData.map((datum) => datum.trim()).filter((datum) => datum.length > 0);
 };
 
-/*
-only handles either zero quotes or all quotes
-*/
-export const makeQuestionDataCsv = (quizData, expectedCount) => {
-  const parsedData = quizData.map((line) => {
-    line = sanitizeAll(line);
-    if (line.indexOf('"') > -1) {
-      // replace escaped quotes (remember this will end up with a string with quotes in it)
-      let parsed = line.replaceAll('"""', '""');
-      parsed = parsed.replaceAll('\\"', '"');
-
-      // attempt to split on quoted values
-      parsed = parsed.split('","').slice(0, expectedCount);
-
-      if (parsed.length !== expectedCount) {
-        return ["could not parse csv line", parsed.join(",")];
-      } else {
-        // remove start/end quotes for each
-        parsed[0] = parsed[0].replace(/^"/, "");
-        parsed[1] = parsed[1].replace(/"$/, "");
-
-        return parsed;
-      }
-    }
-
-    // split on plain commas
-    return line.split(",").slice(0, expectedCount);
-  });
-
-  return parsedData.flat();
-};
-
 /**
  * assumes array of lines with alternating question/answer
  *
- * csv is converted to alternating line format via makeQuestionDataCsv
+ * csv is converted to alternating line format via parseCsv
  * @param {*} questionData
  * @returns
  */
@@ -170,8 +141,8 @@ export const makeQuestionObjects = (questionData) => {
   let questions = [];
   for (let i = 0; i < questionData.length; i += 2) {
     if (questions.length <= MAX_QUESTIONS) {
-      const question = sanitizeAll(questionData[i]);
-      const answer = sanitizeAll(questionData[i + 1]);
+      const question = questionData[i];
+      const answer = questionData[i + 1];
       questions.push(makeQuestionObject(questions.length + 1, question, answer));
     }
   }
