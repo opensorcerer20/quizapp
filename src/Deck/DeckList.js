@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     flex: 10,
+    fontSize: 16,
   },
   itemMenuButton: {
     flex: 1,

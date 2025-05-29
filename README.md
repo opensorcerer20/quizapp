@@ -46,10 +46,10 @@ item: {
     flexDirection: "row",
     alignItems: "center", // centers vertically
 },
-    itemText: {
+itemText: {
     flex: 10,
 },
-    itemMenuButton: {
+itemMenuButton: {
     flex: 1,
 },
 ```
@@ -172,7 +172,7 @@ item: {
     -   [x] solution one: use keys similar to "user.email" "user.phone"
     -   [x] new func "makeNewDeckData" with {id, questions}
 
--   [ ] confirm csv import is working
+-   [x] confirm csv import is working
 
     -   [x] no quotes
     -   [x] full quotes
@@ -185,16 +185,16 @@ item: {
     -   [x] confirm
         -   [x] android
         -   [x] ios
-    -   [ ] make my csv parsing public
+    -   [x] make my csv parsing public (kinda)
 
--   [ ] when adding deck, modal to edit name (use filename as default, without extension)
+-   [x] when adding deck, modal to edit name (use filename as default, without extension)
 
     -   [x] functional modal
     -   [x] working modal (both add and edit deck)
     -   [x] remove "cancel" when adding deck
     -   [x] possible refresh issue: if done after adding deck, it adds it again
     -   [x] polished modal
-    -   [ ] see if a generic modal component can be made
+    -   [ ] ~~see if a generic modal component can be made~~
 
 -   [ ] ~~deck info: filename, date added~~
 
@@ -207,23 +207,6 @@ item: {
 -   [x] sanitize input
 
 -   [ ] ~~utilize custom hooks (same as react component but returns value (and callback) not component)~~
-
--   [ ] use react testing library
-    -   [ ] i.e. test clicks
-
--   [ ] add quiz screen i.e. questions with multiple answers
-    -   [ ] duplicate review screen
-    -   [ ] default route to new quiz screen
-    -   [ ] get 2 answers from "original" bag
-    -   [ ] show question
-    -   [ ] show answers
-    -   [ ] on answer pick, show right answer
-    -   [ ] next/reset/remix same
-    -   [ ] previous?
-    -   [ ] WHEN DONE, route list to review
-
--   [ ] select review or quiz for deck
-    -   [ ] ?
 
 -   [x] issue w android importing csv
 
@@ -249,7 +232,7 @@ item: {
 
 -   [x] fab.group causes error "Warning: TypeError: 0, \_useLatestCallback.default is not a function (it is undefined)"
 
--   [ ] iphone (and galaxy) bugs
+-   [x] iphone (and galaxy) bugs
 
     -   [x] next/prev not showing
     -   [x] text for "swap q&a" not showing
@@ -260,10 +243,31 @@ item: {
     -   [ ] android
     -   [ ] iphone
 
+(add quiz screen)
+
+-   [ ] use react testing library
+    -   [ ] i.e. test clicks
+
+-   [ ] add quiz screen i.e. questions with multiple answers
+    -   [ ] duplicate review screen
+    -   [ ] default route to new quiz screen
+    -   [ ] get 2 answers from "original" bag
+    -   [ ] show question
+    -   [ ] show answers
+    -   [ ] on answer pick, show right answer
+    -   [ ] next/reset/remix same
+    -   [ ] previous?
+    -   [ ] WHEN DONE, route list to review
+
+-   [ ] select review or quiz for deck
+    -   [ ] ?
+
+(continue list)
+
 -   [ ] launch critical bugs
 
-    -   [ ] csv must have all quotes or it doesnt work right
-    -   [ ] handle different text sizes (eg android text size is bigger than iphone for "reverse q&a")
+    -   [ ] ~~csv must have all quotes or it doesnt work right~~
+    -   [ ] handle different text sizes (device might have non-default sizes)
     -   [ ] deck name doesnt fit in toolbar
     -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
 

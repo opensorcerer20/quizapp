@@ -10,6 +10,7 @@ export const lightDarkStyles = {
       borderColor: "dddddd",
     },
     txt: {
+      fontSize: 16,
       color: "#dddddd",
     },
     deck: {
@@ -28,6 +29,7 @@ export const lightDarkStyles = {
       borderColor: "222222",
     },
     txt: {
+      fontSize: 16,
       color: "#333333",
     },
     deck: {
