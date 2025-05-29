@@ -40,6 +40,21 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
         -   if not null, use that value
         -   else use a specified default value
 -   for android, the csv mime type is "text/comma-separated-values"
+-   getting text vertically centered for listview
+```
+item: {
+    flexDirection: "row",
+    alignItems: "center", // centers vertically
+},
+    itemText: {
+    flex: 10,
+},
+    itemMenuButton: {
+    flex: 1,
+},
+```
+-   to color icon on button for react native paper, use textColor attribute
+
 
 ## Planned future features
 

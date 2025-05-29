@@ -87,7 +87,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
         <View style={[styles.item, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
           <Text style={styles.itemText}>{item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}</Text>
           <View style={styles.itemMenuButton}>
-            <Button icon="dots-vertical" onPress={(event) => handleMenuPress(event, item)} />
+            <Button textColor="black" icon="dots-vertical" onPress={(event) => handleMenuPress(event, item)} />
           </View>
         </View>
       </Pressable>
@@ -251,9 +251,6 @@ const styles = StyleSheet.create({
   },
   itemText: {
     flex: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    textAlignVertical: "center",
   },
   itemMenuButton: {
     flex: 1,
