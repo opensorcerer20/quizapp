@@ -187,23 +187,37 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 
     -   [x] delete
     -   [x] edit deck name
+    -   [x] dot menu, no long press
 
--   [ ] sanitize input
+-   [x] sanitize input
 
--   [ ] utilize custom hooks (same as react component but returns value (and callback) not component)
+-   [ ] ~~utilize custom hooks (same as react component but returns value (and callback) not component)~~
 
 -   [ ] use react testing library
+    -   [ ] i.e. test clicks
 
 -   [ ] add quiz screen i.e. questions with multiple answers
+    -   [ ] duplicate review screen
+    -   [ ] default route to new quiz screen
+    -   [ ] get 2 answers from "original" bag
+    -   [ ] show question
+    -   [ ] show answers
+    -   [ ] on answer pick, show right answer
+    -   [ ] next/reset/remix same
+    -   [ ] previous?
+    -   [ ] WHEN DONE, route list to review
 
--   [ ] issue w android importing csv
+-   [ ] select review or quiz for deck
+    -   [ ] ?
+
+-   [x] issue w android importing csv
 
 (continue list)
 
--   [ ] char limit for deck list name
+-   [x] char limit for deck list name
 
--   [ ] slide menu for deck list
--   [ ] turn off long press for deck list
+-   [ ] ~~slide menu for deck list~~
+    -   [x] tried react native elements, not great
 
 -   [x] save settings (light/dark) to storage
 

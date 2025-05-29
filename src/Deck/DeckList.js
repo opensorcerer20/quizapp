@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet, Dimensions, Modal, Alert, TextInput } from "react-native";
 import { useTheme } from "../Providers/ThemeProvider";
 import { lightDarkStyles } from "../lib";
-import { FAB, Portal } from "react-native-paper";
+import { Button, FAB, Portal } from "react-native-paper";
 import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../constants";
 import * as DocumentPicker from "expo-document-picker";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
-import { getRandomInt } from "../util";
+import { getRandomInt, sanitizeAll } from "../util";
 import QuizModal from "../components/QuizModal";
 import DeckListEditModal from "./DeckListEditModal";
 
@@ -83,15 +83,12 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
   const renderItem = ({ item }) => {
     // console.log("item " + JSON.stringify(item));
     return (
-      <Pressable
-        key={item.id}
-        onPress={() => onPressDeck(item.id)}
-        onLongPress={(event) => handleMenuPress(event, item)}
-      >
-        <View
-          style={[styles.item, selectedItem && item.id === selectedItem.id ? styles.selectedItem : {}, scheme.deck]}
-        >
-          <Text style={scheme.txt}>{item.name}</Text>
+      <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
+        <View style={[styles.item, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
+          <Text style={styles.itemText}>{item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}</Text>
+          <View style={styles.itemMenuButton}>
+            <Button icon="dots-vertical" onPress={(event) => handleMenuPress(event, item)} />
+          </View>
         </View>
       </Pressable>
     );
@@ -137,7 +134,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
 
     // @todo this is too big for useState
     setEditingDeck(newDeck);
-    setDeckName(newDeckName);
+    setDeckName(sanitizeAll(newDeckName));
     setEditModalVisible(true);
     setShowCancel(false);
   };
@@ -151,7 +148,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
 
   const handleRenameDeck = (deckId, name) => {
     // @todo this is too big for useState
-    onUpdateDeck(deckId, { name });
+    onUpdateDeck(deckId, { name: sanitizeAll(name) });
     handleCancelClick();
   };
 
@@ -170,10 +167,8 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
     <View style={styles.container}>
       {deckListData.length > 0 && (
         <>
-          <Text style={scheme.txt}>Saved Decks</Text>
+          <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
           <FlatList data={deckListData} renderItem={renderItem} />
-
-          {/* edit modal */}
           <Modal
             animationType="fade"
             transparent={true}
@@ -182,15 +177,13 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
               setEditModalVisible(false);
             }}
           >
-            <View style={[styles.centeredView, styles.overlay]}>
-              <DeckListEditModal
-                initialDeckName={deckName}
-                editingDeck={editingDeck}
-                handleCancelClick={handleCancelClick}
-                handleRenameDeck={handleRenameDeck}
-                showCancel={showCancel}
-              />
-            </View>
+            <DeckListEditModal
+              initialDeckName={deckName}
+              editingDeck={editingDeck}
+              handleCancelClick={handleCancelClick}
+              handleRenameDeck={handleRenameDeck}
+              showCancel={showCancel}
+            />
           </Modal>
 
           <QuizModal
@@ -220,7 +213,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
           <FAB.Group
             open={open}
             visible
-            icon={"plus"}
+            icon="plus"
             actions={[
               {
                 icon: "text",
@@ -236,11 +229,6 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
             onStateChange={onStateChange}
           />
         </Portal>
-        // <FAB
-        //     icon="plus"
-        //     style={[styles.fab]}
-        //     onPress={() => onPressImport("txt")}
-        // />
       )}
       {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[styles.fab, { backgroundColor: "grey" }]} />}
     </View>
@@ -250,19 +238,26 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 10 },
   item: {
+    backgroundColor: "white",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
     flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 15,
-    backgroundColor: "#f9f9f9",
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    margin: 2,
+    alignItems: "center",
   },
   selectedItem: {
     backgroundColor: "#ffcccc",
   },
-  overlay: {
+  itemText: {
+    flex: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlignVertical: "center",
+  },
+  itemMenuButton: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    paddingHorizontal: 5,
   },
   menu: {
     position: "absolute",
@@ -287,15 +282,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: "orange",
   },
-
-  // start copy/paste styles
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  // end copy/paste styles
-
   ...lightDarkStyles,
 });
 

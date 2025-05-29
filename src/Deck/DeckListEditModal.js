@@ -21,17 +21,17 @@ const DeckListEditModal = ({
   }, []);
 
   return (
-    <View style={[styles.modalView, scheme.bg2, scheme.border]}>
-      <Text style={styles.modalText}>
-        <TextInput
-          style={styles.textInput}
-          placeholder={editingDeck.name}
-          onChangeText={setDeckName}
-          value={deckName}
-        />
-      </Text>
-      <View style={{ flex: 1 }}>
-        <View style={{ flexDirection: "row" }}>
+    <View style={[styles.centeredView, styles.overlay]}>
+      <View style={[styles.modalView, scheme.bg2, scheme.border]}>
+        <Text style={styles.modalText}>
+          <TextInput
+            style={styles.textInput}
+            placeholder={editingDeck.name}
+            onChangeText={setDeckName}
+            value={deckName}
+          />
+        </Text>
+        <View style={{ flex: 1, flexDirection: "row" }}>
           {showCancel && (
             <Pressable style={[styles.button, styles.buttonCancel]} onPress={handleCancelClick}>
               <Text style={styles.textStyle}>Cancel</Text>
@@ -97,6 +97,15 @@ const styles = StyleSheet.create({
   },
   buttonCancel: {
     backgroundColor: "grey",
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.2)",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   ...lightDarkStyles,
 });
