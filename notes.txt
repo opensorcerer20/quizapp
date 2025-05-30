@@ -20,3 +20,7 @@ make package com.appname.appname (as opposed to com.username.appname)
 if doing a new version of an already installed app...
 - change version on app.json
 - might need package.json version change too
+
+if "dont have permission"
+- remove extra/eas/projectid from app.json
+

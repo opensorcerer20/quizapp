@@ -240,6 +240,7 @@ itemMenuButton: {
 
 -   [ ] test alpha version self
 
+    -   [ ] create development build
     -   [ ] android
     -   [ ] iphone
 

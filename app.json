@@ -2,7 +2,7 @@
   "expo": {
     "name": "QuizApp",
     "slug": "QuizApp",
-    "version": "1.0.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -12,7 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.opensorcerer20.QuizApp"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,11 +25,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "5bd0dee5-010d-4c28-86e0-c6464628506a"
-      }
-    },
-    "owner": "opensorcerer20"
+    "owner": "opensorcerer20",
   }
 }

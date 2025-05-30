@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-    flex: 1,
   },
   switch: { width: 50, marginHorizontal: 10 },
   switchTextPress: {
