@@ -9,3 +9,14 @@
 - android port not available, kill adb
   - ps aux | grep adb
   - kill [processId]
+
+eas notes
+npx eas-cli@latest build -p android --profile test
+
+first time...
+
+make package com.appname.appname (as opposed to com.username.appname)
+
+if doing a new version of an already installed app...
+- change version on app.json
+- might need package.json version change too
