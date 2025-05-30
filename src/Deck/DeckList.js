@@ -62,7 +62,6 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
   };
 
   const handleEditClick = () => {
-    console.log("edit " + JSON.stringify(selectedItem));
     const selected = deckListData.filter((deck) => deck.id === selectedItem.id);
     if (selected.length === 1) {
       setEditingDeck(selected[0]);
@@ -81,7 +80,6 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
   };
 
   const renderItem = ({ item }) => {
-    // console.log("item " + JSON.stringify(item));
     return (
       <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
         <View style={[styles.item, selectedItem?.id === item.id ? styles.selectedItem : {}]}>

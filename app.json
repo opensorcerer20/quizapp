@@ -2,7 +2,7 @@
   "expo": {
     "name": "QuizApp",
     "slug": "QuizApp",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -25,6 +25,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "opensorcerer20",
+    "owner": "opensorcerer20"
   }
 }

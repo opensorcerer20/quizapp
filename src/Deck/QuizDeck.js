@@ -100,8 +100,6 @@ export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   questions = convertFileToArray(rawQuestionData);
   questions.map((line) => sanitizeAll(line));
 
-  // console.log("questions[0] " + JSON.stringify(questions[0]));
-  // console.log("questions 0 type " + JSON.stringify(typeof questions[0]));
   // plain text does not require additional processing (at this time)
   if (MIME_TYPE_CSV.indexOf(mimeType) > -1) {
     questions = parseCsv(questions, 2);
@@ -109,7 +107,6 @@ export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   }
   // else assume text
 
-  // console.log("questions[0] 2 " + JSON.stringify(questions[0]));
   return makeQuestionObjects(questions);
 };
 

@@ -56,12 +56,9 @@ export const formatCardText = (text) => {
   }
 
   const charLimit = getLineLimit(text.length);
-  // console.log(
-  //     "test data " + JSON.stringify({ textlength: text.length, charLimit })
-  // );
   let textPieces = [];
   let failsafe = 0;
-  // console.log('text before loop :' + text);
+
   do {
     if (text.length > charLimit) {
       // get charLimit chars
@@ -87,7 +84,7 @@ export const formatCardText = (text) => {
       text = "";
     }
     text = text.trim();
-    // console.log('text in loop: ' + text);
+
     failsafe++;
   } while (text.length > 0 && failsafe < 30);
 
