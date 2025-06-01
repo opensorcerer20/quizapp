@@ -54,6 +54,11 @@ itemMenuButton: {
 },
 ```
 -   to color icon on button for react native paper, use textColor attribute
+-   for ios build
+    - eas device create
+    - install (policy?) on device
+    - eas build preview
+    - scan qr code to install via itunes
 
 
 ## Planned future features
@@ -242,28 +247,12 @@ itemMenuButton: {
 
     -   [ ] create development build
     -   [ ] android
-    -   [ ] iphone
+    -   [ ] iphone (redo build from beginning, add device with uuid)
 
-(add quiz screen)
+-   [ ] list view to enable/disable cards
 
 -   [ ] use react testing library
     -   [ ] i.e. test clicks
-
--   [ ] add quiz screen i.e. questions with multiple answers
-    -   [ ] duplicate review screen
-    -   [ ] default route to new quiz screen
-    -   [ ] get 2 answers from "original" bag
-    -   [ ] show question
-    -   [ ] show answers
-    -   [ ] on answer pick, show right answer
-    -   [ ] next/reset/remix same
-    -   [ ] previous?
-    -   [ ] WHEN DONE, route list to review
-
--   [ ] select review or quiz for deck
-    -   [ ] ?
-
-(continue list)
 
 -   [ ] launch critical bugs
 
@@ -295,8 +284,23 @@ itemMenuButton: {
 
 ## Possible future dev
 
+-   [ ] make new deck from existing deck
 -   [ ] menu when clicking on deck for review, quiz, audible, etc
 -   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
+    -   [ ] add quiz screen i.e. questions with multiple answers
+        -   [ ] duplicate review screen
+        -   [ ] default route to new quiz screen
+        -   [ ] get 2 answers from "original" bag
+        -   [ ] show question
+        -   [ ] show answers
+        -   [ ] on answer pick, show right answer
+        -   [ ] next/reset/remix same
+        -   [ ] previous?
+        -   [ ] WHEN DONE, route list to review
+
+    -   [ ] select review or quiz for deck
+        -   [ ] ?
+
 -   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
 -   [ ] custom card themes
 -   [ ] different settings for modes
