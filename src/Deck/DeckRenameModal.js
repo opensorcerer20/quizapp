@@ -4,13 +4,7 @@ import { useTheme } from "../Providers/ThemeProvider";
 import { THEMES } from "../constants";
 import { lightDarkStyles } from "../lib";
 
-const DeckListEditModal = ({
-  initialDeckName,
-  editingDeck,
-  handleCancelClick,
-  handleRenameDeck,
-  showCancel = true,
-}) => {
+const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, handleRenameDeck, showCancel = true }) => {
   const [deckName, setDeckName] = useState("");
 
   const { theme } = useTheme();
@@ -110,4 +104,4 @@ const styles = StyleSheet.create({
   ...lightDarkStyles,
 });
 
-export default DeckListEditModal;
+export default DeckRenameModal;

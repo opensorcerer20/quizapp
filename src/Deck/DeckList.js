@@ -8,7 +8,8 @@ import * as DocumentPicker from "expo-document-picker";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../Deck/QuizDeck";
 import { getRandomInt, sanitizeAll } from "../util";
 import QuizModal from "../components/QuizModal";
-import DeckListEditModal from "./DeckListEditModal";
+import DeckRenameModal from "./DeckRenameModal";
+import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "./DeckListMenu";
 
 const emptyImportSource = {
   mimeType: null,
@@ -20,7 +21,6 @@ const emptyImportSource = {
 export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, onUpdateDeck }) => {
   const { width } = Dimensions.get("window");
   const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
-  const MODAL_WIDTH = 100; // arbitrary for now
 
   const [importSource, setImportSource] = useState(emptyImportSource);
 
@@ -55,13 +55,13 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
     const { pageX, pageY } = event.nativeEvent;
     const modalWidth = 100;
     let modalX = Math.max(pageX - modalWidth, 0);
-    modalX = Math.min(SAFE_WIDTH - MODAL_WIDTH, modalX);
+    modalX = Math.min(SAFE_WIDTH - DECK_LIST_MENU_WIDTH, modalX);
     setMenuPosition({ top: pageY, left: modalX });
     setSelectedItem(item);
     setMenuVisible(true);
   };
 
-  const handleEditClick = () => {
+  const handleRenameClick = () => {
     const selected = deckListData.filter((deck) => deck.id === selectedItem.id);
     if (selected.length === 1) {
       setEditingDeck(selected[0]);
@@ -170,22 +170,23 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
         <>
           <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
           <FlatList data={deckListData} renderItem={renderItem} />
-          <Modal
+          <QuizModal modalVisible={editModalVisible} handleModalClickAway={() => {}}>
+            {/* <Modal
             animationType="fade"
             transparent={true}
             visible={editModalVisible}
             onRequestClose={() => {
               setEditModalVisible(false);
             }}
-          >
-            <DeckListEditModal
+          > */}
+            <DeckRenameModal
               initialDeckName={deckName}
               editingDeck={editingDeck}
               handleCancelClick={handleCancelClick}
               handleRenameDeck={handleRenameDeck}
               showCancel={showCancel}
             />
-          </Modal>
+          </QuizModal>
 
           <QuizModal
             modalVisible={menuVisible}
@@ -198,12 +199,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
               },
             ]}
           >
-            <Pressable onPress={handleEditClick}>
-              <Text style={styles.menuItem}>Edit</Text>
-            </Pressable>
-            <Pressable onPress={handleDeleteClick}>
-              <Text style={styles.menuItem}>Delete</Text>
-            </Pressable>
+            <DeckListMenu handleRenameClick={handleRenameClick} handleDeleteClick={handleDeleteClick} />
           </QuizModal>
         </>
       )}
@@ -268,11 +264,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-  },
-  menuItem: {
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    fontSize: 16,
   },
   fab: {
     position: "absolute",
