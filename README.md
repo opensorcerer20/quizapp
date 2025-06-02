@@ -61,7 +61,7 @@ itemMenuButton: {
     - scan qr code to install via itunes
 
 
-## Planned future features
+## Completed Roadmap Development
 
 -   [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
 -   [x] allow user to choose local file and process (txt only)
@@ -243,6 +243,8 @@ itemMenuButton: {
     -   [x] text for "swap q&a" not showing
     -   [x] switch for "swap q&a" colliding with "card x of y"
 
+## Current Roadmap Development
+
 -   [ ] test alpha version self
 
     -   [x] create development build
@@ -251,6 +253,7 @@ itemMenuButton: {
 
 -   [ ] alpha bugs
     -   [x] deck rename not persisted
+    -   [ ] android back button exits app, need react navigation
 
 -   [ ] list view to enable/disable cards
 
@@ -281,6 +284,8 @@ itemMenuButton: {
 -   [ ] LLC
 
 -   [ ] launch 1.0
+
+## End Roadmap Development
 
 ## Possible future dev
 
