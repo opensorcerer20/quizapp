@@ -137,17 +137,20 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
     setShowCancel(false);
   };
 
-  const handleCancelClick = () => {
+  const clearEditModal = () => {
     setEditModalVisible(false);
     setEditingDeck(emptyDeck);
     setDeckName("");
     setSelectedItem(null);
   };
 
+  const handleCancelClick = () => {
+    clearEditModal();
+  };
+
   const handleRenameDeck = (deckId, name) => {
-    // @todo this is too big for useState
     onUpdateDeck(deckId, { name: sanitizeAll(name) });
-    handleCancelClick();
+    clearEditModal();
   };
 
   // actions after source specified

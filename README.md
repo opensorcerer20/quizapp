@@ -245,14 +245,14 @@ itemMenuButton: {
 
 -   [ ] test alpha version self
 
-    -   [ ] create development build
+    -   [x] create development build
     -   [ ] android
-    -   [ ] iphone (redo build from beginning, add device with uuid)
+    -   [ ] iphone
+
+-   [ ] alpha bugs
+    -   [x] deck rename not persisted
 
 -   [ ] list view to enable/disable cards
-
--   [ ] use react testing library
-    -   [ ] i.e. test clicks
 
 -   [ ] launch critical bugs
 

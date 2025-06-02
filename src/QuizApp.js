@@ -72,8 +72,12 @@ export default QuizApp = () => {
 
   const onDeleteDeck = async (deckId) => {
     const newDeckListData = deckListData.filter((deckDatum) => deckDatum.id !== deckId);
-    setDeckListData(newDeckListData);
+    await updateDeckListData(newDeckListData);
     await removeStorageData(DECK_QA_KEY + `_${deckId}`);
+  };
+
+  const updateDeckListData = async (newDeckListData) => {
+    setDeckListData(newDeckListData);
     saveDeckListData(newDeckListData);
   };
 
@@ -87,7 +91,7 @@ export default QuizApp = () => {
         }
         return deck;
       });
-      setDeckListData(newDeckListData);
+      await updateDeckListData(newDeckListData);
     } else {
       console.log("couldnt edit single deck with id " + deckId);
     }
