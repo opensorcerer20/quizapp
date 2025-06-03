@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { View, Text, FlatList, Pressable, StyleSheet, Dimensions, Modal, Alert, TextInput } from "react-native";
-import { useTheme } from "../Providers/ThemeProvider";
-import { lightDarkStyles } from "../../common/lib";
+import { useTheme } from "../components/Providers/ThemeProvider";
+import { lightDarkStyles } from "../common/lib";
 import { Button, FAB, Portal } from "react-native-paper";
-import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../../common/constants";
+import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../common/constants";
 import * as DocumentPicker from "expo-document-picker";
-import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "./QuizDeck";
-import { getRandomInt, sanitizeAll } from "../../common/util";
-import QuizModal from "../QuizModal";
-import DeckRenameModal from "./DeckRenameModal";
-import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "./DeckListMenu";
+import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
+import { getRandomInt, sanitizeAll } from "../common/util";
+import QuizModal from "../components/QuizModal";
+import DeckRenameModal from "../components/Deck/DeckRenameModal";
+import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 
 const emptyImportSource = {
   mimeType: null,

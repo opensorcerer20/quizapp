@@ -257,6 +257,8 @@ itemMenuButton: {
 
 -   [ ] list view to enable/disable cards
 
+-   [ ] segmentedbuttons for deck nav
+
 -   [ ] launch critical bugs
 
     -   [ ] ~~csv must have all quotes or it doesnt work right~~
