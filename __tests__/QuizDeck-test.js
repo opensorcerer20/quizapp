@@ -1,4 +1,4 @@
-import { makeQuestionObjects } from "../src/Deck/QuizDeck";
+import { makeQuestionObjects } from "../src/components/Deck/QuizDeck";
 
 describe("makeQuestionObjects", () => {
   it("generates question/answer array", () => {

@@ -25,6 +25,9 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "opensorcerer20"
+    "owner": "opensorcerer20",
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { lightDarkStyles } from "../lib";
+import { lightDarkStyles } from "../../common/lib";
 import FlipCard from "../Deck/FlipCard";
-import { getRandomInt } from "../util";
+import { getRandomInt } from "../../common/util";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { useTheme } from "../Providers/ThemeProvider";
-import { THEMES } from "../constants";
 import { difference } from "lodash";
 import { DeckNav } from "../Deck/DeckNav";
 import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
+import { THEMES } from "../../common/constants";
 
 export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
   const [isReversed, setIsReversed] = useState(false);

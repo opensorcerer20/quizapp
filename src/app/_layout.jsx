@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { PaperProvider } from "react-native-paper";
-import { ThemeProvider } from "./src/components/Providers/ThemeProvider";
 import QuizApp from "./src/components/QuizApp";
+import { ThemeProvider } from "./src/components/Providers/ThemeProvider";
 
 export default App = () => {
   return (

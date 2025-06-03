@@ -1,4 +1,4 @@
-import { formatCardText } from "../src/util";
+import { formatCardText } from "../src/components/util";
 
 describe("formatCardText", () => {
   it("returns the original text when no words exceed the char limit", () => {

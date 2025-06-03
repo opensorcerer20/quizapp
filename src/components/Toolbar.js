@@ -1,6 +1,6 @@
 import { useTheme } from "./Providers/ThemeProvider";
 import { Appbar } from "react-native-paper";
-import { THEMES, VIEWS } from "./constants";
+import { THEMES, VIEWS } from "../common/constants";
 
 const Toolbar = ({ title, currentView, backCallback }) => {
   const { theme, toggleTheme } = useTheme();

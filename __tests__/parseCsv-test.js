@@ -1,4 +1,4 @@
-import { parseCsv } from "../src/Deck/parseCsv";
+import { parseCsv } from "../src/components/Deck/parseCsv";
 
 describe("parseCsv", () => {
   it("parses lines with no quotes", () => {

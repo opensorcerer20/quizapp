@@ -1,5 +1,5 @@
-import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../constants";
-import { sanitizeAll } from "../util";
+import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../../common/constants";
+import { sanitizeAll } from "../../common/util";
 import { parseCsv } from "./parseCsv";
 
 export const emptyQuestion = {
