@@ -8,7 +8,8 @@ import { DeckList } from "./DeckList";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import { DECK_DATA_KEY, DECK_QA_KEY, THEMES, VIEWS } from "../common/constants";
 // import { getStaticData } from "./Deck/QuizDeck";
-import { loadStorageData, removeStorageData, saveStorageData } from "../common/fileLib";
+import { loadQuestionsFromStorage, loadStorageData, removeStorageData, saveStorageData } from "../common/fileLib";
+import { router } from "expo-router";
 
 export default QuizApp = () => {
   // const USE_STATIC_DATA = false;
@@ -27,10 +28,22 @@ export default QuizApp = () => {
 
   const onPressDeck = async (id) => {
     const selectedDeck = deckListData.find((deck) => deck.id === id);
-    const selectedDeckData = await loadStorageData(DECK_QA_KEY + `_${id}`);
+    const selectedDeckData = await loadQuestionsFromStorage(id);
     if (selectedDeck && Array.isArray(selectedDeckData?.questions) && selectedDeckData.questions.length) {
-      setCurrentDeck(selectedDeck);
-      setCurrentDeckData(selectedDeckData.questions);
+      // setCurrentDeck(selectedDeck);
+      // setCurrentDeckData(selectedDeckData.questions);
+
+      router.navigate({
+        pathname: "QuizScreen",
+        params: { deckId: id },
+      });
+      // navigation.navigate("QuizScreen", {
+      //   screen: "QuizScreen",
+      //   params: {
+      //     headerShown: false,
+      //     deckId: id,
+      //   },
+      // });
     } else {
       clearDeck();
     }
@@ -120,7 +133,17 @@ export default QuizApp = () => {
   //    saveDeckListData([]);
   //}, []);
 
-  const currentView = !!currentDeck ? VIEWS.quizView : VIEWS.homeView;
+  /*
+  navigation.navigate('root', {
+    screen: 'QuizScreen',
+    params: {
+      headerShown: false
+    },
+  });
+  */
+
+  // const currentView = !!currentDeck ? VIEWS.quizView : VIEWS.homeView;
+  const currentView = VIEWS.homeView;
 
   // console.log(
   //     "quizapp state " +

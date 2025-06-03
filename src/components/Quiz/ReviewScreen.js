@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { lightDarkStyles } from "../common/lib";
-import FlipCard from "../components/Deck/FlipCard";
-import { getRandomInt } from "../common/util";
-import { emptyQuestion, randomizeQBag } from "../components/Deck/QuizDeck";
-import { useTheme } from "../components/Providers/ThemeProvider";
+import { lightDarkStyles } from "../../common/lib";
+import FlipCard from "../Deck/FlipCard";
+import { getRandomInt } from "../../common/util";
+import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
+import { useTheme } from "../Providers/ThemeProvider";
 import { difference } from "lodash";
-import { DeckNav } from "../components/Deck/DeckNav";
-import { ReverseDeckButton } from "../components/Deck/ReverseDeckButton";
-import { THEMES } from "../common/constants";
+import { DeckNav } from "../Deck/DeckNav";
+import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
+import { THEMES } from "../../common/constants";
 
 export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
   const [isReversed, setIsReversed] = useState(false);
   const { theme } = useTheme();
+
   const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
   const [currentState, setCurrentState] = useState({
     originalBag: [],
@@ -60,31 +61,25 @@ export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
     if (remix) {
       newBag = randomizeQBag(newBag);
     }
+    console.log("calling next question");
     nextQuestion(newBag);
   };
 
   const hasQuestionData = !!currentState.currentQuestion.q;
-
-  // if deck changes, reset question bag
-  useEffect(() => {
-    if (hasQuestionData) {
-      resetQuestionBag(true);
-    }
-  }, [currentDeck]);
 
   // initial run, go ahead and reset question bag
   useEffect(() => {
     if (currentDeck && Array.isArray(currentDeckData) && currentDeckData.length > 0) {
       resetQuestionBag(true);
     }
-  }, []);
+  }, [currentDeck]);
 
   // console.log("state " + JSON.stringify({ currentState, currentDeckData }));
 
   return (
     <>
       {hasQuestionData && (
-        <View style={styles.container}>
+        <View style={[styles.container, scheme.bg]}>
           <ReverseDeckButton txtStyle={scheme.txt} isReversed={isReversed} onClick={() => setIsReversed(!isReversed)} />
           <Text
             style={[

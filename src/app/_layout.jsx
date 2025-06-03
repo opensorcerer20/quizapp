@@ -1,16 +1,19 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { PaperProvider } from "react-native-paper";
-import QuizApp from "./QuizApp";
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
+import { Stack } from 'expo-router';
 
-export default App = () => {
+export default RootLayout = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <PaperProvider>
           <ThemeProvider>
-            <QuizApp />
+            <Stack>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="QuizScreen" options={{ headerShown: false }} />
+            </Stack>
           </ThemeProvider>
         </PaperProvider>
       </SafeAreaView>

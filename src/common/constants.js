@@ -16,13 +16,13 @@ export const LINE_CHAR_LIMIT_XL = 13;
 export const LINE_CHAR_LIMIT_XXL = 7;
 
 export const VIEWS = {
-    homeView: "homeView",
-    quizView: "quizView",
+  homeView: "homeView",
+  quizView: "quizView",
 };
 
 export const THEMES = {
-    light: "light",
-    dark: "dark",
+  light: "light",
+  dark: "dark",
 };
 
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
