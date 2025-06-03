@@ -1,15 +1,17 @@
-import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
+
+import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import { lightDarkStyles } from "../common/lib";
-import QuizScreen from "./QuizScreen";
-import Toolbar from "../components/Toolbar";
-import { DeckList } from "./DeckList";
-import { useTheme } from "../components/Providers/ThemeProvider";
+
 import { DECK_DATA_KEY, DECK_QA_KEY, THEMES, VIEWS } from "../common/constants";
 // import { getStaticData } from "./Deck/QuizDeck";
 import { loadQuestionsFromStorage, loadStorageData, removeStorageData, saveStorageData } from "../common/fileLib";
-import { router } from "expo-router";
+import { lightDarkStyles } from "../common/lib";
+import { useTheme } from "../components/Providers/ThemeProvider";
+import Toolbar from "../components/Toolbar";
+import { DeckList } from "./DeckList";
+import QuizScreen from "./QuizScreen";
 
 export default QuizApp = () => {
   // const USE_STATIC_DATA = false;

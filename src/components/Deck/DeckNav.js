@@ -1,5 +1,6 @@
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Pressable, StyleSheet, View } from "react-native";
+
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const NavButton = ({ enabled, onClick, children, extraStyles = {} }) => {
   return (

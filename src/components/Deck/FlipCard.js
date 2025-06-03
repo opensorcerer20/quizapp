@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, View, StyleSheet, Text } from "react-native";
+
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+
+import { THEMES } from "../../common/constants";
+import { lightDarkStyles } from "../../common/lib";
 import { formatCardText, getFontSize } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
-import { lightDarkStyles } from "../../common/lib";
-import { THEMES } from "../../common/constants";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/

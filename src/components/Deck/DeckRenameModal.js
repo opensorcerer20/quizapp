@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+
 import { Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { useTheme } from "../Providers/ThemeProvider";
+
 import { THEMES } from "../../common/constants";
 import { lightDarkStyles } from "../../common/lib";
+import { useTheme } from "../Providers/ThemeProvider";
 
 const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, handleRenameDeck, showCancel = true }) => {
   const [deckName, setDeckName] = useState("");

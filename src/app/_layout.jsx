@@ -1,8 +1,12 @@
+import { Stack } from "expo-router";
 import { StyleSheet } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { PaperProvider } from "react-native-paper";
+import {
+  SafeAreaProvider,
+  SafeAreaView,
+} from "react-native-safe-area-context";
+
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
-import { Stack } from 'expo-router';
 
 export default RootLayout = () => {
   return (

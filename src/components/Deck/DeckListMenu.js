@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 export const DECK_LIST_MENU_WIDTH = 100;
