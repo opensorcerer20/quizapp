@@ -26,6 +26,18 @@ export const loadDeckFromStorage = async (deckId) => {
   }
 };
 
+export const loadDeckData = async (deckId) => {
+  if (deckId) {
+    const selectedDeck = await loadDeckFromStorage(deckId);
+    const selectedDeckData = await loadQuestionsFromStorage(deckId);
+    if (selectedDeck && Array.isArray(selectedDeckData?.questions) && selectedDeckData.questions.length) {
+      return [selectedDeck, selectedDeckData];
+    }
+  }
+
+  return [null, []];
+};
+
 export const loadQuestionsFromStorage = async (deckId) => {
   return await loadStorageData(DECK_QA_KEY + `_${deckId}`);
 };

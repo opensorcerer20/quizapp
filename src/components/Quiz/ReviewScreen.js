@@ -12,7 +12,7 @@ import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
 import { useTheme } from "../Providers/ThemeProvider";
 
-export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
+export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
   const [isReversed, setIsReversed] = useState(false);
   const { theme } = useTheme();
 
@@ -59,11 +59,10 @@ export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
   };
 
   const resetQuestionBag = (remix = false) => {
-    let newBag = remix ? currentDeckData.slice() : currentState.originalBag.slice();
+    let newBag = remix ? currentDeckQuestionData.slice() : currentState.originalBag.slice();
     if (remix) {
       newBag = randomizeQBag(newBag);
     }
-    console.log("calling next question");
     nextQuestion(newBag);
   };
 
@@ -71,12 +70,12 @@ export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
 
   // initial run, go ahead and reset question bag
   useEffect(() => {
-    if (currentDeck && Array.isArray(currentDeckData) && currentDeckData.length > 0) {
+    if (currentDeck && Array.isArray(currentDeckQuestionData) && currentDeckQuestionData.length > 0) {
       resetQuestionBag(true);
     }
-  }, [currentDeck]);
+  }, [currentDeck, currentDeckQuestionData]);
 
-  // console.log("state " + JSON.stringify({ currentState, currentDeckData }));
+  // console.log("state " + JSON.stringify({ currentState, hasQuestionData }));
 
   return (
     <>
@@ -94,7 +93,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckData }) => {
               },
             ]}
           >
-            Card {currentDeckData.length - currentState.questionBag.length} of {currentDeckData.length}
+            Card {currentDeckQuestionData.length - currentState.questionBag.length} of {currentDeckQuestionData.length}
           </Text>
           <FlipCard
             key={getRandomInt(100000, 999999)}

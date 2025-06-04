@@ -17,6 +17,7 @@ export default RootLayout = () => {
             <Stack>
               <Stack.Screen name="index" options={{ headerShown: false }} />
               <Stack.Screen name="QuizScreen" options={{ headerShown: false }} />
+              <Stack.Screen name="DeckScreen" options={{ headerShown: false }} />
             </Stack>
           </ThemeProvider>
         </PaperProvider>

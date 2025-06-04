@@ -5,15 +5,10 @@ import { StyleSheet, Text } from "react-native";
 
 import { loadDeckData } from "../common/fileLib";
 import { lightDarkStyles } from "../common/lib";
-import { ReviewScreen } from "../components/Quiz/ReviewScreen";
 import ScreenTemplate from "../components/ScreenTemplate";
 import Toolbar from "../components/Toolbar";
 
-/*
-later there will be a quiz screen etc
-*/
-
-const QuizScreen = () => {
+const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckQuestionData, setCurrentDeckQuestionData] = useState([]);
@@ -21,32 +16,28 @@ const QuizScreen = () => {
   useEffect(() => {
     if (deckId) {
       const asyncFunc = async () => {
-        const [selectedDeck, selectedDeckData] = await loadDeckData(deckId);
-        setCurrentDeck(selectedDeck);
-        setCurrentDeckQuestionData(selectedDeckData.questions);
+        return await loadDeckData(deckId);
       };
-      asyncFunc();
+      const [selectedDeck, selectedDeckData] = asyncFunc();
+      setCurrentDeck(selectedDeck);
+      setCurrentDeckQuestionData(selectedDeckData.questions);
     } else {
       setCurrentDeck(null);
       setCurrentDeckQuestionData([]);
     }
   }, [deckId]);
 
-  const whichScreen = "review";
-  if (whichScreen === "review") {
-    return (
-      <ScreenTemplate>
-        <Toolbar title={currentDeck?.name || ""} />
+  return (
+    <ScreenTemplate>
+      <Toolbar title={currentDeck?.name || ""} />
 
-        <ReviewScreen currentDeck={currentDeck} currentDeckQuestionData={currentDeckQuestionData} />
-      </ScreenTemplate>
-    );
-  }
-  return <Text>Error: no screen specified</Text>;
+      <Text>deck screen</Text>
+    </ScreenTemplate>
+  );
 };
 
 const styles = StyleSheet.create({
   ...lightDarkStyles,
 });
 
-export default QuizScreen;
+export default DeckScreen;

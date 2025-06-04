@@ -2,61 +2,30 @@ import { useEffect, useState } from "react";
 
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
 
-import { DECK_DATA_KEY, DECK_QA_KEY, THEMES, VIEWS } from "../common/constants";
-// import { getStaticData } from "./Deck/QuizDeck";
+import { DECK_DATA_KEY, DECK_QA_KEY } from "../common/constants";
 import { loadQuestionsFromStorage, loadStorageData, removeStorageData, saveStorageData } from "../common/fileLib";
-import { lightDarkStyles } from "../common/lib";
-import { useTheme } from "../components/Providers/ThemeProvider";
+import ScreenTemplate from "../components/ScreenTemplate";
 import Toolbar from "../components/Toolbar";
 import { DeckList } from "./DeckList";
-import QuizScreen from "./QuizScreen";
 
 export default QuizApp = () => {
   // const USE_STATIC_DATA = false;
-  const { theme } = useTheme();
   const [deckListData, setDeckListData] = useState([]);
-  const [currentDeck, setCurrentDeck] = useState(null);
-  const [currentDeckData, setCurrentDeckData] = useState([]);
   const [reload, setReload] = useState(false);
-
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
-
-  const clearDeck = () => {
-    setCurrentDeck(null);
-    setCurrentDeckData([]);
-  };
 
   const onPressDeck = async (id) => {
     const selectedDeck = deckListData.find((deck) => deck.id === id);
     const selectedDeckData = await loadQuestionsFromStorage(id);
     if (selectedDeck && Array.isArray(selectedDeckData?.questions) && selectedDeckData.questions.length) {
-      // setCurrentDeck(selectedDeck);
-      // setCurrentDeckData(selectedDeckData.questions);
-
       router.navigate({
         pathname: "QuizScreen",
         params: { deckId: id },
       });
-      // navigation.navigate("QuizScreen", {
-      //   screen: "QuizScreen",
-      //   params: {
-      //     headerShown: false,
-      //     deckId: id,
-      //   },
-      // });
-    } else {
-      clearDeck();
     }
   };
 
   const loadDeckListData = async () => {
-    // not working, doesnt separate decklist and deckdata
-    // if (USE_STATIC_DATA) {
-    //     const staticDeckInfo = getStaticData();
-    //     setDeckListData(staticDeckInfo.staticDeckListData);
-    // } else {
     let newDeckListData = await loadStorageData(DECK_DATA_KEY);
     if (Array.isArray(newDeckListData)) {
       newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
@@ -64,14 +33,13 @@ export default QuizApp = () => {
     } else {
       setDeckListData([]);
     }
+
+    // if reload was set, set back to false
     setReload(false);
-    // }
   };
 
   const onAddDeck = async (newDeck, newDeckData) => {
     let newDeckListData = deckListData.slice();
-
-    // @todo only save deck data not qa data
 
     newDeckListData.push(newDeck);
     await saveDeckListData(newDeckListData);
@@ -135,57 +103,34 @@ export default QuizApp = () => {
   //    saveDeckListData([]);
   //}, []);
 
-  /*
-  navigation.navigate('root', {
-    screen: 'QuizScreen',
-    params: {
-      headerShown: false
-    },
-  });
-  */
-
-  // const currentView = !!currentDeck ? VIEWS.quizView : VIEWS.homeView;
-  const currentView = VIEWS.homeView;
-
   // console.log(
   //     "quizapp state " +
   //         JSON.stringify({ deckListData, currentView, currentDeck })
   // );
 
   return (
-    <View style={[styles.container, scheme.bg, scheme.txt]}>
-      <Toolbar
-        style={styles.toolbarContainer}
-        currentView={currentView}
-        title={currentDeck?.name || ""}
-        backCallback={clearDeck}
+    <ScreenTemplate>
+      <Toolbar showBack={false} />
+      <DeckList
+        deckListData={deckListData}
+        onPressDeck={onPressDeck}
+        onAddDeck={onAddDeck}
+        onDeleteDeck={onDeleteDeck}
+        onUpdateDeck={onUpdateDeck}
       />
-      {currentView === VIEWS.quizView && <QuizScreen currentDeck={currentDeck} currentDeckData={currentDeckData} />}
-      {currentView === VIEWS.homeView && (
-        <DeckList
-          deckListData={deckListData}
-          onPressDeck={onPressDeck}
-          onAddDeck={onAddDeck}
-          onDeleteDeck={onDeleteDeck}
-          onUpdateDeck={onUpdateDeck}
-        />
-      )}
       <StatusBar style="dark" />
-    </View>
+    </ScreenTemplate>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    //marginTop: 50,
-  },
-  toolbarContainer: {
-    flex: 1,
-  },
-  insideContainer: {
-    flex: 10,
-  },
-  ...lightDarkStyles,
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     flexDirection: "column",
+//     //marginTop: 50,
+//   },
+//   insideContainer: {
+//     flex: 10,
+//   },
+//   ...lightDarkStyles,
+// });
