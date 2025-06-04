@@ -6,6 +6,18 @@ Generic React Native Expo app to ask questions from a given JSON file after shuf
 
 Initial idea: someone going on a multi country tour, wants to learn the local language at each place, so they load a file of language each time, and can do a flip card quiz on the go
 
+## Roadmap
+
+- [x] initial development
+- [x] first complete version
+- [x] complete alpha for testing
+- [ ] apply alpha testing changes (est complete 6/13)
+- [ ] last changes before getting beta testers (est complete 6/20)
+- [ ] beta testing (est 6/23)
+- [ ] apply beta testing changes (est complete 7/7)
+- [ ] set up llc before launch (est complete 7/10)
+- [ ] launch 1.0! (est 7/14)
+
 ## FAQ
 
 -   Why use react native paper?
@@ -251,13 +263,10 @@ itemMenuButton: {
     -   [ ] android
     -   [ ] iphone
 
--   [ ] alpha bugs
+-   [ ] alpha bugs/improvements
     -   [x] deck rename not persisted
-    -   [ ] android back button exits app, need react navigation
-
--   [ ] list view to enable/disable cards
-
--   [ ] segmentedbuttons for deck nav
+    -   [x] android back button exits app, need react navigation
+    -   [ ] list view to enable/disable cards
 
 -   [ ] launch critical bugs
 
@@ -268,7 +277,9 @@ itemMenuButton: {
 
 -   [ ] add themes for cards
 
-    -   [ ] note card
+    -   [ ] apply light/dark to card theme
+    -   [ ] keep original colors
+    -   [ ] add white/grey note card
 
 -   [ ] last chance to add before beta
 
@@ -282,6 +293,8 @@ itemMenuButton: {
     -   [ ] after certain amount of uses, tip popup with option to "dont show again"
 
 -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
+
+-   [ ] beta bugs/improvements
 
 -   [ ] LLC
 
