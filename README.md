@@ -282,8 +282,9 @@ itemMenuButton: {
     -   [ ] keep original colors
     -   [ ] add white/grey note card
 
--   [ ] last chance to add before beta
+-   [ ] last chance before beta
 
+    -   [ ] remove all @todos
     -   [ ] import big file into smaller decks?
 
 -   [ ] code cleanup

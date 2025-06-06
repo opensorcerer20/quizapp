@@ -46,7 +46,7 @@ export const getFontSize = (length) => {
   return "";
 };
 
-export const formatCardText = (text) => {
+export const formatCardText = (text, lineLimitOverride = null) => {
   text = text.trim();
   if (text.length === 0) {
     return "";
@@ -56,7 +56,7 @@ export const formatCardText = (text) => {
     text = text.slice(0, maxLimit) + "...";
   }
 
-  const charLimit = getLineLimit(text.length);
+  const charLimit = lineLimitOverride || getLineLimit(text.length);
   let textPieces = [];
   let failsafe = 0;
 

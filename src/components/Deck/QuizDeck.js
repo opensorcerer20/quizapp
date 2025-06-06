@@ -1,4 +1,7 @@
-import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../../common/constants";
+import {
+  MAX_QUESTIONS,
+  MIME_TYPE_CSV,
+} from "../../common/constants";
 import { sanitizeAll } from "../../common/util";
 import { parseCsv } from "./parseCsv";
 
@@ -6,13 +9,15 @@ export const emptyQuestion = {
   id: null,
   q: null,
   a: null,
+  disabled: false,
 };
 
-export const makeQuestionObject = (id, question, answer) => {
+export const makeQuestionObject = (id, question, answer, disabled = false) => {
   return {
-    id: id,
+    id,
     q: question,
     a: answer,
+    disabled,
   };
 };
 
@@ -41,38 +46,6 @@ export const makeNewDeckData = (id, questions) => {
   return false;
 };
 
-// @deprecated
-export const getStaticData = () => {
-  // @todo need to separate decks(decklistdata.data) and decklistdata
-
-  const staticDeckListData = [];
-  for (let i = 1; i < 50; i++) {
-    staticDeckListData.push(
-      // makeNewDeck(i, `deck ${i}`, [
-      makeNewDeck(i, `deck ${i}`)
-      // [
-      //     makeQuestionObject(
-      //         1,
-      //         `deck ${i} question 1`,
-      //         `deck ${i} answer 1`
-      //     ),
-      //     makeQuestionObject(
-      //         2,
-      //         `deck ${i} question 2`,
-      //         `deck ${i} answer 2`
-      //     ),
-      //     makeQuestionObject(
-      //         3,
-      //         `deck ${i} question 3`,
-      //         `deck ${i} answer 3`
-      //     ),
-      //     makeQuestionObject(4, "MW".repeat(200), "MW".repeat(200)),
-      // ]
-    );
-  }
-  return staticDeckListData;
-};
-
 // randomize questions
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array#46545530
 export const randomizeQBag = (bag) => {
@@ -85,12 +58,8 @@ export const randomizeQBag = (bag) => {
 export const getFileData = async (fileData) => {
   // need to determine what type is
   const fileResponse = await fetch(fileData.uri); // returns Response object
-  //if (JSON.stringify(fileResponse) !== '{}') {
   const rawQuestionData = await fileResponse.text();
   return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
-  //} else {
-  //  throw new Error('Error: no response reading from file');
-  //}
 };
 
 // @todo integration test

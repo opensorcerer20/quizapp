@@ -1,10 +1,10 @@
 export const lightDarkStyles = {
   schemeDark: {
     bg: {
-      backgroundColor: "#222222",
+      backgroundColor: "#333333",
     },
     bg2: {
-      backgroundColor: "#444444",
+      backgroundColor: "#666666",
     },
     border: {
       borderColor: "dddddd",

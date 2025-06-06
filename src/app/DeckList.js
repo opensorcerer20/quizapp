@@ -247,6 +247,9 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
         </>
       )}
       {deckListData.length < 1 && <Text style={scheme.txt}>No decks in memory, please add a deck</Text>}
+
+      {/* @todo bug: the fab is showing up on deckscreen when it shouldnt (router) */}
+
       {deckListData.length < MAX_DECKS && (
         // this is broken for iphone, specifically fab.group
         <Portal>

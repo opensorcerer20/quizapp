@@ -1,14 +1,24 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import { difference } from "lodash";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import { THEMES } from "../../common/constants";
 import { lightDarkStyles } from "../../common/lib";
 import { getRandomInt } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
 import FlipCard from "../Deck/FlipCard";
-import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
+import {
+  emptyQuestion,
+  randomizeQBag,
+} from "../Deck/QuizDeck";
 import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
 import { useTheme } from "../Providers/ThemeProvider";
 
@@ -45,7 +55,10 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
   const nextQuestion = (incomingBag = null) => {
     const originalBag = incomingBag ? incomingBag.slice() : currentState.originalBag;
     const currentBag = incomingBag ?? currentState.questionBag.slice();
-    if (currentBag.length) {
+
+    // @todo need to handle zero enabled cards
+
+    if (currentBag.length > 0) {
       const questionBag = currentBag.slice(1);
       const currentQuestion = currentBag.shift();
       setCurrentState({
@@ -60,10 +73,16 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
 
   const resetQuestionBag = (remix = false) => {
     let newBag = remix ? currentDeckQuestionData.slice() : currentState.originalBag.slice();
-    if (remix) {
-      newBag = randomizeQBag(newBag);
+    newBag = newBag.filter((question) => !question?.disabled);
+    if (newBag.length > 0) {
+      if (remix) {
+        newBag = randomizeQBag(newBag);
+      }
+      nextQuestion(newBag);
+    } else {
+      // @todo
+      console.log("modal to go back");
     }
-    nextQuestion(newBag);
   };
 
   const hasQuestionData = !!currentState.currentQuestion.q;
@@ -93,7 +112,8 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
               },
             ]}
           >
-            Card {currentDeckQuestionData.length - currentState.questionBag.length} of {currentDeckQuestionData.length}
+            Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
+            {currentState.originalBag.length}
           </Text>
           <FlipCard
             key={getRandomInt(100000, 999999)}

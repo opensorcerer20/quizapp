@@ -3,7 +3,7 @@ import { makeQuestionObjects } from "../src/components/Deck/QuizDeck";
 describe("makeQuestionObjects", () => {
   it("generates question/answer array", () => {
     const questionData = ["sí", "yes"];
-    expect(makeQuestionObjects(questionData)).toEqual([{ id: 1, q: "sí", a: "yes" }]);
+    expect(makeQuestionObjects(questionData)).toEqual([{ id: 1, q: "sí", a: "yes", disabled: false }]);
   });
 
   // this now happens OUTSIDE this method
@@ -14,6 +14,6 @@ describe("makeQuestionObjects", () => {
 
   it("handles one extra element", () => {
     const questionData = ["sí", "yes", "extra"];
-    expect(makeQuestionObjects(questionData)).toEqual([{ id: 1, q: "sí", a: "yes" }]);
+    expect(makeQuestionObjects(questionData)).toEqual([{ id: 1, q: "sí", a: "yes", disabled: false }]);
   });
 });

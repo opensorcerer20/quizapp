@@ -15,7 +15,8 @@ import {
 import {
   loadStorageData,
   removeStorageData,
-  saveStorageData,
+  saveDeckData,
+  saveDeckListData,
 } from "../common/fileLib";
 import { lightDarkStyles } from "../common/lib";
 import { useTheme } from "../components/Providers/ThemeProvider";
@@ -24,7 +25,6 @@ import Toolbar from "../components/Toolbar";
 import { DeckList } from "./DeckList";
 
 export default QuizApp = () => {
-  // const USE_STATIC_DATA = false;
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
 
@@ -40,6 +40,7 @@ export default QuizApp = () => {
   };
 
   // @todo should i move to decklist?
+  // move "deck_data_key" bit to filelib.js2
   const loadDeckListData = async () => {
     let newDeckListData = await loadStorageData(DECK_DATA_KEY);
     if (Array.isArray(newDeckListData)) {
@@ -58,12 +59,8 @@ export default QuizApp = () => {
     let newDeckListData = deckListData.slice();
 
     newDeckListData.push(newDeck);
-    await saveDeckListData(newDeckListData);
-    await saveStorageData(DECK_QA_KEY + `_${newDeck.id}`, newDeckData);
-  };
-
-  const saveDeckListData = async (deckListData) => {
-    const result = await saveStorageData(DECK_DATA_KEY, deckListData);
+    await saveDeckData(newDeck.id, newDeckData);
+    const result = await saveDeckListData(newDeckListData);
     if (result === true) {
       setReload(true);
     }
@@ -117,14 +114,11 @@ export default QuizApp = () => {
   }, []);
 
   // use to clear memory
-  //useEffect(() => {
-  //    saveDeckListData([]);
-  //}, []);
+  // useEffect(() => {
+  //   saveDeckListData([]);
+  // }, []);
 
-  // console.log(
-  //     "quizapp state " +
-  //         JSON.stringify({ deckListData, currentView, currentDeck })
-  // );
+  // console.log("quizapp state " + JSON.stringify({ deckListData }));
 
   return (
     <ScreenTemplate>
@@ -142,13 +136,5 @@ export default QuizApp = () => {
 };
 
 const styles = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //     flexDirection: "column",
-  //     //marginTop: 50,
-  //   },
-  //   insideContainer: {
-  //     flex: 10,
-  //   },
   ...lightDarkStyles,
 });
