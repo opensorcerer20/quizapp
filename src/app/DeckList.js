@@ -1,15 +1,43 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import * as DocumentPicker from "expo-document-picker";
-import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import { Button, FAB, Portal } from "react-native-paper";
+import { router } from "expo-router";
+import {
+  Dimensions,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import {
+  Button,
+  FAB,
+  Portal,
+} from "react-native-paper";
 
-import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../common/constants";
+import {
+  MAX_DECKS,
+  MIME_TYPE_CSV,
+  MIME_TYPE_TEXT,
+  THEMES,
+} from "../common/constants";
 import { lightDarkStyles } from "../common/lib";
-import { getRandomInt, sanitizeAll } from "../common/util";
+import {
+  getRandomInt,
+  sanitizeAll,
+} from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
-import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
+import {
+  emptyDeck,
+  getFileData,
+  makeNewDeck,
+  makeNewDeckData,
+} from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import QuizModal from "../components/QuizModal";
 
@@ -63,6 +91,14 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
     setMenuVisible(true);
   };
 
+  const handleViewClick = () => {
+    router.navigate({
+      pathname: "DeckScreen",
+      params: { deckId: selectedItem.id },
+    });
+    unSelectItem();
+  };
+
   const handleRenameClick = () => {
     const selected = deckListData.filter((deck) => deck.id === selectedItem.id);
     if (selected.length === 1) {
@@ -73,6 +109,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
       setShowCancel(true);
     } else {
       console.log("Error editing deck with id " + selectedItem.id);
+      unSelectItem();
     }
   };
 
@@ -201,7 +238,11 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
               },
             ]}
           >
-            <DeckListMenu handleRenameClick={handleRenameClick} handleDeleteClick={handleDeleteClick} />
+            <DeckListMenu
+              handleViewClick={handleViewClick}
+              handleRenameClick={handleRenameClick}
+              handleDeleteClick={handleDeleteClick}
+            />
           </QuizModal>
         </>
       )}

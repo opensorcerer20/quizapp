@@ -21,9 +21,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 ## FAQ
 
 -   Why use react native paper?
-    -   TBD (I remember trying to use tailwind and/or chakra but hit a problem; don't remember what problem)
--   Why is the unit testing not robust, eg testing for precise button ids?
-    -   I think this refers to enzyme, which is outdated. React Testing Library seems to be the way to go, and you can work around the lack of precise element targeting
+    -   I don't remember, but I think it was because I tried to use TailwindCSS and the CSS library didn't work as expected. I know now that some libraries do work, e.g. Bootstrap
 -   Why not support mixed quotes for csv parsing?
     -   I only support either zero quotes or full quotes for csv. Attempting to code for a combination of quoted and unquoted values increases the required parsing logic, so I put that off.
 
@@ -267,6 +265,9 @@ itemMenuButton: {
     -   [x] deck rename not persisted
     -   [x] android back button exits app, need react navigation
     -   [ ] list view to enable/disable cards
+    -   [ ] disable card in review view
+    -   [ ] switch to show disabled cards in review view
+    -   [ ] move "deck list" operations to decklist, out of index
 
 -   [ ] launch critical bugs
 
@@ -319,7 +320,7 @@ itemMenuButton: {
         -   [ ] WHEN DONE, route list to review
 
     -   [ ] select review or quiz for deck
-        -   [ ] ?
+        -   [ ] how?
 
 -   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
 -   [ ] custom card themes

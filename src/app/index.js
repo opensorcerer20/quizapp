@@ -1,10 +1,24 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { StyleSheet } from "react-native";
 
-import { DECK_DATA_KEY, DECK_QA_KEY } from "../common/constants";
-import { loadQuestionsFromStorage, loadStorageData, removeStorageData, saveStorageData } from "../common/fileLib";
+import {
+  DECK_DATA_KEY,
+  DECK_QA_KEY,
+  THEMES,
+} from "../common/constants";
+import {
+  loadStorageData,
+  removeStorageData,
+  saveStorageData,
+} from "../common/fileLib";
+import { lightDarkStyles } from "../common/lib";
+import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import Toolbar from "../components/Toolbar";
 import { DeckList } from "./DeckList";
@@ -14,17 +28,18 @@ export default QuizApp = () => {
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
 
+  const { theme, toggleTheme } = useTheme();
+  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+
+  // @todo move to decklist
   const onPressDeck = async (id) => {
-    const selectedDeck = deckListData.find((deck) => deck.id === id);
-    const selectedDeckData = await loadQuestionsFromStorage(id);
-    if (selectedDeck && Array.isArray(selectedDeckData?.questions) && selectedDeckData.questions.length) {
-      router.navigate({
-        pathname: "QuizScreen",
-        params: { deckId: id },
-      });
-    }
+    router.navigate({
+      pathname: "QuizScreen",
+      params: { deckId: id },
+    });
   };
 
+  // @todo should i move to decklist?
   const loadDeckListData = async () => {
     let newDeckListData = await loadStorageData(DECK_DATA_KEY);
     if (Array.isArray(newDeckListData)) {
@@ -38,6 +53,7 @@ export default QuizApp = () => {
     setReload(false);
   };
 
+  // @todo should i move to decklist?
   const onAddDeck = async (newDeck, newDeckData) => {
     let newDeckListData = deckListData.slice();
 
@@ -53,6 +69,7 @@ export default QuizApp = () => {
     }
   };
 
+  // @todo should i move to decklist?
   const onDeleteDeck = async (deckId) => {
     const newDeckListData = deckListData.filter((deckDatum) => deckDatum.id !== deckId);
     await updateDeckListData(newDeckListData);
@@ -64,6 +81,7 @@ export default QuizApp = () => {
     saveDeckListData(newDeckListData);
   };
 
+  // @todo should i move to decklist?
   const onUpdateDeck = async (deckId, data) => {
     let updatedDeck = deckListData.filter((deck) => deck.id === deckId);
     if (updatedDeck.length === 1) {
@@ -110,7 +128,7 @@ export default QuizApp = () => {
 
   return (
     <ScreenTemplate>
-      <Toolbar showBack={false} />
+      <Toolbar showBack={false} theme={theme} toggleTheme={toggleTheme} />
       <DeckList
         deckListData={deckListData}
         onPressDeck={onPressDeck}
@@ -123,14 +141,14 @@ export default QuizApp = () => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: "column",
-//     //marginTop: 50,
-//   },
-//   insideContainer: {
-//     flex: 10,
-//   },
-//   ...lightDarkStyles,
-// });
+const styles = StyleSheet.create({
+  //   container: {
+  //     flex: 1,
+  //     flexDirection: "column",
+  //     //marginTop: 50,
+  //   },
+  //   insideContainer: {
+  //     flex: 10,
+  //   },
+  ...lightDarkStyles,
+});

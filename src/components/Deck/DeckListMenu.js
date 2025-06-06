@@ -1,13 +1,18 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 export const DECK_LIST_MENU_WIDTH = 100;
 
-const DeckListMenu = ({ handleRenameClick, handleDeleteClick }) => {
+const DeckListMenu = ({ handleViewClick, handleRenameClick, handleDeleteClick }) => {
   return (
     <>
-      <Pressable onPress={() => {}}>
+      <Pressable onPress={handleViewClick}>
         <View style={styles.menuItem}>
           <FontAwesome6 name="eye" size={20} color="black" style={styles.menuIcon} />
           <Text style={styles.menuText}>View</Text>

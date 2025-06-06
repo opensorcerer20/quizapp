@@ -2,10 +2,8 @@ import { router } from "expo-router";
 import { Appbar } from "react-native-paper";
 
 import { THEMES } from "../common/constants";
-import { useTheme } from "./Providers/ThemeProvider";
 
-const Toolbar = ({ title = null, showBack = true }) => {
-  const { theme, toggleTheme } = useTheme();
+const Toolbar = ({ title = null, showBack = true, theme = THEMES.light, toggleTheme = () => {} }) => {
   let themeIcon = null;
   if (theme) {
     themeIcon = theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
