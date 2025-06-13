@@ -1,11 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
 
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 import { THEMES } from "../../common/constants";
 import { lightDarkStyles } from "../../common/lib";
-import { formatCardText, getFontSize } from "../../common/util";
+import {
+  formatCardText,
+  getFontSize,
+} from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 
 /**
@@ -160,13 +176,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   l: {
-    fontSize: 16,
-  },
-  xl: {
     fontSize: 24,
   },
-  xxl: {
+  xl: {
     fontSize: 32,
+  },
+  xxl: {
+    fontSize: 40,
   },
   flippedCard: {
     flex: 1,

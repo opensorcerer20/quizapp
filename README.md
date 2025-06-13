@@ -268,6 +268,9 @@ itemMenuButton: {
     -   [ ] disable card in review view
     -   [ ] switch to show disabled cards in review view
     -   [ ] move "deck list" operations to decklist, out of index
+    -   [x] poker questions bugs found
+        -   [x] crowded on left side, like line limit is too small
+        -   [x] related to above, large font size changes card size
 
 -   [ ] launch critical bugs
 

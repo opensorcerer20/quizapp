@@ -24,3 +24,8 @@ if doing a new version of an already installed app...
 if "dont have permission"
 - remove extra/eas/projectid from app.json
 
+-   for ios build
+    - eas device create
+    - install (policy?) on device
+    - eas build preview
+    - scan qr code to install via itunes
