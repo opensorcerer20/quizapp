@@ -13,10 +13,7 @@ import {
 } from "react-native";
 import { Checkbox } from "react-native-paper";
 
-import {
-  LINE_CHAR_LIMIT,
-  THEMES,
-} from "../common/constants";
+import { THEMES } from "../common/constants";
 import {
   loadDeckData,
   saveDeckData,
@@ -55,9 +52,9 @@ const DeckScreen = () => {
           status={item.disabled ? "unchecked" : "checked"}
           onPress={() => onCheckboxClick(!item?.disabled, item.id)}
         />
-        <View style={{ flexDirection: "col" }}>
-          <Text style={[scheme.txt, styles.itemText]}>{formatCardText(`Q: ${item.q}`, LINE_CHAR_LIMIT)}</Text>
-          <Text style={[scheme.txt, styles.itemText]}>{formatCardText(`A: ${item.a}`, LINE_CHAR_LIMIT)}</Text>
+        <View style={{ flexDirection: "col", width: "95%" }}>
+          <Text style={[scheme.txt, styles.itemText]}>{formatCardText(`Q: ${item.q}`)}</Text>
+          <Text style={[scheme.txt, styles.itemText]}>{formatCardText(`A: ${item.a}`)}</Text>
         </View>
       </View>
     );

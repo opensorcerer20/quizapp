@@ -264,13 +264,31 @@ itemMenuButton: {
 -   [ ] alpha bugs/improvements
     -   [x] deck rename not persisted
     -   [x] android back button exits app, need react navigation
-    -   [ ] list view to enable/disable cards
+    -   [x] list view to enable/disable cards
     -   [ ] disable card in review view
     -   [ ] switch to show disabled cards in review view
     -   [ ] move "deck list" operations to decklist, out of index
     -   [x] poker questions bugs found
         -   [x] crowded on left side, like line limit is too small
         -   [x] related to above, large font size changes card size
+        -   [x] now it's too big, getting breaks too late
+            - [x] odd, do i even need to check line length? it seems to be working without that
+        -   [x] overflow on viewing deck cards 6-17 2:45:49
+    -   [ ] user settings
+        -   [ ] settings gear
+        -   [ ] card color (q & a)
+        -   [ ] background image
+    -   [ ] languages
+    -   [ ] deck rename
+        -   [ ] instructions
+        -   [ ] shadow visible
+    -   [ ] quiz mode (only if it's quick)
+    -   [ ] line breaks
+    -   [ ] font size
+    -   [x] fab visible in review screen
+    -   [ ] title bar background
+    -   [ ] app icon
+    -   [ ] change "quizapp" to "flashcard library"
 
 -   [ ] launch critical bugs
 
@@ -291,6 +309,7 @@ itemMenuButton: {
     -   [ ] import big file into smaller decks?
 
 -   [ ] code cleanup
+    - [ ] move all "style"s to stylesheets
 
 -   [ ] tips
 

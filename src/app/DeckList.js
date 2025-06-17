@@ -4,7 +4,10 @@ import {
 } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
-import { router } from "expo-router";
+import {
+  router,
+  usePathname,
+} from "expo-router";
 import {
   Dimensions,
   FlatList,
@@ -199,9 +202,10 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
     }
   }, [importSource]);
 
-  // console.log(
-  //     "testing console log (show debug data here) " + JSON.stringify({})
-  // );
+  const path = usePathname();
+  const showFab = path === "/" && deckListData.length < MAX_DECKS;
+
+  // console.log("testing console log (show debug data here) " + JSON.stringify({}));
 
   return (
     <View style={styles.container}>
@@ -250,7 +254,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
 
       {/* @todo bug: the fab is showing up on deckscreen when it shouldnt (router) */}
 
-      {deckListData.length < MAX_DECKS && (
+      {showFab && (
         // this is broken for iphone, specifically fab.group
         <Portal>
           <FAB.Group

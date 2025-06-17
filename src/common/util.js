@@ -1,10 +1,6 @@
 import sanitizeHtml from "sanitize-html";
 
 import {
-  LINE_CHAR_LIMIT,
-  LINE_CHAR_LIMIT_L,
-  LINE_CHAR_LIMIT_XL,
-  LINE_CHAR_LIMIT_XXL,
   MAX_CHAR_LIMIT,
   MAX_CHAR_LIMIT_L,
   MAX_CHAR_LIMIT_XL,
@@ -18,19 +14,6 @@ export const getRandomInt = (min, max) => {
 
 export const delay = async (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
-};
-
-export const getLineLimit = (length) => {
-  if (length <= MAX_CHAR_LIMIT_XXL) {
-    return LINE_CHAR_LIMIT_XXL;
-  }
-  if (length <= MAX_CHAR_LIMIT_XL) {
-    return LINE_CHAR_LIMIT_XL;
-  }
-  if (length <= MAX_CHAR_LIMIT_L) {
-    return LINE_CHAR_LIMIT_L;
-  }
-  return LINE_CHAR_LIMIT;
 };
 
 export const getFontSize = (length) => {
@@ -56,7 +39,7 @@ export const formatCardText = (text, lineLimitOverride = null) => {
     text = text.slice(0, maxLimit) + "...";
   }
 
-  const charLimit = lineLimitOverride || getLineLimit(text.length);
+  const charLimit = lineLimitOverride || 1000;
   let textPieces = [];
   let failsafe = 0;
 
