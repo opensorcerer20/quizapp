@@ -1,7 +1,7 @@
 export const lightDarkStyles = {
   schemeDark: {
     bg: {
-      backgroundColor: "#333333",
+      backgroundColor: "#121212",
     },
     bg2: {
       backgroundColor: "#666666",
@@ -42,17 +42,5 @@ export const lightDarkStyles = {
       backgroundColor: "#f9f9f9",
       borderBottomColor: "#ddd",
     },
-  },
-};
-
-export const buttonStyles = {
-  button: {
-    backgroundColor: "darkblue",
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
   },
 };

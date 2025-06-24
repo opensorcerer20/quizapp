@@ -5,7 +5,8 @@ import { router, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
 
-import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../common/constants";
+import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../common/constants";
+import { loadStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { lightDarkStyles } from "../common/lib";
 import { getRandomInt, sanitizeAll } from "../common/util";
 import Background from "../components/Background";
@@ -22,11 +23,13 @@ const emptyImportSource = {
   uri: null,
 };
 
-export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, onUpdateDeck }) => {
+export const DeckList = () => {
   const { width } = Dimensions.get("window");
   const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
 
   const [importSource, setImportSource] = useState(emptyImportSource);
+  const [deckListData, setDeckListData] = useState([]);
+  const [reload, setReload] = useState(false);
 
   // used when deck menu is pressed
   const [menuVisible, setMenuVisible] = useState(false);
@@ -45,6 +48,64 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
   const [state, setState] = useState({ open: false });
   const onStateChange = ({ open }) => setState({ open });
   const { open } = state;
+
+  const loadDeckListData = async () => {
+    let newDeckListData = await loadStorageData(DECK_DATA_KEY);
+    if (Array.isArray(newDeckListData)) {
+      newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
+      setDeckListData(newDeckListData);
+    } else {
+      setDeckListData([]);
+    }
+
+    // if reload was set, set back to false
+    setReload(false);
+  };
+
+  const onPressDeck = async (id) => {
+    router.navigate({
+      pathname: "QuizScreen",
+      params: { deckId: id },
+    });
+  };
+
+  const onAddDeck = async (newDeck, newDeckData) => {
+    let newDeckListData = deckListData.slice();
+
+    newDeckListData.push(newDeck);
+    await saveDeckData(newDeck.id, newDeckData);
+    const result = await saveDeckListData(newDeckListData);
+    if (result === true) {
+      setReload(true);
+    }
+  };
+
+  const onDeleteDeck = async (deckId) => {
+    const newDeckListData = deckListData.filter((deckDatum) => deckDatum.id !== deckId);
+    await updateDeckListData(newDeckListData);
+    await removeStorageData(DECK_QA_KEY + `_${deckId}`);
+  };
+
+  const updateDeckListData = async (newDeckListData) => {
+    setDeckListData(newDeckListData);
+    saveDeckListData(newDeckListData);
+  };
+
+  const onUpdateDeck = async (deckId, data) => {
+    let updatedDeck = deckListData.filter((deck) => deck.id === deckId);
+    if (updatedDeck.length === 1) {
+      updatedDeck[0].name = data.name;
+      const newDeckListData = deckListData.map((deck) => {
+        if (deck.id === deckId) {
+          return updatedDeck[0];
+        }
+        return deck;
+      });
+      await updateDeckListData(newDeckListData);
+    } else {
+      console.log("couldnt edit single deck with id " + deckId);
+    }
+  };
 
   const unSelectItem = () => {
     setSelectedItem(null);
@@ -179,6 +240,24 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
     }
   }, [importSource]);
 
+  // load data if either first time or reload is tripped
+  useEffect(() => {
+    if (reload) {
+      const loadData = async () => {
+        await loadDeckListData();
+      };
+      loadData();
+    }
+  }, [reload]);
+
+  // load data first time
+  useEffect(() => {
+    const loadData = async () => {
+      await loadDeckListData();
+    };
+    loadData();
+  }, []);
+
   const path = usePathname();
   const showFab = path === "/" && deckListData.length < MAX_DECKS;
 
@@ -245,7 +324,7 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
             />
           </Portal>
         )}
-        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[styles.fab, { backgroundColor: "grey" }]} />}
+        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={styles.fabDisabled} />}
       </Background>
     </View>
   );
@@ -300,12 +379,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "orange",
+  fabDisabled: {
+    backgroundColor: "grey",
   },
   ...lightDarkStyles,
 });

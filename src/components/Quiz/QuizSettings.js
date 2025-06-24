@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
 
-import { buttonStyles, lightDarkStyles } from "../../common/lib";
+import { lightDarkStyles } from "../../common/lib";
 
 export const MyButton = ({ buttonText, onPress }) => {
   const noop = () => {};
@@ -79,7 +79,6 @@ const QuizSettings = ({ deckSettings, updateDeckSettings }) => {
 };
 
 const styles = StyleSheet.create({
-  ...buttonStyles,
   ...lightDarkStyles,
 });
 

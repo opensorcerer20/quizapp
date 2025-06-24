@@ -267,7 +267,7 @@ itemMenuButton: {
     -   [x] list view to enable/disable cards
     -   [ ] disable card in review view
     -   [ ] switch to show disabled cards in review view
-    -   [ ] move "deck list" operations to decklist, out of index
+    -   [x] move "deck list" operations to decklist, out of index
     -   [x] poker questions bugs found
         -   [x] crowded on left side, like line limit is too small
         -   [x] related to above, large font size changes card size
@@ -279,18 +279,18 @@ itemMenuButton: {
         -   [ ] card color (q & a)
         -   [ ] background image
     -   [ ] languages
-    -   [ ] deck rename
-        -   [ ] instructions
-        -   [ ] shadow visible
+    -   [x] deck rename
+        -   [x] instructions
+        -   [x] shadow visible
     -   [ ] quiz mode (only if it's quick)
     -   [x] line breaks
-    -   [ ] font size
+    -   [ ] font size (?)
     -   [x] fab visible in review screen
-    -   [ ] title bar background
+    -   [x] title bar background
     -   [ ] app icon
     -   [x] change "quizapp" to "flashcard library"
     -   [ ] do something about decklist multiple state vars
-    -   [ ] decklist menu can go off to the right
+    -   [x] decklist menu can go off to the right
 
 -   [ ] launch critical bugs
 

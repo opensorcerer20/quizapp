@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { trim } from "lodash";
 import { Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { THEMES } from "../../common/constants";
@@ -8,36 +9,46 @@ import { useTheme } from "../Providers/ThemeProvider";
 
 const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, handleRenameDeck, showCancel = true }) => {
   const [deckName, setDeckName] = useState("");
+  const [submitEnabled, setSubmitEnabled] = useState(true);
 
   const { theme } = useTheme();
   const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+
+  const onDeckNameUpdate = (text) => {
+    setDeckName(text);
+    setSubmitEnabled(trim(text) != "");
+  };
 
   useEffect(() => {
     setDeckName(initialDeckName);
   }, []);
 
+  const submitBgStyle = submitEnabled ? scheme.bg3 : scheme.bg;
+
   return (
-    <View style={[styles.centeredView, styles.overlay]}>
-      <View style={[styles.modalView, scheme.bg2, scheme.border]}>
+    <View style={[styles.container, styles.centeredView]}>
+      <View style={[styles.modalView, scheme.bg, scheme.border]}>
+        <View>
+          <Text style={[scheme.txt, { paddingBottom: 10 }]}>Name this deck</Text>
+        </View>
         <Text style={styles.modalText}>
-          <TextInput
-            style={styles.textInput}
-            placeholder={editingDeck.name}
-            onChangeText={setDeckName}
-            value={deckName}
-          />
+          <TextInput style={styles.textInput} onChangeText={onDeckNameUpdate} value={deckName} />
         </Text>
         <View style={{ flex: 1, flexDirection: "row" }}>
           {showCancel && (
-            <Pressable style={[styles.button, styles.buttonCancel]} onPress={handleCancelClick}>
-              <Text style={styles.textStyle}>Cancel</Text>
+            <Pressable style={[styles.button, scheme.bg2]} onPress={handleCancelClick}>
+              <Text style={[styles.textStyle, scheme.txt]}>Cancel</Text>
             </Pressable>
           )}
           <Pressable
-            style={[styles.button, styles.buttonSubmit]}
-            onPress={() => handleRenameDeck(editingDeck.id, deckName)}
+            style={[styles.button, submitBgStyle]}
+            onPress={() => {
+              if (submitEnabled) {
+                handleRenameDeck(editingDeck.id, deckName);
+              }
+            }}
           >
-            <Text style={styles.textStyle}>Submit</Text>
+            <Text style={[styles.textStyle, scheme.txt]}>Submit</Text>
           </Pressable>
         </View>
       </View>
@@ -46,24 +57,16 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   modalView: {
-    margin: 20,
-    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    maxHeight: 150,
+    maxHeight: 200,
   },
   textStyle: {
-    color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -83,7 +86,6 @@ const styles = StyleSheet.create({
       ios: 30,
       android: 40,
     }),
-    elevation: 2,
     margin: 5,
     paddingTop: 5,
     paddingHorizontal: 10,

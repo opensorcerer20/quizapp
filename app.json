@@ -31,6 +31,7 @@
     "owner": "opensorcerer20",
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "scheme": "com.opensorcerer20.QuizApp"
   }
 }
