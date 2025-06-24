@@ -283,12 +283,14 @@ itemMenuButton: {
         -   [ ] instructions
         -   [ ] shadow visible
     -   [ ] quiz mode (only if it's quick)
-    -   [ ] line breaks
+    -   [x] line breaks
     -   [ ] font size
     -   [x] fab visible in review screen
     -   [ ] title bar background
     -   [ ] app icon
-    -   [ ] change "quizapp" to "flashcard library"
+    -   [x] change "quizapp" to "flashcard library"
+    -   [ ] do something about decklist multiple state vars
+    -   [ ] decklist menu can go off to the right
 
 -   [ ] launch critical bugs
 

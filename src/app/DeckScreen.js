@@ -100,7 +100,11 @@ const DeckScreen = () => {
               </Pressable>
             ))}
           </View>
-          <FlatList data={currentDeckData.questions} renderItem={renderItem} />
+          <FlatList
+            contentContainerStyle={{ alignItems: "center" }}
+            data={currentDeckData.questions}
+            renderItem={renderItem}
+          />
         </>
       )}
       {!currentDeckData && <Text style={scheme.txt}>Loading question data...</Text>}
@@ -110,7 +114,7 @@ const DeckScreen = () => {
 
 const styles = StyleSheet.create({
   item: {
-    width: "95%",
+    width: "90%",
     flexDirection: "row",
     paddingHorizontal: 10,
     paddingVertical: 5,

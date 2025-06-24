@@ -27,3 +27,6 @@ export const THEMES = {
 
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
 export const MIME_TYPE_TEXT = ["text/plain"];
+
+export const LIGHT_APP_BG = "pexels-asphotograpy-518245.jpg";
+export const DARK_APP_BG = "pexels-gantas-3750272.jpg";

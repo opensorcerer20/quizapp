@@ -1,46 +1,17 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
-import {
-  router,
-  usePathname,
-} from "expo-router";
-import {
-  Dimensions,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import {
-  Button,
-  FAB,
-  Portal,
-} from "react-native-paper";
+import { router, usePathname } from "expo-router";
+import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Button, FAB, Portal } from "react-native-paper";
 
-import {
-  MAX_DECKS,
-  MIME_TYPE_CSV,
-  MIME_TYPE_TEXT,
-  THEMES,
-} from "../common/constants";
+import { MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../common/constants";
 import { lightDarkStyles } from "../common/lib";
-import {
-  getRandomInt,
-  sanitizeAll,
-} from "../common/util";
+import { getRandomInt, sanitizeAll } from "../common/util";
+import Background from "../components/Background";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
-import {
-  emptyDeck,
-  getFileData,
-  makeNewDeck,
-  makeNewDeckData,
-} from "../components/Deck/QuizDeck";
+import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import QuizModal from "../components/QuizModal";
 
@@ -124,10 +95,16 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
   const renderItem = ({ item }) => {
     return (
       <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-        <View style={[styles.item, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
-          <Text style={styles.itemText}>{item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}</Text>
+        <View style={[styles.item, scheme.bg3, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
+          <Text style={[styles.itemText, scheme.txt]}>
+            {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
+          </Text>
           <View style={styles.itemMenuButton}>
-            <Button textColor="black" icon="dots-vertical" onPress={(event) => handleMenuPress(event, item)} />
+            <Button
+              textColor={scheme.txt.color}
+              icon="dots-vertical"
+              onPress={(event) => handleMenuPress(event, item)}
+            />
           </View>
         </View>
       </Pressable>
@@ -209,89 +186,97 @@ export const DeckList = ({ deckListData, onPressDeck, onDeleteDeck, onAddDeck, o
 
   return (
     <View style={styles.container}>
-      {deckListData.length > 0 && (
-        <>
-          <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
-          <FlatList data={deckListData} renderItem={renderItem} />
-          <QuizModal modalVisible={editModalVisible} handleModalClickAway={() => {}}>
-            {/* <Modal
-            animationType="fade"
-            transparent={true}
-            visible={editModalVisible}
-            onRequestClose={() => {
-              setEditModalVisible(false);
-            }}
-          > */}
-            <DeckRenameModal
-              initialDeckName={deckName}
-              editingDeck={editingDeck}
-              handleCancelClick={handleCancelClick}
-              handleRenameDeck={handleRenameDeck}
-              showCancel={showCancel}
+      <Background theme={theme}>
+        {deckListData.length > 0 && (
+          <View style={{ padding: 10 }}>
+            <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
+            <FlatList data={deckListData} renderItem={renderItem} />
+            <QuizModal modalVisible={editModalVisible} handleModalClickAway={() => {}}>
+              <DeckRenameModal
+                initialDeckName={deckName}
+                editingDeck={editingDeck}
+                handleCancelClick={handleCancelClick}
+                handleRenameDeck={handleRenameDeck}
+                showCancel={showCancel}
+              />
+            </QuizModal>
+
+            <QuizModal
+              modalVisible={menuVisible}
+              handleModalClickAway={handleModalClickAway}
+              modalContainerStyle={[
+                styles.menu,
+                {
+                  top: menuPosition.top,
+                  left: menuPosition.left,
+                },
+              ]}
+            >
+              <DeckListMenu
+                handleViewClick={handleViewClick}
+                handleRenameClick={handleRenameClick}
+                handleDeleteClick={handleDeleteClick}
+              />
+            </QuizModal>
+          </View>
+        )}
+        {deckListData.length < 1 && <Text style={scheme.txt}>No decks in memory, please add a deck</Text>}
+
+        {showFab && (
+          // this is broken for iphone, specifically fab.group
+          <Portal>
+            <FAB.Group
+              open={open}
+              visible
+              icon="plus"
+              actions={[
+                {
+                  icon: "text",
+                  label: "Text",
+                  onPress: () => onPressImport("txt"),
+                },
+                {
+                  icon: "table",
+                  label: "CSV",
+                  onPress: () => onPressImport("csv"),
+                },
+              ]}
+              onStateChange={onStateChange}
             />
-          </QuizModal>
-
-          <QuizModal
-            modalVisible={menuVisible}
-            handleModalClickAway={handleModalClickAway}
-            modalContainerStyle={[
-              styles.menu,
-              {
-                top: menuPosition.top,
-                left: menuPosition.left,
-              },
-            ]}
-          >
-            <DeckListMenu
-              handleViewClick={handleViewClick}
-              handleRenameClick={handleRenameClick}
-              handleDeleteClick={handleDeleteClick}
-            />
-          </QuizModal>
-        </>
-      )}
-      {deckListData.length < 1 && <Text style={scheme.txt}>No decks in memory, please add a deck</Text>}
-
-      {/* @todo bug: the fab is showing up on deckscreen when it shouldnt (router) */}
-
-      {showFab && (
-        // this is broken for iphone, specifically fab.group
-        <Portal>
-          <FAB.Group
-            open={open}
-            visible
-            icon="plus"
-            actions={[
-              {
-                icon: "text",
-                label: "Text",
-                onPress: () => onPressImport("txt"),
-              },
-              {
-                icon: "table",
-                label: "CSV",
-                onPress: () => onPressImport("csv"),
-              },
-            ]}
-            onStateChange={onStateChange}
-          />
-        </Portal>
-      )}
-      {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[styles.fab, { backgroundColor: "grey" }]} />}
+          </Portal>
+        )}
+        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[styles.fab, { backgroundColor: "grey" }]} />}
+      </Background>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10 },
+  container: { flex: 1 },
   item: {
     backgroundColor: "white",
     paddingHorizontal: 10,
     paddingVertical: 5,
+    marginVertical: 5,
     borderRadius: 5,
     flexDirection: "row",
     margin: 2,
     alignItems: "center",
+    // boxShadow: "10px 10px 5px black",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+      },
+      android: {
+        elevation: 10,
+      },
+    }),
   },
   selectedItem: {
     backgroundColor: "#ffcccc",
