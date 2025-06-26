@@ -9,7 +9,6 @@ import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, T
 import { loadStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { lightDarkStyles } from "../common/lib";
 import { getRandomInt, sanitizeAll } from "../common/util";
-import Background from "../components/Background";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
@@ -265,67 +264,65 @@ export const DeckList = () => {
 
   return (
     <View style={styles.container}>
-      <Background theme={theme}>
-        {deckListData.length > 0 && (
-          <View style={{ padding: 10 }}>
-            <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
-            <FlatList data={deckListData} renderItem={renderItem} />
-            <QuizModal modalVisible={editModalVisible} handleModalClickAway={() => {}}>
-              <DeckRenameModal
-                initialDeckName={deckName}
-                editingDeck={editingDeck}
-                handleCancelClick={handleCancelClick}
-                handleRenameDeck={handleRenameDeck}
-                showCancel={showCancel}
-              />
-            </QuizModal>
-
-            <QuizModal
-              modalVisible={menuVisible}
-              handleModalClickAway={handleModalClickAway}
-              modalContainerStyle={[
-                styles.menu,
-                {
-                  top: menuPosition.top,
-                  left: menuPosition.left,
-                },
-              ]}
-            >
-              <DeckListMenu
-                handleViewClick={handleViewClick}
-                handleRenameClick={handleRenameClick}
-                handleDeleteClick={handleDeleteClick}
-              />
-            </QuizModal>
-          </View>
-        )}
-        {deckListData.length < 1 && <Text style={scheme.txt}>No decks in memory, please add a deck</Text>}
-
-        {showFab && (
-          // this is broken for iphone, specifically fab.group
-          <Portal>
-            <FAB.Group
-              open={open}
-              visible
-              icon="plus"
-              actions={[
-                {
-                  icon: "text",
-                  label: "Text",
-                  onPress: () => onPressImport("txt"),
-                },
-                {
-                  icon: "table",
-                  label: "CSV",
-                  onPress: () => onPressImport("csv"),
-                },
-              ]}
-              onStateChange={onStateChange}
+      {deckListData.length > 0 && (
+        <View style={{ padding: 10 }}>
+          <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
+          <FlatList data={deckListData} renderItem={renderItem} />
+          <QuizModal modalVisible={editModalVisible} handleModalClickAway={() => {}}>
+            <DeckRenameModal
+              initialDeckName={deckName}
+              editingDeck={editingDeck}
+              handleCancelClick={handleCancelClick}
+              handleRenameDeck={handleRenameDeck}
+              showCancel={showCancel}
             />
-          </Portal>
-        )}
-        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={styles.fabDisabled} />}
-      </Background>
+          </QuizModal>
+
+          <QuizModal
+            modalVisible={menuVisible}
+            handleModalClickAway={handleModalClickAway}
+            modalContainerStyle={[
+              styles.menu,
+              {
+                top: menuPosition.top,
+                left: menuPosition.left,
+              },
+            ]}
+          >
+            <DeckListMenu
+              handleViewClick={handleViewClick}
+              handleRenameClick={handleRenameClick}
+              handleDeleteClick={handleDeleteClick}
+            />
+          </QuizModal>
+        </View>
+      )}
+      {deckListData.length < 1 && <Text style={scheme.txt}>No decks in memory, please add a deck</Text>}
+
+      {showFab && (
+        // this is broken for iphone, specifically fab.group
+        <Portal>
+          <FAB.Group
+            open={open}
+            visible
+            icon="plus"
+            actions={[
+              {
+                icon: "text",
+                label: "Text",
+                onPress: () => onPressImport("txt"),
+              },
+              {
+                icon: "table",
+                label: "CSV",
+                onPress: () => onPressImport("csv"),
+              },
+            ]}
+            onStateChange={onStateChange}
+          />
+        </Portal>
+      )}
+      {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={styles.fabDisabled} />}
     </View>
   );
 };

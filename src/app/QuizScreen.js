@@ -1,13 +1,7 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import { useLocalSearchParams } from "expo-router";
-import {
-  StyleSheet,
-  Text,
-} from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import { THEMES } from "../common/constants";
 import { loadDeckData } from "../common/fileLib";
@@ -29,7 +23,6 @@ const QuizScreen = () => {
   const { theme, toggleTheme } = useTheme();
   const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
 
-  // WORKING
   useEffect(() => {
     if (deckId) {
       const asyncFunc = async () => {
@@ -55,11 +48,12 @@ const QuizScreen = () => {
   const whichScreen = "review";
   if (whichScreen === "review") {
     return (
-      <ScreenTemplate>
+      <>
         <Toolbar title={currentDeck?.name || ""} theme={theme} toggleTheme={toggleTheme} />
-
-        <ReviewScreen currentDeck={currentDeck} currentDeckQuestionData={currentDeckQuestionData} />
-      </ScreenTemplate>
+        <ScreenTemplate>
+          <ReviewScreen currentDeck={currentDeck} currentDeckQuestionData={currentDeckQuestionData} />
+        </ScreenTemplate>
+      </>
     );
   }
   return <Text>Error: no screen specified</Text>;

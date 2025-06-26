@@ -6,7 +6,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { THEMES } from "../../common/constants";
 import { lightDarkStyles } from "../../common/lib";
 import { getRandomInt } from "../../common/util";
-import Background from "../Background";
 import { DeckNav } from "../Deck/DeckNav";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
@@ -76,6 +75,12 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
     }
   };
 
+  const disableQuestion = (id) => {
+    // make copy of currentDeckQuestionData
+    // set question with id to disabled
+    // save copy of currentDeckQuestionData
+  };
+
   const hasQuestionData = !!currentState.currentQuestion.q;
 
   // initial run, go ahead and reset question bag
@@ -88,7 +93,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
   // console.log("state " + JSON.stringify({ currentState, hasQuestionData }));
 
   return (
-    <Background theme={theme}>
+    <>
       {hasQuestionData && (
         <View style={[styles.container]}>
           <ReverseDeckButton
@@ -131,7 +136,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
           <Text style={scheme.txt}>No deck data</Text>
         </View>
       )}
-    </Background>
+    </>
   );
 };
 

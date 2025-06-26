@@ -15,31 +15,47 @@ import { useTheme } from "../Providers/ThemeProvider";
 const CARDTYPE_QUESTION = "question";
 const CARDTYPE_ANSWER = "answer";
 
-const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
+const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle }) => {
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);
   const textSizeStyle = fontSize !== "" ? styles[fontSize] : {};
 
-  // console.log(
-  //     "flipcard status " +
-  //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
-  // );
-
-  return (
-    <View style={cardStyle}>
+  const CardHeader = () => (
+    <View
+      style={[
+        cardType === CARDTYPE_ANSWER ? { marginLeft: "auto", marginRight: 0 } : { marginLeft: 0, marginRight: "auto" },
+        {
+          borderWidth: 1,
+          borderRadius: 5,
+          padding: 2,
+          backgroundColor: textStyle.color,
+        },
+      ]}
+    >
       <Text
         style={[
           { fontWeight: "bold" },
           textStyle,
           {
             textAlign: cardType === CARDTYPE_ANSWER ? "right" : "left",
+            color: cardBg.backgroundColor,
           },
         ]}
       >
         {cardType === CARDTYPE_ANSWER ? "Answer" : "Question"}
       </Text>
-      <Text style={[textStyle, textSizeStyle, { marginTop: 20 }]}>{finalCardText}</Text>
+    </View>
+  );
+
+  // console.log(
+  //     "flipcard status " +
+  //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
+  // );
+  return (
+    <View style={[cardStyle, { backgroundColor: cardBg.backgroundColor }]}>
+      <CardHeader />
+      <Text style={[textStyle, textSizeStyle, { marginTop: 10 }]}>{finalCardText}</Text>
     </View>
   );
 };
@@ -71,7 +87,8 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
     <CardContent
       cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
       cardText={regularText}
-      cardStyle={[styles.card, isReversed ? scheme.bg4 : scheme.bg3]}
+      cardStyle={styles.card}
+      cardBg={isReversed ? scheme.bg4 : scheme.bg3}
       textStyle={scheme.txt}
     />
   );
@@ -80,7 +97,8 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
     <CardContent
       cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
       cardText={flippedText}
-      cardStyle={[styles.card, isReversed ? scheme.bg3 : scheme.bg4]}
+      cardStyle={styles.card}
+      cardBg={isReversed ? scheme.bg3 : scheme.bg4}
       textStyle={scheme.txt}
     />
   );

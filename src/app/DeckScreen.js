@@ -73,31 +73,33 @@ const DeckScreen = () => {
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
   return (
-    <ScreenTemplate>
+    <>
       <Toolbar title={currentDeck?.name || ""} theme={theme} toggleTheme={toggleTheme} />
-      {currentDeckData && (
-        <>
-          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            {[
-              { icon: "✓", color: "green", label: "Enable All", onPress: () => onCheckboxClick(false) },
-              { icon: "✕", color: "red", label: "Disable All", onPress: () => onCheckboxClick(true) },
-            ].map(({ icon, color, label, onPress }) => (
-              <Pressable key={label} style={[scheme.bg2, styles.blanketButton]} onPress={onPress}>
-                <Text style={{ color }}>{icon}</Text>
-                <Text style={scheme.txt}> {label}</Text>
-              </Pressable>
-            ))}
-          </View>
-          <FlatList
-            keyExtractor={(item) => item.id}
-            style={{ width: "100%" }}
-            data={currentDeckData.questions}
-            renderItem={renderItem}
-          />
-        </>
-      )}
-      {!currentDeckData && <Text style={scheme.txt}>Loading question data...</Text>}
-    </ScreenTemplate>
+      <ScreenTemplate>
+        {currentDeckData && (
+          <>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              {[
+                { icon: "✓", color: "green", label: "Enable All", onPress: () => onCheckboxClick(false) },
+                { icon: "✕", color: "red", label: "Disable All", onPress: () => onCheckboxClick(true) },
+              ].map(({ icon, color, label, onPress }) => (
+                <Pressable key={label} style={[scheme.bg2, styles.blanketButton]} onPress={onPress}>
+                  <Text style={{ color }}>{icon}</Text>
+                  <Text style={scheme.txt}> {label}</Text>
+                </Pressable>
+              ))}
+            </View>
+            <FlatList
+              keyExtractor={(item) => item.id}
+              style={{ width: "100%" }}
+              data={currentDeckData.questions}
+              renderItem={renderItem}
+            />
+          </>
+        )}
+        {!currentDeckData && <Text style={scheme.txt}>Loading question data...</Text>}
+      </ScreenTemplate>
+    </>
   );
 };
 

@@ -1,24 +1,28 @@
-import {
-  Dimensions,
-  ImageBackground,
-} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet } from "react-native";
 
-import { THEMES } from "../common/constants";
-
-require("../../assets/pexels-gantas-3750272.jpg");
-require("../../assets/pexels-asphotograpy-518245.jpg");
-
+// via google.com ai
 const Background = ({ theme, children }) => {
-  const { width, height } = Dimensions.get("window");
-  const appBg =
-    theme === THEMES.dark
-      ? require("../../assets/pexels-gantas-3750272.jpg")
-      : require("../../assets/pexels-asphotograpy-518245.jpg");
   return (
-    <ImageBackground source={appBg} style={{ width: width, height: height }}>
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]} // Array of colors for the gradient
+      style={styles.background}
+      start={{ x: 0, y: 0 }} // Optional: start point of the gradient (top-left)
+      end={{ x: 1, y: 1 }} // Optional: end point of the gradient (bottom-right)
+    >
       {children}
-    </ImageBackground>
+    </LinearGradient>
   );
 };
+
+const styles = StyleSheet.create({
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0, // Ensures it covers the entire parent View
+  },
+});
 
 export default Background;

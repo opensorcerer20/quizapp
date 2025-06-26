@@ -16,10 +16,12 @@ export default QuizApp = () => {
   // console.log("quizapp state " + JSON.stringify({ deckListData }));
 
   return (
-    <ScreenTemplate>
+    <>
       <Toolbar showBack={false} theme={theme} toggleTheme={toggleTheme} />
-      <DeckList />
+      <ScreenTemplate>
+        <DeckList />
+      </ScreenTemplate>
       <StatusBar style="dark" />
-    </ScreenTemplate>
+    </>
   );
 };
