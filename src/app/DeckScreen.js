@@ -1,23 +1,11 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import { useLocalSearchParams } from "expo-router";
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { Checkbox } from "react-native-paper";
 
 import { THEMES } from "../common/constants";
-import {
-  loadDeckData,
-  saveDeckData,
-} from "../common/fileLib";
+import { loadDeckData, saveDeckData } from "../common/fileLib";
 import { lightDarkStyles } from "../common/lib";
 import { formatCardText } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
@@ -101,7 +89,8 @@ const DeckScreen = () => {
             ))}
           </View>
           <FlatList
-            contentContainerStyle={{ alignItems: "center" }}
+            keyExtractor={(item) => item.id}
+            style={{ width: "100%" }}
             data={currentDeckData.questions}
             renderItem={renderItem}
           />
@@ -116,10 +105,11 @@ const styles = StyleSheet.create({
   item: {
     width: "90%",
     flexDirection: "row",
-    paddingHorizontal: 10,
+    paddingRight: 10,
     paddingVertical: 5,
     borderRadius: 5,
-    margin: 2,
+    marginVertical: 2,
+    marginHorizontal: "auto",
     alignItems: "center",
   },
   blanketButton: {
@@ -130,6 +120,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
+    maxWidth: "90%",
   },
   ...lightDarkStyles,
 });

@@ -1,24 +1,15 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import { difference } from "lodash";
-import {
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { THEMES } from "../../common/constants";
 import { lightDarkStyles } from "../../common/lib";
 import { getRandomInt } from "../../common/util";
+import Background from "../Background";
 import { DeckNav } from "../Deck/DeckNav";
 import FlipCard from "../Deck/FlipCard";
-import {
-  emptyQuestion,
-  randomizeQBag,
-} from "../Deck/QuizDeck";
+import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
 import { useTheme } from "../Providers/ThemeProvider";
 
@@ -97,10 +88,14 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
   // console.log("state " + JSON.stringify({ currentState, hasQuestionData }));
 
   return (
-    <>
+    <Background theme={theme}>
       {hasQuestionData && (
-        <View style={[styles.container, scheme.bg]}>
-          <ReverseDeckButton txtStyle={scheme.txt} isReversed={isReversed} onClick={() => setIsReversed(!isReversed)} />
+        <View style={[styles.container]}>
+          <ReverseDeckButton
+            txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+            isReversed={isReversed}
+            onClick={() => setIsReversed(!isReversed)}
+          />
           <Text
             style={[
               scheme.txt,
@@ -136,7 +131,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
           <Text style={scheme.txt}>No deck data</Text>
         </View>
       )}
-    </>
+    </Background>
   );
 };
 

@@ -9,6 +9,9 @@ export const lightDarkStyles = {
     bg3: {
       backgroundColor: "#514254",
     },
+    bg4: {
+      backgroundColor: "#7a6180",
+    },
     border: {
       borderColor: "dddddd",
     },
@@ -30,6 +33,9 @@ export const lightDarkStyles = {
     },
     bg3: {
       backgroundColor: "#cbabd1",
+    },
+    bg4: {
+      backgroundColor: "#e9b3f2",
     },
     border: {
       borderColor: "222222",

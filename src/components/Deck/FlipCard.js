@@ -1,27 +1,11 @@
-import React, {
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import Animated, {
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { THEMES } from "../../common/constants";
 import { lightDarkStyles } from "../../common/lib";
-import {
-  formatCardText,
-  getFontSize,
-} from "../../common/util";
+import { formatCardText, getFontSize } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 
 /**
@@ -47,7 +31,7 @@ const CardContent = ({ cardType, cardText, cardStyle, textStyle }) => {
       <Text
         style={[
           { fontWeight: "bold" },
-          styles.cardTypeText,
+          textStyle,
           {
             textAlign: cardType === CARDTYPE_ANSWER ? "right" : "left",
           },
@@ -87,8 +71,8 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
     <CardContent
       cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
       cardText={regularText}
-      cardStyle={isReversed ? styles.flippedCard : styles.regularCard}
-      textStyle={styles.cardText}
+      cardStyle={[styles.card, isReversed ? scheme.bg4 : scheme.bg3]}
+      textStyle={scheme.txt}
     />
   );
 
@@ -96,8 +80,8 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
     <CardContent
       cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
       cardText={flippedText}
-      cardStyle={isReversed ? styles.regularCard : styles.flippedCard}
-      textStyle={styles.cardText}
+      cardStyle={[styles.card, isReversed ? scheme.bg3 : scheme.bg4]}
+      textStyle={scheme.txt}
     />
   );
 
@@ -161,15 +145,10 @@ const styles = StyleSheet.create({
     backfaceVisibility: "hidden",
     // margin: "auto", // <-- this works for flipped card, but not unflipped
   },
-  regularCard: {
-    flex: 1,
-    backgroundColor: "#00cff7",
-    borderRadius: 16,
-    padding: 10,
-  },
   cardTypeText: {
     color: "black",
     fontSize: 16,
+    paddingRight: 10,
   },
   cardText: {
     color: "black",
@@ -184,9 +163,8 @@ const styles = StyleSheet.create({
   xxl: {
     fontSize: 40,
   },
-  flippedCard: {
+  card: {
     flex: 1,
-    backgroundColor: "#77ee00",
     borderRadius: 16,
     padding: 10,
   },

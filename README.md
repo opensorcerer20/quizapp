@@ -284,13 +284,13 @@ itemMenuButton: {
         -   [x] shadow visible
     -   [ ] quiz mode (only if it's quick)
     -   [x] line breaks
-    -   [ ] font size (?)
     -   [x] fab visible in review screen
     -   [x] title bar background
     -   [ ] app icon
     -   [x] change "quizapp" to "flashcard library"
     -   [ ] do something about decklist multiple state vars
     -   [x] decklist menu can go off to the right
+    -   [x] apply light/dark and purple theme throughout
 
 -   [ ] launch critical bugs
 
@@ -301,14 +301,14 @@ itemMenuButton: {
 
 -   [ ] add themes for cards
 
-    -   [ ] apply light/dark to card theme
+    -   [x] apply light/dark to card theme
     -   [ ] keep original colors
     -   [ ] add white/grey note card
 
 -   [ ] last chance before beta
 
     -   [ ] remove all @todos
-    -   [ ] import big file into smaller decks?
+    -   [ ] import big csv/txt file into smaller decks?
 
 -   [ ] code cleanup
     - [ ] move all "style"s to stylesheets

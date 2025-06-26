@@ -1,3 +1,6 @@
+npx expo run:android --device
+
+
 - To use EAS CLI without installing it globally, you can use the npx command. This command executes a package from the npm registry without installing it globally. You can then use `npx eas-cli@latest` to run EAS CLI commands.
 - building a standalone app for testing
 - Prepare for building: Generate the native Android and iOS directories using npx expo prebuild: npx expo prebuild
