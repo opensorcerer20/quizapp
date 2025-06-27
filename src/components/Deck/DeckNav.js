@@ -2,14 +2,13 @@ import { Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
-import { THEMES } from "../../common/constants";
-import { lightDarkStyles } from "../../common/lib";
+import { getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 
 const NavButton = ({ enabled, onClick, children, scheme, extraStyles = {} }) => {
   return (
     <Pressable
-      style={[styles.button, scheme.bgAccent1, extraStyles]}
+      style={[styles.button, enabled ? scheme.bgAccent3 : scheme.disabled, extraStyles]}
       onPress={enabled ? () => onClick() : () => {}}
       onLongPress={enabled ? () => onClick() : () => {}}
     >
@@ -21,7 +20,7 @@ const NavButton = ({ enabled, onClick, children, scheme, extraStyles = {} }) => 
 export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, onResetClick, onStartOverClick }) => {
   const { theme } = useTheme();
 
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
   return (
     <View style={{ display: "flex", padding: 20, marginTop: 10 }}>
       <View
@@ -80,5 +79,4 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
   },
-  ...lightDarkStyles,
 });

@@ -1,9 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import {
-  DECK_DATA_KEY,
-  DECK_QA_KEY,
-} from "./constants";
+import { DECK_DATA_KEY, DECK_QA_KEY } from "./constants";
 
 export const loadStorageData = async (key) => {
   try {
@@ -73,6 +70,17 @@ export const saveDeckData = async (deckId, deckData) => {
     console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
   }
   return false;
+};
+
+export const updateDeckQuestionData = async (deckId, questions) => {
+  try {
+    const deckData = await loadStorageData(DECK_QA_KEY + `_${deckId}`);
+    if (deckData) {
+      await saveStorageData(DECK_QA_KEY + `_${deckId}`, { ...deckData, questions });
+    }
+  } catch (error) {
+    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+  }
 };
 
 export const removeStorageData = async (key) => {

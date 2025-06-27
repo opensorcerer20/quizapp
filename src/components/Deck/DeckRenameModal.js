@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { trim } from "lodash";
 import { Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-import { THEMES } from "../../common/constants";
-import { lightDarkStyles } from "../../common/lib";
+import { getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 
 const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, handleRenameDeck, showCancel = true }) => {
@@ -12,7 +11,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
   const [submitEnabled, setSubmitEnabled] = useState(true);
 
   const { theme } = useTheme();
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
 
   const onDeckNameUpdate = (text) => {
     setDeckName(text);
@@ -105,7 +104,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  ...lightDarkStyles,
 });
 
 export default DeckRenameModal;

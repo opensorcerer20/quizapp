@@ -5,10 +5,9 @@ import { router, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
 
-import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, THEMES } from "../common/constants";
+import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT } from "../common/constants";
 import { loadStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
-import { lightDarkStyles } from "../common/lib";
-import { getRandomInt, sanitizeAll } from "../common/util";
+import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
@@ -41,7 +40,7 @@ export const DeckList = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
 
   const { theme } = useTheme();
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
 
   // @todo this is used when fab is clicked, need renaming
   const [state, setState] = useState({ open: false });
@@ -297,7 +296,9 @@ export const DeckList = () => {
           </QuizModal>
         </View>
       )}
-      {deckListData.length < 1 && <Text style={scheme.txt}>No decks in memory, please add a deck</Text>}
+      {deckListData.length < 1 && (
+        <Text style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</Text>
+      )}
 
       {showFab && (
         // this is broken for iphone, specifically fab.group
@@ -379,7 +380,6 @@ const styles = StyleSheet.create({
   fabDisabled: {
     backgroundColor: "grey",
   },
-  ...lightDarkStyles,
 });
 
 export default DeckList;

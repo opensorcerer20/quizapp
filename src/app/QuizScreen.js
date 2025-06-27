@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
 
-import { THEMES } from "../common/constants";
-import { loadDeckData } from "../common/fileLib";
-import { lightDarkStyles } from "../common/lib";
+import { loadDeckData, updateDeckQuestionData } from "../common/fileLib";
+import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import { ReviewScreen } from "../components/Quiz/ReviewScreen";
 import ScreenTemplate from "../components/ScreenTemplate";
@@ -21,7 +20,12 @@ const QuizScreen = () => {
   const [currentDeckQuestionData, setCurrentDeckQuestionData] = useState([]);
 
   const { theme, toggleTheme } = useTheme();
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
+
+  const updateQuestionData = async (id, newBag) => {
+    await updateDeckQuestionData(id, newBag);
+    setCurrentDeckQuestionData(newBag);
+  };
 
   useEffect(() => {
     if (deckId) {
@@ -49,21 +53,21 @@ const QuizScreen = () => {
   if (whichScreen === "review") {
     return (
       <>
-        <Toolbar title={currentDeck?.name || ""} theme={theme} toggleTheme={toggleTheme} />
+        <Toolbar title={currentDeck?.name || ""} themeSetting={theme} toggleTheme={toggleTheme} />
         <ScreenTemplate>
           {!!currentDeck && (
-            <ReviewScreen currentDeck={currentDeck} currentDeckQuestionData={currentDeckQuestionData} />
+            <ReviewScreen
+              currentDeck={currentDeck}
+              currentDeckQuestionData={currentDeckQuestionData}
+              updateQuestionData={updateQuestionData}
+            />
           )}
-          {!currentDeck && <Text style={{ padding: 10 }}>Loading...</Text>}
+          {!currentDeck && <Text style={[scheme.txt, { padding: 10 }]}>Loading...</Text>}
         </ScreenTemplate>
       </>
     );
   }
-  return <Text>Error: no screen specified</Text>;
+  return <Text style={[scheme.txt, { padding: 10 }]}>Error: no screen specified</Text>;
 };
-
-const styles = StyleSheet.create({
-  ...lightDarkStyles,
-});
 
 export default QuizScreen;

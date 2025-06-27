@@ -1,11 +1,7 @@
 import sanitizeHtml from "sanitize-html";
 
-import {
-  MAX_CHAR_LIMIT,
-  MAX_CHAR_LIMIT_L,
-  MAX_CHAR_LIMIT_XL,
-  MAX_CHAR_LIMIT_XXL,
-} from "./constants";
+import { MAX_CHAR_LIMIT, MAX_CHAR_LIMIT_L, MAX_CHAR_LIMIT_XL, MAX_CHAR_LIMIT_XXL, THEMES } from "./constants";
+import { lightDarkStyles } from "./lib";
 
 export const getRandomInt = (min, max) => {
   // min and max included
@@ -77,4 +73,12 @@ export const formatCardText = (text, lineLimitOverride = null) => {
 
 export const sanitizeAll = (dirty) => {
   return sanitizeHtml(dirty, { allowedTags: [], allowedAttributes: {} });
+};
+
+export const getScheme = (theme) => {
+  return theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+};
+
+const styles = {
+  ...lightDarkStyles,
 };

@@ -4,10 +4,8 @@ import { useLocalSearchParams } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { Checkbox } from "react-native-paper";
 
-import { THEMES } from "../common/constants";
 import { loadDeckData, saveDeckData } from "../common/fileLib";
-import { lightDarkStyles } from "../common/lib";
-import { formatCardText } from "../common/util";
+import { formatCardText, getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import Toolbar from "../components/Toolbar";
@@ -18,7 +16,7 @@ const DeckScreen = () => {
   const [currentDeckData, setCurrentDeckData] = useState([]);
 
   const { theme, toggleTheme } = useTheme();
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
 
   // sets either all checkboxes or specific checkbox "disabled" property
   const onCheckboxClick = (disabledValue, id = null) => {
@@ -124,7 +122,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     maxWidth: "90%",
   },
-  ...lightDarkStyles,
 });
 
 export default DeckScreen;

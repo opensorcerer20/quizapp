@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 
 import { difference } from "lodash";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
-import { THEMES } from "../../common/constants";
-import { lightDarkStyles } from "../../common/lib";
-import { getRandomInt } from "../../common/util";
+import { getRandomInt, getScheme } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { StyledSwitch } from "../Deck/StyledSwitch";
 import { useTheme } from "../Providers/ThemeProvider";
 
-export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
+export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
   const [isReversed, setIsReversed] = useState(false);
   const { theme } = useTheme();
+  const scheme = getScheme(theme);
 
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
   const [currentState, setCurrentState] = useState({
     originalBag: [],
     questionBag: [],
@@ -76,13 +74,23 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
   };
 
   const disableQuestion = (id) => {
-    console.log("disable id " + id);
-    // make copy of currentDeckQuestionData
-    // set question with id to disabled
-    // save copy of currentDeckQuestionData
+    // avoid issue where there are no questions
+    if (currentDeckQuestionData.length > 1) {
+      const newBag = currentDeckQuestionData.map((question) => {
+        if (question.id === id) {
+          return { ...question, disabled: true };
+        }
+        return question;
+      });
+      updateQuestionData(currentDeck.id, newBag);
+    }
   };
 
   const hasQuestionData = !!currentState.currentQuestion.q;
+  const currentQuestionStateFilter = currentState?.currentQuestion?.id
+    ? currentDeckQuestionData.filter((question) => question.id === currentState.currentQuestion.id)
+    : [];
+  const currentQuestionState = currentQuestionStateFilter.length === 1 ? currentQuestionStateFilter[0] : null;
 
   // initial run, go ahead and reset question bag
   useEffect(() => {
@@ -97,18 +105,26 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
     <>
       {hasQuestionData && (
         <View style={[styles.container]}>
-          <StyledSwitch
-            txtStyle={[scheme.txt, { fontWeight: "bold" }]}
-            optionValue={isReversed}
-            onClick={() => setIsReversed(!isReversed)}
-            labelTxt={"Reverse Q & A"}
-          />
-          <StyledSwitch
-            txtStyle={[scheme.txt, { fontWeight: "bold" }]}
-            optionValue={!currentState.currentQuestion.disabled}
-            onClick={() => disableQuestion(currentState.currentQuestion.id)}
-            labelTxt={"Card Enabled"}
-          />
+          <View style={{ paddingBottom: Platform.OS === "ios" ? 10 : 0 }}>
+            <StyledSwitch
+              theme={theme}
+              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+              optionValue={isReversed}
+              onClick={() => setIsReversed(!isReversed)}
+              labelTxt={"Reverse Q & A"}
+            />
+          </View>
+          <View style={{ paddingBottom: Platform.OS === "ios" ? 5 : 0 }}>
+            <StyledSwitch
+              theme={theme}
+              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+              optionValue={
+                currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
+              }
+              onClick={() => disableQuestion(currentState.currentQuestion.id)}
+              labelTxt={"Card Enabled"}
+            />
+          </View>
           <Text
             style={[
               scheme.txt,
@@ -152,5 +168,4 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
-  ...lightDarkStyles,
 });

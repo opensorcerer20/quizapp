@@ -1,9 +1,8 @@
 import { router } from "expo-router";
-import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 
 import { THEMES } from "../common/constants";
-import { lightDarkStyles } from "../common/lib";
+import { getScheme } from "../common/util";
 import { useTheme } from "./Providers/ThemeProvider";
 
 const Toolbar = ({ title = null, showBack = true, themeSetting = THEMES.light, toggleTheme = () => {} }) => {
@@ -13,7 +12,7 @@ const Toolbar = ({ title = null, showBack = true, themeSetting = THEMES.light, t
   }
 
   const { theme } = useTheme();
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
 
   return (
     <Appbar.Header style={[scheme.bgAccent1, scheme.txt]}>
@@ -23,9 +22,5 @@ const Toolbar = ({ title = null, showBack = true, themeSetting = THEMES.light, t
     </Appbar.Header>
   );
 };
-
-const styles = StyleSheet.create({
-  ...lightDarkStyles,
-});
 
 export default Toolbar;

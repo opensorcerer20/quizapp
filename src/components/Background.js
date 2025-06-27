@@ -1,12 +1,11 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 
-import { THEMES } from "../common/constants";
-import { lightDarkStyles } from "../common/lib";
+import { getScheme } from "../common/util";
 
 // via google.com ai
 const Background = ({ theme, children }) => {
-  const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
+  const scheme = getScheme(theme);
   return (
     <LinearGradient
       colors={[scheme.bgAccent2.backgroundColor, scheme.bgAccent1.backgroundColor, scheme.bgAccent2.backgroundColor]} // Array of colors for the gradient
@@ -27,7 +26,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0, // Ensures it covers the entire parent View
   },
-  ...lightDarkStyles,
 });
 
 export default Background;
