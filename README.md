@@ -265,7 +265,7 @@ itemMenuButton: {
     -   [x] deck rename not persisted
     -   [x] android back button exits app, need react navigation
     -   [x] list view to enable/disable cards
-    -   [ ] disable card in review view
+    -   [x] disable card in review view
     -   [ ] switch to show disabled cards in review view
     -   [x] move "deck list" operations to decklist, out of index
     -   [x] poker questions bugs found

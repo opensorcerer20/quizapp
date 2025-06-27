@@ -73,12 +73,12 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   };
 
-  const disableQuestion = (id) => {
+  const onEnableSwitchClick = (id, isNowDisabled) => {
     // avoid issue where there are no questions
     if (currentDeckQuestionData.length > 1) {
       const newBag = currentDeckQuestionData.map((question) => {
         if (question.id === id) {
-          return { ...question, disabled: true };
+          return { ...question, disabled: !!isNowDisabled };
         }
         return question;
       });
@@ -115,13 +115,20 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             />
           </View>
           <View style={{ paddingBottom: Platform.OS === "ios" ? 5 : 0 }}>
+            {/* true if disabled == false */}
+            {/* new value == !question.disabled */}
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
               optionValue={
                 currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
               }
-              onClick={() => disableQuestion(currentState.currentQuestion.id)}
+              onClick={() =>
+                onEnableSwitchClick(
+                  currentState.currentQuestion.id,
+                  currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
+                )
+              }
               labelTxt={"Card Enabled"}
             />
           </View>
