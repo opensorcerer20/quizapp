@@ -69,6 +69,8 @@ itemMenuButton: {
     - install (policy?) on device
     - eas build preview
     - scan qr code to install via itunes
+- for fab.group, setting fab button color required using fabstyle attribute
+- tricky bit where the card can be "disabled" but switch indicated "enabled", and setting it to the other value was the opposite boolean result
 
 
 ## Completed Roadmap Development
