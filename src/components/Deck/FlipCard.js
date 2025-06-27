@@ -88,7 +88,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
       cardText={regularText}
       cardStyle={styles.card}
-      cardBg={isReversed ? scheme.bg4 : scheme.bg3}
+      cardBg={isReversed ? scheme.bgAccent2 : scheme.bgAccent1}
       textStyle={scheme.txt}
     />
   );
@@ -98,7 +98,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
       cardText={flippedText}
       cardStyle={styles.card}
-      cardBg={isReversed ? scheme.bg3 : scheme.bg4}
+      cardBg={isReversed ? scheme.bgAccent1 : scheme.bgAccent2}
       textStyle={scheme.txt}
     />
   );

@@ -1,15 +1,15 @@
 export const lightDarkStyles = {
   schemeDark: {
-    bg: {
+    bgPrimary: {
       backgroundColor: "#121212",
     },
-    bg2: {
-      backgroundColor: "#666666",
+    bgSecondary: {
+      backgroundColor: "#888888",
     },
-    bg3: {
+    bgAccent1: {
       backgroundColor: "#514254",
     },
-    bg4: {
+    bgAccent2: {
       backgroundColor: "#7a6180",
     },
     border: {
@@ -28,13 +28,13 @@ export const lightDarkStyles = {
     bg: {
       backgroundColor: "#dddddd",
     },
-    bg2: {
-      backgroundColor: "#aaaaaa",
+    bgSecondary: {
+      backgroundColor: "#dddddd",
     },
-    bg3: {
+    bgAccent1: {
       backgroundColor: "#cbabd1",
     },
-    bg4: {
+    bgAccent2: {
       backgroundColor: "#e9b3f2",
     },
     border: {

@@ -23,11 +23,11 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
     setDeckName(initialDeckName);
   }, []);
 
-  const submitBgStyle = submitEnabled ? scheme.bg3 : scheme.bg;
+  const submitBgStyle = submitEnabled ? scheme.bgAccent1 : scheme.bgPrimary;
 
   return (
     <View style={[styles.container, styles.centeredView]}>
-      <View style={[styles.modalView, scheme.bg, scheme.border]}>
+      <View style={[styles.modalView, scheme.bgPrimary, scheme.border]}>
         <View>
           <Text style={[scheme.txt, { paddingBottom: 10 }]}>Name this deck</Text>
         </View>
@@ -36,7 +36,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
         </Text>
         <View style={{ flex: 1, flexDirection: "row" }}>
           {showCancel && (
-            <Pressable style={[styles.button, scheme.bg2]} onPress={handleCancelClick}>
+            <Pressable style={[styles.button, scheme.bgSecondary]} onPress={handleCancelClick}>
               <Text style={[styles.textStyle, scheme.txt]}>Cancel</Text>
             </Pressable>
           )}

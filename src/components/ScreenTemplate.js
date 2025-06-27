@@ -10,7 +10,7 @@ const ScreenTemplate = ({ children }) => {
   const scheme = theme === THEMES.dark ? styles.schemeDark : styles.schemeLight;
 
   return (
-    <View style={[styles.container, scheme.bg, scheme.txt]}>
+    <View style={[styles.container, scheme.bgPrimary, scheme.txt]}>
       <Background theme={theme}>{children}</Background>
     </View>
   );

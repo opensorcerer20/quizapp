@@ -155,7 +155,7 @@ export const DeckList = () => {
   const renderItem = ({ item }) => {
     return (
       <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-        <View style={[styles.item, scheme.bg3, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
+        <View style={[styles.item, scheme.bgSecondary, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
           <Text style={[styles.itemText, scheme.txt]}>
             {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
           </Text>

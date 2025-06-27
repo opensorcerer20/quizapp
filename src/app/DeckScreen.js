@@ -35,7 +35,7 @@ const DeckScreen = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View key={item.id} style={[scheme.bg2, scheme.txt, styles.item]}>
+      <View key={item.id} style={[scheme.bgSecondary, scheme.txt, styles.item]}>
         <Checkbox
           status={item.disabled ? "unchecked" : "checked"}
           onPress={() => onCheckboxClick(!item?.disabled, item.id)}
@@ -83,7 +83,7 @@ const DeckScreen = () => {
                 { icon: "✓", color: "green", label: "Enable All", onPress: () => onCheckboxClick(false) },
                 { icon: "✕", color: "red", label: "Disable All", onPress: () => onCheckboxClick(true) },
               ].map(({ icon, color, label, onPress }) => (
-                <Pressable key={label} style={[scheme.bg2, styles.blanketButton]} onPress={onPress}>
+                <Pressable key={label} style={[scheme.bgSecondary, styles.blanketButton]} onPress={onPress}>
                   <Text style={{ color }}>{icon}</Text>
                   <Text style={scheme.txt}> {label}</Text>
                 </Pressable>

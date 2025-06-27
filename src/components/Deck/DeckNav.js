@@ -9,7 +9,7 @@ import { useTheme } from "../Providers/ThemeProvider";
 const NavButton = ({ enabled, onClick, children, scheme, extraStyles = {} }) => {
   return (
     <Pressable
-      style={[styles.button, scheme.bg3, extraStyles]}
+      style={[styles.button, scheme.bgAccent1, extraStyles]}
       onPress={enabled ? () => onClick() : () => {}}
       onLongPress={enabled ? () => onClick() : () => {}}
     >
