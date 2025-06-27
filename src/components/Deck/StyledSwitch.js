@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
 
-export const ReverseDeckButton = ({ txtStyle, isReversed, onClick }) => {
+export const StyledSwitch = ({ txtStyle, optionValue = true, onClick, labelTxt }) => {
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
@@ -9,14 +9,14 @@ export const ReverseDeckButton = ({ txtStyle, isReversed, onClick }) => {
             false: "#767577",
             true: "#81b0ff",
           }}
-          thumbColor={isReversed ? "#f5dd4b" : "#f4f3f4"}
+          thumbColor={!!optionValue ? "#f5dd4b" : "#f4f3f4"}
           onValueChange={onClick}
-          value={isReversed}
+          value={!!optionValue}
           style={styles.switch}
         />
 
         <Pressable onPress={onClick} onLongPress={onClick} style={styles.switchTextPress}>
-          <Text style={txtStyle}>Reverse Q & A</Text>
+          <Text style={txtStyle}>{labelTxt}</Text>
         </Pressable>
       </View>
     </View>

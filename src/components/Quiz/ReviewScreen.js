@@ -9,7 +9,7 @@ import { getRandomInt } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
-import { ReverseDeckButton } from "../Deck/ReverseDeckButton";
+import { StyledSwitch } from "../Deck/StyledSwitch";
 import { useTheme } from "../Providers/ThemeProvider";
 
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
@@ -76,6 +76,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
   };
 
   const disableQuestion = (id) => {
+    console.log("disable id " + id);
     // make copy of currentDeckQuestionData
     // set question with id to disabled
     // save copy of currentDeckQuestionData
@@ -88,18 +89,25 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData }) => {
     if (currentDeck && Array.isArray(currentDeckQuestionData) && currentDeckQuestionData.length > 0) {
       resetQuestionBag(true);
     }
-  }, [currentDeck, currentDeckQuestionData]);
+  }, []);
 
-  // console.log("state " + JSON.stringify({ currentState, hasQuestionData }));
+  // console.log("state " + JSON.stringify({ currentDeck, currentDeckQuestionData }));
 
   return (
     <>
       {hasQuestionData && (
         <View style={[styles.container]}>
-          <ReverseDeckButton
+          <StyledSwitch
             txtStyle={[scheme.txt, { fontWeight: "bold" }]}
-            isReversed={isReversed}
+            optionValue={isReversed}
             onClick={() => setIsReversed(!isReversed)}
+            labelTxt={"Reverse Q & A"}
+          />
+          <StyledSwitch
+            txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+            optionValue={!currentState.currentQuestion.disabled}
+            onClick={() => disableQuestion(currentState.currentQuestion.id)}
+            labelTxt={"Card Enabled"}
           />
           <Text
             style={[

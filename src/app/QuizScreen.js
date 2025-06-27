@@ -51,7 +51,10 @@ const QuizScreen = () => {
       <>
         <Toolbar title={currentDeck?.name || ""} theme={theme} toggleTheme={toggleTheme} />
         <ScreenTemplate>
-          <ReviewScreen currentDeck={currentDeck} currentDeckQuestionData={currentDeckQuestionData} />
+          {!!currentDeck && (
+            <ReviewScreen currentDeck={currentDeck} currentDeckQuestionData={currentDeckQuestionData} />
+          )}
+          {!currentDeck && <Text style={{ padding: 10 }}>Loading...</Text>}
         </ScreenTemplate>
       </>
     );
