@@ -8,7 +8,7 @@ import { useTheme } from "../Providers/ThemeProvider";
 const NavButton = ({ enabled, onClick, children, scheme, extraStyles = {} }) => {
   return (
     <Pressable
-      style={[styles.button, enabled ? scheme.bgAccent3 : scheme.disabled, extraStyles]}
+      style={[styles.button, enabled ? scheme.bgAccent2 : scheme.disabled, extraStyles]}
       onPress={enabled ? () => onClick() : () => {}}
       onLongPress={enabled ? () => onClick() : () => {}}
     >

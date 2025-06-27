@@ -17,7 +17,7 @@ export default QuizApp = () => {
 
   return (
     <>
-      <Toolbar showBack={false} theme={theme} toggleTheme={toggleTheme} />
+      <Toolbar showBack={false} themeSetting={theme} toggleTheme={toggleTheme} />
       <ScreenTemplate>
         <DeckList />
       </ScreenTemplate>

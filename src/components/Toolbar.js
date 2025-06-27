@@ -15,7 +15,7 @@ const Toolbar = ({ title = null, showBack = true, themeSetting = THEMES.light, t
   const scheme = getScheme(theme);
 
   return (
-    <Appbar.Header style={[scheme.bgAccent1, scheme.txt]}>
+    <Appbar.Header style={[scheme.antiTxtBg, scheme.txt]}>
       {showBack && <Appbar.BackAction color={scheme.txt.color} onPress={() => router.back()} />}
       <Appbar.Content title={title || "Flashcard Library"} color={scheme.txt.color} />
       {themeIcon && <Appbar.Action icon={themeIcon} onPress={toggleTheme} color={scheme.txt.color} />}

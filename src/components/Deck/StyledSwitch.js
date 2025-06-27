@@ -8,10 +8,11 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
     <View style={styles.container}>
       <Switch
         trackColor={{
-          false: scheme.bgPrimary,
-          true: scheme.bgPrimary,
+          false: scheme.bgAccent3.backgroundColor,
+          true: scheme.bgAccent3.backgroundColor,
         }}
-        thumbColor={!!optionValue ? scheme.bgAccent1 : scheme.disabled}
+        ios_backgroundColor={scheme.bgAccent3.backgroundColor}
+        thumbColor={!!optionValue ? scheme.txt.color : scheme.disabled.backgroundColor}
         onValueChange={onClick}
         value={!!optionValue}
       />

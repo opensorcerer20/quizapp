@@ -154,13 +154,25 @@ export const DeckList = () => {
   const renderItem = ({ item }) => {
     return (
       <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-        <View style={[styles.item, scheme.bgSecondary, selectedItem?.id === item.id ? styles.selectedItem : {}]}>
-          <Text style={[styles.itemText, scheme.txt]}>
+        <View
+          style={[
+            styles.item,
+            scheme.bgAccent3,
+            selectedItem?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
+            scheme.border,
+          ]}
+        >
+          <Text
+            style={[
+              styles.itemText,
+              { color: selectedItem?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color },
+            ]}
+          >
             {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
           </Text>
           <View style={styles.itemMenuButton}>
             <Button
-              textColor={scheme.txt.color}
+              textColor={selectedItem?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
               icon="dots-vertical"
               onPress={(event) => handleMenuPress(event, item)}
             />
@@ -307,6 +319,7 @@ export const DeckList = () => {
             open={open}
             visible
             icon="plus"
+            fabStyle={scheme.bgAntiPrimary}
             actions={[
               {
                 icon: "text",
@@ -323,7 +336,7 @@ export const DeckList = () => {
           />
         </Portal>
       )}
-      {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={styles.fabDisabled} />}
+      {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={scheme.disabled} />}
     </View>
   );
 };
