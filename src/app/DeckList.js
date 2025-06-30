@@ -6,7 +6,7 @@ import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } fro
 import { Button, FAB, Portal } from "react-native-paper";
 
 import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT } from "../common/constants";
-import { loadStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
+import { loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
@@ -28,24 +28,24 @@ export const DeckList = () => {
   const [importSource, setImportSource] = useState(emptyImportSource);
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
-
-  // used when deck menu is pressed
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [editingDeck, setEditingDeck] = useState(emptyDeck);
-  const [deckName, setDeckName] = useState("");
-  const [showCancel, setShowCancel] = useState(true);
-
-  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [menuState, setMenuState] = useState({
+    visible: false,
+    position: { top: 0, left: 0 },
+  });
+  const [renameState, setRenameState] = useState({
+    deckId: null,
+    editingDeck: emptyDeck,
+    visible: false,
+    showCancel: false,
+  });
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
 
-  // @todo this is used when fab is clicked, need renaming
-  const [state, setState] = useState({ open: false });
-  const onStateChange = ({ open }) => setState({ open });
-  const { open } = state;
+  const [fabOpen, setFabOpen] = useState(false);
+  const onFABClick = ({ open }) => {
+    setFabOpen(!!open);
+  };
 
   const loadDeckListData = async () => {
     let newDeckListData = await loadStorageData(DECK_DATA_KEY);
@@ -106,8 +106,8 @@ export const DeckList = () => {
   };
 
   const unSelectItem = () => {
-    setSelectedItem(null);
-    setMenuVisible(false);
+    setRenameState({ ...renameState, editingDeck: emptyDeck });
+    setMenuState({ ...menuState, visible: false });
   };
 
   const handleModalClickAway = () => {
@@ -119,35 +119,31 @@ export const DeckList = () => {
     const modalWidth = 100;
     let modalX = Math.max(pageX - modalWidth, 0);
     modalX = Math.min(SAFE_WIDTH - DECK_LIST_MENU_WIDTH, modalX);
-    setMenuPosition({ top: pageY, left: modalX });
-    setSelectedItem(item);
-    setMenuVisible(true);
+    setRenameState({ ...renameState, editingDeck: item });
+    setMenuState({ position: { top: pageY, left: modalX }, visible: true });
   };
 
   const handleViewClick = () => {
     router.navigate({
       pathname: "DeckScreen",
-      params: { deckId: selectedItem.id },
+      params: { deckId: renameState.editingDeck.id },
     });
     unSelectItem();
   };
 
   const handleRenameClick = () => {
-    const selected = deckListData.filter((deck) => deck.id === selectedItem.id);
+    const selected = deckListData.filter((deck) => deck.id === renameState.editingDeck.id);
     if (selected.length === 1) {
-      setEditingDeck(selected[0]);
-      setDeckName(selectedItem.name);
-      setEditModalVisible(true);
-      setMenuVisible(false);
-      setShowCancel(true);
+      setMenuState({ ...menuState, visible: false });
+      setRenameState({ ...renameState, showCancel: true, visible: true, editingDeck: selected[0] });
     } else {
-      console.log("Error editing deck with id " + selectedItem.id);
+      console.log("Error editing deck with id " + renameState.editingDeck.id);
       unSelectItem();
     }
   };
 
   const handleDeleteClick = () => {
-    onDeleteDeck(selectedItem.id);
+    onDeleteDeck(renameState.editingDeck.id);
     unSelectItem();
   };
 
@@ -158,21 +154,23 @@ export const DeckList = () => {
           style={[
             styles.item,
             scheme.bgAccent3,
-            selectedItem?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
+            renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
             scheme.border,
           ]}
         >
           <Text
             style={[
               styles.itemText,
-              { color: selectedItem?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color },
+              {
+                color: renameState.editingDeck?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color,
+              },
             ]}
           >
             {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
           </Text>
           <View style={styles.itemMenuButton}>
             <Button
-              textColor={selectedItem?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
+              textColor={renameState.editingDeck?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
               icon="dots-vertical"
               onPress={(event) => handleMenuPress(event, item)}
             />
@@ -200,6 +198,7 @@ export const DeckList = () => {
   };
 
   const importDeck = async () => {
+    // generate deck id that doesnt already exist
     let newDeckId;
     let limit = 0;
     do {
@@ -213,7 +212,7 @@ export const DeckList = () => {
 
     const newQuestionArray = await getFileData(importSource);
     const [newDeckName] = importSource.name.split(".");
-    const newDeck = makeNewDeck(newDeckId, newDeckName);
+    const newDeck = makeNewDeck(newDeckId, sanitizeAll(newDeckName));
     const newDeckData = makeNewDeckData(newDeckId, newQuestionArray);
 
     await onAddDeck(newDeck, newDeckData);
@@ -221,17 +220,11 @@ export const DeckList = () => {
     setImportSource(emptyImportSource);
 
     // @todo this is too big for useState
-    setEditingDeck(newDeck);
-    setDeckName(sanitizeAll(newDeckName));
-    setEditModalVisible(true);
-    setShowCancel(false);
+    setRenameState({ ...renameState, showCancel: false, visible: true, editingDeck: newDeck });
   };
 
   const clearEditModal = () => {
-    setEditModalVisible(false);
-    setEditingDeck(emptyDeck);
-    setDeckName("");
-    setSelectedItem(null);
+    setRenameState({ ...renameState, visible: false, editingDeck: emptyDeck });
   };
 
   const handleCancelClick = () => {
@@ -271,7 +264,7 @@ export const DeckList = () => {
   const path = usePathname();
   const showFab = path === "/" && deckListData.length < MAX_DECKS;
 
-  // console.log("testing console log (show debug data here) " + JSON.stringify({}));
+  //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
 
   return (
     <View style={styles.container}>
@@ -279,24 +272,24 @@ export const DeckList = () => {
         <View style={{ padding: 10 }}>
           <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
           <FlatList data={deckListData} renderItem={renderItem} />
-          <QuizModal modalVisible={editModalVisible} handleModalClickAway={() => {}}>
+          <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
             <DeckRenameModal
-              initialDeckName={deckName}
-              editingDeck={editingDeck}
+              initialDeckName={renameState.editingDeck.name}
+              editingDeck={renameState.editingDeck}
               handleCancelClick={handleCancelClick}
               handleRenameDeck={handleRenameDeck}
-              showCancel={showCancel}
+              showCancel={renameState.showCancel}
             />
           </QuizModal>
 
           <QuizModal
-            modalVisible={menuVisible}
+            modalVisible={menuState.visible}
             handleModalClickAway={handleModalClickAway}
             modalContainerStyle={[
               styles.menu,
               {
-                top: menuPosition.top,
-                left: menuPosition.left,
+                top: menuState.position.top,
+                left: menuState.position.left,
               },
             ]}
           >
@@ -316,7 +309,7 @@ export const DeckList = () => {
         // this is broken for iphone, specifically fab.group
         <Portal>
           <FAB.Group
-            open={open}
+            open={fabOpen}
             visible
             icon="plus"
             fabStyle={scheme.bgAntiPrimary}
@@ -332,7 +325,7 @@ export const DeckList = () => {
                 onPress: () => onPressImport("csv"),
               },
             ]}
-            onStateChange={onStateChange}
+            onStateChange={onFABClick}
           />
         </Portal>
       )}
@@ -367,9 +360,6 @@ const styles = StyleSheet.create({
         elevation: 10,
       },
     }),
-  },
-  selectedItem: {
-    backgroundColor: "#ffcccc",
   },
   itemText: {
     flex: 10,
