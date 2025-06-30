@@ -5,7 +5,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { Checkbox } from "react-native-paper";
 
 import { loadDeckData, saveDeckData } from "../common/fileLib";
-import { formatCardText, getScheme } from "../common/util";
+import { formatCardText, getBgScheme, getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import Toolbar from "../components/Toolbar";
@@ -17,6 +17,7 @@ const DeckScreen = () => {
 
   const { theme, toggleTheme } = useTheme();
   const scheme = getScheme(theme);
+  const schemeBg = getBgScheme(theme);
 
   // sets either all checkboxes or specific checkbox "disabled" property
   const onCheckboxClick = (disabledValue, id = null) => {
@@ -35,6 +36,7 @@ const DeckScreen = () => {
     return (
       <View key={item.id} style={[scheme.bgAccent3, scheme.txt, styles.item]}>
         <Checkbox
+          color={scheme.txt.color}
           status={item.disabled ? "unchecked" : "checked"}
           onPress={() => onCheckboxClick(!item?.disabled, item.id)}
         />
@@ -78,8 +80,8 @@ const DeckScreen = () => {
           <>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
               {[
-                { icon: "✓", color: "green", label: "Enable All", onPress: () => onCheckboxClick(false) },
-                { icon: "✕", color: "red", label: "Disable All", onPress: () => onCheckboxClick(true) },
+                { icon: "✓", color: "green", label: "Show All Cards", onPress: () => onCheckboxClick(false) },
+                { icon: "✕", color: "red", label: "Hide All Cards", onPress: () => onCheckboxClick(true) },
               ].map(({ icon, color, label, onPress }) => (
                 <Pressable key={label} style={[scheme.bgAccent3, styles.blanketButton]} onPress={onPress}>
                   <Text style={{ color }}>{icon}</Text>

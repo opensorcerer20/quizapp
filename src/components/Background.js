@@ -1,14 +1,14 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 
-import { getScheme } from "../common/util";
+import { getBgScheme } from "../common/util";
 
 // via google.com ai
 const Background = ({ theme, children }) => {
-  const scheme = getScheme(theme);
+  const schemeBg = getBgScheme(theme);
   return (
     <LinearGradient
-      colors={[scheme.bgAccent2.backgroundColor, scheme.bgAccent1.backgroundColor, scheme.bgAccent2.backgroundColor]} // Array of colors for the gradient
+      colors={[schemeBg.bgAccent2, schemeBg.bgAccent1, schemeBg.bgAccent2]} // Array of colors for the gradient
       style={styles.background}
       start={{ x: 0, y: 0 }} // Optional: start point of the gradient (top-left)
       end={{ x: 1, y: 1 }} // Optional: end point of the gradient (bottom-right)

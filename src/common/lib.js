@@ -1,5 +1,32 @@
 //https://www.color-hex.com/color-palettes/
 
+export const lightDarkBgColors = {
+  schemeBgDark: {
+    antiTxtBg: "#121212",
+    // antiTxtBg: "#121212",
+    bgAccent1: "#47448b",
+    // bgAccent1: "#3a306d",
+    bgAccent2: "#5458b9",
+    // bgAccent2: "#616cc7",
+    bgAccent3: "#3a306d",
+    // bgAccent3: "#6d8ff5",
+    disabled: "#565656",
+    // disabled: "#565656",
+  },
+  schemeBgLight: {
+    antiTxtBg: "#efefef",
+    // antiTxtBg: "#efefef",
+    bgAccent1: "#a187e1",
+    // bgAccent1: "#a187e1",
+    bgAccent2: "#c5a2f2",
+    // bgAccent2: "#c5a2f2",
+    bgAccent3: "#d5c5e3",
+    // bgAccent3: "#f6f2fa",
+    disabled: "#787878",
+    // disabled: "#787878",
+  },
+};
+
 export const lightDarkStyles = {
   schemeDark: {
     /*
@@ -10,32 +37,29 @@ export const lightDarkStyles = {
   #6d8ff5	(125,143,245)
     */
     bgPrimary: {
-      backgroundColor: "#3a306d",
+      backgroundColor: "#47448b",
     },
     bgAntiPrimary: {
       // equivalent to light primary
       backgroundColor: "#a187e1",
     },
-    bgSecondary: {
-      backgroundColor: "#5458b9",
-    },
     disabled: {
-      backgroundColor: "#565656",
+      backgroundColor: lightDarkBgColors.schemeBgDark.disabled,
     },
     cardQ: {
-      backgroundColor: "#121212",
-    },
-    cardA: {
-      backgroundColor: "#121212",
-    },
-    bgAccent1: {
       backgroundColor: "#3a306d",
     },
+    cardA: {
+      backgroundColor: "#3a306d",
+    },
+    bgAccent1: {
+      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent1,
+    },
     bgAccent2: {
-      backgroundColor: "#616cc7",
+      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent2,
     },
     bgAccent3: {
-      backgroundColor: "#6d8ff5",
+      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3,
     },
     border: {
       borderColor: "efefef",
@@ -46,10 +70,7 @@ export const lightDarkStyles = {
       color: "#efefef",
     },
     antiTxtBg: {
-      backgroundColor: "#121212",
-    },
-    deck: {
-      backgroundColor: "#4a407d",
+      backgroundColor: lightDarkBgColors.schemeBgDark.antiTxtBg,
     },
   },
   schemeLight: {
@@ -67,26 +88,23 @@ export const lightDarkStyles = {
       // equivalent to dark primary
       backgroundColor: "#3a306d",
     },
-    bgSecondary: {
-      backgroundColor: "#c5a2f2",
-    },
     disabled: {
-      backgroundColor: "#787878",
+      backgroundColor: lightDarkBgColors.schemeBgLight.disabled,
     },
     cardQ: {
-      backgroundColor: "#efefef",
+      backgroundColor: "#d5c5e3",
     },
     cardA: {
-      backgroundColor: "#efefef",
+      backgroundColor: "#d5c5e3",
     },
     bgAccent1: {
-      backgroundColor: "#a187e1",
+      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent1,
     },
     bgAccent2: {
-      backgroundColor: "#c5a2f2",
+      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent2,
     },
     bgAccent3: {
-      backgroundColor: "#f6f2fa",
+      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent3,
     },
     border: {
       borderColor: "#121212",
@@ -97,10 +115,7 @@ export const lightDarkStyles = {
       color: "#121212",
     },
     antiTxtBg: {
-      backgroundColor: "#efefef",
-    },
-    deck: {
-      backgroundColor: "#72559a",
+      backgroundColor: lightDarkBgColors.schemeBgLight.antiTxtBg,
     },
   },
 };

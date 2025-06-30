@@ -7,7 +7,7 @@ import { Button, FAB, Portal } from "react-native-paper";
 
 import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT } from "../common/constants";
 import { loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
-import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
@@ -41,6 +41,7 @@ export const DeckList = () => {
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
+  const schemeBg = getBgScheme(theme);
 
   const [fabOpen, setFabOpen] = useState(false);
   const onFABClick = ({ open }) => {
@@ -162,7 +163,7 @@ export const DeckList = () => {
             style={[
               styles.itemText,
               {
-                color: renameState.editingDeck?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color,
+                color: renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color,
               },
             ]}
           >
@@ -170,7 +171,7 @@ export const DeckList = () => {
           </Text>
           <View style={styles.itemMenuButton}>
             <Button
-              textColor={renameState.editingDeck?.id === item.id ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
+              textColor={renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color}
               icon="dots-vertical"
               onPress={(event) => handleMenuPress(event, item)}
             />

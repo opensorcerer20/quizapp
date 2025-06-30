@@ -99,7 +99,9 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   }, []);
 
-  // console.log("state " + JSON.stringify({ currentDeck, currentDeckQuestionData }));
+  // console.log(
+  //   "state " + JSON.stringify({ one: currentQuestionState.disabled, two: !!currentState.currentQuestion.disabled })
+  // );
 
   return (
     <>
@@ -115,13 +117,11 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             />
           </View>
           <View style={{ paddingBottom: Platform.OS === "ios" ? 5 : 0 }}>
-            {/* true if disabled == false */}
-            {/* new value == !question.disabled */}
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
               optionValue={
-                currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
+                currentQuestionState ? !!currentQuestionState.disabled : !!currentState.currentQuestion.disabled
               }
               onClick={() =>
                 onEnableSwitchClick(
@@ -129,7 +129,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
                   currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
                 )
               }
-              labelTxt={"Card Enabled"}
+              labelTxt={"Turn card off"}
             />
           </View>
           <Text
