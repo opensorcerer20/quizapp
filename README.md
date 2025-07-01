@@ -72,6 +72,82 @@ itemMenuButton: {
 - for fab.group, setting fab button color required using fabstyle attribute
 - tricky bit where the card can be "disabled" but switch indicated "enabled", and setting it to the other value was the opposite boolean result
 
+## Current Roadmap Development
+
+-   [ ] last chance before beta
+
+    -   [ ] app icon
+    -   [ ] deck name doesnt fit in toolbar
+    -   [ ] remove all @todos
+    -   [ ] import big csv/txt file into smaller decks?
+    -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
+    -   [ ] move all "style"s to stylesheets
+    -   [ ] tips
+        -   [ ] tip button (https://buymeacoffee.com/)
+        -   [ ] after certain amount of uses, tip popup with option to "dont show again"
+
+- [ ] make beta
+    -   [ ] android
+    -   [ ] iphone
+    -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
+
+-   [ ] beta bugs/improvements
+
+-   [ ] LLC
+
+-   [ ] launch 1.0
+
+
+## Possible future dev
+
+-   [ ] make new deck from existing deck
+-   [ ] menu when clicking on deck for review, quiz, audible, etc
+-   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
+    -   [ ] add quiz screen i.e. questions with multiple answers
+        -   [ ] duplicate review screen
+        -   [ ] default route to new quiz screen
+        -   [ ] get 2 answers from "original" bag
+        -   [ ] show question
+        -   [ ] show answers
+        -   [ ] on answer pick, show right answer
+        -   [ ] next/reset/remix same
+        -   [ ] previous?
+        -   [ ] WHEN DONE, route list to review
+
+    -   [ ] select review or quiz for deck
+        -   [ ] how?
+
+-   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
+-   [ ] custom card themes
+-   [ ] different settings for modes
+-   [ ] text box for input
+-   [ ] swipe to next card ("swipe gesture" plus animation)
+-   [ ] now that everything is done, can the code be redone for better organization?
+-   [ ] allow renaming saved file (modal)
+    -   [ ] edit icon
+    -   [ ] modal to edit string
+    -   [ ] "save" to save edit
+    -   [ ] "cancel" or click away to cancel
+-   more modes
+    -   [ ] show settings for other modes
+    -   [ ] mode select: "continuous (full random)"
+        -   almost same as grab bag, but question is NOT popped off, next question full random
+    -   [ ] persist mode select
+        -   [x] persist in app memory
+        -   [ ] persist in device storage
+    -   [ ] mode select: "single time"
+        -   [x] show number of cards remaining in deck
+        -   [ ] button to restart deck (always shown)
+        -   [ ] disable "next" button at end of deck
+    -   [ ] settings drawer with gear access
+        -   [ ] use small icons for settings
+    -   [ ] new mode: show all cards at once
+-   load Google Drive spreadsheet
+-   Questions with random content with a variable and its resolver
+    -   enables more variance in questions to prevent rote memorization, e.g. different numbers of apples each time
+    -   Example question "If John has `{apples[0]}` and Jane has `{apples[1]}` and she gives John `{apples[2]}`, how many does John have?" "Answer: `{apples[3]}`"
+    -   resolver `apples()` fills question and answer after it fills in values such as `["2 apples", "1 apple", "1 apple", "3 apples"]`
+    -   in the case of language, have something like `{noun}` with a list of nouns that can be used to make the question, and `{verb}` with a list of verbs they can choose from
 
 ## Completed Roadmap Development
 
@@ -255,20 +331,18 @@ itemMenuButton: {
     -   [x] text for "swap q&a" not showing
     -   [x] switch for "swap q&a" colliding with "card x of y"
 
-## Current Roadmap Development
-
--   [ ] test alpha version self
+-   [x] test alpha version self
 
     -   [x] create development build
-    -   [ ] android
-    -   [ ] iphone
+    -   [x] android
+    -   [x] iphone
 
 -   [ ] alpha bugs/improvements
     -   [x] deck rename not persisted
     -   [x] android back button exits app, need react navigation
     -   [x] list view to enable/disable cards
     -   [x] disable card in review view
-    -   [ ] switch to show disabled cards in review view
+    -   [ ] ~~switch to show disabled cards in review view~~
     -   [x] move "deck list" operations to decklist, out of index
     -   [x] poker questions bugs found
         -   [x] crowded on left side, like line limit is too small
@@ -276,10 +350,10 @@ itemMenuButton: {
         -   [x] now it's too big, getting breaks too late
             - [x] odd, do i even need to check line length? it seems to be working without that
         -   [x] overflow on viewing deck cards 6-17 2:45:49
-    -   [ ] user settings
-        -   [ ] settings gear
-        -   [ ] card color (q & a)
-        -   [ ] background image
+    -   [ ] ~~user settings~~
+        -   [ ] ~~settings gear~~
+        -   [ ] ~~card color (q & a)~~
+        -   [ ] ~~background image~~
     -   [ ] languages
     -   [x] deck rename
         -   [x] instructions
@@ -288,95 +362,23 @@ itemMenuButton: {
     -   [x] line breaks
     -   [x] fab visible in review screen
     -   [x] title bar background
-    -   [ ] app icon
+    -   [ ] ~~app icon~~
     -   [x] change "quizapp" to "flashcard library"
-    -   [ ] do something about decklist multiple state vars
+    -   [x] do something about decklist multiple state vars
     -   [x] decklist menu can go off to the right
     -   [x] apply light/dark and purple theme throughout
 
--   [ ] launch critical bugs
+-   [ ] ~~launch critical bugs~~
 
     -   [ ] ~~csv must have all quotes or it doesnt work right~~
-    -   [ ] handle different text sizes (device might have non-default sizes)
-    -   [ ] deck name doesnt fit in toolbar
-    -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
+    -   [ ] ~~handle different text sizes (device might have non-default sizes)~~
+    -   [ ] ~~deck name doesnt fit in toolbar~~
+    -   [ ] ~~need to test full 20 decks with 50 questions each to see if memory is an issue~~
 
--   [ ] add themes for cards
+-   [x] add themes for cards
 
     -   [x] apply light/dark to card theme
-    -   [ ] keep original colors
-    -   [ ] add white/grey note card
-
--   [ ] last chance before beta
-
-    -   [ ] remove all @todos
-    -   [ ] import big csv/txt file into smaller decks?
-
--   [ ] code cleanup
-    - [ ] move all "style"s to stylesheets
-
--   [ ] tips
-
-    -   [ ] tip button (https://buymeacoffee.com/)
-    -   [ ] after certain amount of uses, tip popup with option to "dont show again"
-
--   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
-
--   [ ] beta bugs/improvements
-
--   [ ] LLC
-
--   [ ] launch 1.0
+    -   [ ] ~~keep original colors~~
+    -   [ ] ~~add white/grey note card~~
 
 ## End Roadmap Development
-
-## Possible future dev
-
--   [ ] make new deck from existing deck
--   [ ] menu when clicking on deck for review, quiz, audible, etc
--   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
-    -   [ ] add quiz screen i.e. questions with multiple answers
-        -   [ ] duplicate review screen
-        -   [ ] default route to new quiz screen
-        -   [ ] get 2 answers from "original" bag
-        -   [ ] show question
-        -   [ ] show answers
-        -   [ ] on answer pick, show right answer
-        -   [ ] next/reset/remix same
-        -   [ ] previous?
-        -   [ ] WHEN DONE, route list to review
-
-    -   [ ] select review or quiz for deck
-        -   [ ] how?
-
--   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
--   [ ] custom card themes
--   [ ] different settings for modes
--   [ ] text box for input
--   [ ] swipe to next card ("swipe gesture" plus animation)
--   [ ] now that everything is done, can the code be redone for better organization?
--   [ ] allow renaming saved file (modal)
-    -   [ ] edit icon
-    -   [ ] modal to edit string
-    -   [ ] "save" to save edit
-    -   [ ] "cancel" or click away to cancel
--   more modes
-    -   [ ] show settings for other modes
-    -   [ ] mode select: "continuous (full random)"
-        -   almost same as grab bag, but question is NOT popped off, next question full random
-    -   [ ] persist mode select
-        -   [x] persist in app memory
-        -   [ ] persist in device storage
-    -   [ ] mode select: "single time"
-        -   [x] show number of cards remaining in deck
-        -   [ ] button to restart deck (always shown)
-        -   [ ] disable "next" button at end of deck
-    -   [ ] settings drawer with gear access
-        -   [ ] use small icons for settings
-    -   [ ] new mode: show all cards at once
--   load Google Drive spreadsheet
--   Questions with random content with a variable and its resolver
-    -   enables more variance in questions to prevent rote memorization, e.g. different numbers of apples each time
-    -   Example question "If John has `{apples[0]}` and Jane has `{apples[1]}` and she gives John `{apples[2]}`, how many does John have?" "Answer: `{apples[3]}`"
-    -   resolver `apples()` fills question and answer after it fills in values such as `["2 apples", "1 apple", "1 apple", "3 apples"]`
-    -   in the case of language, have something like `{noun}` with a list of nouns that can be used to make the question, and `{verb}` with a list of verbs they can choose from
