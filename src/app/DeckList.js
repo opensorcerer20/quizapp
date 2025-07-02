@@ -307,7 +307,6 @@ export const DeckList = () => {
       )}
 
       {showFab && (
-        // this is broken for iphone, specifically fab.group
         <Portal>
           <FAB.Group
             open={fabOpen}

@@ -5,6 +5,7 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { getRandomInt, getScheme } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
+import DeckTitle from "../Deck/DeckTitle";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { StyledSwitch } from "../Deck/StyledSwitch";
@@ -107,7 +108,8 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     <>
       {hasQuestionData && (
         <View style={[styles.container]}>
-          <View style={{ paddingBottom: Platform.OS === "ios" ? 10 : 0 }}>
+          <DeckTitle deckName={currentDeck.name} scheme={scheme} />
+          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
@@ -116,7 +118,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
               labelTxt={"Reverse Q & A"}
             />
           </View>
-          <View style={{ paddingBottom: Platform.OS === "ios" ? 5 : 0 }}>
+          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
@@ -132,20 +134,6 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
               labelTxt={"Turn card off"}
             />
           </View>
-          <Text
-            style={[
-              scheme.txt,
-              {
-                margin: "auto",
-                fontSize: 16,
-                fontWeight: "bold",
-                padding: 5,
-              },
-            ]}
-          >
-            Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
-            {currentState.originalBag.length}
-          </Text>
           <FlipCard
             key={getRandomInt(100000, 999999)}
             questionText={currentState.currentQuestion.q}
@@ -160,13 +148,23 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             onResetClick={() => resetQuestionBag(true)}
             onStartOverClick={() => resetQuestionBag(false)}
           />
+          <Text
+            style={[
+              scheme.txt,
+              {
+                margin: "auto",
+                fontSize: 16,
+                fontWeight: "bold",
+                padding: 5,
+              },
+            ]}
+          >
+            Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
+            {currentState.originalBag.length}
+          </Text>
         </View>
       )}
-      {!hasQuestionData && (
-        <View>
-          <Text style={scheme.txt}>No deck data</Text>
-        </View>
-      )}
+      {!hasQuestionData && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
     </>
   );
 };

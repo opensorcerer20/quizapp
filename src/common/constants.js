@@ -30,3 +30,63 @@ export const MIME_TYPE_TEXT = ["text/plain"];
 
 export const LIGHT_APP_BG = "pexels-asphotograpy-518245.jpg";
 export const DARK_APP_BG = "pexels-gantas-3750272.jpg";
+
+export const LANGUAGE_LIBRARY = {
+  "Flashcard Library": {
+    en: "Flashcard Library",
+  },
+  "Saved Decks": {
+    en: "Saved Decks",
+  },
+  "No decks in memory": {
+    en: "No decks in memory",
+  },
+  "please add a deck": {
+    en: "please add a deck",
+  },
+  "No deck data": {
+    en: "No deck data",
+  },
+  View: {
+    en: "View",
+  },
+  Rename: {
+    en: "Rename",
+  },
+  Delete: {
+    en: "Delete",
+  },
+  Cancel: {
+    en: "Cancel",
+  },
+  Submit: {
+    en: "Submit",
+  },
+  "Show All Cards": {
+    en: "Show All Cards",
+  },
+  "Hide All Cards": {
+    en: "Hide All Cards",
+  },
+  "Name this deck": {
+    en: "Name this deck",
+  },
+  "Reverse question and answer": {
+    en: "Reverse Q & A",
+  },
+  "Turn card off": {
+    en: "Turn card off",
+  },
+  "Card [x] of [y]": {
+    en: "Card [x] of [y]",
+  },
+  Question: {
+    en: "Question",
+  },
+  Answer: {
+    en: "Answer",
+  },
+  Text: {
+    en: "Text",
+  },
+};

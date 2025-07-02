@@ -1,7 +1,5 @@
 import { Modal, Pressable, StyleSheet, View } from "react-native";
 
-//<Modal modalVisible={modalVisible} setModalVisible={setModalVisible}><Text>modal content</Text></Modal>
-
 const QuizModal = ({
   modalVisible = false,
   handleModalClickAway = () => {},
@@ -12,9 +10,6 @@ const QuizModal = ({
   if (!Array.isArray(modalContainerStyle)) {
     modalContainerStyle = [modalContainerStyle];
   }
-  // if (!Array.isArray(modalStyle)) {
-  //     modalStyle = [modalStyle];
-  // }
 
   return (
     <Modal transparent animationType="fade" visible={modalVisible}>
@@ -33,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.2)" },
+  overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)" },
   textStyle: {
     color: "white",
     fontWeight: "bold",

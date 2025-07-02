@@ -3,27 +3,17 @@
 export const lightDarkBgColors = {
   schemeBgDark: {
     antiTxtBg: "#121212",
-    // antiTxtBg: "#121212",
     bgAccent1: "#47448b",
-    // bgAccent1: "#3a306d",
     bgAccent2: "#5458b9",
-    // bgAccent2: "#616cc7",
-    bgAccent3: "#3a306d",
-    // bgAccent3: "#6d8ff5",
+    bgAccent3: "#6d8ff5",
     disabled: "#565656",
-    // disabled: "#565656",
   },
   schemeBgLight: {
-    antiTxtBg: "#efefef",
-    // antiTxtBg: "#efefef",
+    antiTxtBg: "#dedede",
     bgAccent1: "#a187e1",
-    // bgAccent1: "#a187e1",
     bgAccent2: "#c5a2f2",
-    // bgAccent2: "#c5a2f2",
     bgAccent3: "#d5c5e3",
-    // bgAccent3: "#f6f2fa",
     disabled: "#787878",
-    // disabled: "#787878",
   },
 };
 
@@ -36,6 +26,7 @@ export const lightDarkStyles = {
   #616cc7	(113,124,215)
   #6d8ff5	(125,143,245)
     */
+    baseBg: { backgroundColor: "#121212" },
     bgPrimary: {
       backgroundColor: "#47448b",
     },
@@ -62,12 +53,12 @@ export const lightDarkStyles = {
       backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3,
     },
     border: {
-      borderColor: "efefef",
+      borderColor: "dedede",
       borderWidth: 1,
     },
     txt: {
       fontSize: 16,
-      color: "#efefef",
+      color: "#dedede",
     },
     antiTxtBg: {
       backgroundColor: lightDarkBgColors.schemeBgDark.antiTxtBg,
@@ -81,6 +72,7 @@ export const lightDarkStyles = {
   #d5c5e3	(213,197,227)
   #f6f2fa	(246,242,250)
     */
+    baseBg: { backgroundColor: "#dedede" },
     bgPrimary: {
       backgroundColor: "#a187e1",
     },

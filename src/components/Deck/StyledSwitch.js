@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 
 import { getBgScheme, getScheme } from "../../common/util";
 
@@ -6,7 +6,14 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
   const scheme = getScheme(theme);
   const schemeBg = getBgScheme(theme);
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: Platform.OS === "ios" ? 10 : 0,
+      }}
+    >
       <Switch
         trackColor={{
           false: schemeBg.bgAccent3,
@@ -16,10 +23,10 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
         thumbColor={!!optionValue ? scheme.txt.color : schemeBg.disabled}
         onValueChange={onClick}
         value={!!optionValue}
+        style={{ padding: 0, margin: 0 }}
       />
-
       <Pressable onPress={onClick} onLongPress={onClick}>
-        <Text style={[txtStyle, { paddingLeft: 10 }]}>{labelTxt}</Text>
+        <Text style={[txtStyle, { padding: 0, paddingLeft: 10, margin: 0 }]}>{labelTxt}</Text>
       </Pressable>
     </View>
   );

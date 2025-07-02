@@ -53,7 +53,7 @@ const QuizScreen = () => {
   if (whichScreen === "review") {
     return (
       <>
-        <Toolbar title={currentDeck?.name || ""} themeSetting={theme} toggleTheme={toggleTheme} />
+        <Toolbar title={"Review Deck"} themeSetting={theme} toggleTheme={toggleTheme} />
         <ScreenTemplate>
           {!!currentDeck && (
             <ReviewScreen

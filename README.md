@@ -76,13 +76,15 @@ itemMenuButton: {
 
 -   [ ] last chance before beta
 
+    -   [x] add help menu
     -   [ ] app icon
-    -   [ ] deck name doesnt fit in toolbar
+    -   [x] deck name doesnt fit in toolbar
     -   [ ] remove all @todos
     -   [ ] import big csv/txt file into smaller decks?
     -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
     -   [ ] move all "style"s to stylesheets
     -   [ ] tips
+        -   [ ] 3 dot menu in toolbar
         -   [ ] tip button (https://buymeacoffee.com/)
         -   [ ] after certain amount of uses, tip popup with option to "dont show again"
 
@@ -91,7 +93,8 @@ itemMenuButton: {
     -   [ ] iphone
     -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
 
--   [ ] beta bugs/improvements
+- [ ] beta bugs/improvements
+    -   [ ] question: continue language support?
 
 -   [ ] LLC
 
@@ -354,7 +357,7 @@ itemMenuButton: {
         -   [ ] ~~settings gear~~
         -   [ ] ~~card color (q & a)~~
         -   [ ] ~~background image~~
-    -   [ ] languages
+    -   [x] languages (groundwork)
     -   [x] deck rename
         -   [x] instructions
         -   [x] shadow visible
