@@ -25,11 +25,7 @@ const Toolbar = ({ title = null, showBack = true, themeSetting = THEMES.light, t
     <>
       <Appbar.Header style={[scheme.antiTxtBg, scheme.txt]}>
         {showBack && <Appbar.BackAction color={scheme.txt.color} onPress={() => router.back()} />}
-        <Appbar.Content
-          title={title === null ? getLocalString("Flashcard Library") : title}
-          color={scheme.txt.color}
-          style={{}}
-        />
+        <Appbar.Content title={title === null ? getLocalString("Flashcard Library") : title} color={scheme.txt.color} />
         {themeIcon && <Appbar.Action icon={themeIcon} onPress={toggleTheme} color={scheme.txt.color} />}
         <Appbar.Action icon={"help"} onPress={() => setShowHelp(!showHelp)} color={scheme.txt.color} />
         {/* <Appbar.Action color={scheme.txt.color} icon="dots-vertical" onPress={onMenuClick} /> */}

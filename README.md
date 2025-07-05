@@ -80,9 +80,9 @@ itemMenuButton: {
     -   [ ] app icon
     -   [x] deck name doesnt fit in toolbar
     -   [ ] remove all @todos
-    -   [ ] import big csv/txt file into smaller decks?
     -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
     -   [ ] move all "style"s to stylesheets
+    -   [ ] make new appbar below real appbar, will fix this after beta testing
     -   [ ] tips
         -   [ ] 3 dot menu in toolbar
         -   [ ] tip button (https://buymeacoffee.com/)
@@ -95,6 +95,8 @@ itemMenuButton: {
 
 - [ ] beta bugs/improvements
     -   [ ] question: continue language support?
+    -   [ ] make appbar consistent between ios and android
+    -   [ ] import big csv/txt file into smaller decks?
 
 -   [ ] LLC
 

@@ -4,18 +4,24 @@
     "slug": "QuizApp",
     "version": "0.2.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.opensorcerer20.QuizApp",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "icon": {
+        "dark": "./assets/images/ios-dark.png",
+        "light": "./assets/images/ios-light.png",
+        "tinted": "./assets/images/ios-tinted.png"
       }
     },
     "android": {
       "supportsTablet": false,
-      "package": "com.opensorcerer20.QuizApp"
+      "package": "com.opensorcerer20.QuizApp",
+      "adaptiveIcon": "./assets/adaptive-icon.png"
     },
     "web": {
       "favicon": "./assets/favicon.png"
