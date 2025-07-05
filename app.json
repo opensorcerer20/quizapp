@@ -1,14 +1,14 @@
 {
   "expo": {
     "name": "Flashcard Library",
-    "slug": "QuizApp",
-    "version": "0.2.1",
+    "slug": "FlashcardLibrary",
+    "version": "0.3.0",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.opensorcerer20.QuizApp",
+      "bundleIdentifier": "com.opensorcerer20.FlashcardLibrary",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -20,7 +20,7 @@
     },
     "android": {
       "supportsTablet": false,
-      "package": "com.opensorcerer20.QuizApp",
+      "package": "com.opensorcerer20.FlashcardLibrary",
       "adaptiveIcon": "./assets/adaptive-icon.png"
     },
     "web": {
@@ -30,6 +30,6 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "com.opensorcerer20.QuizApp"
+    "scheme": "com.opensorcerer20.FlashcardLibrary"
   }
 }
