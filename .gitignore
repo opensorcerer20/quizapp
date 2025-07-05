@@ -10,3 +10,4 @@ builds/
 assets/.DS_Store
 temp/
 .prettierrc.json
+ios/
