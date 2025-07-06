@@ -8,7 +8,6 @@ import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import { ReviewScreen } from "../components/Quiz/ReviewScreen";
 import ScreenTemplate from "../components/ScreenTemplate";
-import Toolbar from "../components/Toolbar";
 
 /*
 later there will be a quiz screen etc
@@ -53,8 +52,7 @@ const QuizScreen = () => {
   if (whichScreen === "review") {
     return (
       <>
-        <Toolbar title={"Review Deck"} themeSetting={theme} toggleTheme={toggleTheme} />
-        <ScreenTemplate>
+        <ScreenTemplate title={"Review Deck"}>
           {!!currentDeck && (
             <ReviewScreen
               currentDeck={currentDeck}

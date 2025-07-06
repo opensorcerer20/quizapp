@@ -1,7 +1,4 @@
-import {
-  MAX_QUESTIONS,
-  MIME_TYPE_CSV,
-} from "../../common/constants";
+import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../../common/constants";
 import { sanitizeAll } from "../../common/util";
 import { parseCsv } from "./parseCsv";
 
@@ -62,7 +59,6 @@ export const getFileData = async (fileData) => {
   return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
 };
 
-// @todo integration test
 export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
   let questions = [];
 

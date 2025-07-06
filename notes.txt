@@ -14,7 +14,7 @@ npx expo run:android --device
   - kill [processId]
 
 eas notes
-npx eas-cli@latest build -p android --profile test
+npx eas-cli@latest build -p android --profile preview
 
 first time...
 

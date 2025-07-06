@@ -13,6 +13,7 @@ import { useTheme } from "../Providers/ThemeProvider";
 
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
   const [isReversed, setIsReversed] = useState(false);
+  const [noEnabledQs, setNoEnabledQs] = useState(false);
   const { theme } = useTheme();
   const scheme = getScheme(theme);
 
@@ -45,8 +46,6 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     const originalBag = incomingBag ? incomingBag.slice() : currentState.originalBag;
     const currentBag = incomingBag ?? currentState.questionBag.slice();
 
-    // @todo need to handle zero enabled cards
-
     if (currentBag.length > 0) {
       const questionBag = currentBag.slice(1);
       const currentQuestion = currentBag.shift();
@@ -69,8 +68,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
       }
       nextQuestion(newBag);
     } else {
-      // @todo
-      console.log("modal to go back");
+      setNoEnabledQs(true);
     }
   };
 
@@ -87,7 +85,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   };
 
-  const hasQuestionData = !!currentState.currentQuestion.q;
+  const hasQuestionData = !noEnabledQs && !!currentState.currentQuestion.q;
   const currentQuestionStateFilter = currentState?.currentQuestion?.id
     ? currentDeckQuestionData.filter((question) => question.id === currentState.currentQuestion.id)
     : [];
@@ -155,7 +153,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
                 margin: "auto",
                 fontSize: 16,
                 fontWeight: "bold",
-                padding: 5,
+                paddingVertical: 10,
               },
             ]}
           >
@@ -165,6 +163,16 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
         </View>
       )}
       {!hasQuestionData && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
+      {noEnabledQs && (
+        <View style={styles.container}>
+          <View style={[scheme.bgAntiPrimary, styles.noQContainer]}>
+            <Text style={styles.noQText}>Sorry, no questions are enabled for this deck.</Text>
+            <Text style={styles.noQText}>
+              Please go to the deck View from the main Deck List and enable at least one card from this deck.
+            </Text>
+          </View>
+        </View>
+      )}
     </>
   );
 };
@@ -172,5 +180,15 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+  noQContainer: {
+    width: "95%",
+    padding: 10,
+    borderRadius: 10,
+    marginHorizontal: "auto",
+  },
+  noQText: {
+    marginBottom: 10,
+    fontSize: 16,
   },
 });

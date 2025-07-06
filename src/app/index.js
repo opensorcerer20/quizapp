@@ -1,13 +1,7 @@
-import { StatusBar } from "expo-status-bar";
-
-import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
-import Toolbar from "../components/Toolbar";
 import { DeckList } from "./DeckList";
 
 export default QuizApp = () => {
-  const { theme, toggleTheme } = useTheme();
-
   // use to clear memory
   // useEffect(() => {
   //   saveDeckListData([]);
@@ -17,11 +11,9 @@ export default QuizApp = () => {
 
   return (
     <>
-      <Toolbar showBack={false} themeSetting={theme} toggleTheme={toggleTheme} />
-      <ScreenTemplate>
+      <ScreenTemplate showBack={false}>
         <DeckList />
       </ScreenTemplate>
-      <StatusBar style="dark" />
     </>
   );
 };

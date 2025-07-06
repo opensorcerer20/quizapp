@@ -5,11 +5,10 @@ import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { Checkbox } from "react-native-paper";
 
 import { loadDeckData, saveDeckData } from "../common/fileLib";
-import { formatCardText, getBgScheme, getScheme } from "../common/util";
+import { formatCardText, getScheme } from "../common/util";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
-import Toolbar from "../components/Toolbar";
 
 const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
@@ -18,7 +17,6 @@ const DeckScreen = () => {
 
   const { theme, toggleTheme } = useTheme();
   const scheme = getScheme(theme);
-  const schemeBg = getBgScheme(theme);
 
   // sets either all checkboxes or specific checkbox "disabled" property
   const onCheckboxClick = (disabledValue, id = null) => {
@@ -75,8 +73,7 @@ const DeckScreen = () => {
 
   return (
     <>
-      <Toolbar title={"Deck Settings"} themeSetting={theme} toggleTheme={toggleTheme} />
-      <ScreenTemplate>
+      <ScreenTemplate title={"Deck Settings"}>
         {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
         {currentDeckData && (
           <>
