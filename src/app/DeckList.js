@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
+import * as NavigationBar from "expo-navigation-bar";
 import { router, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
@@ -13,6 +14,7 @@ import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import QuizModal from "../components/QuizModal";
+import ScreenTemplate from "../components/ScreenTemplate";
 
 const emptyImportSource = {
   mimeType: null,
@@ -262,75 +264,83 @@ export const DeckList = () => {
     loadData();
   }, []);
 
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      NavigationBar.setStyle("dark");
+    }
+  }, []);
+
   const path = usePathname();
   const showFab = path === "/" && deckListData.length < MAX_DECKS;
 
   //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
 
   return (
-    <View style={styles.container}>
-      {deckListData.length > 0 && (
-        <View style={{ padding: 10 }}>
-          <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
-          <FlatList data={deckListData} renderItem={renderItem} />
-          <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
-            <DeckRenameModal
-              initialDeckName={renameState.editingDeck.name}
-              editingDeck={renameState.editingDeck}
-              handleCancelClick={handleCancelClick}
-              handleRenameDeck={handleRenameDeck}
-              showCancel={renameState.showCancel}
-            />
-          </QuizModal>
+    <ScreenTemplate showBack={false} helpType={"list"}>
+      <View style={styles.container}>
+        {deckListData.length > 0 && (
+          <View style={{ padding: 10 }}>
+            <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
+            <FlatList data={deckListData} renderItem={renderItem} />
+            <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
+              <DeckRenameModal
+                initialDeckName={renameState.editingDeck.name}
+                editingDeck={renameState.editingDeck}
+                handleCancelClick={handleCancelClick}
+                handleRenameDeck={handleRenameDeck}
+                showCancel={renameState.showCancel}
+              />
+            </QuizModal>
 
-          <QuizModal
-            modalVisible={menuState.visible}
-            handleModalClickAway={handleModalClickAway}
-            modalContainerStyle={[
-              styles.menu,
-              {
-                top: menuState.position.top,
-                left: menuState.position.left,
-              },
-            ]}
-          >
-            <DeckListMenu
-              handleViewClick={handleViewClick}
-              handleRenameClick={handleRenameClick}
-              handleDeleteClick={handleDeleteClick}
-            />
-          </QuizModal>
-        </View>
-      )}
-      {deckListData.length < 1 && (
-        <Text style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</Text>
-      )}
+            <QuizModal
+              modalVisible={menuState.visible}
+              handleModalClickAway={handleModalClickAway}
+              modalContainerStyle={[
+                styles.menu,
+                {
+                  top: menuState.position.top,
+                  left: menuState.position.left,
+                },
+              ]}
+            >
+              <DeckListMenu
+                handleViewClick={handleViewClick}
+                handleRenameClick={handleRenameClick}
+                handleDeleteClick={handleDeleteClick}
+              />
+            </QuizModal>
+          </View>
+        )}
+        {deckListData.length < 1 && (
+          <Text style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</Text>
+        )}
 
-      {showFab && (
-        <Portal>
-          <FAB.Group
-            open={fabOpen}
-            visible
-            icon="plus"
-            fabStyle={scheme.bgAntiPrimary}
-            actions={[
-              {
-                icon: "text",
-                label: "Text",
-                onPress: () => onPressImport("txt"),
-              },
-              {
-                icon: "table",
-                label: "CSV",
-                onPress: () => onPressImport("csv"),
-              },
-            ]}
-            onStateChange={onFABClick}
-          />
-        </Portal>
-      )}
-      {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={scheme.disabled} />}
-    </View>
+        {showFab && (
+          <Portal>
+            <FAB.Group
+              open={fabOpen}
+              visible
+              icon="plus"
+              fabStyle={scheme.bgAntiPrimary}
+              actions={[
+                {
+                  icon: "text",
+                  label: "Text",
+                  onPress: () => onPressImport("txt"),
+                },
+                {
+                  icon: "table",
+                  label: "CSV",
+                  onPress: () => onPressImport("csv"),
+                },
+              ]}
+              onStateChange={onFABClick}
+            />
+          </Portal>
+        )}
+        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={scheme.disabled} />}
+      </View>
+    </ScreenTemplate>
   );
 };
 

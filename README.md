@@ -85,6 +85,8 @@ itemMenuButton: {
         - [x] new appbar replaces old
         - [ ] menu
         - [ ] if no back button, show title on left
+        - [ ] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
+
     -   [ ] tips
         -   [ ] 3 dot menu in toolbar
         -   [ ] tip button (https://buymeacoffee.com/)
@@ -98,6 +100,8 @@ itemMenuButton: {
     -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
 
 - [ ] beta bugs/improvements
+    -   [ ] quizmodal move inside menu component
+    -   [ ] consolidate modal styles (very similar)
     -   [ ] question: continue language support?
     -   [ ] make appbar consistent between ios and android
     -   [ ] import big csv/txt file into smaller decks?

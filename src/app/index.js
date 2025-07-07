@@ -1,4 +1,3 @@
-import ScreenTemplate from "../components/ScreenTemplate";
 import { DeckList } from "./DeckList";
 
 export default QuizApp = () => {
@@ -9,11 +8,5 @@ export default QuizApp = () => {
 
   // console.log("quizapp state " + JSON.stringify({ deckListData }));
 
-  return (
-    <>
-      <ScreenTemplate showBack={false}>
-        <DeckList />
-      </ScreenTemplate>
-    </>
-  );
+  return <DeckList />;
 };

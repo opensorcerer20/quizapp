@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
+import * as NavigationBar from "expo-navigation-bar";
 import { useLocalSearchParams } from "expo-router";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Checkbox } from "react-native-paper";
 
 import { loadDeckData, saveDeckData } from "../common/fileLib";
@@ -33,7 +34,10 @@ const DeckScreen = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View key={item.id} style={[scheme.bgAccent3, scheme.txt, styles.item]}>
+      <View
+        key={item.id}
+        style={[scheme.bgAccent2, scheme.txt, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}
+      >
         <Checkbox
           color={scheme.txt.color}
           status={item.disabled ? "unchecked" : "checked"}
@@ -69,11 +73,17 @@ const DeckScreen = () => {
     }
   }, [deckId]);
 
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      NavigationBar.setStyle("dark");
+    }
+  }, []);
+
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
   return (
     <>
-      <ScreenTemplate title={"Deck Settings"}>
+      <ScreenTemplate title={"Deck Settings"} hideButtons={true}>
         {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
         {currentDeckData && (
           <>
@@ -82,7 +92,7 @@ const DeckScreen = () => {
                 { icon: "✓", color: "green", label: "Show All Cards", onPress: () => onCheckboxClick(false) },
                 { icon: "✕", color: "red", label: "Hide All Cards", onPress: () => onCheckboxClick(true) },
               ].map(({ icon, color, label, onPress }) => (
-                <Pressable key={label} style={[scheme.bgAccent3, styles.blanketButton]} onPress={onPress}>
+                <Pressable key={label} style={[scheme.bgAccent1, styles.blanketButton]} onPress={onPress}>
                   <Text style={{ color }}>{icon}</Text>
                   <Text style={scheme.txt}> {label}</Text>
                 </Pressable>
