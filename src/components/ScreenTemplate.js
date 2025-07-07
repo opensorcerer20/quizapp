@@ -30,7 +30,7 @@ const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideBu
   let themeIcon = theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
   const scheme = getScheme(theme);
 
-  console.log("showmenu " + JSON.stringify(showMenu));
+  // console.log("showmenu " + JSON.stringify(showMenu));
 
   return (
     <>
