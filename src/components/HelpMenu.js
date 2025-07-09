@@ -1,4 +1,4 @@
-import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -6,7 +6,9 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 
-const HelpContentDeck = ({ scheme, onCloseClick }) => {
+import { SAFE_WIDTH } from "../common/constants";
+
+const HelpContentDeck = ({ width, scheme, onCloseClick }) => {
   return (
     <View style={{ width: width }}>
       <View style={styles.helpHeader}>
@@ -55,7 +57,7 @@ const HelpContentDeck = ({ scheme, onCloseClick }) => {
   );
 };
 
-const HelpContentList = ({ scheme, onCloseClick }) => {
+const HelpContentList = ({ width, scheme, onCloseClick }) => {
   return (
     <View style={{ width: width }}>
       <View style={styles.helpHeader}>
@@ -117,8 +119,12 @@ const HelpMenu = ({ scheme, helpType = "list", setShowHelp }) => {
   const unknownType = ["list", "deck"].indexOf(helpType) === -1;
   return (
     <>
-      {helpType === "list" && <HelpContentList scheme={scheme} onCloseClick={() => setShowHelp(false)} />}
-      {helpType === "deck" && <HelpContentDeck scheme={scheme} onCloseClick={() => setShowHelp(false)} />}
+      {helpType === "list" && (
+        <HelpContentList width={HELP_MODAL_WIDTH} scheme={scheme} onCloseClick={() => setShowHelp(false)} />
+      )}
+      {helpType === "deck" && (
+        <HelpContentDeck width={HELP_MODAL_WIDTH} scheme={scheme} onCloseClick={() => setShowHelp(false)} />
+      )}
       {unknownType && (
         <View>
           <Text>Unknown help type</Text>
@@ -128,13 +134,9 @@ const HelpMenu = ({ scheme, helpType = "list", setShowHelp }) => {
   );
 };
 
-const { width } = Dimensions.get("window");
-const SAFE_MARGIN = Math.round(width / 20); // 5% width
-const SAFE_WIDTH = width - SAFE_MARGIN; // 95% width
-
-const helpModalWidth = Math.min(SAFE_WIDTH, 300);
-const headerWidth = helpModalWidth - 30;
-const contentWidth = helpModalWidth - 70;
+export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
+const headerWidth = HELP_MODAL_WIDTH - 30;
+const contentWidth = HELP_MODAL_WIDTH - 70;
 
 const styles = StyleSheet.create({
   helpHeader: {

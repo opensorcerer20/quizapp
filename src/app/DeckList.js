@@ -6,7 +6,7 @@ import { router, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
 
-import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT } from "../common/constants";
+import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, SAFE_WIDTH } from "../common/constants";
 import { loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
@@ -25,7 +25,6 @@ const emptyImportSource = {
 
 export const DeckList = () => {
   const { width } = Dimensions.get("window");
-  const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
 
   const [importSource, setImportSource] = useState(emptyImportSource);
   const [deckListData, setDeckListData] = useState([]);

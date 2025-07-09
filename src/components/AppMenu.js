@@ -1,27 +1,28 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
-export const DECK_LIST_MENU_WIDTH = 150;
+import { THEMES } from "../common/constants";
+import { getScheme } from "../common/util";
+import { StyledSwitch } from "./Deck/StyledSwitch";
+import { useTheme } from "./Providers/ThemeProvider";
 
-const AppMenu = ({ scheme }) => {
+export const APP_MENU_WIDTH = 250;
+
+const AppMenu = () => {
+  const { theme, toggleTheme } = useTheme();
+  const scheme = getScheme(theme);
   return (
-    <View style={{ width: DECK_LIST_MENU_WIDTH }}>
+    <View style={{ width: APP_MENU_WIDTH }}>
       <Pressable onPress={() => {}}>
         <View style={styles.menuItem}>
-          <Text style={[styles.menuText, scheme.txt]}>App Menu</Text>
+          <StyledSwitch
+            theme={theme}
+            txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+            optionValue={theme === THEMES.dark}
+            onClick={toggleTheme}
+            labelTxt={"Dark Theme"}
+          />
         </View>
       </Pressable>
-      {/* <Pressable onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <FontAwesome6 name="pen-to-square" size={20} color="black" style={styles.menuIcon} />
-          <Text style={styles.menuText}>Rename</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => {}}>
-        <View style={styles.menuItem}>
-          <FontAwesome6 name="trash" size={20} color="black" style={styles.menuIcon} />
-          <Text style={styles.menuText}>Delete</Text>
-        </View>
-      </Pressable> */}
     </View>
   );
 };

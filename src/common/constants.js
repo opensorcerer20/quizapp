@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export const DECK_DATA_KEY = "DECK_DATA";
 export const DECK_QA_KEY = "DECK_QA";
 export const THEME_KEY = "THEME";
@@ -30,6 +32,10 @@ export const MIME_TYPE_TEXT = ["text/plain"];
 
 export const LIGHT_APP_BG = "pexels-asphotograpy-518245.jpg";
 export const DARK_APP_BG = "pexels-gantas-3750272.jpg";
+
+const { width } = Dimensions.get("window");
+export const SAFE_MARGIN = Math.round(width / 20); // 5% width
+export const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
 
 export const LANGUAGE_LIBRARY = {
   "Flashcard Library": {

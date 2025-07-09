@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
+import Checkbox from "expo-checkbox";
 import * as NavigationBar from "expo-navigation-bar";
 import { useLocalSearchParams } from "expo-router";
 import { FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
-import { Checkbox } from "react-native-paper";
 
 import { loadDeckData, saveDeckData } from "../common/fileLib";
 import { formatCardText, getScheme } from "../common/util";
@@ -36,12 +36,13 @@ const DeckScreen = () => {
     return (
       <View
         key={item.id}
-        style={[scheme.bgAccent2, scheme.txt, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}
+        style={[scheme.bgAccent3, scheme.txt, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}
       >
         <Checkbox
-          color={scheme.txt.color}
-          status={item.disabled ? "unchecked" : "checked"}
-          onPress={() => onCheckboxClick(!item?.disabled, item.id)}
+          color={scheme.bgAccent2.backgroundColor}
+          style={styles.checkbox}
+          value={!item.disabled}
+          onValueChange={() => onCheckboxClick(!item?.disabled, item.id)}
         />
         <View style={{ flexDirection: "col", width: "95%" }}>
           <Text style={[scheme.txt, styles.itemText]}>{formatCardText(`Q: ${item.q}`)}</Text>
@@ -89,10 +90,10 @@ const DeckScreen = () => {
           <>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
               {[
-                { icon: "✓", color: "green", label: "Show All Cards", onPress: () => onCheckboxClick(false) },
-                { icon: "✕", color: "red", label: "Hide All Cards", onPress: () => onCheckboxClick(true) },
+                { icon: "✕", color: scheme.txt.color, label: "Hide All Cards", onPress: () => onCheckboxClick(true) },
+                { icon: "✓", color: scheme.txt.color, label: "Show All Cards", onPress: () => onCheckboxClick(false) },
               ].map(({ icon, color, label, onPress }) => (
-                <Pressable key={label} style={[scheme.bgAccent1, styles.blanketButton]} onPress={onPress}>
+                <Pressable key={label} style={[scheme.bgAccent3, styles.blanketButton]} onPress={onPress}>
                   <Text style={{ color }}>{icon}</Text>
                   <Text style={scheme.txt}> {label}</Text>
                 </Pressable>
@@ -132,6 +133,10 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     maxWidth: "90%",
+  },
+  checkbox: {
+    padding: 10,
+    margin: 10,
   },
 });
 

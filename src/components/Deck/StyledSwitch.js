@@ -2,7 +2,7 @@ import { Platform, Pressable, StyleSheet, Switch, Text, View } from "react-nativ
 
 import { getBgScheme, getScheme } from "../../common/util";
 
-export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, labelTxt }) => {
+export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, labelTxt = null }) => {
   const scheme = getScheme(theme);
   const schemeBg = getBgScheme(theme);
   return (
@@ -25,9 +25,11 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
         value={!!optionValue}
         style={{ padding: 0, margin: 0 }}
       />
-      <Pressable onPress={onClick} onLongPress={onClick}>
-        <Text style={[txtStyle, { padding: 0, paddingLeft: 10, margin: 0 }]}>{labelTxt}</Text>
-      </Pressable>
+      {labelTxt !== null && (
+        <Pressable onPress={onClick} onLongPress={onClick}>
+          <Text style={[txtStyle, { padding: 0, paddingLeft: 10, margin: 0 }]}>{labelTxt}</Text>
+        </Pressable>
+      )}
     </View>
   );
 };

@@ -38,7 +38,8 @@
     "react-native-web": "^0.20.0",
     "sanitize-html": "^2.17.0",
     "expo-linear-gradient": "~14.1.5",
-    "expo-navigation-bar": "~4.2.7"
+    "expo-navigation-bar": "~4.2.7",
+    "expo-checkbox": "~4.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

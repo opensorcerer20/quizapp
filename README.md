@@ -83,13 +83,12 @@ itemMenuButton: {
     -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
     -   [ ] make new appbar
         - [x] new appbar replaces old
-        - [ ] menu
-        - [ ] if no back button, show title on left
+        - [x] back/menu button
+        - [ ] menu with theme and tip
+            -   [ ] tip button (https://buymeacoffee.com/)
+        - [ ] move "quizmodal" uses to modal callouts eg "appmenumodal" "helpmodal" etc
         - [ ] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
 
-    -   [ ] tips
-        -   [ ] 3 dot menu in toolbar
-        -   [ ] tip button (https://buymeacoffee.com/)
     -   [ ] very last tasks before beta build
         -   [x] remove all @todos
         -   [ ] move all "style"s to stylesheets
@@ -103,7 +102,7 @@ itemMenuButton: {
     -   [ ] quizmodal move inside menu component
     -   [ ] consolidate modal styles (very similar)
     -   [ ] question: continue language support?
-    -   [ ] make appbar consistent between ios and android
+    -   [x] make appbar consistent between ios and android
     -   [ ] import big csv/txt file into smaller decks?
     -   [ ] quickly: quiz mode
     -   [ ] quickly: use redux for deck list state

@@ -133,7 +133,7 @@ const FlipCard = ({ answerText, questionText, isReversed }) => {
   }, [questionText]);
 
   return (
-    <>
+    <View style={{ marginVertical: 10 }}>
       <Pressable onPress={handlePress}>
         <TheCard
           isFlipped={isFlipped}
@@ -144,7 +144,7 @@ const FlipCard = ({ answerText, questionText, isReversed }) => {
           isReversed={isReversed}
         />
       </Pressable>
-    </>
+    </View>
   );
 };
 

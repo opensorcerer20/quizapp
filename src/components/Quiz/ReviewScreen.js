@@ -107,31 +107,6 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
       {hasQuestionData && (
         <View style={[styles.container]}>
           <DeckTitle deckName={currentDeck.name} scheme={scheme} />
-          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
-            <StyledSwitch
-              theme={theme}
-              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
-              optionValue={isReversed}
-              onClick={() => setIsReversed(!isReversed)}
-              labelTxt={"Reverse Q & A"}
-            />
-          </View>
-          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
-            <StyledSwitch
-              theme={theme}
-              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
-              optionValue={
-                currentQuestionState ? !!currentQuestionState.disabled : !!currentState.currentQuestion.disabled
-              }
-              onClick={() =>
-                onEnableSwitchClick(
-                  currentState.currentQuestion.id,
-                  currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
-                )
-              }
-              labelTxt={"Turn card off"}
-            />
-          </View>
           <FlipCard
             key={getRandomInt(100000, 999999)}
             questionText={currentState.currentQuestion.q}
@@ -160,6 +135,31 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
             {currentState.originalBag.length}
           </Text>
+          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
+            <StyledSwitch
+              theme={theme}
+              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+              optionValue={isReversed}
+              onClick={() => setIsReversed(!isReversed)}
+              labelTxt={"Reverse Q & A"}
+            />
+          </View>
+          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
+            <StyledSwitch
+              theme={theme}
+              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
+              optionValue={
+                currentQuestionState ? !!currentQuestionState.disabled : !!currentState.currentQuestion.disabled
+              }
+              onClick={() =>
+                onEnableSwitchClick(
+                  currentState.currentQuestion.id,
+                  currentQuestionState ? !currentQuestionState.disabled : !currentState.currentQuestion.disabled
+                )
+              }
+              labelTxt={"Turn card off"}
+            />
+          </View>
         </View>
       )}
       {!hasQuestionData && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
