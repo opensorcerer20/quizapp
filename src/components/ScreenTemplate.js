@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -28,7 +27,7 @@ const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideBu
   return (
     <>
       <View style={[styles.container, scheme.bgPrimary, scheme.txt]}>
-        <StatusBar style={Platform.OS === "android" ? "inverted" : "auto"} />
+        <StatusBar barStyle={"default"} />
         <Background theme={theme}>
           {/* start toolbar */}
           <View
