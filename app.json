@@ -19,7 +19,8 @@
       }
     },
     "android": {
-      "package": "com.opensorcerer20.FlashcardLibrary"
+      "package": "com.opensorcerer20.FlashcardLibrary",
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
