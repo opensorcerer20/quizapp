@@ -19,8 +19,7 @@
       }
     },
     "android": {
-      "package": "com.opensorcerer20.FlashcardLibrary",
-      "adaptiveIcon": "./assets/adaptive-icon.png"
+      "package": "com.opensorcerer20.FlashcardLibrary"
     },
     "web": {
       "favicon": "./assets/favicon.png"

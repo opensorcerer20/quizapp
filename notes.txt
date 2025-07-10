@@ -16,6 +16,8 @@ npx expo run:android --device
 eas notes
 npx eas-cli@latest build -p android --profile preview
 
+npx expo prebuild -p android
+
 first time...
 
 make package com.appname.appname (as opposed to com.username.appname)
