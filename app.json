@@ -19,7 +19,6 @@
       }
     },
     "android": {
-      "supportsTablet": false,
       "package": "com.opensorcerer20.FlashcardLibrary",
       "adaptiveIcon": "./assets/adaptive-icon.png"
     },
@@ -30,7 +29,6 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "com.opensorcerer20.FlashcardLibrary",
     "extra": {
       "router": {}
     }
