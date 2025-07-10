@@ -81,13 +81,11 @@ itemMenuButton: {
     -   [x] deck name doesnt fit in toolbar
 
     -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
-    -   [ ] make new appbar
+    -   [x] make new appbar
         - [x] new appbar replaces old
         - [x] back/menu button
-        - [ ] menu with theme and tip
-            -   [ ] tip button (https://buymeacoffee.com/)
-        - [ ] move "quizmodal" uses to modal callouts eg "appmenumodal" "helpmodal" etc
-        - [ ] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
+        - [x] move "quizmodal" uses to modal callouts eg "appmenumodal" "helpmodal" etc
+        - [x] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
 
     -   [ ] very last tasks before beta build
         -   [x] remove all @todos
@@ -109,6 +107,9 @@ itemMenuButton: {
     -   [ ] tips: after certain amount of uses, tip popup with option to "dont show again"
 
 -   [ ] LLC
+
+- [ ] add tip to menu (needs llc name)
+    -   [ ] tip button (https://buymeacoffee.com/)
 
 -   [ ] launch 1.0
 

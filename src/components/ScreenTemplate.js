@@ -2,22 +2,18 @@ import { useState } from "react";
 
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Dimensions, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
 import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
-import AppMenu, { APP_MENU_WIDTH } from "./AppMenu";
+import AppMenuModal from "./AppMenuModal";
 import Background from "./Background";
-import HelpMenu, { HELP_MODAL_WIDTH } from "./HelpMenu";
+import HelpMenuModal from "./HelpMenuModal";
 import { useLocale } from "./Providers/TranslationProvider";
-import QuizModal from "./QuizModal";
 
 const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideButtons = false, children }) => {
-  const { width } = Dimensions.get("window");
-
   const { getLocalString } = useLocale();
   const [showHelp, setShowHelp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -71,41 +67,9 @@ const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideBu
             </View>
           </View>
 
-          {/* AppMenuModal */}
-          <QuizModal
-            modalVisible={showMenu}
-            handleModalClickAway={() => setShowMenu(false)}
-            modalContainerStyle={[
-              styles.menuModal,
-              {
-                top: Platform.OS === "ios" ? 100 : 50,
-                left: 20,
-                width: APP_MENU_WIDTH,
-              },
-              scheme.baseBg,
-              { borderColor: scheme.bgAccent2.backgroundColor, borderWidth: 1 },
-            ]}
-          >
-            <AppMenu scheme={scheme} />
-          </QuizModal>
+          <AppMenuModal scheme={scheme} showMenu={showMenu} setShowMenu={setShowMenu} />
+          <HelpMenuModal showHelp={showHelp} setShowHelp={setShowHelp} scheme={scheme} helpType={helpType} />
 
-          {/* HelpModal */}
-          <QuizModal
-            modalVisible={showHelp}
-            handleModalClickAway={() => setShowHelp(false)}
-            modalContainerStyle={[
-              styles.helpModal,
-              {
-                top: Platform.OS === "ios" ? 100 : 50,
-                left: SAFE_WIDTH / 2 - HELP_MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
-                width: HELP_MODAL_WIDTH,
-              },
-              scheme.baseBg,
-              { borderColor: scheme.bgAccent2.backgroundColor, borderWidth: 1 },
-            ]}
-          >
-            <HelpMenu scheme={scheme} helpType={helpType} setShowHelp={setShowHelp} />
-          </QuizModal>
           {/* end toolbar */}
           {children}
         </Background>
@@ -117,34 +81,6 @@ const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideBu
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  // @todo move to AppMenuModal
-  menuModal: {
-    position: "absolute",
-    backgroundColor: "white",
-    padding: 15,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.6,
-    shadowRadius: 4,
-    elevation: 5,
-    alignItems: "flex-start",
-    borderRadius: 10,
-  },
-  // @todo move to HelpModal
-  helpModal: {
-    position: "absolute",
-    backgroundColor: "white",
-    padding: 15,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.6,
-    shadowRadius: 4,
-    elevation: 5,
-    alignItems: "flex-start",
-    borderRadius: 10,
   },
 });
 

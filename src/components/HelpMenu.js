@@ -8,6 +8,8 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 
 import { SAFE_WIDTH } from "../common/constants";
 
+export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
+
 const HelpContentDeck = ({ width, scheme, onCloseClick }) => {
   return (
     <View style={{ width: width }}>
@@ -118,7 +120,7 @@ const HelpContentList = ({ width, scheme, onCloseClick }) => {
 const HelpMenu = ({ scheme, helpType = "list", setShowHelp }) => {
   const unknownType = ["list", "deck"].indexOf(helpType) === -1;
   return (
-    <>
+    <View style={{ padding: 15 }}>
       {helpType === "list" && (
         <HelpContentList width={HELP_MODAL_WIDTH} scheme={scheme} onCloseClick={() => setShowHelp(false)} />
       )}
@@ -130,11 +132,10 @@ const HelpMenu = ({ scheme, helpType = "list", setShowHelp }) => {
           <Text>Unknown help type</Text>
         </View>
       )}
-    </>
+    </View>
   );
 };
 
-export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
 const headerWidth = HELP_MODAL_WIDTH - 30;
 const contentWidth = HELP_MODAL_WIDTH - 70;
 
