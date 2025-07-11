@@ -18,6 +18,12 @@ npx eas-cli@latest build -p android --profile preview
 
 npx expo prebuild -p android
 
+export ANDROID_HOME=/Users/xxx/Library/Android/sdk
+
+local.properties
+sdk.dir=/Users/xxx/Library/Android/sdk
+
+
 first time...
 
 make package com.appname.appname (as opposed to com.username.appname)
