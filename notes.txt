@@ -23,6 +23,21 @@ export ANDROID_HOME=/Users/xxx/Library/Android/sdk
 local.properties
 sdk.dir=/Users/xxx/Library/Android/sdk
 
+fixing node not found
+- install zulu 17 manually (using brew, then look at cask, then go to cask with version number)
+- default nvm 20
+- close android studio
+- set .zshrc with android home, platform tools, emulator
+- source .zshrc
+- from terminal: open -a "/Applications/Android Studio.app" ./android
+worked
+more ~/.zshrc
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+- ndk: use android studio sdk -> sdk tools -> ndk side by side and make sure it is up to date
+
 
 first time...
 
