@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import * as NavigationBar from "expo-navigation-bar";
 import { useLocalSearchParams } from "expo-router";
-import { Platform, Text } from "react-native";
+import { Text } from "react-native";
 
 import { loadDeckData, updateDeckQuestionData } from "../common/fileLib";
 import { getScheme } from "../common/util";
@@ -48,12 +47,6 @@ const QuizScreen = () => {
       setCurrentDeckQuestionData([]);
     }
   }, [deckId]);
-
-  useEffect(() => {
-    if (Platform.OS === "android") {
-      NavigationBar.setStyle("dark");
-    }
-  }, []);
 
   // hard coded, change when other views implemented (like quiz view)
   const whichScreen = "review";

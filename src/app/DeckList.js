@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
-import * as NavigationBar from "expo-navigation-bar";
 import { router, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
@@ -261,12 +260,6 @@ export const DeckList = () => {
       await loadDeckListData();
     };
     loadData();
-  }, []);
-
-  useEffect(() => {
-    if (Platform.OS === "android") {
-      NavigationBar.setStyle("dark");
-    }
   }, []);
 
   const path = usePathname();

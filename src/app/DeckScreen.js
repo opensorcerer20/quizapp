@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
 import Checkbox from "expo-checkbox";
-import * as NavigationBar from "expo-navigation-bar";
 import { useLocalSearchParams } from "expo-router";
-import { FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { loadDeckData, saveDeckData } from "../common/fileLib";
 import { formatCardText, getScheme } from "../common/util";
@@ -73,12 +72,6 @@ const DeckScreen = () => {
       setCurrentDeckData([]);
     }
   }, [deckId]);
-
-  useEffect(() => {
-    if (Platform.OS === "android") {
-      NavigationBar.setStyle("dark");
-    }
-  }, []);
 
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
