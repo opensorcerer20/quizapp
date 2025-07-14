@@ -71,21 +71,42 @@ itemMenuButton: {
     - scan qr code to install via itunes
 - for fab.group, setting fab button color required using fabstyle attribute
 - tricky bit where the card can be "disabled" but switch indicated "enabled", and setting it to the other value was the opposite boolean result
+- expo multiple file selection
+```
+    const result = await DocumentPicker.getDocumentAsync({
+      multiple: true,
+      copyToCacheDirectory: false,
+    });
+    if (result.type === "success") {
+      // result.output is an array when multiple is true
+      setFiles(result.output || [result]);
+    }
+```
 
 ## Current Roadmap Development
 
 -   [ ] last chance before beta
 
     -   [x] add help menu
-    -   [ ] app icon
     -   [x] deck name doesnt fit in toolbar
 
-    -   [ ] need to test full 20 decks with 50 questions each to see if memory is an issue
+    -   [x] need to test full 20 decks with 50 questions each to see if memory is an issue
     -   [x] make new appbar
         - [x] new appbar replaces old
         - [x] back/menu button
         - [x] move "quizmodal" uses to modal callouts eg "appmenumodal" "helpmodal" etc
         - [x] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
+
+    - [ ] bugs/improvements
+        - [ ] need at least 1 test deck loaded for android emulator
+        - [ ] full list clips at bottom
+        - [x] simpler color scheme
+            - [ ] ~~note where colors applied~~
+            - [ ] ~~more neutral color scheme~~
+            - [ ] ~~? user select color scheme~~
+        - [x] more spacing between switches
+        - [ ] android top bar shaded
+    -   [ ] app icon
 
     -   [ ] very last tasks before beta build
         -   [x] remove all @todos
@@ -97,11 +118,13 @@ itemMenuButton: {
     -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
 
 - [ ] beta bugs/improvements
-    -   [ ] quizmodal move inside menu component
-    -   [ ] consolidate modal styles (very similar)
+    -   [x] quizmodal move inside menu component
+    -   [x] consolidate modal styles (very similar)
     -   [ ] question: continue language support?
     -   [x] make appbar consistent between ios and android
     -   [ ] import big csv/txt file into smaller decks?
+    -   [ ] multi file select
+    -   [ ] order list by name, date added
     -   [ ] quickly: quiz mode
     -   [ ] quickly: use redux for deck list state
     -   [ ] tips: after certain amount of uses, tip popup with option to "dont show again"
@@ -116,8 +139,9 @@ itemMenuButton: {
 
 ## Possible future dev
 
+-   [ ] reorder deck list
 -   [ ] make new deck from existing deck
--   [ ] menu when clicking on deck for review, quiz, audible, etc
+-   [ ] menu when clicking on deck for modes: review, quiz, etc
 -   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
     -   [ ] add quiz screen i.e. questions with multiple answers
         -   [ ] duplicate review screen
@@ -134,22 +158,19 @@ itemMenuButton: {
         -   [ ] how?
 
 -   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
+    - [ ] possible problem connecting to bluetooth
 -   [ ] custom card themes
 -   [ ] different settings for modes
--   [ ] text box for input
+-   [ ] text box for inputting questions on the fly
 -   [ ] swipe to next card ("swipe gesture" plus animation)
 -   [ ] now that everything is done, can the code be redone for better organization?
--   [ ] allow renaming saved file (modal)
-    -   [ ] edit icon
-    -   [ ] modal to edit string
-    -   [ ] "save" to save edit
-    -   [ ] "cancel" or click away to cancel
+
 -   more modes
     -   [ ] show settings for other modes
     -   [ ] mode select: "continuous (full random)"
         -   almost same as grab bag, but question is NOT popped off, next question full random
     -   [ ] persist mode select
-        -   [x] persist in app memory
+        -   [ ] persist in app memory
         -   [ ] persist in device storage
     -   [ ] mode select: "single time"
         -   [x] show number of cards remaining in deck
@@ -158,7 +179,7 @@ itemMenuButton: {
     -   [ ] settings drawer with gear access
         -   [ ] use small icons for settings
     -   [ ] new mode: show all cards at once
--   load Google Drive spreadsheet
+-   ? load Google Drive spreadsheet
 -   Questions with random content with a variable and its resolver
     -   enables more variance in questions to prevent rote memorization, e.g. different numbers of apples each time
     -   Example question "If John has `{apples[0]}` and Jane has `{apples[1]}` and she gives John `{apples[2]}`, how many does John have?" "Answer: `{apples[3]}`"
@@ -397,4 +418,9 @@ itemMenuButton: {
     -   [ ] ~~keep original colors~~
     -   [ ] ~~add white/grey note card~~
 
+-   [x] allow renaming saved file (modal)
+    -   [x] edit icon
+    -   [x] modal to edit string
+    -   [x] "save" to save edit
+    -   [x] "cancel" or click away to cancel
 ## End Roadmap Development

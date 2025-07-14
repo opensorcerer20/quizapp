@@ -95,4 +95,7 @@ export const LANGUAGE_LIBRARY = {
   Text: {
     en: "Text",
   },
+  "Dark Theme": {
+    en: "Dark Theme",
+  },
 };

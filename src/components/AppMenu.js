@@ -4,8 +4,10 @@ import { THEMES } from "../common/constants";
 import { getScheme } from "../common/util";
 import { StyledSwitch } from "./Deck/StyledSwitch";
 import { useTheme } from "./Providers/ThemeProvider";
+import { useLocale } from "./Providers/TranslationProvider";
 
 const AppMenu = () => {
+  const { getLocalString } = useLocale();
   const { theme, toggleTheme } = useTheme();
   const scheme = getScheme(theme);
   return (
@@ -15,9 +17,10 @@ const AppMenu = () => {
           <StyledSwitch
             theme={theme}
             txtStyle={[scheme.txt, { fontWeight: "bold", paddingRight: 5 }]}
-            optionValue={theme === THEMES.dark}
+            optionValue={theme === THEMES.dark} // set theme value to THEMES.dark
+            onValueChange={toggleTheme}
+            labelTxt={getLocalString("Dark Theme")}
             onClick={toggleTheme}
-            labelTxt={"Dark Theme"}
           />
         </View>
       </Pressable>

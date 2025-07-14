@@ -11,6 +11,8 @@ import { SAFE_WIDTH } from "../common/constants";
 export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
 
 const HelpContentDeck = ({ width, scheme, onCloseClick }) => {
+  // @todo need translations
+  // const { getLocalString } = useLocale();
   return (
     <View style={{ width: width }}>
       <View style={styles.helpHeader}>
@@ -60,6 +62,8 @@ const HelpContentDeck = ({ width, scheme, onCloseClick }) => {
 };
 
 const HelpContentList = ({ width, scheme, onCloseClick }) => {
+  // @todo need translations
+  // const { getLocalString } = useLocale();
   return (
     <View style={{ width: width }}>
       <View style={styles.helpHeader}>

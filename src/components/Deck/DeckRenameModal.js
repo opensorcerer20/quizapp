@@ -5,8 +5,10 @@ import { Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-na
 
 import { getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
+import { useLocale } from "../Providers/TranslationProvider";
 
 const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, handleRenameDeck, showCancel = true }) => {
+  const { getLocalString } = useLocale();
   const [deckName, setDeckName] = useState("");
   const [submitEnabled, setSubmitEnabled] = useState(true);
 
@@ -22,13 +24,13 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
     setDeckName(initialDeckName);
   }, []);
 
-  const submitBgStyle = submitEnabled ? scheme.bgAccent3 : scheme.disabled;
+  const submitBgStyle = submitEnabled ? scheme.buttonBg : scheme.disabled;
 
   return (
     <View style={[styles.container, styles.centeredView]}>
-      <View style={[styles.modalView, scheme.bgAccent2, scheme.border]}>
+      <View style={[styles.modalView, scheme.bgAccent1, scheme.border]}>
         <View>
-          <Text style={[scheme.txt, { paddingBottom: 10 }]}>Name this deck</Text>
+          <Text style={[scheme.txt, { paddingBottom: 10 }]}>{getLocalString("Name this deck")}</Text>
         </View>
         <Text style={styles.modalText}>
           <TextInput style={styles.textInput} onChangeText={onDeckNameUpdate} value={deckName} />
@@ -36,7 +38,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
         <View style={{ flex: 1, flexDirection: "row" }}>
           {showCancel && (
             <Pressable style={[styles.button, scheme.disabled]} onPress={handleCancelClick}>
-              <Text style={[styles.textStyle, scheme.txt]}>Cancel</Text>
+              <Text style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Cancel")}</Text>
             </Pressable>
           )}
           <Pressable
@@ -47,7 +49,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
               }
             }}
           >
-            <Text style={[styles.textStyle, scheme.txt]}>Submit</Text>
+            <Text style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Submit")}</Text>
           </Pressable>
         </View>
       </View>

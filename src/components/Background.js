@@ -1,5 +1,5 @@
-import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
+import { View } from "react-native-web";
 
 import { getBgScheme } from "../common/util";
 
@@ -7,14 +7,14 @@ import { getBgScheme } from "../common/util";
 const Background = ({ theme, children }) => {
   const schemeBg = getBgScheme(theme);
   return (
-    <LinearGradient
-      colors={[schemeBg.bgAccent2, schemeBg.bgAccent1, schemeBg.bgAccent2]} // Array of colors for the gradient
-      style={styles.background}
-      start={{ x: 0, y: 0 }} // Optional: start point of the gradient (top-left)
-      end={{ x: 1, y: 1 }} // Optional: end point of the gradient (bottom-right)
-    >
-      {children}
-    </LinearGradient>
+    // <LinearGradient
+    //   colors={[schemeBg.bgAccent2, schemeBg.bgAccent1, schemeBg.bgAccent2]} // Array of colors for the gradient
+    //   style={styles.background}
+    //   start={{ x: 0, y: 0 }} // Optional: start point of the gradient (top-left)
+    //   end={{ x: 1, y: 1 }} // Optional: end point of the gradient (bottom-right)
+    // >
+    <View style={[styles.background, { backgroundColor: schemeBg.bgAccent1 }]}>{children}</View>
+    // </LinearGradient>
   );
 };
 

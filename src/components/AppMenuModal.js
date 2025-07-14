@@ -16,7 +16,7 @@ const AppMenuModal = ({ showMenu, setShowMenu, scheme }) => {
           width: "auto",
         },
         scheme.baseBg,
-        { borderColor: scheme.bgAccent2.backgroundColor, borderWidth: 1 },
+        { borderColor: scheme.bgAccent1.backgroundColor, borderWidth: 1 },
       ]}
     >
       <AppMenu scheme={scheme} />

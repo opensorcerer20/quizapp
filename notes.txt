@@ -38,6 +38,7 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 - ndk: use android studio sdk -> sdk tools -> ndk side by side and make sure it is up to date
 
+open -a "/Applications/Android Studio.app" ./android
 
 first time...
 

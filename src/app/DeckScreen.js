@@ -38,7 +38,7 @@ const DeckScreen = () => {
         style={[scheme.bgAccent3, scheme.txt, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}
       >
         <Checkbox
-          color={scheme.bgAccent2.backgroundColor}
+          color={scheme.bgAccent1.backgroundColor}
           style={styles.checkbox}
           value={!item.disabled}
           onValueChange={() => onCheckboxClick(!item?.disabled, item.id)}
@@ -86,7 +86,7 @@ const DeckScreen = () => {
                 { icon: "✕", color: scheme.txt.color, label: "Hide All Cards", onPress: () => onCheckboxClick(true) },
                 { icon: "✓", color: scheme.txt.color, label: "Show All Cards", onPress: () => onCheckboxClick(false) },
               ].map(({ icon, color, label, onPress }) => (
-                <Pressable key={label} style={[scheme.bgAccent3, styles.blanketButton]} onPress={onPress}>
+                <Pressable key={label} style={[scheme.buttonBg, styles.setAllButton]} onPress={onPress}>
                   <Text style={{ color }}>{icon}</Text>
                   <Text style={scheme.txt}> {label}</Text>
                 </Pressable>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
     alignItems: "center",
   },
-  blanketButton: {
+  setAllButton: {
     flexDirection: "row",
     padding: 10,
     borderRadius: 5,

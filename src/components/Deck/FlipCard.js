@@ -13,7 +13,7 @@ import { useTheme } from "../Providers/ThemeProvider";
 const CARDTYPE_QUESTION = "question";
 const CARDTYPE_ANSWER = "answer";
 
-const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle }) => {
+const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerTextStyle }) => {
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);
@@ -35,10 +35,9 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle }) => {
       <Text
         style={[
           { fontWeight: "bold" },
-          textStyle,
+          headerTextStyle,
           {
             textAlign: cardType === CARDTYPE_ANSWER ? "right" : "left",
-            color: cardBg.backgroundColor,
           },
         ]}
       >
@@ -89,6 +88,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardStyle={[styles.card, scheme.border]}
       cardBg={isReversed ? scheme.cardA : scheme.cardQ}
       textStyle={scheme.txt}
+      headerTextStyle={{ color: scheme.antiTxtBg.backgroundColor, fontSize: 20 }}
     />
   );
 
@@ -99,6 +99,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardStyle={[styles.card, scheme.border]}
       cardBg={isReversed ? scheme.cardQ : scheme.cardA}
       textStyle={scheme.txt}
+      headerTextStyle={{ color: scheme.antiTxtBg.backgroundColor, fontSize: 20 }}
     />
   );
 

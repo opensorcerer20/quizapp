@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { difference } from "lodash";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { getRandomInt, getScheme } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
@@ -135,7 +135,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
             {currentState.originalBag.length}
           </Text>
-          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
+          <View style={{ margin: 0, padding: 5 }}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
@@ -144,7 +144,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
               labelTxt={"Reverse Q & A"}
             />
           </View>
-          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
+          <View style={{ margin: 0, padding: 5 }}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}

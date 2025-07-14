@@ -4,6 +4,7 @@ import * as DocumentPicker from "expo-document-picker";
 import { router, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, SAFE_WIDTH } from "../common/constants";
 import { loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
@@ -264,6 +265,7 @@ export const DeckList = () => {
 
   const path = usePathname();
   const showFab = path === "/" && deckListData.length < MAX_DECKS;
+  const insets = useSafeAreaInsets();
 
   //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
 
@@ -273,7 +275,11 @@ export const DeckList = () => {
         {deckListData.length > 0 && (
           <View style={{ padding: 10 }}>
             <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
-            <FlatList data={deckListData} renderItem={renderItem} />
+            <FlatList
+              data={deckListData}
+              renderItem={renderItem}
+              contentContainerStyle={{ paddingBottom: insets.bottom }}
+            />
             <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
               <DeckRenameModal
                 initialDeckName={renameState.editingDeck.name}

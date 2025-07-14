@@ -17,7 +17,7 @@ const HelpMenuModal = ({ showHelp, setShowHelp, scheme, helpType }) => {
           width: HELP_MODAL_WIDTH,
         },
         scheme.baseBg,
-        { borderColor: scheme.bgAccent2.backgroundColor, borderWidth: 1 },
+        { borderColor: scheme.bgAccent3.backgroundColor, borderWidth: 1 },
       ]}
     >
       <HelpMenu scheme={scheme} helpType={helpType} setShowHelp={setShowHelp} />
