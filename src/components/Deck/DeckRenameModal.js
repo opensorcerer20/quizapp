@@ -28,7 +28,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
 
   return (
     <View style={[styles.container, styles.centeredView]}>
-      <View style={[styles.modalView, scheme.bgAccent1, scheme.border]}>
+      <View style={[styles.modalView, scheme.baseBg, scheme.border]}>
         <View>
           <Text style={[scheme.txt, { paddingBottom: 10 }]}>{getLocalString("Name this deck")}</Text>
         </View>

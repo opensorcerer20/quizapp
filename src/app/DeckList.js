@@ -319,7 +319,8 @@ export const DeckList = () => {
               open={fabOpen}
               visible
               icon="plus"
-              fabStyle={scheme.bgAntiPrimary}
+              color={scheme.txt.color}
+              fabStyle={scheme.bgAccent3}
               actions={[
                 {
                   icon: "text",

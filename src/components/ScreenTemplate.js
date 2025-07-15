@@ -30,17 +30,7 @@ const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideBu
         <StatusBar barStyle={"default"} />
         <Background theme={theme}>
           {/* start toolbar */}
-          <View
-            style={[
-              scheme.baseBg,
-              {
-                height: 50,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-              },
-            ]}
-          >
+          <View style={[scheme.bgAccent3, styles.toolbar]}>
             <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
               {showBack && (
                 <Pressable onPress={() => router.back()}>
@@ -80,6 +70,12 @@ const ScreenTemplate = ({ title = null, showBack = true, helpType = null, hideBu
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  toolbar: {
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
 });
 

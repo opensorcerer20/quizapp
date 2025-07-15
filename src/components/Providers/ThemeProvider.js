@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+import { useColorScheme } from "react-native";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { THEME_KEY, THEMES } from "../../common/constants";
@@ -39,7 +41,12 @@ export const ThemeProvider = ({ children }) => {
           setTheme(storedTheme === THEMES.dark ? THEMES.dark : THEMES.light);
         } else {
           // default theme
-          setTheme(THEMES.light);
+          if (useColorScheme() === "dark") {
+            setTheme(THEMES.dark);
+          } else {
+            // light theme
+            setTheme(THEMES.light);
+          }
         }
       } catch (e) {
         console.log("error loading theme, error keys " + JSON.stringify(Object.keys(e)));

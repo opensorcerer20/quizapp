@@ -127,11 +127,12 @@ itemMenuButton: {
     -   [ ] order list by name, date added
     -   [ ] quickly: quiz mode
     -   [ ] quickly: use redux for deck list state
-    -   [ ] tips: after certain amount of uses, tip popup with option to "dont show again"
+    -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
 
 -   [ ] LLC
 
 - [ ] add tip to menu (needs llc name)
+    -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
     -   [ ] tip button (https://buymeacoffee.com/)
 
 -   [ ] launch 1.0

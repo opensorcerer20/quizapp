@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 
 import Checkbox from "expo-checkbox";
 import { useLocalSearchParams } from "expo-router";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
+import { THEMES } from "../common/constants";
 import { loadDeckData, saveDeckData } from "../common/fileLib";
 import { formatCardText, getScheme } from "../common/util";
 import DeckTitle from "../components/Deck/DeckTitle";
@@ -33,12 +34,11 @@ const DeckScreen = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View
-        key={item.id}
-        style={[scheme.bgAccent3, scheme.txt, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}
-      >
+      <View key={item.id} style={[scheme.bgAccent3, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}>
         <Checkbox
-          color={scheme.bgAccent1.backgroundColor}
+          color={
+            Platform.OS === "android" && theme === THEMES.dark ? scheme.antiTxtBg.backgroundColor : scheme.txt.color
+          }
           style={styles.checkbox}
           value={!item.disabled}
           onValueChange={() => onCheckboxClick(!item?.disabled, item.id)}
@@ -83,12 +83,22 @@ const DeckScreen = () => {
           <>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
               {[
-                { icon: "✕", color: scheme.txt.color, label: "Hide All Cards", onPress: () => onCheckboxClick(true) },
-                { icon: "✓", color: scheme.txt.color, label: "Show All Cards", onPress: () => onCheckboxClick(false) },
+                {
+                  icon: "✕",
+                  color: scheme.buttonTxt.color,
+                  label: "Hide All Cards",
+                  onPress: () => onCheckboxClick(true),
+                },
+                {
+                  icon: "✓",
+                  color: scheme.buttonTxt.color,
+                  label: "Show All Cards",
+                  onPress: () => onCheckboxClick(false),
+                },
               ].map(({ icon, color, label, onPress }) => (
                 <Pressable key={label} style={[scheme.buttonBg, styles.setAllButton]} onPress={onPress}>
                   <Text style={{ color }}>{icon}</Text>
-                  <Text style={scheme.txt}> {label}</Text>
+                  <Text style={{ color }}> {label}</Text>
                 </Pressable>
               ))}
             </View>
