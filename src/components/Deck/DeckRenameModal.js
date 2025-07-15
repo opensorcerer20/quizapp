@@ -28,7 +28,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
 
   return (
     <View style={[styles.container, styles.centeredView]}>
-      <View style={[styles.modalView, scheme.baseBg, scheme.border]}>
+      <View style={[styles.modalView, scheme.bgAccent3, scheme.border]}>
         <View>
           <Text style={[scheme.txt, { paddingBottom: 10 }]}>{getLocalString("Name this deck")}</Text>
         </View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    maxHeight: 200,
+    maxHeight: 170,
   },
   textStyle: {
     fontWeight: "bold",
@@ -74,8 +74,11 @@ const styles = StyleSheet.create({
   textInput: {
     padding: 4,
     backgroundColor: "white",
-    width: 200,
+    width: 300,
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "black",
+    color: "black",
   },
   modalText: {
     marginBottom: 15,

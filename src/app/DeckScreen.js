@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Checkbox from "expo-checkbox";
 import { useLocalSearchParams } from "expo-router";
-import { FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { THEMES } from "../common/constants";
 import { loadDeckData, saveDeckData } from "../common/fileLib";
@@ -36,9 +36,7 @@ const DeckScreen = () => {
     return (
       <View key={item.id} style={[scheme.bgAccent3, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}>
         <Checkbox
-          color={
-            Platform.OS === "android" && theme === THEMES.dark ? scheme.antiTxtBg.backgroundColor : scheme.txt.color
-          }
+          color={theme === THEMES.dark ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
           style={styles.checkbox}
           value={!item.disabled}
           onValueChange={() => onCheckboxClick(!item?.disabled, item.id)}

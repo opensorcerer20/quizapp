@@ -105,8 +105,8 @@ itemMenuButton: {
             - [ ] ~~more neutral color scheme~~
             - [ ] ~~? user select color scheme~~
         - [x] more spacing between switches
-        - [ ] android top bar shaded
-    -   [ ] app icon
+        - [ ] ~~android top bar shaded~~
+    -   [x] app icon
 
     -   [ ] very last tasks before beta build
         -   [x] remove all @todos

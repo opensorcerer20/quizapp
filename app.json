@@ -20,10 +20,11 @@
     },
     "android": {
       "package": "com.opensorcerer20.flashcardlibrary",
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#121212"
+      }
     },
     "owner": "opensorcerer20",
     "plugins": [

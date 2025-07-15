@@ -6,10 +6,12 @@ export const lightDarkBgColors = {
     antiBaseBg: "#efefef",
     antiTxtBg: "#121212",
     bgAccent1: "#343434",
-    bgAccent3: "#4a63ac",
-    buttonBg: "#68b3d0",
-    buttonTxt: "#121212",
-    disabled: "#565656",
+    bgAccent3: "#4a63ac99",
+    cardQ: "#4a63ac66",
+    cardA: "#4a63acff",
+    buttonBg: "#4a63acff",
+    buttonTxt: "#efefef",
+    disabled: "#787878",
     txt: "#efefef",
   },
   schemeBgLight: {
@@ -18,7 +20,9 @@ export const lightDarkBgColors = {
     antiTxtBg: "#ffffff",
     bgAccent1: "#ffffff",
     bgAccent3: "#d5c5e3",
-    buttonBg: "#383aca",
+    cardQ: "#d5c5e366",
+    cardA: "#d5c5e3ff",
+    buttonBg: "#4a63ac",
     buttonTxt: "#efefef",
     disabled: "#787878",
     txt: "#121212",
@@ -46,10 +50,10 @@ export const lightDarkStyles = {
       backgroundColor: lightDarkBgColors.schemeBgDark.disabled,
     },
     cardQ: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3 + "99",
+      backgroundColor: lightDarkBgColors.schemeBgDark.cardQ,
     },
     cardA: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3,
+      backgroundColor: lightDarkBgColors.schemeBgDark.cardA,
     },
     bgAccent1: {
       backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent1,
@@ -95,10 +99,10 @@ export const lightDarkStyles = {
       backgroundColor: lightDarkBgColors.schemeBgLight.disabled,
     },
     cardQ: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent3 + "66",
+      backgroundColor: lightDarkBgColors.schemeBgLight.cardQ,
     },
     cardA: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent3,
+      backgroundColor: lightDarkBgColors.schemeBgLight.cardA,
     },
     bgAccent1: {
       backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent1,

@@ -63,13 +63,14 @@ export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, on
 const styles = StyleSheet.create({
   button: {
     minWidth: "20%",
-    height: 40,
+    height: 50,
     margin: 0,
     borderColor: "#999999",
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 8,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
   },
   buttonLeft: {
     borderTopLeftRadius: 10,
