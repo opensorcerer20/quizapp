@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: "center",
     maxHeight: 170,
   },
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   textInput: {
     padding: 4,
     backgroundColor: "white",
-    width: 300,
+    width: 250,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "black",

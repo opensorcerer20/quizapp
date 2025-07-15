@@ -1,6 +1,25 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { DECK_DATA_KEY, DECK_QA_KEY } from "./constants";
+import { getRandomInt } from "./util";
+
+export const loadDemoData = async () => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const hasDeckData = keys.indexOf(DECK_DATA_KEY) > -1;
+    const hasQaDecks = keys.filter((key) => key.indexOf(DECK_QA_KEY) === 0).length > 0;
+    if (!hasDeckData && !hasQaDecks) {
+      const demoDeckData = require("../../assets/demodeck.json");
+      const deckId = getRandomInt(100000, 999999);
+      await saveDeckListData([{ ...demoDeckData.demoDeckData, id: deckId }]);
+      await saveDeckData(deckId, { ...demoDeckData.demoDeckQuestionData, id: deckId });
+      return true;
+    }
+  } catch (e) {
+    console.log("Error retrieving keys from AsyncStorage:", e);
+  }
+  return false;
+};
 
 export const loadStorageData = async (key) => {
   try {

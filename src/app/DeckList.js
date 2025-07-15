@@ -7,7 +7,7 @@ import { Button, FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, SAFE_WIDTH } from "../common/constants";
-import { loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
+import { loadDemoData, loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
@@ -261,6 +261,17 @@ export const DeckList = () => {
       await loadDeckListData();
     };
     loadData();
+  }, []);
+
+  // load demo data if no data currently saved (checks async storage)
+  useEffect(() => {
+    const checkData = async () => {
+      const result = await loadDemoData();
+      if (result === true) {
+        setReload(true);
+      }
+    };
+    checkData();
   }, []);
 
   const path = usePathname();
