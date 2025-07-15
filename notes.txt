@@ -40,6 +40,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 open -a "/Applications/Android Studio.app" ./android
 
+scheme in app.json must be ALL LOWER CASE and in an array like ["com.opensorcerer20.flashcardlibrary"]
+
 first time...
 
 make package com.appname.appname (as opposed to com.username.appname)

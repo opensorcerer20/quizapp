@@ -1,14 +1,14 @@
 {
   "expo": {
     "name": "Flashcard Library",
-    "slug": "FlashcardLibrary",
+    "slug": "flashcardlibrary",
     "version": "0.3.0",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.opensorcerer20.FlashcardLibrary",
+      "bundleIdentifier": "com.opensorcerer20.flashcardlibrary",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
@@ -19,7 +19,7 @@
       }
     },
     "android": {
-      "package": "com.opensorcerer20.FlashcardLibrary",
+      "package": "com.opensorcerer20.flashcardlibrary",
       "edgeToEdgeEnabled": true
     },
     "web": {
@@ -32,8 +32,11 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "af4a1aaf-3a83-4eb5-a68f-c2b41c7f36c5"
+        "projectId": "7a960274-0ed7-421e-bf44-53940aadcc5f"
       }
-    }
+    },
+    "scheme": [
+      "com.opensorcerer20.flashcardlibrary"
+    ]
   }
 }

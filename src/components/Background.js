@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-import { View } from "react-native-web";
+import { StyleSheet, View } from "react-native";
 
 import { getBgScheme } from "../common/util";
 
