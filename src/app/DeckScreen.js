@@ -34,7 +34,7 @@ const DeckScreen = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View key={item.id} style={[scheme.bgAccent3, styles.item, { borderColor: scheme.txt.color, borderWidth: 1 }]}>
+      <View key={item.id} style={[scheme.bgAccent3, styles.item, { borderColor: scheme.txt.color }]}>
         <Checkbox
           color={theme === THEMES.dark ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
           style={styles.checkbox}
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     marginHorizontal: "auto",
     alignItems: "center",
+    borderWidth: 1,
   },
   setAllButton: {
     flexDirection: "row",

@@ -6,14 +6,7 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
   const scheme = getScheme(theme);
   const schemeBg = getBgScheme(theme);
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: Platform.OS === "ios" ? 10 : 0,
-      }}
-    >
+    <View style={styles.container}>
       <Switch
         trackColor={{
           false: schemeBg.bgAccent3,
@@ -23,11 +16,11 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
         thumbColor={!!optionValue ? scheme.txt.color : schemeBg.disabled}
         onValueChange={onClick}
         value={!!optionValue}
-        style={{ padding: 0, margin: 0 }}
+        style={styles.switch}
       />
       {labelTxt !== null && (
         <Pressable onPress={onClick} onLongPress={onClick}>
-          <Text style={[txtStyle, { padding: 0, paddingLeft: 10, margin: 0 }]}>{labelTxt}</Text>
+          <Text style={[txtStyle, styles.switchTxt]}>{labelTxt}</Text>
         </Pressable>
       )}
     </View>
@@ -37,7 +30,17 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
-    margin: "auto",
+    marginTop: Platform.OS === "ios" ? 10 : 0,
+  },
+  switch: {
+    padding: 0,
+    margin: 0,
+  },
+  switchTxt: {
+    padding: 0,
+    paddingLeft: 10,
+    margin: 0,
   },
 });

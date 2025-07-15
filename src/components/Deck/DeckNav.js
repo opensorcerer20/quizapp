@@ -22,15 +22,8 @@ export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, on
 
   const scheme = getScheme(theme);
   return (
-    <View style={{ display: "flex", padding: 20, marginTop: 10 }}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <View style={styles.container}>
+      <View style={styles.navContainer}>
         <NavButton
           enabled={true}
           scheme={scheme}
@@ -61,6 +54,17 @@ export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, on
 };
 
 const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    padding: 20,
+    marginTop: 10,
+  },
+  navContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   button: {
     minWidth: "20%",
     height: 50,

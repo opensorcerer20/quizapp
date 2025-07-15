@@ -85,33 +85,6 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
--   [ ] last chance before beta
-
-    -   [x] add help menu
-    -   [x] deck name doesnt fit in toolbar
-
-    -   [x] need to test full 20 decks with 50 questions each to see if memory is an issue
-    -   [x] make new appbar
-        - [x] new appbar replaces old
-        - [x] back/menu button
-        - [x] move "quizmodal" uses to modal callouts eg "appmenumodal" "helpmodal" etc
-        - [x] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
-
-    - [ ] bugs/improvements
-        - [ ] need at least 1 test deck loaded for android emulator
-        - [x] full list clips at bottom
-        - [x] simpler color scheme
-            - [ ] ~~note where colors applied~~
-            - [ ] ~~more neutral color scheme~~
-            - [ ] ~~? user select color scheme~~
-        - [x] more spacing between switches
-        - [ ] ~~android top bar shaded~~
-    -   [x] app icon
-
-    -   [ ] very last tasks before beta build
-        -   [x] remove all @todos
-        -   [ ] move all "style"s to stylesheets
-
 - [ ] make beta
     -   [ ] android
     -   [ ] iphone
@@ -424,4 +397,32 @@ itemMenuButton: {
     -   [x] modal to edit string
     -   [x] "save" to save edit
     -   [x] "cancel" or click away to cancel
+
+-   [ ] last chance before beta
+
+    -   [x] add help menu
+    -   [x] deck name doesnt fit in toolbar
+
+    -   [x] need to test full 20 decks with 50 questions each to see if memory is an issue
+    -   [x] make new appbar
+        - [x] new appbar replaces old
+        - [x] back/menu button
+        - [x] move "quizmodal" uses to modal callouts eg "appmenumodal" "helpmodal" etc
+        - [x] modals ONLY WORK with deck menu, not working when click outside (in android only), use react-native-modal
+
+    - [x] bugs/improvements
+        - [x] need at least 1 test deck loaded for android emulator
+        - [x] full list clips at bottom
+        - [x] simpler color scheme
+            - [ ] ~~note where colors applied~~
+            - [ ] ~~more neutral color scheme~~
+            - [ ] ~~? user select color scheme~~
+        - [x] more spacing between switches
+        - [ ] ~~android top bar shaded~~
+    -   [x] app icon
+
+    -   [x] very last tasks before beta build
+        -   [x] remove all @todos
+        -   [x] move all "style"s to stylesheets
+
 ## End Roadmap Development

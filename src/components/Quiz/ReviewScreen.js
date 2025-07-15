@@ -121,21 +121,11 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             onResetClick={() => resetQuestionBag(true)}
             onStartOverClick={() => resetQuestionBag(false)}
           />
-          <Text
-            style={[
-              scheme.txt,
-              {
-                margin: "auto",
-                fontSize: 16,
-                fontWeight: "bold",
-                paddingVertical: 10,
-              },
-            ]}
-          >
+          <Text style={[scheme.txt, styles.cardCounter]}>
             Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
             {currentState.originalBag.length}
           </Text>
-          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
+          <View style={styles.switchContainer}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
@@ -144,7 +134,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
               labelTxt={"Reverse Q & A"}
             />
           </View>
-          <View style={{ margin: 0, padding: Platform.OS === "ios" ? 5 : 0 }}>
+          <View style={styles.switchContainer}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
@@ -190,5 +180,12 @@ const styles = StyleSheet.create({
   noQText: {
     marginBottom: 10,
     fontSize: 16,
+  },
+  switchContainer: { margin: 0, padding: Platform.OS === "ios" ? 5 : 0 },
+  cardCounter: {
+    margin: "auto",
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingVertical: 10,
   },
 });

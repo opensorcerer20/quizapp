@@ -17,16 +17,16 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);
-  const textSizeStyle = fontSize !== "" ? styles[fontSize] : {};
+  const textSizeStyle = fontSize !== "" ? { ...styles[fontSize], marginTop: 10 } : { marginTop: 10 };
+  const qStyle = { marginLeft: 0, marginRight: "auto" };
+  const aStyle = { marginLeft: "auto", marginRight: 0 };
 
   const CardHeader = () => (
     <View
       style={[
-        cardType === CARDTYPE_ANSWER ? { marginLeft: "auto", marginRight: 0 } : { marginLeft: 0, marginRight: "auto" },
+        cardType === CARDTYPE_ANSWER ? aStyle : qStyle,
+        styles.cardHeaderContainer,
         {
-          borderWidth: 1,
-          borderRadius: 5,
-          padding: 2,
           borderColor: textStyle.color,
           backgroundColor: textStyle.color,
         },
@@ -53,7 +53,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
   return (
     <View style={[cardStyle, { backgroundColor: cardBg.backgroundColor }]}>
       <CardHeader />
-      <Text style={[textStyle, textSizeStyle, { marginTop: 10 }]}>{finalCardText}</Text>
+      <Text style={[textStyle, textSizeStyle]}>{finalCardText}</Text>
     </View>
   );
 };
@@ -81,6 +81,8 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
     };
   });
 
+  const headerTextStyle = { color: scheme.antiTxtBg.backgroundColor, fontSize: 20 };
+
   const questionCard = (
     <CardContent
       cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
@@ -88,7 +90,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardStyle={[styles.card, scheme.border]}
       cardBg={isReversed ? scheme.cardA : scheme.cardQ}
       textStyle={scheme.txt}
-      headerTextStyle={{ color: scheme.antiTxtBg.backgroundColor, fontSize: 20 }}
+      headerTextStyle={headerTextStyle}
     />
   );
 
@@ -99,7 +101,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardStyle={[styles.card, scheme.border]}
       cardBg={isReversed ? scheme.cardQ : scheme.cardA}
       textStyle={scheme.txt}
-      headerTextStyle={{ color: scheme.antiTxtBg.backgroundColor, fontSize: 20 }}
+      headerTextStyle={headerTextStyle}
     />
   );
 
@@ -206,6 +208,11 @@ const styles = StyleSheet.create({
   },
   flippedCardContainer: {
     zIndex: 2,
+  },
+  cardHeaderContainer: {
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 2,
   },
 });
 
