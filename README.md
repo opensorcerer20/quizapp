@@ -99,7 +99,7 @@ itemMenuButton: {
 
     - [ ] bugs/improvements
         - [ ] need at least 1 test deck loaded for android emulator
-        - [ ] full list clips at bottom
+        - [x] full list clips at bottom
         - [x] simpler color scheme
             - [ ] ~~note where colors applied~~
             - [ ] ~~more neutral color scheme~~
