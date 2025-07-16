@@ -86,7 +86,7 @@ itemMenuButton: {
 ## Current Roadmap Development
 
 - [ ] make beta
-    -   [ ] android
+    -   [x] android
     -   [ ] iphone
     -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
 

@@ -51,7 +51,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
   //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
   // );
   return (
-    <View style={[cardStyle, { backgroundColor: cardBg.backgroundColor }]}>
+    <View style={[cardStyle, cardBg]}>
       <CardHeader />
       <Text style={[textStyle, textSizeStyle]}>{finalCardText}</Text>
     </View>
@@ -106,7 +106,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
   );
 
   return (
-    <View>
+    <View style={styles.viewShadow}>
       <Animated.View style={[styles.regularCardContainer, cardStyle, regularCardAnimatedStyle]}>
         {isReversed ? answerCard : questionCard}
       </Animated.View>
@@ -187,6 +187,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 10,
     marginVertical: 5,
+  },
+  viewShadow: {
     ...Platform.select({
       ios: {
         shadowColor: "#000",
