@@ -4,11 +4,11 @@ import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
 import HelpMenu, { HELP_MODAL_WIDTH } from "./HelpMenu";
 import QuizModal from "./QuizModal";
 
-const HelpMenuModal = ({ showModal, setShowModal, scheme, helpType }) => {
+const HelpMenuModal = ({ showHelp, setShowHelp, scheme, helpType }) => {
   return (
     <QuizModal
-      modalVisible={showModal}
-      handleModalClickAway={() => setShowModal(false)}
+      modalVisible={showHelp}
+      handleModalClickAway={() => setShowHelp(false)}
       modalContainerStyle={[
         styles.helpModal,
         {
@@ -16,11 +16,11 @@ const HelpMenuModal = ({ showModal, setShowModal, scheme, helpType }) => {
           left: SAFE_WIDTH / 2 - HELP_MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: HELP_MODAL_WIDTH,
         },
-        scheme.baseBg3,
+        scheme.baseBg,
         { borderColor: scheme.bgAccent3.backgroundColor, borderWidth: 1 },
       ]}
     >
-      <HelpMenu scheme={scheme} helpType={helpType} setShowModal={setShowModal} />
+      <HelpMenu scheme={scheme} helpType={helpType} setShowHelp={setShowHelp} />
     </QuizModal>
   );
 };

@@ -8,8 +8,8 @@ import { DeckNav } from "../Deck/DeckNav";
 import DeckTitle from "../Deck/DeckTitle";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
+import { StyledSwitch } from "../Deck/StyledSwitch";
 import { useTheme } from "../Providers/ThemeProvider";
-import { StyledSwitch } from "../StyledSwitch";
 
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
   const [isReversed, setIsReversed] = useState(false);

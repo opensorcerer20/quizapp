@@ -5,31 +5,14 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { THEMES } from "../common/constants";
-import { getScheme } from "../common/util";
 import AppMenuModal from "./AppMenuModal";
-import FileHelpModal from "./FileHelpModal";
 import HelpMenuModal from "./HelpMenuModal";
-import { useTheme } from "./Providers/ThemeProvider";
 import { useLocale } from "./Providers/TranslationProvider";
 
-const Toolbar = ({ title, showBack, helpType, hideButtons }) => {
+const Toolbar = ({ title, showBack, scheme, helpType, hideButtons }) => {
   const { getLocalString } = useLocale();
   const [showHelp, setShowHelp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [showFileHelp, setShowFileHelp] = useState(false);
-
-  const { theme, toggleTheme } = useTheme();
-  const themeIcon = theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
-  const scheme = getScheme(theme);
-
-  const showFileHelpModal = () => {
-    setShowMenu(false);
-
-    setTimeout(() => {
-      setShowFileHelp(true);
-    }, 300);
-  };
 
   const showHelpButton = !hideButtons && helpType !== null;
   return (
@@ -51,26 +34,17 @@ const Toolbar = ({ title, showBack, helpType, hideButtons }) => {
         <View style={{ flex: 8 }}>
           <Text style={scheme.txt}>{title || getLocalString("Flashcard Library")}</Text>
         </View>
-        <View style={{ flex: 2, alignItems: "flex-end", marginRight: 15, flexDirection: "row" }}>
-          <Pressable style={{ flex: 1 }} onPress={toggleTheme}>
-            <MaterialCommunityIcons name={themeIcon} size={24} color={scheme.txt.color} />
-          </Pressable>
+        <View style={{ flex: 2, alignItems: "flex-end", marginRight: 15 }}>
           {showHelpButton && (
-            <Pressable style={{ flex: 1 }} onPress={() => setShowHelp(!showHelp)}>
+            <Pressable onPress={() => setShowHelp(!showHelp)}>
               <MaterialCommunityIcons name="help" size={24} color={scheme.txt.color} />
             </Pressable>
           )}
         </View>
       </View>
 
-      <AppMenuModal
-        showModal={showMenu}
-        setShowModal={setShowMenu}
-        onClickHelp={() => showFileHelpModal()}
-        scheme={scheme}
-      />
-      <HelpMenuModal showModal={showHelp} setShowModal={setShowHelp} scheme={scheme} helpType={helpType} />
-      <FileHelpModal showModal={showFileHelp} setShowModal={setShowFileHelp} scheme={scheme} />
+      <AppMenuModal scheme={scheme} showMenu={showMenu} setShowMenu={setShowMenu} />
+      <HelpMenuModal showHelp={showHelp} setShowHelp={setShowHelp} scheme={scheme} helpType={helpType} />
     </>
   );
 };
