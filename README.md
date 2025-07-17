@@ -85,6 +85,10 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
+- [ ] add file help
+    - [ ] show first time along with loading demo data
+    - [ ] below "dark theme" in menu to show again
+
 - [ ] make beta
     -   [x] android
     -   [ ] iphone
@@ -101,6 +105,7 @@ itemMenuButton: {
     -   [ ] quickly: quiz mode
     -   [ ] quickly: use redux for deck list state
     -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
+    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
 
 -   [ ] LLC
 
@@ -137,6 +142,7 @@ itemMenuButton: {
 -   [ ] different settings for modes
 -   [ ] text box for inputting questions on the fly
 -   [ ] swipe to next card ("swipe gesture" plus animation)
+    - [ ] NOTE: i saw a list where you could swipe between pictures horizontally, but i dont remember the construct. expo router? list that goes horizontal?
 -   [ ] now that everything is done, can the code be redone for better organization?
 
 -   more modes

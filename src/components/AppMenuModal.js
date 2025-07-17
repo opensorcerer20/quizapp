@@ -1,13 +1,12 @@
-import { Platform, StyleSheet } from "react-native";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
-import AppMenu from "./AppMenu";
 import QuizModal from "./QuizModal";
 
-const AppMenuModal = ({ showMenu, setShowMenu, scheme }) => {
+const AppMenuModal = ({ showModal, setShowModal, onClickHelp, scheme }) => {
   return (
     <QuizModal
-      modalVisible={showMenu}
-      handleModalClickAway={() => setShowMenu(false)}
+      modalVisible={showModal}
+      handleModalClickAway={() => setShowModal(false)}
       modalContainerStyle={[
         styles.menuModal,
         {
@@ -15,11 +14,15 @@ const AppMenuModal = ({ showMenu, setShowMenu, scheme }) => {
           left: 20,
           width: "auto",
         },
-        scheme.baseBg,
+        scheme.baseBg3,
         { borderColor: scheme.bgAccent1.backgroundColor, borderWidth: 1 },
       ]}
     >
-      <AppMenu scheme={scheme} />
+      <Pressable onPress={onClickHelp}>
+        <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
+          <Text style={[scheme.txt, { fontSize: 16 }]}>Deck file help</Text>
+        </View>
+      </Pressable>
     </QuizModal>
   );
 };
@@ -33,6 +36,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     borderRadius: 10,
+  },
+  menuItem: {
+    padding: 10,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingBottom: Platform.OS === "ios" ? 15 : 10,
   },
 });
 
