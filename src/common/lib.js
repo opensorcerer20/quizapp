@@ -3,6 +3,8 @@
 export const lightDarkBgColors = {
   schemeBgDark: {
     baseBg: "#121212",
+    baseBg2: "#232323",
+    baseBg3: "#343434",
     antiBaseBg: "#efefef",
     antiTxtBg: "#121212",
     bgAccent1: "#343434",
@@ -16,6 +18,8 @@ export const lightDarkBgColors = {
   },
   schemeBgLight: {
     baseBg: "#ffffff",
+    baseBg2: "#ffffff",
+    baseBg3: "#ffffff",
     antiBaseBg: "#121212",
     antiTxtBg: "#ffffff",
     bgAccent1: "#ffffff",
@@ -31,14 +35,9 @@ export const lightDarkBgColors = {
 
 export const lightDarkStyles = {
   schemeDark: {
-    /*
-  #3a306d	(74,64,125)
-  #47448b	(87,84,155)
-  #5458b9	(100,104,185)
-  #616cc7	(113,124,215)
-  #6d8ff5	(125,143,245)
-    */
     baseBg: { backgroundColor: lightDarkBgColors.schemeBgDark.baseBg },
+    baseBg2: { backgroundColor: lightDarkBgColors.schemeBgDark.baseBg2 },
+    baseBg3: { backgroundColor: lightDarkBgColors.schemeBgDark.baseBg3 },
     bgPrimary: {
       backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent1,
     },
@@ -80,14 +79,9 @@ export const lightDarkStyles = {
     },
   },
   schemeLight: {
-    /*
-  #8265aa	(114,85,154)
-  #a187e1	(145,119,209)
-  #c5a2f2	(197,162,242)
-  #d5c5e3	(213,197,227)
-  #f6f2fa	(246,242,250)
-    */
     baseBg: { backgroundColor: lightDarkBgColors.schemeBgLight.baseBg },
+    baseBg2: { backgroundColor: lightDarkBgColors.schemeBgLight.baseBg2 },
+    baseBg3: { backgroundColor: lightDarkBgColors.schemeBgLight.baseBg3 },
     bgPrimary: {
       backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent1,
     },

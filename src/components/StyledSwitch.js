@@ -1,6 +1,6 @@
 import { Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 
-import { getBgScheme, getScheme } from "../../common/util";
+import { getBgScheme, getScheme } from "../common/util";
 
 export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, labelTxt = null }) => {
   const scheme = getScheme(theme);

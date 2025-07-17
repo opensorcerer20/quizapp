@@ -12,6 +12,7 @@ import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/uti
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
+import FileHelpModal from "../components/FileHelpModal";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import QuizModal from "../components/QuizModal";
 import ScreenTemplate from "../components/ScreenTemplate";
@@ -29,6 +30,7 @@ export const DeckList = () => {
   const [importSource, setImportSource] = useState(emptyImportSource);
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
+  const [showFileHelp, setShowFileHelp] = useState(false);
   const [menuState, setMenuState] = useState({
     visible: false,
     position: { top: 0, left: 0 },
@@ -47,6 +49,14 @@ export const DeckList = () => {
   const [fabOpen, setFabOpen] = useState(false);
   const onFABClick = ({ open }) => {
     setFabOpen(!!open);
+  };
+
+  const showFileHelpModal = () => {
+    setFabOpen(false);
+
+    setTimeout(() => {
+      setShowFileHelp(true);
+    }, 300);
   };
 
   const loadDeckListData = async () => {
@@ -325,28 +335,36 @@ export const DeckList = () => {
         )}
 
         {showFab && (
-          <Portal>
-            <FAB.Group
-              open={fabOpen}
-              visible
-              icon="plus"
-              color={scheme.txt.color}
-              fabStyle={scheme.bgAccent3}
-              actions={[
-                {
-                  icon: "text",
-                  label: "Text",
-                  onPress: () => onPressImport("txt"),
-                },
-                {
-                  icon: "table",
-                  label: "CSV",
-                  onPress: () => onPressImport("csv"),
-                },
-              ]}
-              onStateChange={onFABClick}
-            />
-          </Portal>
+          <>
+            <Portal>
+              <FAB.Group
+                open={fabOpen}
+                visible
+                icon="plus"
+                color={scheme.txt.color}
+                fabStyle={scheme.bgAccent3}
+                actions={[
+                  {
+                    icon: "help", // material community icon
+                    label: "Help",
+                    onPress: showFileHelpModal,
+                  },
+                  {
+                    icon: "text", // material community icon
+                    label: "Text",
+                    onPress: () => onPressImport("txt"),
+                  },
+                  {
+                    icon: "table", // material community icon
+                    label: "CSV",
+                    onPress: () => onPressImport("csv"),
+                  },
+                ]}
+                onStateChange={onFABClick}
+              />
+            </Portal>
+            <FileHelpModal scheme={scheme} showModal={showFileHelp} setShowModal={setShowFileHelp} />
+          </>
         )}
         {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={scheme.disabled} />}
       </View>
