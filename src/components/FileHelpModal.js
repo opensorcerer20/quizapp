@@ -1,4 +1,6 @@
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+
+import { Image, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 //import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -11,6 +13,40 @@ const MODAL_WIDTH = SAFE_WIDTH * 0.9;
 const SAFE_MODAL_WIDTH = MODAL_WIDTH * 0.95;
 
 const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const pages = [
+    <View style={{ flexDirection: "column" }}>
+      <MaterialCommunityIcons
+        style={{ flex: 1, marginHorizontal: "auto", marginBottom: 10 }}
+        name="text"
+        size={24}
+        color={scheme.txt.color}
+      />
+      <Text style={[scheme.txt, { flex: 1 }]}>
+        TXT files should alternate between question (odd lines) and answers (even lines)
+      </Text>
+      <Image
+        style={{ flex: 1, marginTop: 10, alignSelf: "center", width: 250, height: 150, resizeMode: "contain" }}
+        source={require("../../assets/txt_example.png")}
+      />
+    </View>,
+    <View style={{ flexDirection: "column" }}>
+      <MaterialCommunityIcons
+        style={{ flex: 1, marginHorizontal: "auto", marginBottom: 10 }}
+        name="table"
+        size={24}
+        color={scheme.txt.color}
+      />
+      <Text style={[scheme.txt, { flex: 1 }]}>
+        CSV files should be saved as CSV files, with questions in column 1 or "A" and answers in column 2 or "B"
+      </Text>
+      <Image
+        style={{ flex: 1, marginTop: 10, alignSelf: "center", width: 250, height: 150, resizeMode: "contain" }}
+        source={require("../../assets/csv_example.png")}
+      />
+    </View>,
+  ];
+
   return (
     <QuizModal
       modalVisible={showModal}
@@ -42,48 +78,40 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
       <View style={{ flexDirection: "column" }}>
         <View style={{ flex: 11 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={[scheme.txt, { flex: 1, marginLeft: 10, marginRight: 5 }]}>&lt;</Text>
-            <View style={{ flex: 10 }}>
-              <Text style={scheme.txt}>
-                four score and seven years ago our forefathers brought forth upon this continent a new nation conceived
-                in liberty and dedicated the proposition that all men are created equal
-              </Text>
-              {/*
-          <View style={styles.helpItem}>
-        <Text style={[styles.helpParaIcon, scheme.txt]}>
-          <Entypo name="text" size={24} color={scheme.txt.color} />
-        </Text>
-        <Text style={[styles.helpPara, scheme.txt]}>
-          TXT files should alternate between question (odd lines) and answers (even lines)
-        </Text>
-      </View>
-      <View style={styles.helpItem}>
-        <Text style={[styles.helpParaIcon, scheme.txt]}>
-          <MaterialCommunityIcons name="table" size={24} color={scheme.txt.color} />
-        </Text>
-        <Text style={[styles.helpPara, scheme.txt]}>
-          CSV files should be saved as CSV files, with questions in column 1 or "A" and answers in column 2 or "B"
-        </Text>
-      </View>
-          */}
+            <Pressable
+              style={{ flex: 1 }}
+              onPress={() => (currentPage > 0 ? setCurrentPage((currentPage + pages.length - 1) % pages.length) : null)}
+            >
+              {currentPage > 0 && <MaterialCommunityIcons name="chevron-left" size={24} color={scheme.txt.color} />}
+            </Pressable>
+            <View
+              style={{ flex: 10, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 10 }}
+            >
+              {pages[currentPage]}
             </View>
-            <Text style={[scheme.txt, { flex: 1, marginLeft: 5, marginRight: 10, textAlign: "right" }]}>&gt;</Text>
+            <Pressable
+              style={{ flex: 1 }}
+              onPress={() =>
+                currentPage < pages.length - 1 ? setCurrentPage((currentPage + pages.length + 1) % pages.length) : null
+              }
+            >
+              {currentPage < pages.length - 1 && (
+                <MaterialCommunityIcons name="chevron-right" size={24} color={scheme.txt.color} />
+              )}
+            </Pressable>
           </View>
         </View>
         <View style={{ flex: 1, alignItems: "center", marginVertical: 10 }}>
-          <View style={{ flexDirection: "row", width: 100, alignItems: "center" }}>
-            <View style={{ flex: 1 }}>
-              <MaterialCommunityIcons name="circle" size={8} color={scheme.txt.color} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <MaterialCommunityIcons name="circle-outline" size={8} color={scheme.txt.color} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <MaterialCommunityIcons name="circle-outline" size={8} color={scheme.txt.color} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <MaterialCommunityIcons name="circle-outline" size={8} color={scheme.txt.color} />
-            </View>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {pages.map((_, idx) => (
+              <View key={idx} style={{ flex: 1, paddingHorizontal: 2 }}>
+                <MaterialCommunityIcons
+                  name={idx === currentPage ? "circle" : "circle-outline"}
+                  size={8}
+                  color={scheme.txt.color}
+                />
+              </View>
+            ))}
           </View>
         </View>
       </View>
