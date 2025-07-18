@@ -85,10 +85,6 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
-- [ ] add file help
-    - [ ] show first time along with loading demo data
-    - [ ] below "dark theme" in menu to show again
-
 - [ ] make beta
     -   [x] android
     -   [ ] iphone
@@ -106,6 +102,9 @@ itemMenuButton: {
     -   [ ] quickly: use redux for deck list state
     -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
     -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+    -   [ ] file help
+        - [ ] animation when changing pages
+        - [ ] swipe between pages
 
 -   [ ] LLC
 
@@ -430,5 +429,10 @@ itemMenuButton: {
     -   [x] very last tasks before beta build
         -   [x] remove all @todos
         -   [x] move all "style"s to stylesheets
+
+- [x] add file help
+    - [x] show first time along with loading demo data
+    - [x] below "dark theme" in menu to show again
+
 
 ## End Roadmap Development
