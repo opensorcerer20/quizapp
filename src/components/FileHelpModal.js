@@ -38,7 +38,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         color={scheme.txt.color}
       />
       <Text style={[scheme.txt, { flex: 1 }]}>
-        CSV files should be saved as CSV files, with questions in column 1 or "A" and answers in column 2 or "B"
+        CSV files should be saved as CSV files, with questions in column 1 and answers in column 2
       </Text>
       <Image
         style={{ flex: 1, marginTop: 10, alignSelf: "center", width: 250, height: 150, resizeMode: "contain" }}
@@ -62,21 +62,25 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         { borderColor: scheme.bgAccent3.backgroundColor },
       ]}
     >
-      <View
-        style={[styles.modalHeader, { width: SAFE_MODAL_WIDTH, marginHorizontal: "auto", marginTop: 5, padding: 10 }]}
-      >
-        <Text style={[styles.modalTitle, scheme.txt, { flex: 11 }]}>File Help</Text>
-        <Pressable onPress={() => setShowModal(false)}>
-          <FontAwesome6
-            name="square-xmark"
-            size={24}
-            color={scheme.txt.color}
-            style={{ textAlign: "right", flex: 1 }}
-          />
-        </Pressable>
-      </View>
       <View style={{ flexDirection: "column" }}>
-        <View style={{ flex: 11 }}>
+        <View
+          style={[
+            styles.modalHeader,
+            { flex: 2, width: SAFE_MODAL_WIDTH + 10, marginHorizontal: "auto", marginTop: 5, padding: 10 },
+          ]}
+        >
+          <Text style={[styles.modalTitle, scheme.txt, { flex: 11 }]}>File Help</Text>
+          <Pressable onPress={() => setShowModal(false)}>
+            <FontAwesome6
+              name="square-xmark"
+              size={24}
+              color={scheme.txt.color}
+              style={{ textAlign: "right", flex: 1 }}
+            />
+          </Pressable>
+        </View>
+
+        <View style={{ flex: 9 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Pressable
               style={{ flex: 1 }}
@@ -101,7 +105,8 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
             </Pressable>
           </View>
         </View>
-        <View style={{ flex: 1, alignItems: "center", marginVertical: 10 }}>
+        {/* <View style={{ flex: 1, alignItems: "center", marginVertical: 10 }}> */}
+        <View style={{ flex: 1, width: 50, alignSelf: "center", marginVertical: 10 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {pages.map((_, idx) => (
               <View key={idx} style={{ flex: 1, paddingHorizontal: 2 }}>

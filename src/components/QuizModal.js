@@ -15,7 +15,9 @@ const QuizModal = ({
     <Modal transparent animationType="fade" visible={modalVisible}>
       <Pressable style={styles.overlay} onPress={() => handleModalClickAway()}>
         <View style={[styles.centeredView, ...modalContainerStyle]}>
-          <View style={modalStyle}>{children}</View>
+          <Pressable onPress={() => {}}>
+            <View style={modalStyle}>{children}</View>
+          </Pressable>
         </View>
       </Pressable>
     </Modal>
