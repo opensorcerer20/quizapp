@@ -3,7 +3,7 @@ import { Image, Pressable, StyleSheet, useWindowDimensions, View } from "react-n
 import { SAFE_WIDTH } from "../common/constants";
 import QuizModal from "./QuizModal";
 
-const TutorialModal = ({ showModal, setShowModal, scheme }) => {
+const TutorialModal = ({ showModal, setShowModal }) => {
   const { width } = useWindowDimensions();
   return (
     <QuizModal

@@ -5,9 +5,9 @@ import { getRandomInt } from "./util";
 
 export const loadDemoData = async () => {
   try {
-    const keys = await AsyncStorage.getAllKeys();
-    const hasDeckData = keys.indexOf(DECK_DATA_KEY) > -1;
-    const hasQaDecks = keys.filter((key) => key.indexOf(DECK_QA_KEY) === 0).length > 0;
+    const hasDeckData = await checkIfExists(DECK_DATA_KEY);
+    const hasQaDecks = await checkIfExists(DECK_QA_KEY, true);
+    // console.log("demo checks: " + JSON.stringify({ hasDeckData, hasQaDecks }));
     if (!hasDeckData && !hasQaDecks) {
       const demoDeckData = require("../../assets/demodeck.json");
       const deckId = getRandomInt(100000, 999999);
@@ -21,6 +21,33 @@ export const loadDemoData = async () => {
   return false;
 };
 
+/**
+ * Check if key exists in async storage
+ *
+ * @param {string} key
+ * @param {boolean} startsWith - if true, checks all keys to see if "key" exists as start of key
+ * @returns boolean
+ */
+export const checkIfExists = async (key, startsWith = false) => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    if (startsWith) {
+      return keys.filter((thisKey) => thisKey.indexOf(key) === 0).length > 0;
+    }
+    console.log("check key " + key);
+    console.log("result " + JSON.stringify(keys.indexOf(key) > -1));
+    return keys.indexOf(key) > -1;
+  } catch (e) {
+    console.log("Error retrieving keys from AsyncStorage:", e);
+  }
+  return false;
+};
+
+export const setFlag = (key, value) => {
+  saveStorageData(key, value);
+};
+
+// @todo change so this is NOT exported
 export const loadStorageData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
@@ -61,6 +88,7 @@ export const loadQuestionsFromStorage = async (deckId) => {
   return await loadStorageData(DECK_QA_KEY + `_${deckId}`);
 };
 
+// DO NOT EXPORT
 const saveStorageData = async (key, value) => {
   try {
     // console.log("saving with key " + key + " value " + JSON.stringify(value));

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { difference, pick } from "lodash";
+import { difference } from "lodash";
 import { Platform, StyleSheet, Text, View } from "react-native";
 
+import { TUTORIAL_SHOWN_KEY } from "../../common/constants";
+import { checkIfExists, setFlag } from "../../common/fileLib";
 import { getRandomInt, getScheme } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
 import DeckTitle from "../Deck/DeckTitle";
@@ -15,7 +17,6 @@ import TutorialModal from "../TutorialModal";
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
   const [isReversed, setIsReversed] = useState(false);
   const [noEnabledQs, setNoEnabledQs] = useState(false);
-  const [cardLayout, setCardLayout] = useState({});
   const [showTutorial, setShowTutorial] = useState(false);
 
   const { theme } = useTheme();
@@ -89,6 +90,11 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   };
 
+  const dismissTutorial = (value) => {
+    setShowTutorial(value);
+    setFlag(TUTORIAL_SHOWN_KEY, true);
+  };
+
   const hasQuestionData = !noEnabledQs && !!currentState.currentQuestion.q;
   const currentQuestionStateFilter = currentState?.currentQuestion?.id
     ? currentDeckQuestionData.filter((question) => question.id === currentState.currentQuestion.id)
@@ -100,47 +106,26 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     if (currentDeck && Array.isArray(currentDeckQuestionData) && currentDeckQuestionData.length > 0) {
       resetQuestionBag(true);
     }
+    const asyncCall = async () => {
+      const value = await checkIfExists(TUTORIAL_SHOWN_KEY);
+      setShowTutorial(!value);
+    };
+    asyncCall();
   }, []);
 
-  const test = true;
-  const getCardLayout = (event) => {
-    if (test) {
-      setCardLayout(pick(event.nativeEvent.layout, ["y", "height"]));
-    }
-  };
-
-  useEffect(() => {
-    if (cardLayout.y && cardLayout.height) {
-      setShowTutorial(true);
-      console.log("show tutorial");
-      // console.log("Layout Y:", cardLayout.y);
-      // console.log("Layout Height:", cardLayout.height);
-      /*
-      mask from y 0 to cardlayout.y
-      mask from cardlayout.y + cardlayout.height to bottom of screen
-      */
-    } else {
-      console.log("dont show tutorial");
-    }
-  }, [cardLayout]);
-
-  // console.log(
-  //   "state " + JSON.stringify({ one: currentQuestionState.disabled, two: !!currentState.currentQuestion.disabled })
-  // );
+  // console.log("showtutorial " + JSON.stringify(showTutorial));
 
   return (
     <>
       {hasQuestionData && (
         <View style={[styles.container]}>
           <DeckTitle deckName={currentDeck.name} scheme={scheme} />
-          <View onLayout={getCardLayout}>
-            <FlipCard
-              key={getRandomInt(100000, 999999)}
-              questionText={currentState.currentQuestion.q}
-              answerText={currentState.currentQuestion.a}
-              isReversed={isReversed}
-            />
-          </View>
+          <FlipCard
+            key={getRandomInt(100000, 999999)}
+            questionText={currentState.currentQuestion.q}
+            answerText={currentState.currentQuestion.a}
+            isReversed={isReversed}
+          />
           <DeckNav
             prevEnabled={currentState.originalBag.length - currentState.questionBag.length > 1}
             onPrevClick={prevQuestion}
@@ -191,14 +176,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
           </View>
         </View>
       )}
-      <TutorialModal
-        showModal={showTutorial}
-        setShowModal={setShowTutorial}
-        scheme={scheme}
-        currentQuestion={currentState.currentQuestion}
-        positionY={cardLayout.y}
-        height={cardLayout.height}
-      />
+      <TutorialModal showModal={showTutorial} setShowModal={dismissTutorial} />
     </>
   );
 };

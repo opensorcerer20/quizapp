@@ -3,6 +3,7 @@ import { Dimensions } from "react-native";
 export const DECK_DATA_KEY = "DECK_DATA";
 export const DECK_QA_KEY = "DECK_QA";
 export const THEME_KEY = "THEME";
+export const TUTORIAL_SHOWN_KEY = "TUTORIAL_SHOWN";
 
 export const MAX_DECKS = 20;
 export const MAX_QUESTIONS = 50;
