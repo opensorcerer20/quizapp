@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { difference } from "lodash";
+import { difference, pick } from "lodash";
 import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { getRandomInt, getScheme } from "../../common/util";
@@ -10,10 +10,14 @@ import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { useTheme } from "../Providers/ThemeProvider";
 import { StyledSwitch } from "../StyledSwitch";
+import TutorialModal from "../TutorialModal";
 
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
   const [isReversed, setIsReversed] = useState(false);
   const [noEnabledQs, setNoEnabledQs] = useState(false);
+  const [cardLayout, setCardLayout] = useState({});
+  const [showTutorial, setShowTutorial] = useState(false);
+
   const { theme } = useTheme();
   const scheme = getScheme(theme);
 
@@ -98,6 +102,28 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   }, []);
 
+  const test = true;
+  const getCardLayout = (event) => {
+    if (test) {
+      setCardLayout(pick(event.nativeEvent.layout, ["y", "height"]));
+    }
+  };
+
+  useEffect(() => {
+    if (cardLayout.y && cardLayout.height) {
+      setShowTutorial(true);
+      console.log("show tutorial");
+      // console.log("Layout Y:", cardLayout.y);
+      // console.log("Layout Height:", cardLayout.height);
+      /*
+      mask from y 0 to cardlayout.y
+      mask from cardlayout.y + cardlayout.height to bottom of screen
+      */
+    } else {
+      console.log("dont show tutorial");
+    }
+  }, [cardLayout]);
+
   // console.log(
   //   "state " + JSON.stringify({ one: currentQuestionState.disabled, two: !!currentState.currentQuestion.disabled })
   // );
@@ -107,12 +133,14 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
       {hasQuestionData && (
         <View style={[styles.container]}>
           <DeckTitle deckName={currentDeck.name} scheme={scheme} />
-          <FlipCard
-            key={getRandomInt(100000, 999999)}
-            questionText={currentState.currentQuestion.q}
-            answerText={currentState.currentQuestion.a}
-            isReversed={isReversed}
-          />
+          <View onLayout={getCardLayout}>
+            <FlipCard
+              key={getRandomInt(100000, 999999)}
+              questionText={currentState.currentQuestion.q}
+              answerText={currentState.currentQuestion.a}
+              isReversed={isReversed}
+            />
+          </View>
           <DeckNav
             prevEnabled={currentState.originalBag.length - currentState.questionBag.length > 1}
             onPrevClick={prevQuestion}
@@ -163,6 +191,14 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
           </View>
         </View>
       )}
+      <TutorialModal
+        showModal={showTutorial}
+        setShowModal={setShowTutorial}
+        scheme={scheme}
+        currentQuestion={currentState.currentQuestion}
+        positionY={cardLayout.y}
+        height={cardLayout.height}
+      />
     </>
   );
 };
