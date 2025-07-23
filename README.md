@@ -82,6 +82,13 @@ itemMenuButton: {
       setFiles(result.output || [result]);
     }
 ```
+- incredibly important note with flexbox if you have "jitter" of ui components: you can mix "flex: #" and "width: #"
+```
+<Component1 style={{ flexDirection: "row" }}>
+  <Component2 style={{ flex: 10 }} />
+  <Component3 style={{ width: 55 }} />
+</Component1>
+```
 
 ## Current Roadmap Development
 

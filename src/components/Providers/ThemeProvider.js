@@ -2,9 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { useColorScheme } from "react-native";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { THEME_KEY, THEMES } from "../../common/constants";
+import { checkIfExists, getFlag, setFlag } from "../../common/fileLib";
 
 // createContext() can accept a value for testing the context without wrapping, but undefined is fine
 const ThemeContext = createContext(null);
@@ -14,11 +13,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const saveTheme = async () => {
-      try {
-        await AsyncStorage.setItem(THEME_KEY, theme);
-      } catch (e) {
-        console.log("error saving theme, error keys " + JSON.stringify(Object.keys(e)));
-      }
+      await setFlag(THEME_KEY, theme);
     };
     if (theme) {
       saveTheme();
@@ -36,8 +31,8 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const getTheme = async () => {
       try {
-        const storedTheme = await AsyncStorage.getItem(THEME_KEY);
-        if (storedTheme !== null) {
+        if (await checkIfExists(THEME_KEY)) {
+          const storedTheme = await getFlag(THEME_KEY);
           setTheme(storedTheme === THEMES.dark ? THEMES.dark : THEMES.light);
         } else {
           // default theme

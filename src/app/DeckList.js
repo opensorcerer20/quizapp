@@ -6,8 +6,8 @@ import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } fro
 import { Button, FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { DECK_DATA_KEY, DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, SAFE_WIDTH } from "../common/constants";
-import { loadDemoData, loadStorageData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
+import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, SAFE_WIDTH } from "../common/constants";
+import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
@@ -25,6 +25,7 @@ const emptyImportSource = {
 };
 
 export const DeckList = () => {
+  // AsyncStorage.clear();
   const { width } = Dimensions.get("window");
 
   const [importSource, setImportSource] = useState(emptyImportSource);
@@ -60,7 +61,7 @@ export const DeckList = () => {
   };
 
   const loadDeckListData = async () => {
-    let newDeckListData = await loadStorageData(DECK_DATA_KEY);
+    let newDeckListData = await loadAllDecks();
     if (Array.isArray(newDeckListData)) {
       newDeckListData.sort((a, b) => b.createdAt - a.createdAt);
       setDeckListData(newDeckListData);

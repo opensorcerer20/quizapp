@@ -83,24 +83,24 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         <View style={{ flex: 9 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Pressable
-              style={{ flex: 1 }}
+              style={{ flex: 2, paddingLeft: 10 }}
               onPress={() => (currentPage > 0 ? setCurrentPage((currentPage + pages.length - 1) % pages.length) : null)}
             >
-              {currentPage > 0 && <MaterialCommunityIcons name="chevron-left" size={24} color={scheme.txt.color} />}
+              {currentPage > 0 && <MaterialCommunityIcons name="chevron-left" size={36} color={scheme.txt.color} />}
             </Pressable>
             <View
-              style={{ flex: 10, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 10 }}
+              style={{ flex: 8, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 10 }}
             >
               {pages[currentPage]}
             </View>
             <Pressable
-              style={{ flex: 1 }}
+              style={{ flex: 2, paddingRight: 10, alignItems: "flex-end" }}
               onPress={() =>
                 currentPage < pages.length - 1 ? setCurrentPage((currentPage + pages.length + 1) % pages.length) : null
               }
             >
               {currentPage < pages.length - 1 && (
-                <MaterialCommunityIcons name="chevron-right" size={24} color={scheme.txt.color} />
+                <MaterialCommunityIcons name="chevron-right" size={36} color={scheme.txt.color} />
               )}
             </Pressable>
           </View>

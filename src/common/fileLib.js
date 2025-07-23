@@ -34,8 +34,8 @@ export const checkIfExists = async (key, startsWith = false) => {
     if (startsWith) {
       return keys.filter((thisKey) => thisKey.indexOf(key) === 0).length > 0;
     }
-    console.log("check key " + key);
-    console.log("result " + JSON.stringify(keys.indexOf(key) > -1));
+    // console.log("check key " + key);
+    // console.log("result " + JSON.stringify(keys.indexOf(key) > -1));
     return keys.indexOf(key) > -1;
   } catch (e) {
     console.log("Error retrieving keys from AsyncStorage:", e);
@@ -43,12 +43,20 @@ export const checkIfExists = async (key, startsWith = false) => {
   return false;
 };
 
-export const setFlag = (key, value) => {
-  saveStorageData(key, value);
+export const setFlag = async (key, value) => {
+  await saveStorageData(key, value);
+};
+
+export const getFlag = async (key) => {
+  await loadStorageData(key);
 };
 
 // @todo change so this is NOT exported
-export const loadStorageData = async (key) => {
+export const loadAllDecks = async () => {
+  return await loadStorageData(DECK_DATA_KEY);
+};
+
+const loadStorageData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
