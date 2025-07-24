@@ -1,22 +1,23 @@
-# quizapp
+# Flashcard Library
 
-Generic React Native Expo app to ask questions from a given JSON file after shuffling them randomly. Once the quiz is done, reload and reshuffle.
+Generic React Native Expo app to ask questions from a given question file after shuffling them randomly. Once the quiz is done, reload and reshuffle.
 
 ## Overall Aim
 
-Initial idea: someone going on a multi country tour, wants to learn the local language at each place, so they load a file of language each time, and can do a flip card quiz on the go
+Initial idea: someone going on a multi country tour wants to learn the local language at each place. With this app, they can load a file of terms to learn for each language, and can do a flip card quiz on the go.
 
 ## Roadmap
 
 - [x] initial development
 - [x] first complete version
 - [x] complete alpha for testing
-- [ ] apply alpha testing changes (est complete 6/13)
-- [ ] last changes before getting beta testers (est complete 6/20)
-- [ ] beta testing (est 6/23)
-- [ ] apply beta testing changes (est complete 7/7)
-- [ ] set up llc before launch (est complete 7/10)
-- [ ] launch 1.0! (est 7/14)
+- [x] apply alpha testing changes
+- [x] last changes before getting beta testers
+- [ ] closed beta testing (starts 7/24, est complete 8/7)
+- [ ] set up llc
+- [ ] open beta testing
+- [ ] apply beta testing changes
+- [ ] launch 1.0!
 
 ## FAQ
 
@@ -31,7 +32,7 @@ Initial idea: someone going on a multi country tour, wants to learn the local la
 -   couldn't see a way to test random sort
 -   if you get error "you probably forgot to export..." make sure you use the right import eg "import {FlipCard}..." or "import FlipCard..."
 -   cant console log the "response" when fetching a file
--   oops, dont nest "safe area"
+-   oops, dont nest "safe area" components, it causes problems
 -   how to "reset" a reused react component: change the key="" attribute; that tells react that it's a totally different component, and it discards the previous
     -   this was needed for when a card is flipped, then the next question clicked; the card was still flipped, so the answer for the next question was visible
 -   how to get a drawer: for expo, it has documentation at https://docs.expo.dev/router/advanced/drawer/
@@ -92,10 +93,13 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
-- [ ] make beta
-    -   [x] android
-    -   [ ] iphone
-    -   [ ] beta testing by other ppl (https://docs.expo.dev/review/overview/)
+- [ ] closed beta
+
+- [ ] confirm my real name isnt available with app
+
+- [ ] open beta
+
+- [ ] llc
 
 - [ ] beta bugs/improvements
     -   [x] quizmodal move inside menu component
@@ -113,11 +117,13 @@ itemMenuButton: {
         - [ ] animation when changing pages
         - [ ] swipe between pages
 
--   [ ] LLC
-
 - [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
     -   [ ] tip button (https://buymeacoffee.com/)
+
+- [ ] app store page
+    -   [ ] link to repository
+    -   [ ] instructions to build
 
 -   [ ] launch 1.0
 
@@ -440,6 +446,11 @@ itemMenuButton: {
 - [x] add file help
     - [x] show first time along with loading demo data
     - [x] below "dark theme" in menu to show again
+
+- [x] make beta
+    -   [x] android
+    -   [x] iphone
+    -   [x] beta testing by other ppl (https://docs.expo.dev/review/overview/)
 
 
 ## End Roadmap Development
