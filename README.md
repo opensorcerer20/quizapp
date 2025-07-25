@@ -23,6 +23,7 @@ Initial idea: someone going on a multi country tour wants to learn the local lan
 
 -   Why use react native paper?
     -   I don't remember, but I think it was because I tried to use TailwindCSS and the CSS library didn't work as expected. I know now that some libraries do work, e.g. Bootstrap
+    -   Looks like "NativeWind" can be used
 -   Why not support mixed quotes for csv parsing?
     -   I only support either zero quotes or full quotes for csv. Attempting to code for a combination of quoted and unquoted values increases the required parsing logic, so I put that off.
 
@@ -93,6 +94,12 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
+- [ ] Simple way to create a deck
+    - [ ] textbox: name of deck
+    - [ ] "textarea" where questions are on odd lines and answers on even lines
+        - [ ] limit 50 questions
+    - [ ] help or tutorial
+
 - [ ] closed beta
 
 - [ ] confirm my real name isnt available with app
@@ -102,6 +109,7 @@ itemMenuButton: {
 - [ ] llc
 
 - [ ] beta bugs/improvements
+    -   [x] example image for file help doesnt fit
     -   [x] quizmodal move inside menu component
     -   [x] consolidate modal styles (very similar)
     -   [ ] question: continue language support?
@@ -116,6 +124,8 @@ itemMenuButton: {
     -   [ ] file help
         - [ ] animation when changing pages
         - [ ] swipe between pages
+    -   [ ] MW an issue: causes card to go bigger at bottom
+    -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
 
 - [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
@@ -130,26 +140,30 @@ itemMenuButton: {
 
 ## Possible future dev
 
+-   [ ] new feature release: quiz and timing
+    -   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
+        -   [ ] add quiz screen i.e. questions with multiple answers
+            -   [ ] duplicate review screen
+            -   [ ] default route to new quiz screen
+            -   [ ] get 2 answers from "original" bag
+            -   [ ] show question
+            -   [ ] show answers
+            -   [ ] on answer pick, show right answer
+            -   [ ] next/reset/remix same
+            -   [ ] previous?
+            -   [ ] WHEN DONE, route list to review
+
+        -   [ ] select review or quiz for deck
+            -   [ ] how?
+-   [ ] new feature release: audio mode
+        - [ ] possible problem connecting to bluetooth
+
 -   [ ] reorder deck list
 -   [ ] make new deck from existing deck
 -   [ ] menu when clicking on deck for modes: review, quiz, etc
--   [ ] quiz mode: all answers from deck randomized, 4 choices given per question
-    -   [ ] add quiz screen i.e. questions with multiple answers
-        -   [ ] duplicate review screen
-        -   [ ] default route to new quiz screen
-        -   [ ] get 2 answers from "original" bag
-        -   [ ] show question
-        -   [ ] show answers
-        -   [ ] on answer pick, show right answer
-        -   [ ] next/reset/remix same
-        -   [ ] previous?
-        -   [ ] WHEN DONE, route list to review
-
-    -   [ ] select review or quiz for deck
-        -   [ ] how?
 
 -   [ ] audio mode (for drivers): question is asked, 5 second pause, answer given
-    - [ ] possible problem connecting to bluetooth
+
 -   [ ] custom card themes
 -   [ ] different settings for modes
 -   [ ] text box for inputting questions on the fly

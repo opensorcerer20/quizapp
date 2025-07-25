@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { Image, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image } from "expo-image";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 //import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -14,6 +15,7 @@ const SAFE_MODAL_WIDTH = MODAL_WIDTH * 0.95;
 
 const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
   const [currentPage, setCurrentPage] = useState(0);
+
   const pages = [
     <View style={{ flexDirection: "column" }}>
       <MaterialCommunityIcons
@@ -26,8 +28,8 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         TXT files should alternate between question (odd lines) and answers (even lines)
       </Text>
       <Image
-        style={{ flex: 1, marginTop: 10, alignSelf: "center", width: 250, height: 150, resizeMode: "contain" }}
         source={require("../../assets/txt_example.png")}
+        style={{ flex: 1, width: 430, height: 144, alignSelf: "center", transform: [{ scale: 0.55 }] }}
       />
     </View>,
     <View style={{ flexDirection: "column" }}>
@@ -41,8 +43,8 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         CSV files should be saved as CSV files, with questions in column 1 and answers in column 2
       </Text>
       <Image
-        style={{ flex: 1, marginTop: 10, alignSelf: "center", width: 250, height: 150, resizeMode: "contain" }}
         source={require("../../assets/csv_example.png")}
+        style={{ flex: 1, width: 376, height: 171, alignSelf: "center", transform: [{ scale: 0.6 }] }}
       />
     </View>,
   ];
@@ -69,7 +71,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
             { flex: 2, width: SAFE_MODAL_WIDTH + 10, marginHorizontal: "auto", marginTop: 5, padding: 10 },
           ]}
         >
-          <Text style={[styles.modalTitle, scheme.txt, { flex: 11 }]}>File Help</Text>
+          <Text style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>File Help</Text>
           <Pressable onPress={() => setShowModal(false)}>
             <FontAwesome6
               name="square-xmark"
@@ -83,18 +85,18 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         <View style={{ flex: 9 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Pressable
-              style={{ flex: 2, paddingLeft: 10 }}
+              style={{ flex: 1, paddingLeft: 5 }}
               onPress={() => (currentPage > 0 ? setCurrentPage((currentPage + pages.length - 1) % pages.length) : null)}
             >
               {currentPage > 0 && <MaterialCommunityIcons name="chevron-left" size={36} color={scheme.txt.color} />}
             </Pressable>
             <View
-              style={{ flex: 8, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 10 }}
+              style={{ flex: 10, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 20 }}
             >
               {pages[currentPage]}
             </View>
             <Pressable
-              style={{ flex: 2, paddingRight: 10, alignItems: "flex-end" }}
+              style={{ flex: 1, paddingRight: 5, alignItems: "flex-end" }}
               onPress={() =>
                 currentPage < pages.length - 1 ? setCurrentPage((currentPage + pages.length + 1) % pages.length) : null
               }
@@ -105,7 +107,6 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
             </Pressable>
           </View>
         </View>
-        {/* <View style={{ flex: 1, alignItems: "center", marginVertical: 10 }}> */}
         <View style={{ flex: 1, width: 50, alignSelf: "center", marginVertical: 10 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {pages.map((_, idx) => (
