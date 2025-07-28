@@ -95,10 +95,14 @@ itemMenuButton: {
 ## Current Roadmap Development
 
 - [ ] Simple way to create a deck
-    - [ ] textbox: name of deck
-    - [ ] "textarea" where questions are on odd lines and answers on even lines
-        - [ ] limit 50 questions
+    - [x] textbox: name of deck
+    - [x] "textarea" where questions are on odd lines and answers on even lines
+        - [x] limit 50 questions
+    - [x] reload deck list
+    - [ ] add button to FAB (and shrink space between buttons)
     - [ ] help or tutorial
+
+- [ ] delete confirm
 
 - [ ] closed beta
 

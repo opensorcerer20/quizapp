@@ -1,5 +1,6 @@
 import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../../common/constants";
-import { sanitizeAll } from "../../common/util";
+import { loadAllDecks, saveDeckData, saveDeckListData } from "../../common/fileLib";
+import { getRandomInt, sanitizeAll } from "../../common/util";
 import { parseCsv } from "./parseCsv";
 
 export const emptyQuestion = {
@@ -52,37 +53,65 @@ export const randomizeQBag = (bag) => {
     .map(({ value }) => value);
 };
 
+// @todo handle all new deck imports (or at least new deck creation via textarea)
+export const importNewDeck = async (title, questionData) => {
+  const deckListData = await loadAllDecks();
+  // generate deck id that doesnt already exist
+  let newDeckId;
+  let limit = 0;
+  do {
+    newDeckId = getRandomInt(100000, 999999);
+    limit++;
+  } while (deckListData.filter((deck) => deck.id === newDeckId).length > 0 && limit < 10);
+  if (limit >= 10) {
+    console.log("loop limit for deck id, last id: " + newDeckId);
+    return;
+  }
+
+  const newQuestionArray = getQuestionObjectsFromRawData("text", questionData);
+
+  const newDeckName = title;
+  const newDeck = makeNewDeck(newDeckId, sanitizeAll(newDeckName));
+  const newDeckData = makeNewDeckData(newDeckId, newQuestionArray);
+
+  let newDeckListData = deckListData.slice();
+
+  newDeckListData.push(newDeck);
+
+  await saveDeckData(newDeck.id, newDeckData);
+  const result = await saveDeckListData(newDeckListData);
+  if (result !== true) {
+    console.log("error saving new deck");
+  }
+  return result;
+};
+
 export const getFileData = async (fileData) => {
   // need to determine what type is
   const fileResponse = await fetch(fileData.uri); // returns Response object
   const rawQuestionData = await fileResponse.text();
-  return getQuestionObjectsFromFile(fileData.mimeType, rawQuestionData);
+
+  const mimeType = MIME_TYPE_CSV.indexOf(fileData.mimeType) > -1 ? "csv" : "text";
+
+  return getQuestionObjectsFromRawData(mimeType, rawQuestionData);
 };
 
-export const getQuestionObjectsFromFile = (mimeType, rawQuestionData) => {
+export const getQuestionObjectsFromRawData = (mimeType, rawQuestionData) => {
   let questions = [];
 
-  questions = convertFileToArray(rawQuestionData);
+  // clean input that could have \r\n, remove empty lines
+  const splitLines = rawQuestionData.split("\n");
+  questions = splitLines.map((datum) => datum.trim()).filter((datum) => datum.length > 0);
   questions.map((line) => sanitizeAll(line));
 
   // plain text does not require additional processing (at this time)
-  if (MIME_TYPE_CSV.indexOf(mimeType) > -1) {
+  if (mimeType === "csv") {
     questions = parseCsv(questions, 2);
     questions = questions.flat(); // change [[1, 2],[3, 4]]] to [1,2,3,4]
   }
   // else assume text
 
   return makeQuestionObjects(questions);
-};
-
-/**
- * clean input that could have \r\n, remove empty lines
- * @param {*} fileData
- * @returns
- */
-const convertFileToArray = (fileData) => {
-  let quizData = fileData.split("\n");
-  return quizData.map((datum) => datum.trim()).filter((datum) => datum.length > 0);
 };
 
 /**

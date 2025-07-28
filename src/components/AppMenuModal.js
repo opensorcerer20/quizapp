@@ -2,7 +2,7 @@ import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 import QuizModal from "./QuizModal";
 
-const AppMenuModal = ({ showModal, setShowModal, onClickHelp, scheme }) => {
+const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme }) => {
   return (
     <QuizModal
       modalVisible={showModal}
@@ -18,6 +18,11 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, scheme }) => {
         { borderColor: scheme.bgAccent1.backgroundColor, borderWidth: 1 },
       ]}
     >
+      <Pressable onPress={onClickNew}>
+        <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
+          <Text style={[scheme.txt, { fontSize: 16 }]}>Make new deck</Text>
+        </View>
+      </Pressable>
       <Pressable onPress={onClickHelp}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
           <Text style={[scheme.txt, { fontSize: 16 }]}>Deck file help</Text>

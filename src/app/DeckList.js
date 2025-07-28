@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
-import { router, usePathname } from "expo-router";
+import { router, useLocalSearchParams, usePathname } from "expo-router";
 import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, SAFE_WIDTH } from "../common/constants";
+import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED, SAFE_WIDTH } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
@@ -42,6 +42,8 @@ export const DeckList = () => {
     visible: false,
     showCancel: false,
   });
+
+  const routeParams = useLocalSearchParams();
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -80,6 +82,7 @@ export const DeckList = () => {
     });
   };
 
+  // @todo use importNewDeck to handle all new deck imports (or at least new deck creation via textarea)
   const onAddDeck = async (newDeck, newDeckData) => {
     let newDeckListData = deckListData.slice();
 
@@ -255,6 +258,13 @@ export const DeckList = () => {
       importDeck(importSource.uri);
     }
   }, [importSource]);
+
+  useEffect(() => {
+    if (routeParams[NEW_DECK_ADDED] === "true") {
+      setReload(true);
+      router.setParams({ NEW_DECK_ADDED: false });
+    }
+  }, [routeParams]);
 
   // load data if either first time or reload is tripped
   useEffect(() => {

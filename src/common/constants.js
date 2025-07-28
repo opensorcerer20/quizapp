@@ -5,6 +5,8 @@ export const DECK_QA_KEY = "DECK_QA";
 export const THEME_KEY = "THEME";
 export const TUTORIAL_SHOWN_KEY = "TUTORIAL_SHOWN";
 
+export const NEW_DECK_ADDED = "NEW_DECK_ADDED";
+
 export const MAX_DECKS = 20;
 export const MAX_QUESTIONS = 50;
 
@@ -30,9 +32,6 @@ export const THEMES = {
 
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
 export const MIME_TYPE_TEXT = ["text/plain"];
-
-export const LIGHT_APP_BG = "pexels-asphotograpy-518245.jpg";
-export const DARK_APP_BG = "pexels-gantas-3750272.jpg";
 
 const { width } = Dimensions.get("window");
 export const SAFE_MARGIN = Math.round(width / 20); // 5% width
