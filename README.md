@@ -99,8 +99,9 @@ itemMenuButton: {
     - [x] "textarea" where questions are on odd lines and answers on even lines
         - [x] limit 50 questions
     - [x] reload deck list
-    - [ ] add button to FAB (and shrink space between buttons)
-    - [ ] help or tutorial
+    - [x] add button to FAB (and shrink space between buttons)
+    - [x] help or tutorial
+    - [x] on back click, confirm leave if theres content
 
 - [ ] delete confirm
 

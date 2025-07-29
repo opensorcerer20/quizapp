@@ -13,7 +13,7 @@ import HelpMenuModal from "./HelpMenuModal";
 import { useTheme } from "./Providers/ThemeProvider";
 import { useLocale } from "./Providers/TranslationProvider";
 
-const Toolbar = ({ title, showBack, helpType, hideButtons }) => {
+const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
   const { getLocalString } = useLocale();
   const [showHelp, setShowHelp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -46,7 +46,7 @@ const Toolbar = ({ title, showBack, helpType, hideButtons }) => {
       <View style={[scheme.bgAccent3, styles.container]}>
         <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
           {showBack && (
-            <Pressable onPress={() => router.back()}>
+            <Pressable onPress={onBackClick}>
               <MaterialCommunityIcons name="arrow-left" size={24} color={scheme.txt.color} />
             </Pressable>
           )}

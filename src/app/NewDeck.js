@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Button, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { getScheme } from "../common/util";
@@ -9,9 +9,39 @@ import { importNewDeck } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 
+const ConfirmModal = ({ scheme, confirmModalVisible, handleCancel, handleConfirm }) => {
+  return (
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={confirmModalVisible}
+      onRequestClose={handleCancel} // Handle Android back button
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>You have unsaved data, do you want to discard it?</Text>
+          <View style={styles.buttonContainer}>
+            <Pressable onPress={handleCancel} onLongPress={handleCancel} style={[scheme.disabled, styles.buttonStyle]}>
+              <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Cancel</Text>
+            </Pressable>
+            <Pressable
+              onPress={handleConfirm}
+              onLongPress={handleConfirm}
+              style={[scheme.buttonBg, styles.buttonStyle]}
+            >
+              <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Discard</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
 const NewDeck = () => {
   const [title, setTitle] = useState("");
   const [questionData, setQuestionData] = useState("");
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -31,8 +61,25 @@ const NewDeck = () => {
     }
   };
 
+  const handleConfirm = () => {
+    router.back();
+    setConfirmModalVisible(false); // Hide the modal
+  };
+
+  const handleCancel = () => {
+    setConfirmModalVisible(false); // Hide the modal
+  };
+
+  const onBackClick = () => {
+    if (title.length > 0 || questionData.length > 0) {
+      setConfirmModalVisible(true);
+    } else {
+      router.back();
+    }
+  };
+
   return (
-    <ScreenTemplate showBack={true}>
+    <ScreenTemplate showBack={true} onBackClick={onBackClick}>
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
           Add a short descriptive title for the new deck.
@@ -58,14 +105,25 @@ const NewDeck = () => {
           numberOfLines={100}
           textAlignVertical="top"
         />
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Submit"
+        <View style={[styles.buttonContainer, { margin: "auto" }]}>
+          <Pressable
             onPress={() => handleSubmit(title, questionData)}
-            disabled={questionData.length === 0 || title.length === 0}
-          />
+            onLongPress={() => handleSubmit(title, questionData)}
+            style={[
+              styles.buttonStyle,
+              questionData.length === 0 || title.length === 0 ? scheme.disabled : scheme.buttonBg,
+            ]}
+          >
+            <Text style={scheme.buttonTxt}>Submit</Text>
+          </Pressable>
         </View>
       </KeyboardAvoidingView>
+      <ConfirmModal
+        scheme={scheme}
+        confirmModalVisible={confirmModalVisible}
+        handleCancel={handleCancel}
+        handleConfirm={handleConfirm}
+      />
     </ScreenTemplate>
   );
 };
@@ -103,6 +161,34 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 8,
+  },
+  buttonStyle: {
+    borderRadius: 5,
+    padding: 8,
+    margin: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)", // Semi-transparent background
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 35,
+    alignItems: "center",
+    elevation: 5, // Shadow for Android
+    width: 320,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 18,
+  },
+  buttonContainer: {
+    flexDirection: "row",
   },
 });
 

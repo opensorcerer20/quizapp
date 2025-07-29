@@ -252,6 +252,13 @@ export const DeckList = () => {
     clearEditModal();
   };
 
+  const onClickNew = () => {
+    router.navigate({
+      pathname: "NewDeck",
+      params: {},
+    });
+  };
+
   // actions after source specified
   useEffect(() => {
     if (importSource.uri) {
@@ -356,18 +363,23 @@ export const DeckList = () => {
                 fabStyle={scheme.bgAccent3}
                 actions={[
                   {
+                    icon: "form-textbox", // material community icon
+                    label: "Create Deck",
+                    onPress: onClickNew,
+                  },
+                  {
                     icon: "help", // material community icon
-                    label: "Help",
+                    label: "File Help",
                     onPress: showFileHelpModal,
                   },
                   {
                     icon: "text", // material community icon
-                    label: "Text",
+                    label: "Import TXT",
                     onPress: () => onPressImport("txt"),
                   },
                   {
                     icon: "table", // material community icon
-                    label: "CSV",
+                    label: "Import CSV",
                     onPress: () => onPressImport("csv"),
                   },
                 ]}
