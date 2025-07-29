@@ -1,0 +1,50 @@
+import { Platform, StyleSheet } from "react-native";
+
+import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
+import ConfirmModal from "./ConfirmModal";
+import QuizModal from "./QuizModal";
+
+const ConfirmDeleteModal = ({ showModal, setShowModal, scheme, onConfirm = () => {}, onCancel = null }) => {
+  return (
+    <QuizModal
+      modalVisible={showModal}
+      handleModalClickAway={() => setShowModal(false)}
+      modalContainerStyle={[
+        styles.helpModal,
+        {
+          top: Platform.OS === "ios" ? 100 : 50,
+          left: SAFE_WIDTH / 2 - 125 + SAFE_MARGIN / 2,
+          width: 250,
+        },
+        scheme.baseBg3,
+        { borderColor: scheme.bgAccent3.backgroundColor, borderWidth: 1 },
+      ]}
+    >
+      <ConfirmModal
+        scheme={scheme}
+        confirmModalVisible={showModal}
+        handleCancel={onCancel || (() => setShowModal(false))}
+        handleConfirm={onConfirm}
+        prompt="Are you sure you want to delete this deck?"
+        cancelText="Cancel"
+        confirmText="Delete"
+      />
+    </QuizModal>
+  );
+};
+
+const styles = StyleSheet.create({
+  helpModal: {
+    position: "absolute",
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.6,
+    shadowRadius: 4,
+    elevation: 5,
+    alignItems: "flex-start", // removing this removes left padding for helpmenu
+    borderRadius: 10,
+  },
+});
+
+export default ConfirmDeleteModal;
