@@ -9,7 +9,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED, SAFE_WIDTH } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
-import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
@@ -33,7 +32,6 @@ export const DeckList = () => {
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [menuState, setMenuState] = useState({
     visible: false,
     position: { top: 0, left: 0 },
@@ -61,12 +59,6 @@ export const DeckList = () => {
 
     setTimeout(() => {
       setShowFileHelp(true);
-    }, 300);
-  };
-
-  const showConfirmDeleteModal = () => {
-    setTimeout(() => {
-      setShowConfirmDelete(true);
     }, 300);
   };
 
@@ -106,8 +98,6 @@ export const DeckList = () => {
     const newDeckListData = deckListData.filter((deckDatum) => deckDatum.id !== deckId);
     await updateDeckListData(newDeckListData);
     await removeStorageData(DECK_QA_KEY + `_${deckId}`);
-    unSelectItem();
-    setShowConfirmDelete(false);
   };
 
   const updateDeckListData = async (newDeckListData) => {
@@ -166,6 +156,11 @@ export const DeckList = () => {
       console.log("Error editing deck with id " + renameState.editingDeck.id);
       unSelectItem();
     }
+  };
+
+  const handleDeleteClick = () => {
+    onDeleteDeck(renameState.editingDeck.id);
+    unSelectItem();
   };
 
   const renderItem = ({ item }) => {
@@ -348,7 +343,7 @@ export const DeckList = () => {
               <DeckListMenu
                 handleViewClick={handleViewClick}
                 handleRenameClick={handleRenameClick}
-                handleDeleteClick={showConfirmDeleteModal}
+                handleDeleteClick={handleDeleteClick}
               />
             </QuizModal>
           </View>
@@ -392,16 +387,6 @@ export const DeckList = () => {
               />
             </Portal>
             <FileHelpModal scheme={scheme} showModal={showFileHelp} setShowModal={setShowFileHelp} />
-            <ConfirmDeleteModal
-              scheme={scheme}
-              showModal={showConfirmDelete}
-              setShowModal={setShowConfirmDelete}
-              onCancel={() => {
-                unSelectItem();
-                setShowConfirmDelete(false);
-              }}
-              onConfirm={() => onDeleteDeck(renameState.editingDeck.id)}
-            />
           </>
         )}
         {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={scheme.disabled} />}

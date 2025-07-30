@@ -103,7 +103,7 @@ itemMenuButton: {
     - [x] help or tutorial
     - [x] on back click, confirm leave if theres content
 
-- [x] delete confirm
+- [ ] delete confirm
 
 - [ ] closed beta
 
