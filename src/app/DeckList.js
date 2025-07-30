@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED, SAFE_WIDTH } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import ConfirmDeleteModal from "../components/Deck/ConfirmDeleteModal";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
@@ -36,6 +37,7 @@ export const DeckList = () => {
     visible: false,
     position: { top: 0, left: 0 },
   });
+  const [deleteDeckId, setDeleteDeckId] = useState(null);
   const [renameState, setRenameState] = useState({
     deckId: null,
     editingDeck: emptyDeck,
@@ -159,8 +161,11 @@ export const DeckList = () => {
   };
 
   const handleDeleteClick = () => {
-    onDeleteDeck(renameState.editingDeck.id);
-    unSelectItem();
+    const selectedId = renameState.editingDeck.id;
+    if (selectedId) {
+      setMenuState({ ...menuState, visible: false });
+      setDeleteDeckId(selectedId);
+    }
   };
 
   const renderItem = ({ item }) => {
@@ -247,9 +252,20 @@ export const DeckList = () => {
     clearEditModal();
   };
 
+  const handleDeleteCancelClick = () => {
+    setDeleteDeckId(null);
+    unSelectItem();
+  };
+
   const handleRenameDeck = (deckId, name) => {
     onUpdateDeck(deckId, { name: sanitizeAll(name) });
     clearEditModal();
+  };
+
+  const handleConfirmClick = () => {
+    onDeleteDeck(deleteDeckId);
+    setDeleteDeckId(null);
+    unSelectItem();
   };
 
   const onClickNew = () => {
@@ -346,12 +362,18 @@ export const DeckList = () => {
                 handleDeleteClick={handleDeleteClick}
               />
             </QuizModal>
+            <QuizModal modalVisible={deleteDeckId !== null} handleModalClickAway={handleDeleteCancelClick}>
+              <ConfirmDeleteModal
+                scheme={scheme}
+                handleCancelClick={handleDeleteCancelClick}
+                handleConfirmClick={handleConfirmClick}
+              />
+            </QuizModal>
           </View>
         )}
         {deckListData.length < 1 && (
           <Text style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</Text>
         )}
-
         {showFab && (
           <>
             <Portal>

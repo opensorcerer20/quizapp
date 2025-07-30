@@ -65,6 +65,9 @@ export const LANGUAGE_LIBRARY = {
   Cancel: {
     en: "Cancel",
   },
+  Confirm: {
+    en: "Confirm",
+  },
   Submit: {
     en: "Submit",
   },
@@ -97,5 +100,8 @@ export const LANGUAGE_LIBRARY = {
   },
   "Dark Theme": {
     en: "Dark Theme",
+  },
+  "Are you sure you want to delete this deck?": {
+    en: "Are you sure you want to delete this deck?",
   },
 };
