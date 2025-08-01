@@ -94,7 +94,7 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
-- [ ] Simple way to create a deck
+- [x] Simple way to create a deck
     - [x] textbox: name of deck
     - [x] "textarea" where questions are on odd lines and answers on even lines
         - [x] limit 50 questions
@@ -103,7 +103,7 @@ itemMenuButton: {
     - [x] help or tutorial
     - [x] on back click, confirm leave if theres content
 
-- [ ] delete confirm
+- [x] delete confirm
 
 - [ ] closed beta
 
