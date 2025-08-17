@@ -72,6 +72,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           ]}
         >
           <Text style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>File Help</Text>
+          {/* @todo use space-between */}
           <Pressable onPress={() => setShowModal(false)}>
             <FontAwesome6
               name="square-xmark"

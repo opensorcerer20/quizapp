@@ -73,6 +73,8 @@ const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
         <View style={styles.helpHeader}>
           <Text style={[styles.helpTitle, scheme.txt, { flex: 11 }]}>{title}</Text>
           <Pressable onPress={() => setShowModal(false)}>
+            {/* @todo use space-between */}
+            {/* @todo top of help with title and x should be extracted */}
             <FontAwesome6
               name="square-xmark"
               size={24}

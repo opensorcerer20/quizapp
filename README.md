@@ -125,8 +125,28 @@ itemMenuButton: {
     -   [x] example image for file help doesnt fit
     -   [x] quizmodal move inside menu component
     -   [x] consolidate modal styles (very similar)
-    -   [ ] question: continue language support?
     -   [x] make appbar consistent between ios and android
+    -   [ ] add cards to deck
+      -    [x] fab
+      -    [x] screen w blanks
+      -    [x] working question add
+      -    [x] deck name on add screen
+      -    [x] input labels on screen
+      -    [ ] issue with back button after adding question, stack is incorrect, goes back to same page
+      -    [ ] character limits
+      -    [ ] test cancel/back
+      -    [ ] test modal to leave with info on screen
+      -    [ ] use different color for fab than list items
+    -   [ ] ui consolidation
+      -    [ ] button style
+    -   [ ] education: make available for tablets
+      -   [ ] ui
+        -   [ ] use similar idea to "mobile first": if screen width > ?, show more columns
+        -   [ ] 4-6 cards, 2-3 per row
+        -   [ ] in quiz mode, 1 row, 3 cards with responses below
+    -   [ ] arrows for cards
+    -   [ ] keyboard covering textbox
+    -   [ ] language support
     -   [ ] import big csv/txt file into smaller decks?
     -   [ ] multi file select
     -   [ ] order list by name, date added
@@ -140,6 +160,7 @@ itemMenuButton: {
     -   [ ] MW an issue: causes card to go bigger at bottom
     -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
     -   [ ] pressing android back button on new deck discards form
+    -   [ ] color blind mode (ouch)
 
 - [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
@@ -154,18 +175,19 @@ itemMenuButton: {
 
 ## Possible future dev
 
--   [ ] new feature: quiz mode
--   [ ] new feature: audio mode
--   [ ] reorder deck list
--   [ ] make new deck from existing deck
--   [ ] custom card themes
--   [ ] swipe to next card ("swipe gesture" plus animation)
-
-    -   [ ] mode select: "continuous (full random)"
-    -   [ ] persist mode select
-    -   [ ] new mode: show all cards at once
+-   new feature: quiz mode
+-   new feature: audio playback
+-   reorder deck list
+-   make new deck from existing deck
+-   custom card themes
+-   swipe to next card ("swipe gesture" plus animation)
+-   mode select: "continuous (full random)"
+-   persist mode select
+-   new mode: show all cards at once
 -   ? load Google Drive spreadsheet
 -   Questions with random content with a variable and its resolver
+-   record question/answer via microphone
+-   new feature: parent mode
 
 ## Completed Roadmap Development
 <details>

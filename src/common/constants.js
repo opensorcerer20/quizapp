@@ -6,6 +6,7 @@ export const THEME_KEY = "THEME";
 export const TUTORIAL_SHOWN_KEY = "TUTORIAL_SHOWN";
 
 export const NEW_DECK_ADDED = "NEW_DECK_ADDED";
+export const NEW_QUESTION_ADDED = "NEW_QUESTION_ADDED";
 
 export const MAX_DECKS = 20;
 export const MAX_QUESTIONS = 50;

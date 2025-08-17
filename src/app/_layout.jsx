@@ -21,6 +21,7 @@ export default RootLayout = () => {
                 <Stack.Screen name="NewDeck" options={{ headerShown: false }} />
                 <Stack.Screen name="QuizScreen" options={{ headerShown: false }} />
                 <Stack.Screen name="DeckScreen" options={{ headerShown: false }} />
+                <Stack.Screen name="AddQuestion" options={{ headerShown: false }} />
               </Stack>
             </TranslationProvider>
           </ThemeProvider>

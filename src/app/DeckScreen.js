@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
 import Checkbox from "expo-checkbox";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FAB } from "react-native-paper";
 
-import { THEMES } from "../common/constants";
+import { MAX_QUESTIONS, NEW_QUESTION_ADDED, THEMES } from "../common/constants";
 import { loadDeckData, saveDeckData } from "../common/fileLib";
 import { formatCardText, getScheme } from "../common/util";
 import DeckTitle from "../components/Deck/DeckTitle";
@@ -15,9 +16,19 @@ const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
+  const [reload, setReload] = useState(false);
 
   const { theme, toggleTheme } = useTheme();
   const scheme = getScheme(theme);
+
+  const routeParams = useLocalSearchParams();
+
+  const onAddQuestion = () => {
+    router.navigate({
+      pathname: "AddQuestion",
+      params: { deckId },
+    });
+  };
 
   // sets either all checkboxes or specific checkbox "disabled" property
   const onCheckboxClick = (disabledValue, id = null) => {
@@ -49,27 +60,50 @@ const DeckScreen = () => {
     );
   };
 
+  const loadDeckDataFromStorage = async () => {
+    const result = await loadDeckData(deckId);
+    // @todo not happy with this looking for result length 2
+    if (Array.isArray(result) && result.length === 2) {
+      const [selectedDeck, selectedDeckData] = result;
+      setCurrentDeck(selectedDeck);
+      setCurrentDeckData(selectedDeckData);
+    } else {
+      console.log("Unexpected result loading deck with id " + deckId);
+      setCurrentDeck(null);
+      setCurrentDeckData([]);
+    }
+  };
+
+  // load data if either first time or reload is tripped
+  useEffect(() => {
+    if (reload) {
+      const loadData = async () => {
+        await loadDeckDataFromStorage();
+      };
+      loadData();
+    }
+  }, [reload]);
+
   useEffect(() => {
     if (deckId) {
-      const asyncFunc = async () => {
-        // note: tried to move set methods outside, but returning loaddeckdata from this func didnt work
-        const result = await loadDeckData(deckId);
-        if (Array.isArray(result) && result.length === 2) {
-          const [selectedDeck, selectedDeckData] = result;
-          setCurrentDeck(selectedDeck);
-          setCurrentDeckData(selectedDeckData);
-        } else {
-          console.log("Unexpected result loading deck with id " + deckId);
-          setCurrentDeck(null);
-          setCurrentDeckData([]);
-        }
+      const loadData = async () => {
+        await loadDeckDataFromStorage();
       };
-      asyncFunc();
+      loadData();
     } else {
       setCurrentDeck(null);
       setCurrentDeckData([]);
     }
   }, [deckId]);
+
+  useEffect(() => {
+    if (routeParams[NEW_QUESTION_ADDED] === "true") {
+      setReload(true);
+      router.setParams({ NEW_QUESTION_ADDED: false });
+    }
+  }, [routeParams]);
+
+  const canAddQuestion = currentDeckData?.questions?.length < MAX_QUESTIONS;
 
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
@@ -109,6 +143,12 @@ const DeckScreen = () => {
           </>
         )}
         {!currentDeckData && <Text style={scheme.txt}>Loading question data...</Text>}
+        <FAB
+          icon="plus"
+          style={[styles.fab, canAddQuestion ? scheme.bgAccent3 : scheme.disabled]}
+          color={scheme.txt.color}
+          onPress={canAddQuestion ? onAddQuestion : () => {}}
+        />
       </ScreenTemplate>
     </>
   );
@@ -139,6 +179,12 @@ const styles = StyleSheet.create({
   checkbox: {
     padding: 10,
     margin: 10,
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 });
 

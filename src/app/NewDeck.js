@@ -1,42 +1,15 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
+import { textInputStyle } from "../common/lib";
 import { getScheme } from "../common/util";
+import ConfirmModal from "../components/ConfirmModal";
 import { importNewDeck } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
-
-const ConfirmModal = ({ scheme, confirmModalVisible, handleCancel, handleConfirm }) => {
-  return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={confirmModalVisible}
-      onRequestClose={handleCancel} // Handle Android back button
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>You have unsaved data, do you want to discard it?</Text>
-          <View style={styles.buttonContainer}>
-            <Pressable onPress={handleCancel} onLongPress={handleCancel} style={[scheme.disabled, styles.buttonStyle]}>
-              <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Cancel</Text>
-            </Pressable>
-            <Pressable
-              onPress={handleConfirm}
-              onLongPress={handleConfirm}
-              style={[scheme.buttonBg, styles.buttonStyle]}
-            >
-              <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Discard</Text>
-            </Pressable>
-          </View>
-        </View>
-      </View>
-    </Modal>
-  );
-};
 
 const NewDeck = () => {
   const [title, setTitle] = useState("");
@@ -85,7 +58,7 @@ const NewDeck = () => {
           Add a short descriptive title for the new deck.
         </Text>
         <TextInput
-          style={styles.titleInput}
+          style={textInputStyle}
           placeholder="Deck Title"
           placeholderTextColor="#aaaaaa"
           value={title}
@@ -137,15 +110,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  titleInput: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-    fontSize: 18,
-    backgroundColor: "#fafafa",
-  },
   textInput: {
     flex: 1,
     borderWidth: 1,
@@ -166,29 +130,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 8,
     margin: 10,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)", // Semi-transparent background
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 35,
-    alignItems: "center",
-    elevation: 5, // Shadow for Android
-    width: 320,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-    fontSize: 18,
-  },
-  buttonContainer: {
-    flexDirection: "row",
   },
 });
 

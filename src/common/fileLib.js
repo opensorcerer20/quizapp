@@ -133,9 +133,11 @@ export const updateDeckQuestionData = async (deckId, questions) => {
     if (deckData) {
       await saveStorageData(DECK_QA_KEY + `_${deckId}`, { ...deckData, questions });
     }
+    return true;
   } catch (error) {
     console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
   }
+  return false;
 };
 
 export const removeStorageData = async (key) => {

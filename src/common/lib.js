@@ -1,5 +1,7 @@
 //https://www.color-hex.com/color-palettes/
 
+import { SAFE_WIDTH } from "./constants";
+
 export const lightDarkBgColors = {
   schemeBgDark: {
     baseBg: "#121212",
@@ -122,4 +124,15 @@ export const lightDarkStyles = {
       color: lightDarkBgColors.schemeBgLight.buttonTxt,
     },
   },
+};
+
+export const textInputStyle = {
+  width: SAFE_WIDTH * 0.9,
+  borderWidth: 1,
+  borderColor: "#ccc",
+  borderRadius: 8,
+  padding: 12,
+  marginBottom: 16,
+  fontSize: 18,
+  backgroundColor: "#fafafa",
 };
