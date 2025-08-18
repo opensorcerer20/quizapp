@@ -61,5 +61,7 @@ if "dont have permission"
     - scan qr code to install via itunes
 
 - to reinstall and rebuild node modules
+-- rm -rf node_nodules/
+-- rm package-lock.json
 -- npm install
 -- npx expo prebuild --clean

@@ -4,7 +4,7 @@ import { router } from "expo-router";
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
-import { textInputStyle } from "../common/lib";
+import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
 import ConfirmModal from "../components/ConfirmModal";
 import { importNewDeck } from "../components/Deck/QuizDeck";
@@ -58,7 +58,7 @@ const NewDeck = () => {
           Add a short descriptive title for the new deck.
         </Text>
         <TextInput
-          style={textInputStyle}
+          style={globalStyles.textField}
           placeholder="Deck Title"
           placeholderTextColor="#aaaaaa"
           value={title}
@@ -83,7 +83,7 @@ const NewDeck = () => {
             onPress={() => handleSubmit(title, questionData)}
             onLongPress={() => handleSubmit(title, questionData)}
             style={[
-              styles.buttonStyle,
+              globalStyles.button,
               questionData.length === 0 || title.length === 0 ? scheme.disabled : scheme.buttonBg,
             ]}
           >
@@ -125,11 +125,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 8,
-  },
-  buttonStyle: {
-    borderRadius: 5,
-    padding: 8,
-    margin: 10,
   },
 });
 

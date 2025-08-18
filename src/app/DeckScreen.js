@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Checkbox from "expo-checkbox";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { FAB } from "react-native-paper";
 
-import { MAX_QUESTIONS, NEW_QUESTION_ADDED, THEMES } from "../common/constants";
+import { MAX_QUESTIONS, THEMES } from "../common/constants";
 import { loadDeckData, saveDeckData } from "../common/fileLib";
+import { globalStyles } from "../common/lib";
 import { formatCardText, getScheme } from "../common/util";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
@@ -16,12 +17,9 @@ const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
-  const [reload, setReload] = useState(false);
 
   const { theme, toggleTheme } = useTheme();
   const scheme = getScheme(theme);
-
-  const routeParams = useLocalSearchParams();
 
   const onAddQuestion = () => {
     router.navigate({
@@ -48,7 +46,7 @@ const DeckScreen = () => {
       <View key={item.id} style={[scheme.bgAccent3, styles.item, { borderColor: scheme.txt.color }]}>
         <Checkbox
           color={theme === THEMES.dark ? scheme.antiTxtBg.backgroundColor : scheme.txt.color}
-          style={styles.checkbox}
+          style={globalStyles.checkbox}
           value={!item.disabled}
           onValueChange={() => onCheckboxClick(!item?.disabled, item.id)}
         />
@@ -74,15 +72,16 @@ const DeckScreen = () => {
     }
   };
 
-  // load data if either first time or reload is tripped
-  useEffect(() => {
-    if (reload) {
+  // specific to expo router
+  useFocusEffect(
+    useCallback(() => {
+      // re-fetch data
       const loadData = async () => {
         await loadDeckDataFromStorage();
       };
       loadData();
-    }
-  }, [reload]);
+    }, [])
+  );
 
   useEffect(() => {
     if (deckId) {
@@ -95,13 +94,6 @@ const DeckScreen = () => {
       setCurrentDeckData([]);
     }
   }, [deckId]);
-
-  useEffect(() => {
-    if (routeParams[NEW_QUESTION_ADDED] === "true") {
-      setReload(true);
-      router.setParams({ NEW_QUESTION_ADDED: false });
-    }
-  }, [routeParams]);
 
   const canAddQuestion = currentDeckData?.questions?.length < MAX_QUESTIONS;
 
@@ -128,7 +120,11 @@ const DeckScreen = () => {
                   onPress: () => onCheckboxClick(false),
                 },
               ].map(({ icon, color, label, onPress }) => (
-                <Pressable key={label} style={[scheme.buttonBg, styles.setAllButton]} onPress={onPress}>
+                <Pressable
+                  key={label}
+                  style={[globalStyles.button, scheme.buttonBg, styles.setAllButton]}
+                  onPress={onPress}
+                >
                   <Text style={{ color }}>{icon}</Text>
                   <Text style={{ color }}> {label}</Text>
                 </Pressable>
@@ -145,8 +141,8 @@ const DeckScreen = () => {
         {!currentDeckData && <Text style={scheme.txt}>Loading question data...</Text>}
         <FAB
           icon="plus"
-          style={[styles.fab, canAddQuestion ? scheme.bgAccent3 : scheme.disabled]}
-          color={scheme.txt.color}
+          style={[globalStyles.fab, canAddQuestion ? scheme.buttonBg : scheme.disabled]}
+          color={scheme.buttonTxt.color}
           onPress={canAddQuestion ? onAddQuestion : () => {}}
         />
       </ScreenTemplate>
@@ -168,23 +164,10 @@ const styles = StyleSheet.create({
   },
   setAllButton: {
     flexDirection: "row",
-    padding: 10,
-    borderRadius: 5,
-    margin: 5,
   },
   itemText: {
     fontSize: 16,
     maxWidth: "90%",
-  },
-  checkbox: {
-    padding: 10,
-    margin: 10,
-  },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
   },
 });
 

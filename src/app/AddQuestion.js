@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-import { SAFE_WIDTH } from "../common/constants";
+import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED, SAFE_WIDTH } from "../common/constants";
 import { loadDeckFromStorage, loadQuestionsFromStorage, updateDeckQuestionData } from "../common/fileLib";
-import { textInputStyle } from "../common/lib";
+import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
@@ -37,14 +37,8 @@ const AddQuestion = () => {
 
         const result = await updateDeckQuestionData(deckId, [...currentQuestions.questions, newQuestion]);
         if (result) {
-          /*
-On the screen you are navigating from, before calling router.back(), you can call router.setParams() on the current route to update its parameters.
-
-On the previous screen, you can then use useLocalSearchParams() to access these updated parameters.
-This approach effectively updates the URL parameters of the previous screen, which can then be read by that screen.
-*/
-
-          router.replace({ pathname: "/DeckScreen", params: { deckId: deckId, NEW_QUESTION_ADDED: true } });
+          router.setParams(NEW_QUESTION_ADDED, true);
+          router.back();
         }
       }
     } catch (error) {
@@ -88,31 +82,39 @@ This approach effectively updates the URL parameters of the previous screen, whi
         <View>
           <Text style={styles.label}>Question</Text>
           <TextInput
-            style={textInputStyle}
+            style={globalStyles.textField}
             placeholder="Question"
             placeholderTextColor="#aaaaaa"
             value={question}
             onChangeText={setQuestion}
-            maxLength={500}
+            maxLength={MAX_CHAR_LIMIT}
           />
         </View>
         <View>
           <Text style={styles.label}>Answer</Text>
           <TextInput
-            style={textInputStyle}
+            style={globalStyles.textField}
             placeholder="Answer"
             placeholderTextColor="#aaaaaa"
             value={answer}
             onChangeText={setAnswer}
-            maxLength={500}
+            maxLength={MAX_CHAR_LIMIT}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Pressable onPress={onBackClick} onLongPress={onBackClick} style={[scheme.disabled, styles.buttonStyle]}>
-            <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Cancel</Text>
+          <Pressable
+            onPress={onBackClick}
+            onLongPress={onBackClick}
+            style={[globalStyles.button, scheme.disabled, styles.buttonStyle]}
+          >
+            <Text style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>Cancel</Text>
           </Pressable>
-          <Pressable onPress={handleSubmit} onLongPress={handleSubmit} style={[scheme.buttonBg, styles.buttonStyle]}>
-            <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Add Question</Text>
+          <Pressable
+            onPress={handleSubmit}
+            onLongPress={handleSubmit}
+            style={[globalStyles.button, scheme.buttonBg, styles.buttonStyle]}
+          >
+            <Text style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>Add Question</Text>
           </Pressable>
         </View>
         <ConfirmModal
@@ -139,9 +141,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonStyle: {
-    padding: 10,
-    borderRadius: 5,
-    minWidth: 100,
     alignItems: "center",
   },
 });

@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED, SAFE_WIDTH } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
+import { globalStyles } from "../common/lib";
 import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import ConfirmDeleteModal from "../components/Deck/ConfirmDeleteModal";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
@@ -381,8 +382,8 @@ export const DeckList = () => {
                 open={fabOpen}
                 visible
                 icon="plus"
-                color={scheme.txt.color}
-                fabStyle={scheme.bgAccent3}
+                color={scheme.buttonTxt.color}
+                fabStyle={scheme.buttonBg}
                 actions={[
                   {
                     icon: "form-textbox", // material community icon
@@ -411,7 +412,7 @@ export const DeckList = () => {
             <FileHelpModal scheme={scheme} showModal={showFileHelp} setShowModal={setShowFileHelp} />
           </>
         )}
-        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={scheme.disabled} />}
+        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[globalStyles.fab, scheme.disabled]} />}
       </View>
     </ScreenTemplate>
   );
@@ -461,9 +462,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-  },
-  fabDisabled: {
-    backgroundColor: "grey",
   },
 });
 

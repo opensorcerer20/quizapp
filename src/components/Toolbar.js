@@ -61,7 +61,7 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
           <Text style={scheme.txt}>{title || getLocalString("Flashcard Library")}</Text>
         </View>
         <View style={[{ flex: 2, alignItems: "flex-end", marginRight: 15 }, buttonFlex]}>
-          <Pressable style={{ flex: 1 }} onPress={toggleTheme}>
+          <Pressable style={showHelpButton ? { flex: 1 } : {}} onPress={toggleTheme}>
             <MaterialCommunityIcons name={themeIcon} size={24} color={scheme.txt.color} />
           </Pressable>
           {showHelpButton && (

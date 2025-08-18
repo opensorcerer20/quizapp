@@ -126,26 +126,29 @@ itemMenuButton: {
     -   [x] quizmodal move inside menu component
     -   [x] consolidate modal styles (very similar)
     -   [x] make appbar consistent between ios and android
-    -   [ ] add cards to deck
+    -   [x] add cards to deck
       -    [x] fab
       -    [x] screen w blanks
       -    [x] working question add
       -    [x] deck name on add screen
       -    [x] input labels on screen
-      -    [ ] issue with back button after adding question, stack is incorrect, goes back to same page
-      -    [ ] character limits
-      -    [ ] test cancel/back
-      -    [ ] test modal to leave with info on screen
-      -    [ ] use different color for fab than list items
-    -   [ ] ui consolidation
-      -    [ ] button style
+      -    [x] issue with back button after adding question, stack is incorrect, goes back to same page
+      -    [x] character limits
+      -    [x] test cancel/back
+      -    [x] test modal to leave with info on screen
+      -    [x] use different color for fab than list items
+      -    [x] new issue: submitting does not ALWAYS refresh list (try going in from start after refresh, attempt to submit with only question, then with answer, see if list refreshes)
+    -   [x] ui consolidation
+      -    [x] button style
+    -   [ ] arrows for cards
+    -   [ ] keyboard covering textbox
+    -   [ ] delete questions for a deck
+    -   [ ] edit questions for a deck (using addquestion)
     -   [ ] education: make available for tablets
       -   [ ] ui
         -   [ ] use similar idea to "mobile first": if screen width > ?, show more columns
         -   [ ] 4-6 cards, 2-3 per row
         -   [ ] in quiz mode, 1 row, 3 cards with responses below
-    -   [ ] arrows for cards
-    -   [ ] keyboard covering textbox
     -   [ ] language support
     -   [ ] import big csv/txt file into smaller decks?
     -   [ ] multi file select

@@ -13,7 +13,7 @@ export const lightDarkBgColors = {
     bgAccent3: "#4a63ac99",
     cardQ: "#4a63ac66",
     cardA: "#4a63acff",
-    buttonBg: "#4a63acff",
+    buttonBg: "#3650A1",
     buttonTxt: "#efefef",
     disabled: "#787878",
     txt: "#efefef",
@@ -28,7 +28,7 @@ export const lightDarkBgColors = {
     bgAccent3: "#d5c5e3",
     cardQ: "#d5c5e366",
     cardA: "#d5c5e3ff",
-    buttonBg: "#4a63ac",
+    buttonBg: "#90589C",
     buttonTxt: "#efefef",
     disabled: "#787878",
     txt: "#121212",
@@ -126,13 +126,30 @@ export const lightDarkStyles = {
   },
 };
 
-export const textInputStyle = {
-  width: SAFE_WIDTH * 0.9,
-  borderWidth: 1,
-  borderColor: "#ccc",
-  borderRadius: 8,
-  padding: 12,
-  marginBottom: 16,
-  fontSize: 18,
-  backgroundColor: "#fafafa",
+export const globalStyles = {
+  textField: {
+    width: SAFE_WIDTH * 0.9,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    fontSize: 18,
+    backgroundColor: "#fafafa",
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+  },
+  checkbox: {
+    padding: 10,
+    margin: 10,
+  },
 };

@@ -16,11 +16,6 @@ export const MAX_CHAR_LIMIT_XL = 60;
 export const MAX_CHAR_LIMIT_L = 90;
 export const MAX_CHAR_LIMIT = 120;
 
-export const LINE_CHAR_LIMIT = 40;
-export const LINE_CHAR_LIMIT_L = 33;
-export const LINE_CHAR_LIMIT_XL = 27;
-export const LINE_CHAR_LIMIT_XXL = 10;
-
 export const VIEWS = {
   homeView: "homeView",
   quizView: "quizView",
