@@ -59,3 +59,7 @@ if "dont have permission"
     - install (policy?) on device
     - eas build preview
     - scan qr code to install via itunes
+
+- to reinstall and rebuild node modules
+-- npm install
+-- npx expo prebuild --clean
