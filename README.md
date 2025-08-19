@@ -129,9 +129,7 @@ itemMenuButton: {
       -    [x] button style
     -   [x] arrows for cards
     -   [x] keyboard covering textbox
-    -   [ ] back up to storage
-        -   [ ] needed because with adding questions, files no longer have all questions
-    -   [ ] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
+    -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
     -   [ ] delete questions for a deck
     -   [ ] edit questions for a deck (using addquestion)
     -   [ ] education: make available for tablets
@@ -139,6 +137,8 @@ itemMenuButton: {
         -   [ ] use similar idea to "mobile first": if screen width > ?, show more columns
         -   [ ] 4-6 cards, 2-3 per row
         -   [ ] in quiz mode, 1 row, 3 cards with responses below
+    -   [ ] back up to storage
+        -   [ ] needed because with adding questions, files no longer have all questions
     -   [ ] language support
     -   [ ] import big csv/txt file into smaller decks?
     -   [ ] multi file select

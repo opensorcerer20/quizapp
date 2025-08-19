@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
+import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import { importNewDeck } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
@@ -51,48 +52,48 @@ const NewDeck = () => {
     }
   };
 
+  const hideKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   return (
     <ScreenTemplate showBack={true} onBackClick={onBackClick}>
       <KeyboardAvoidingView
         style={[styles.container, { flex: 1 }]}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
-          Add a short descriptive title for the new deck.
-        </Text>
-        <TextInput
-          style={globalStyles.textField}
-          placeholder="Deck Title"
-          placeholderTextColor="#aaaaaa"
-          value={title}
-          onChangeText={setTitle}
-          maxLength={64}
-        />
-        <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
-          Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc
-        </Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder={"Question 1\nAnswer 1\nQuestion 2\nAnswer 2"}
-          placeholderTextColor="#aaaaaa"
-          value={questionData}
-          onChangeText={updateText}
-          multiline={true}
-          numberOfLines={100}
-          textAlignVertical="top"
-        />
-        <View style={[styles.buttonContainer, { margin: "auto" }]}>
-          <Pressable
-            onPress={() => handleSubmit(title, questionData)}
-            onLongPress={() => handleSubmit(title, questionData)}
-            style={[
-              globalStyles.button,
-              questionData.length === 0 || title.length === 0 ? scheme.disabled : scheme.buttonBg,
-            ]}
-          >
-            <Text style={scheme.buttonTxt}>Submit</Text>
-          </Pressable>
-        </View>
+        <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}>
+          <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
+            Add a short descriptive title for the new deck.
+          </Text>
+          <TextInput
+            style={globalStyles.textField}
+            placeholder="Deck Title"
+            placeholderTextColor="#aaaaaa"
+            value={title}
+            onChangeText={setTitle}
+            maxLength={64}
+          />
+          <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
+            Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc
+          </Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder={"Question 1\nAnswer 1\nQuestion 2\nAnswer 2"}
+            placeholderTextColor="#aaaaaa"
+            value={questionData}
+            onChangeText={updateText}
+            multiline={true}
+            numberOfLines={100}
+            textAlignVertical="top"
+          />
+          <CancelSubmit
+            scheme={scheme}
+            handleSubmit={() => handleSubmit(title, questionData)}
+            onBackClick={onBackClick}
+            submitDisabled={questionData.length === 0 || title.length === 0}
+          />
+        </Pressable>
       </KeyboardAvoidingView>
       <ConfirmModal
         scheme={scheme}
@@ -125,9 +126,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     minHeight: 120,
     maxHeight: 300,
-  },
-  buttonContainer: {
-    marginTop: 8,
   },
 });
 

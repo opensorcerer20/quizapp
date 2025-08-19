@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { router, useLocalSearchParams } from "expo-router";
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from "react-native";
 
-import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED, SAFE_WIDTH } from "../common/constants";
+import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED } from "../common/constants";
 import { loadDeckFromStorage, loadQuestionsFromStorage, updateDeckQuestionData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
@@ -101,22 +102,13 @@ const AddQuestion = () => {
             maxLength={MAX_CHAR_LIMIT}
           />
         </View>
-        <View style={styles.buttonContainer}>
-          <Pressable
-            onPress={onBackClick}
-            onLongPress={onBackClick}
-            style={[globalStyles.button, scheme.disabled, styles.buttonStyle]}
-          >
-            <Text style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>Cancel</Text>
-          </Pressable>
-          <Pressable
-            onPress={handleSubmit}
-            onLongPress={handleSubmit}
-            style={[globalStyles.button, scheme.buttonBg, styles.buttonStyle]}
-          >
-            <Text style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>Add Question</Text>
-          </Pressable>
-        </View>
+        <CancelSubmit
+          scheme={scheme}
+          handleSubmit={handleSubmit}
+          onBackClick={onBackClick}
+          submitLabel="Add Question"
+          submitDisabled={question.length === 0 || answer.length === 0}
+        />
         <ConfirmModal
           scheme={scheme}
           confirmModalVisible={confirmModalVisible}
@@ -133,15 +125,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingTop: 20,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: SAFE_WIDTH * 0.9,
-    marginTop: 20,
-  },
-  buttonStyle: {
-    alignItems: "center",
   },
 });
 

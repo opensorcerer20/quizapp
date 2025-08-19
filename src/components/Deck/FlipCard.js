@@ -70,6 +70,8 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
   //     "flipcard status " +
   //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
   // );
+
+  // only show arrow for question part; yes they can still click to go back, but the point was to have them click in the first place
   return (
     <>
       {cardType === CARDTYPE_QUESTION && (
@@ -93,19 +95,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         </View>
       )}
       {cardType === CARDTYPE_ANSWER && (
-        <View
-          style={[
-            cardStyle,
-            cardBg,
-            {
-              flexDirection: "row",
-              justifyContent: "space-between",
-              borderWidth: 1,
-              height: 200,
-            },
-          ]}
-        >
-          {makeArrow("left")}
+        <View style={[cardStyle, cardBg]}>
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
             <Text style={[textStyle, textSizeStyle, { width: 300 }]}>{finalCardText}</Text>
