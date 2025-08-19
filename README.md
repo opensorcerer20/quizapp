@@ -108,19 +108,6 @@ itemMenuButton: {
 
 - [x] closed android beta
 
-- [ ] llc
-
-- [ ] set up ios app on TestFlight
-    - [ ] need po box
-    - [ ] need llc
-    - [ ] need DUNS (unique id for app store) and EIN (for tax purposes)
-    - [ ] set up organization account on apple app store (which hides developer name)
-- [ ] set up app on google play beta
-
-- [ ] confirm my personal info is hidden
-
-- [ ] open beta
-
 - [ ] beta bugs/improvements
     -   [x] example image for file help doesnt fit
     -   [x] quizmodal move inside menu component
@@ -140,8 +127,10 @@ itemMenuButton: {
       -    [x] new issue: submitting does not ALWAYS refresh list (try going in from start after refresh, attempt to submit with only question, then with answer, see if list refreshes)
     -   [x] ui consolidation
       -    [x] button style
-    -   [ ] arrows for cards
+    -   [x] arrows for cards
     -   [ ] keyboard covering textbox
+    -   [ ] back up to storage
+        -   [ ] needed because with adding questions, files no longer have all questions
     -   [ ] delete questions for a deck
     -   [ ] edit questions for a deck (using addquestion)
     -   [ ] education: make available for tablets
@@ -164,6 +153,20 @@ itemMenuButton: {
     -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
     -   [ ] pressing android back button on new deck discards form
     -   [ ] color blind mode (ouch)
+    -   [ ] app icon needs to come down 2 pixels i think
+
+- [ ] llc
+
+- [ ] set up ios app on TestFlight
+    - [ ] need po box
+    - [ ] need llc
+    - [ ] need DUNS (unique id for app store) and EIN (for tax purposes)
+    - [ ] set up organization account on apple app store (which hides developer name)
+- [ ] set up app on google play beta
+
+- [ ] confirm my personal info is hidden
+
+- [ ] open beta
 
 - [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"

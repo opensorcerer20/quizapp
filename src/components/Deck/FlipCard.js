@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
 import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 
@@ -17,7 +19,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);
-  const textSizeStyle = fontSize !== "" ? { ...styles[fontSize], marginTop: 10 } : { marginTop: 10 };
+  const textSizeStyle = fontSize !== "" ? { ...styles[fontSize] } : {};
   const qStyle = { marginLeft: 0, marginRight: "auto" };
   const aStyle = { marginLeft: "auto", marginRight: 0 };
 
@@ -46,15 +48,71 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
     </View>
   );
 
+  // const arrowElement = <Text style={{ marginTop: "auto", marginBottom: "auto" }}>Y</Text>;
+  const makeArrow = (direction = "right") => {
+    direction = direction === "left" ? "left" : "right";
+    return (
+      <View
+        style={{
+          marginVertical: "auto",
+          borderWidth: 1,
+          borderColor: textStyle.color,
+          borderRadius: 10,
+          marginHorizontal: 5,
+        }}
+      >
+        <MaterialCommunityIcons name={"chevron-double-" + direction} size={24} color={textStyle.color} />
+      </View>
+    );
+  };
+
   // console.log(
   //     "flipcard status " +
   //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
   // );
   return (
-    <View style={[cardStyle, cardBg]}>
-      <CardHeader />
-      <Text style={[textStyle, textSizeStyle]}>{finalCardText}</Text>
-    </View>
+    <>
+      {cardType === CARDTYPE_QUESTION && (
+        <View
+          style={[
+            cardStyle,
+            cardBg,
+            {
+              flexDirection: "row",
+              justifyContent: "space-between",
+              borderWidth: 1,
+              height: 200,
+            },
+          ]}
+        >
+          <View style={{ flexDirection: "column" }}>
+            <CardHeader />
+            <Text style={[textStyle, textSizeStyle, { width: 300 }]}>{finalCardText}</Text>
+          </View>
+          {makeArrow("right")}
+        </View>
+      )}
+      {cardType === CARDTYPE_ANSWER && (
+        <View
+          style={[
+            cardStyle,
+            cardBg,
+            {
+              flexDirection: "row",
+              justifyContent: "space-between",
+              borderWidth: 1,
+              height: 200,
+            },
+          ]}
+        >
+          {makeArrow("left")}
+          <View style={{ flexDirection: "column" }}>
+            <CardHeader />
+            <Text style={[textStyle, textSizeStyle, { width: 300 }]}>{finalCardText}</Text>
+          </View>
+        </View>
+      )}
+    </>
   );
 };
 
@@ -214,7 +272,8 @@ const styles = StyleSheet.create({
   cardHeaderContainer: {
     borderWidth: 1,
     borderRadius: 5,
-    padding: 2,
+    paddingHorizontal: 3,
+    paddingVertical: 1,
   },
 });
 
