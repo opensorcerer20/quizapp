@@ -128,9 +128,10 @@ itemMenuButton: {
     -   [x] ui consolidation
       -    [x] button style
     -   [x] arrows for cards
-    -   [ ] keyboard covering textbox
+    -   [x] keyboard covering textbox
     -   [ ] back up to storage
         -   [ ] needed because with adding questions, files no longer have all questions
+    -   [ ] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
     -   [ ] delete questions for a deck
     -   [ ] edit questions for a deck (using addquestion)
     -   [ ] education: make available for tablets
@@ -154,6 +155,7 @@ itemMenuButton: {
     -   [ ] pressing android back button on new deck discards form
     -   [ ] color blind mode (ouch)
     -   [ ] app icon needs to come down 2 pixels i think
+    -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
 
 - [ ] llc
 

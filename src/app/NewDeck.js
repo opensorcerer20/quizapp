@@ -53,7 +53,10 @@ const NewDeck = () => {
 
   return (
     <ScreenTemplate showBack={true} onBackClick={onBackClick}>
-      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+      <KeyboardAvoidingView
+        style={[styles.container, { flex: 1 }]}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
         <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
           Add a short descriptive title for the new deck.
         </Text>
