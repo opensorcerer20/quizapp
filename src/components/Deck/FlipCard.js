@@ -5,6 +5,7 @@ import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } f
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
+import { SAFE_WIDTH } from "../../common/constants";
 import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 
@@ -89,7 +90,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         >
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
-            <Text style={[textStyle, textSizeStyle, { width: 300 }]}>{finalCardText}</Text>
+            <Text style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</Text>
           </View>
           {makeArrow("right")}
         </View>
@@ -98,7 +99,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         <View style={[cardStyle, cardBg]}>
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
-            <Text style={[textStyle, textSizeStyle, { width: 300 }]}>{finalCardText}</Text>
+            <Text style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</Text>
           </View>
         </View>
       )}
@@ -184,7 +185,7 @@ const FlipCard = ({ answerText, questionText, isReversed }) => {
   }, [questionText]);
 
   return (
-    <View style={{ marginVertical: 10 }}>
+    <View style={{ marginVertical: 10, marginHorizontal: "auto" }}>
       <Pressable onPress={handlePress}>
         <TheCard
           isFlipped={isFlipped}
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   flipCard: {
-    width: "100%",
+    width: SAFE_WIDTH * 0.95,
     height: "auto",
     minHeight: 250,
     backfaceVisibility: "hidden",
