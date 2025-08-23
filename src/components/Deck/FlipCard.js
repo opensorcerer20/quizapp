@@ -8,6 +8,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { SAFE_WIDTH } from "../../common/constants";
 import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
+import { ANSWER_FIRST } from "../Quiz/ReviewScreen";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -71,6 +72,11 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
   //     "flipcard status " +
   //         JSON.stringify({ length: finalCardText.length, textSizeStyle })
   // );
+
+  /*
+  - add simple "off/on" switch to card in bottom right corner
+  - if off, card is greyed out
+  */
 
   // only show arrow for question part; yes they can still click to go back, but the point was to have them click in the first place
   return (
@@ -166,7 +172,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
   );
 };
 
-const FlipCard = ({ answerText, questionText, isReversed }) => {
+const FlipCard = ({ answerText, questionText, showFirst }) => {
   const [localQuestion, setLocalQuestion] = useState("");
   const [localAnswer, setLocalAnswer] = useState("");
 
@@ -183,6 +189,8 @@ const FlipCard = ({ answerText, questionText, isReversed }) => {
   useEffect(() => {
     setLocalQuestion(questionText);
   }, [questionText]);
+
+  const isReversed = showFirst === ANSWER_FIRST;
 
   return (
     <View style={{ marginVertical: 10, marginHorizontal: "auto" }}>

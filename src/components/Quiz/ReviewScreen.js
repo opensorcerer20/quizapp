@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 
 import { difference } from "lodash";
 import { Platform, StyleSheet, Text, View } from "react-native";
+import { SegmentedButtons } from "react-native-paper";
 
-import { TUTORIAL_SHOWN_KEY } from "../../common/constants";
+import { SAFE_WIDTH, TUTORIAL_SHOWN_KEY } from "../../common/constants";
 import { checkIfExists, setFlag } from "../../common/fileLib";
 import { getRandomInt, getScheme } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
@@ -11,11 +12,13 @@ import DeckTitle from "../Deck/DeckTitle";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { useTheme } from "../Providers/ThemeProvider";
-import { StyledSwitch } from "../StyledSwitch";
 import TutorialModal from "../TutorialModal";
 
+export const QUESTION_FIRST = "qtoa";
+export const ANSWER_FIRST = "atoq";
+
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
-  const [isReversed, setIsReversed] = useState(false);
+  const [showFirst, setShowFirst] = useState(QUESTION_FIRST);
   const [noEnabledQs, setNoEnabledQs] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
 
@@ -120,11 +123,28 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
       {hasQuestionData && (
         <View style={[styles.container]}>
           <DeckTitle deckName={currentDeck.name} scheme={scheme} />
+          <View style={styles.switchContainer}>
+            <Text style={{ marginHorizontal: "auto", fontSize: 18, fontWeight: "bold" }}>Show First:</Text>
+            <SegmentedButtons
+              value={showFirst}
+              onValueChange={setShowFirst}
+              buttons={[
+                {
+                  value: QUESTION_FIRST,
+                  label: "Question",
+                },
+                {
+                  value: ANSWER_FIRST,
+                  label: "Answer",
+                },
+              ]}
+            />
+          </View>
           <FlipCard
             key={getRandomInt(100000, 999999)}
             questionText={currentState.currentQuestion.q}
             answerText={currentState.currentQuestion.a}
-            isReversed={isReversed}
+            showFirst={showFirst}
           />
           <DeckNav
             prevEnabled={currentState.originalBag.length - currentState.questionBag.length > 1}
@@ -138,16 +158,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
             {currentState.originalBag.length}
           </Text>
-          <View style={styles.switchContainer}>
-            <StyledSwitch
-              theme={theme}
-              txtStyle={[scheme.txt, { fontWeight: "bold" }]}
-              optionValue={isReversed}
-              onClick={() => setIsReversed(!isReversed)}
-              labelTxt={"Reverse Q & A"}
-            />
-          </View>
-          <View style={styles.switchContainer}>
+          {/* <View style={styles.switchContainer}>
             <StyledSwitch
               theme={theme}
               txtStyle={[scheme.txt, { fontWeight: "bold" }]}
@@ -162,7 +173,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
               }
               labelTxt={"Turn card off"}
             />
-          </View>
+          </View> */}
         </View>
       )}
       {!hasQuestionData && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
@@ -195,7 +206,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
   },
-  switchContainer: { margin: 0, padding: Platform.OS === "ios" ? 5 : 0 },
+  switchContainer: {
+    marginHorizontal: "auto",
+    padding: Platform.OS === "ios" ? 5 : 0,
+    width: SAFE_WIDTH * 0.7,
+  },
   cardCounter: {
     margin: "auto",
     fontSize: 16,
