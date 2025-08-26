@@ -1,5 +1,7 @@
 import { makeQuestionObjects } from "../src/components/Deck/QuizDeck";
 
+// @todo deal with "import asyncstorage..."
+
 describe("makeQuestionObjects", () => {
   it("generates question/answer array", () => {
     const questionData = ["sí", "yes"];

@@ -1,3 +1,38 @@
+import { parse } from "papaparse";
+
+import { sanitizeAll } from "../../common/util";
+
+export const parseRawCsv = (rawCsv, expectedColCount) => {
+  if (expectedColCount < 1) {
+    return [];
+  }
+
+  const parsedData = parse(rawCsv, { delimiter: "," });
+  const errorRowNums = parsedData.errors.map((error) => error.row);
+
+  const colData = [];
+  parsedData.data.map((row, index) => {
+    const sanitizedRow = [];
+    row.map((row) => {
+      const str = sanitizeAll(row.trim());
+      if (str !== null && str.length > 0) {
+        sanitizedRow.push(str);
+      }
+    });
+
+    if (sanitizedRow.length > 0 && sanitizedRow[0] !== null) {
+      const rowHasError = errorRowNums.includes(index);
+      if (!rowHasError && sanitizedRow.length >= expectedColCount) {
+        colData.push(sanitizedRow.slice(0, expectedColCount));
+      } else {
+        colData.push(["Could not parse csv", sanitizedRow[0].slice(0, 50)]);
+      }
+    }
+  });
+
+  return colData;
+};
+
 export const parseCsv = (csvLineArray, expectedColCount) => {
   if (expectedColCount < 1) {
     return [];

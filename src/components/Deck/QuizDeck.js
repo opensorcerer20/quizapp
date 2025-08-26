@@ -1,7 +1,7 @@
 import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../../common/constants";
 import { loadAllDecks, saveDeckData, saveDeckListData } from "../../common/fileLib";
 import { getRandomInt, sanitizeAll } from "../../common/util";
-import { parseCsv } from "./parseCsv";
+import { parseRawCsv } from "./parseCsv";
 
 export const emptyQuestion = {
   id: null,
@@ -106,7 +106,8 @@ export const getQuestionObjectsFromRawData = (mimeType, rawQuestionData) => {
 
   // plain text does not require additional processing (at this time)
   if (mimeType === "csv") {
-    questions = parseCsv(questions, 2);
+    // @todo parse csv here
+    questions = parseRawCsv(rawQuestionData, 2);
     questions = questions.flat(); // change [[1, 2],[3, 4]]] to [1,2,3,4]
   }
   // else assume text

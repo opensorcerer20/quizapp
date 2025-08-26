@@ -65,3 +65,8 @@ if "dont have permission"
 -- rm package-lock.json
 -- npm install
 -- npx expo prebuild --clean
+
+- for new build
+-- npx expo prebuild --clean
+-- build android
+-- build ios

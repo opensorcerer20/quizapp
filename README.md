@@ -131,6 +131,11 @@ itemMenuButton: {
     -   [x] keyboard covering textbox
     -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
 
+    -   [x] allow commas in csv
+        -   [ ] ~~csv-parse library: https://csv.js.org/parse/examples/file_interaction/~~
+        -   [ ] ~~lightweight parser: https://github.com/rufuspollock/csv.js~~
+        -   [x] use papa parse
+
     -   [ ] deck screen
         -   [ ] delete questions for a deck
 
@@ -139,6 +144,7 @@ itemMenuButton: {
     -   [ ] language support
 
     -   [ ] deck list
+        -   [ ] dark mode odd lighter shade for name and dots
         -   [ ] order list by name, date added
         -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
         -   [ ] quickly: use redux for deck list state
@@ -147,6 +153,7 @@ itemMenuButton: {
         -   [ ] the "MW" shows a card goes bigger at bottom
 
     -   [ ] general ui
+        -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
         -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
         -   [ ] file help
             - [ ] use same circle arrow on flip card
