@@ -114,46 +114,46 @@ itemMenuButton: {
     -   [x] consolidate modal styles (very similar)
     -   [x] make appbar consistent between ios and android
     -   [x] add cards to deck
-      -    [x] fab
-      -    [x] screen w blanks
-      -    [x] working question add
-      -    [x] deck name on add screen
-      -    [x] input labels on screen
-      -    [x] issue with back button after adding question, stack is incorrect, goes back to same page
-      -    [x] character limits
-      -    [x] test cancel/back
-      -    [x] test modal to leave with info on screen
-      -    [x] use different color for fab than list items
-      -    [x] new issue: submitting does not ALWAYS refresh list (try going in from start after refresh, attempt to submit with only question, then with answer, see if list refreshes)
+        -    [x] fab
+        -    [x] screen w blanks
+        -    [x] working question add
+        -    [x] deck name on add screen
+        -    [x] input labels on screen
+        -    [x] issue with back button after adding question, stack is incorrect, goes back to same page
+        -    [x] character limits
+        -    [x] test cancel/back
+        -    [x] test modal to leave with info on screen
+        -    [x] use different color for fab than list items
+        -    [x] new issue: submitting does not ALWAYS refresh list (try going in from start after refresh, attempt to submit with only question, then with answer, see if list refreshes)
     -   [x] ui consolidation
-      -    [x] button style
+        -    [x] button style
     -   [x] arrows for cards
     -   [x] keyboard covering textbox
     -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
 
     -   [ ] deck screen
-      -   [ ] delete questions for a deck
+        -   [ ] delete questions for a deck
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
 
     -   [ ] language support
 
     -   [ ] deck list
-      -   [ ] order list by name, date added
-      -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
-      -   [ ] quickly: use redux for deck list state
+        -   [ ] order list by name, date added
+        -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+        -   [ ] quickly: use redux for deck list state
 
     -   [ ] review screen
-      -   [ ] the "MW" shows a card goes bigger at bottom
+        -   [ ] the "MW" shows a card goes bigger at bottom
 
     -   [ ] general ui
-      -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
-      -   [ ] file help
-          - [ ] use same circle arrow on flip card
-          - [ ] animation when changing help pages
-          - [ ] quick attempt: swipe between help pages
-      -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
-      -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
+        -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
+        -   [ ] file help
+            - [ ] use same circle arrow on flip card
+            - [ ] animation when changing help pages
+            - [ ] quick attempt: swipe between help pages
+        -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
+        -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
 
     -   [ ] android app icon needs to come down 2 pixels i think
 
