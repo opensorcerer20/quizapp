@@ -131,40 +131,31 @@ itemMenuButton: {
     -   [x] keyboard covering textbox
     -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
 
-    -   [ ] education: make available for tablets
-      -   [ ] ui
-        -   [ ] use similar idea to "mobile first": if screen width > ?, show more columns
-        -   [ ] 4-6 cards, 2-3 per row
-        -   [ ] in quiz mode, 1 row, 3 cards with responses below
-        -   [ ] what about "reverse" and "turn off"?
-        -   [ ] card nav should be centered at bottom
-        -   [ ] get teacher feedback on a figma sketch of card display for tablet
+    -   [ ] deck screen
+      -   [ ] delete questions for a deck
 
-    -   [ ] delete questions for a deck
-    -   [ ] edit questions for a deck (using addquestion)
-
-    -   [ ] back up to storage
-        -   [ ] needed because with adding questions, files no longer have all questions
+    -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
 
     -   [ ] language support
-    -   [ ] import big csv/txt file into smaller decks?
-    -   [ ] multi file select
-    -   [ ] order list by name, date added
-    -   [ ] quickly: quiz mode
-    -   [ ] quickly: use redux for deck list state
-    -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
-    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
 
-    -   [ ] file help
-        - [ ] animation when changing help pages
-        - [ ] swipe between help pages
+    -   [ ] deck list
+      -   [ ] order list by name, date added
+      -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+      -   [ ] quickly: use redux for deck list state
 
-    -   [ ] the "MW" shows a card goes bigger at bottom
-    -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
-    -   [ ] pressing android back button on new deck discards form
-    -   [ ] color blind mode (ouch)
-    -   [ ] app icon needs to come down 2 pixels i think
-    -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
+    -   [ ] review screen
+      -   [ ] the "MW" shows a card goes bigger at bottom
+
+    -   [ ] general ui
+      -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
+      -   [ ] file help
+          - [ ] use same circle arrow on flip card
+          - [ ] animation when changing help pages
+          - [ ] quick attempt: swipe between help pages
+      -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
+      -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
+
+    -   [ ] android app icon needs to come down 2 pixels i think
 
 - [ ] llc
 
@@ -183,6 +174,8 @@ itemMenuButton: {
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
     -   [ ] tip button (https://buymeacoffee.com/)
 
+- [ ] last chance for changes
+
 - [ ] app store page
     -   [ ] link to repository
     -   [ ] instructions to build
@@ -190,21 +183,31 @@ itemMenuButton: {
 -   [ ] launch 1.0
 
 
+## Planned future dev
+
+-   quiz mode
+-   audio playback
+-   reorder deck list
+-   continuous (full random) mode
+-   tablet mode (multiple cards)
+-   education enhancements
+-   parent lock
+-   edit questions for a deck (using addquestion)
+
 ## Possible future dev
 
--   new feature: quiz mode
--   new feature: audio playback
--   reorder deck list
 -   make new deck from existing deck
 -   custom card themes
 -   swipe to next card ("swipe gesture" plus animation)
--   mode select: "continuous (full random)"
 -   persist mode select
--   new mode: show all cards at once
--   ? load Google Drive spreadsheet
+-   show all cards at once
+-   load Google Drive spreadsheet
 -   Questions with random content with a variable and its resolver
 -   record question/answer via microphone
--   new feature: parent mode
+-   parent mode
+-   import big csv/txt file into smaller decks
+-   multi file select
+-   color blind mode
 
 ## Completed Roadmap Development
 <details>
