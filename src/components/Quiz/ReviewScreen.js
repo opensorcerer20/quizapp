@@ -4,15 +4,13 @@ import { difference } from "lodash";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
 
-import { SAFE_WIDTH, TUTORIAL_SHOWN_KEY } from "../../common/constants";
-import { checkIfExists, setFlag } from "../../common/fileLib";
+import { SAFE_WIDTH } from "../../common/constants";
 import { getRandomInt, getScheme } from "../../common/util";
 import { DeckNav } from "../Deck/DeckNav";
 import DeckTitle from "../Deck/DeckTitle";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { useTheme } from "../Providers/ThemeProvider";
-import TutorialModal from "../TutorialModal";
 
 export const QUESTION_FIRST = "qtoa";
 export const ANSWER_FIRST = "atoq";
@@ -20,7 +18,6 @@ export const ANSWER_FIRST = "atoq";
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
   const [showFirst, setShowFirst] = useState(QUESTION_FIRST);
   const [noEnabledQs, setNoEnabledQs] = useState(false);
-  const [showTutorial, setShowTutorial] = useState(false);
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -93,11 +90,6 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   };
 
-  const dismissTutorial = (value) => {
-    setShowTutorial(value);
-    setFlag(TUTORIAL_SHOWN_KEY, true);
-  };
-
   const hasQuestionData = !noEnabledQs && !!currentState.currentQuestion.q;
   const currentQuestionStateFilter = currentState?.currentQuestion?.id
     ? currentDeckQuestionData.filter((question) => question.id === currentState.currentQuestion.id)
@@ -109,11 +101,6 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     if (currentDeck && Array.isArray(currentDeckQuestionData) && currentDeckQuestionData.length > 0) {
       resetQuestionBag(true);
     }
-    const asyncCall = async () => {
-      const value = await checkIfExists(TUTORIAL_SHOWN_KEY);
-      setShowTutorial(!value);
-    };
-    asyncCall();
   }, []);
 
   // console.log("showtutorial " + JSON.stringify(showTutorial));
@@ -124,18 +111,27 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
         <View style={[styles.container]}>
           <DeckTitle deckName={currentDeck.name} scheme={scheme} />
           <View style={styles.switchContainer}>
-            <Text style={{ marginHorizontal: "auto", fontSize: 18, fontWeight: "bold" }}>Show First:</Text>
             <SegmentedButtons
               value={showFirst}
               onValueChange={setShowFirst}
               buttons={[
                 {
                   value: QUESTION_FIRST,
-                  label: "Question",
+                  label: "Q -> A",
+                  style: {
+                    backgroundColor:
+                      showFirst === QUESTION_FIRST ? scheme.buttonBg.backgroundColor : scheme.disabled.backgroundColor,
+                    color: scheme.buttonTxt.color,
+                  },
                 },
                 {
                   value: ANSWER_FIRST,
-                  label: "Answer",
+                  label: "A -> Q",
+                  style: {
+                    backgroundColor:
+                      showFirst === ANSWER_FIRST ? scheme.buttonBg.backgroundColor : scheme.disabled.backgroundColor,
+                    color: scheme.buttonTxt.color,
+                  },
                 },
               ]}
             />
@@ -187,7 +183,6 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
           </View>
         </View>
       )}
-      <TutorialModal showModal={showTutorial} setShowModal={dismissTutorial} />
     </>
   );
 };
