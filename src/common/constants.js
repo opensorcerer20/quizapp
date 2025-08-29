@@ -11,8 +11,8 @@ export const MAX_DECKS = 20;
 export const MAX_QUESTIONS = 50;
 
 export const MAX_CHAR_LIMIT_XXL = 10;
-export const MAX_CHAR_LIMIT_XL = 60;
-export const MAX_CHAR_LIMIT_L = 90;
+export const MAX_CHAR_LIMIT_XL = 40;
+export const MAX_CHAR_LIMIT_L = 80;
 export const MAX_CHAR_LIMIT = 120;
 
 export const VIEWS = {

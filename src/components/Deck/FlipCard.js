@@ -223,21 +223,21 @@ const styles = StyleSheet.create({
   },
   cardTypeText: {
     color: "black",
-    fontSize: 16,
+    fontSize: Platform.OS === "ios" ? 16 : 14,
     paddingRight: 10,
   },
   cardText: {
     color: "black",
-    fontSize: 12,
+    fontSize: Platform.OS === "ios" ? 16 : 14,
   },
   l: {
-    fontSize: 24,
+    fontSize: Platform.OS === "ios" ? 24 : 20,
   },
   xl: {
-    fontSize: 32,
+    fontSize: Platform.OS === "ios" ? 32 : 28,
   },
   xxl: {
-    fontSize: 40,
+    fontSize: Platform.OS === "ios" ? 40 : 32,
   },
   card: {
     flex: 1,
