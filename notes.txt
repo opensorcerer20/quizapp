@@ -45,8 +45,6 @@ scheme in app.json must be ALL LOWER CASE and in an array like ["com.opensorcere
 
 first time...
 
-make package com.appname.appname (as opposed to com.username.appname)
-
 if doing a new version of an already installed app...
 - change version on app.json
 - might need package.json version change too
