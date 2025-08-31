@@ -134,10 +134,11 @@ itemMenuButton: {
     -   [x] allow commas in csv
         -   [ ] ~~csv-parse library: https://csv.js.org/parse/examples/file_interaction/~~
         -   [ ] ~~lightweight parser: https://github.com/rufuspollock/csv.js~~
-        -   [x] use papa parse
+        -   [ ] ~~use papa parse~~
+        -   [x] use ai generated parser
 
-    -   [ ] deck screen
-        -   [ ] delete questions for a deck
+    -   [x] deck screen
+        -   [x] delete questions for a deck
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
 

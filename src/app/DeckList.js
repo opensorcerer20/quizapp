@@ -363,13 +363,13 @@ export const DeckList = () => {
                 handleDeleteClick={handleDeleteClick}
               />
             </QuizModal>
-            <QuizModal modalVisible={deleteDeckId !== null} handleModalClickAway={handleDeleteCancelClick}>
-              <ConfirmDeleteModal
-                scheme={scheme}
-                handleCancelClick={handleDeleteCancelClick}
-                handleConfirmClick={handleConfirmClick}
-              />
-            </QuizModal>
+            <ConfirmDeleteModal
+              modalVisible={deleteDeckId !== null}
+              handleModalClickAway={handleDeleteCancelClick}
+              scheme={scheme}
+              handleCancelClick={handleDeleteCancelClick}
+              handleConfirmClick={handleConfirmClick}
+            />
           </View>
         )}
         {deckListData.length < 1 && (

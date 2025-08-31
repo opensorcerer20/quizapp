@@ -52,9 +52,11 @@ if doing a new version of an already installed app...
 if "dont have permission"
 - remove extra/eas/projectid from app.json
 
--   for ios build
+-   for ios build (internal distribution)
+    - REQUIRES DEVELOPMENT MODE
     - eas device create
-    - install (policy?) on device
+    -- ? is it as easy as following the url and registering?
+    --- yes, just have to follow instructions: download profile, go to settings, install
     - eas build preview
     - scan qr code to install via itunes
 
