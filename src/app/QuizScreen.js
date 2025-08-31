@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { useLocalSearchParams } from "expo-router";
-import { Text } from "react-native";
 
 import { loadDeckData, updateDeckQuestionData } from "../common/fileLib";
 import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import { ReviewScreen } from "../components/Quiz/ReviewScreen";
 import ScreenTemplate from "../components/ScreenTemplate";
+import TextNormal from "../components/TextNormal";
 
 /*
 later there will be a quiz screen etc
@@ -62,12 +62,12 @@ const QuizScreen = () => {
               updateQuestionData={updateQuestionData}
             />
           )}
-          {!currentDeck && <Text style={[scheme.txt, { padding: 10 }]}>Loading...</Text>}
+          {!currentDeck && <TextNormal style={[scheme.txt, { padding: 10 }]}>Loading...</TextNormal>}
         </ScreenTemplate>
       </>
     );
   }
-  return <Text style={[scheme.txt, { padding: 10 }]}>Error: no screen specified</Text>;
+  return <TextNormal style={[scheme.txt, { padding: 10 }]}>Error: no screen specified</TextNormal>;
 };
 
 export default QuizScreen;

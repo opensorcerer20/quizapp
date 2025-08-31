@@ -1,9 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_WIDTH } from "../common/constants";
+import TextNormal from "./TextNormal";
 
 export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
 
@@ -71,7 +72,7 @@ const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
     <View style={{ padding: 15 }}>
       <View style={{ width: HELP_MODAL_WIDTH }}>
         <View style={styles.helpHeader}>
-          <Text style={[styles.helpTitle, scheme.txt, { flex: 11 }]}>{title}</Text>
+          <TextNormal style={[styles.helpTitle, scheme.txt, { flex: 11 }]}>{title}</TextNormal>
           <Pressable onPress={() => setShowModal(false)}>
             {/* @todo use space-between */}
             {/* @todo top of help with title and x should be extracted */}
@@ -86,13 +87,13 @@ const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
         {items.length > 0 &&
           items.map((item, key) => (
             <View key={key} style={styles.helpItem}>
-              <Text style={[styles.helpParaIcon, scheme.txt]}>{item.icon}</Text>
-              <Text style={[styles.helpPara, scheme.txt]}>{item.text}</Text>
+              <TextNormal style={[styles.helpParaIcon, scheme.txt]}>{item.icon}</TextNormal>
+              <TextNormal style={[styles.helpPara, scheme.txt]}>{item.text}</TextNormal>
             </View>
           ))}
         {items.length === 0 && (
           <View>
-            <Text>Unknown help type</Text>
+            <TextNormal>Unknown help type</TextNormal>
           </View>
         )}
       </View>

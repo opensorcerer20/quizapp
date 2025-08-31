@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -12,6 +12,7 @@ import FileHelpModal from "./FileHelpModal";
 import HelpMenuModal from "./HelpMenuModal";
 import { useTheme } from "./Providers/ThemeProvider";
 import { useLocale } from "./Providers/TranslationProvider";
+import TextNormal from "./TextNormal";
 
 const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
   const { getLocalString } = useLocale();
@@ -58,7 +59,7 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         </View>
 
         <View style={{ flex: 8 }}>
-          <Text style={scheme.txt}>{title || getLocalString("Flashcard Library")}</Text>
+          <TextNormal style={scheme.txt}>{title || getLocalString("Flashcard Library")}</TextNormal>
         </View>
         <View style={[{ flex: 2, alignItems: "flex-end", marginRight: 15 }, buttonFlex]}>
           <Pressable style={showHelpButton ? { flex: 1 } : {}} onPress={toggleTheme}>

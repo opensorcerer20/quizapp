@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { FAB } from "react-native-paper";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -14,6 +14,7 @@ import ConfirmDeleteModal from "../components/Deck/ConfirmDeleteModal";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
+import TextNormal from "../components/TextNormal";
 
 const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
@@ -63,14 +64,14 @@ const DeckScreen = () => {
           />
         </Pressable>
         <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH * 0.7, flex: 10 }}>
-          <Text style={[scheme.txt, styles.itemText]}>
-            <Text style={{ fontWeight: "bold" }}>Q: </Text>
+          <TextNormal style={[scheme.txt, styles.itemText]}>
+            <TextNormal style={{ fontWeight: "bold" }}>Q: </TextNormal>
             {formatCardText(`${item.q}`)}
-          </Text>
-          <Text style={[scheme.txt, styles.itemText]}>
-            <Text style={{ fontWeight: "bold" }}>A: </Text>
+          </TextNormal>
+          <TextNormal style={[scheme.txt, styles.itemText]}>
+            <TextNormal style={{ fontWeight: "bold" }}>A: </TextNormal>
             {formatCardText(`${item.a}`)}
-          </Text>
+          </TextNormal>
         </View>
         <Pressable onPress={() => setDeleteCardId(item.id)}>
           <View>
@@ -159,8 +160,8 @@ const DeckScreen = () => {
                   style={[globalStyles.button, scheme.buttonBg, styles.setAllButton]}
                   onPress={onPress}
                 >
-                  <Text style={{ color }}>{icon}</Text>
-                  <Text style={{ color, paddingHorizontal: 5 }}>{label}</Text>
+                  <TextNormal style={{ color }}>{icon}</TextNormal>
+                  <TextNormal style={{ color, paddingHorizontal: 5 }}>{label}</TextNormal>
                 </Pressable>
               ))}
             </View>
@@ -179,7 +180,7 @@ const DeckScreen = () => {
             />
           </>
         )}
-        {!currentDeckData && <Text style={scheme.txt}>Loading question data...</Text>}
+        {!currentDeckData && <TextNormal style={scheme.txt}>Loading question data...</TextNormal>}
         <FAB
           icon="plus"
           style={[globalStyles.fab, canAddQuestion ? scheme.buttonBg : scheme.disabled]}

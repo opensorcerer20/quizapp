@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -9,6 +9,7 @@ import { SAFE_WIDTH } from "../../common/constants";
 import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 import { ANSWER_FIRST } from "../Quiz/ReviewScreen";
+import TextNormal from "../TextNormal";
 
 /**
  * based on https://docs.swmansion.com/react-native-reanimated/examples/flipCard/
@@ -36,7 +37,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         },
       ]}
     >
-      <Text
+      <TextNormal
         style={[
           { fontWeight: "bold" },
           headerTextStyle,
@@ -46,11 +47,11 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         ]}
       >
         {cardType === CARDTYPE_ANSWER ? "Answer" : "Question"}
-      </Text>
+      </TextNormal>
     </View>
   );
 
-  // const arrowElement = <Text style={{ marginTop: "auto", marginBottom: "auto" }}>Y</Text>;
+  // const arrowElement = <TextNormal style={{ marginTop: "auto", marginBottom: "auto" }}>Y</TextNormal>;
   const makeArrow = (direction = "right") => {
     direction = direction === "left" ? "left" : "right";
     return (
@@ -96,7 +97,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         >
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
-            <Text style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</Text>
+            <TextNormal style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</TextNormal>
           </View>
           {makeArrow("right")}
         </View>
@@ -105,7 +106,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         <View style={[cardStyle, cardBg]}>
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
-            <Text style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</Text>
+            <TextNormal style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</TextNormal>
           </View>
         </View>
       )}

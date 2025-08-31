@@ -1,6 +1,7 @@
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import { useLocale } from "../Providers/TranslationProvider";
+import TextNormal from "../TextNormal";
 
 const ConfirmDelete = ({ scheme, handleCancelClick, handleConfirmClick }) => {
   const { getLocalString } = useLocale();
@@ -9,16 +10,16 @@ const ConfirmDelete = ({ scheme, handleCancelClick, handleConfirmClick }) => {
     <View style={[styles.container, styles.centeredView]}>
       <View style={[styles.modalView, scheme.bgAccent3, scheme.border]}>
         <View>
-          <Text style={[scheme.txt, { paddingBottom: 10 }]}>
+          <TextNormal style={[scheme.txt, { paddingBottom: 10 }]}>
             {getLocalString("Are you sure you want to delete this deck?")}
-          </Text>
+          </TextNormal>
         </View>
         <View style={{ flex: 1, flexDirection: "row" }}>
           <Pressable style={[styles.button, scheme.disabled]} onPress={handleCancelClick}>
-            <Text style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Cancel")}</Text>
+            <TextNormal style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Cancel")}</TextNormal>
           </Pressable>
           <Pressable style={[styles.button, scheme.buttonBg]} onPress={handleConfirmClick}>
-            <Text style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Confirm")}</Text>
+            <TextNormal style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Confirm")}</TextNormal>
           </Pressable>
         </View>
       </View>

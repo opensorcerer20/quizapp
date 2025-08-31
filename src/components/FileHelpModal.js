@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Image } from "expo-image";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 //import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -9,6 +9,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
 import QuizModal from "./QuizModal";
+import TextNormal from "./TextNormal";
 
 const MODAL_WIDTH = SAFE_WIDTH * 0.9;
 const SAFE_MODAL_WIDTH = MODAL_WIDTH * 0.95;
@@ -24,9 +25,9 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         size={24}
         color={scheme.txt.color}
       />
-      <Text style={[scheme.txt, { flex: 1 }]}>
+      <TextNormal style={[scheme.txt, { flex: 1 }]}>
         TXT files should alternate between question (odd lines) and answers (even lines)
-      </Text>
+      </TextNormal>
       <Image
         source={require("../../assets/txt_example.png")}
         style={{ flex: 1, width: 430, height: 144, alignSelf: "center", transform: [{ scale: 0.55 }] }}
@@ -39,9 +40,9 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         size={24}
         color={scheme.txt.color}
       />
-      <Text style={[scheme.txt, { flex: 1 }]}>
+      <TextNormal style={[scheme.txt, { flex: 1 }]}>
         CSV files should be saved as CSV files, with questions in column 1 and answers in column 2
-      </Text>
+      </TextNormal>
       <Image
         source={require("../../assets/csv_example.png")}
         style={{ flex: 1, width: 376, height: 171, alignSelf: "center", transform: [{ scale: 0.6 }] }}
@@ -71,7 +72,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
             { flex: 2, width: SAFE_MODAL_WIDTH + 10, marginHorizontal: "auto", marginTop: 5, padding: 10 },
           ]}
         >
-          <Text style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>File Help</Text>
+          <TextNormal style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>File Help</TextNormal>
           {/* @todo use space-between */}
           <Pressable onPress={() => setShowModal(false)}>
             <FontAwesome6

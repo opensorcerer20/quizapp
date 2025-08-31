@@ -1,6 +1,7 @@
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import QuizModal from "./QuizModal";
+import TextNormal from "./TextNormal";
 
 const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme }) => {
   return (
@@ -20,12 +21,12 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
     >
       <Pressable onPress={onClickNew}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
-          <Text style={[scheme.txt, { fontSize: 16 }]}>Make new deck</Text>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>Make new deck</TextNormal>
         </View>
       </Pressable>
       <Pressable onPress={onClickHelp}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
-          <Text style={[scheme.txt, { fontSize: 16 }]}>Deck file help</Text>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>Deck file help</TextNormal>
         </View>
       </Pressable>
     </QuizModal>

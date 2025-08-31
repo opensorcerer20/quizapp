@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { router, useLocalSearchParams } from "expo-router";
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, TextInput, View } from "react-native";
 
 import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED } from "../common/constants";
 import { loadDeckFromStorage, loadQuestionsFromStorage, updateDeckQuestionData } from "../common/fileLib";
@@ -12,6 +12,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
+import TextNormal from "../components/TextNormal";
 
 const AddQuestion = () => {
   const { deckId } = useLocalSearchParams();
@@ -81,7 +82,7 @@ const AddQuestion = () => {
       {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <View>
-          <Text style={styles.label}>Question</Text>
+          <TextNormal style={styles.label}>Question</TextNormal>
           <TextInput
             style={globalStyles.textField}
             placeholder="Question"
@@ -92,7 +93,7 @@ const AddQuestion = () => {
           />
         </View>
         <View>
-          <Text style={styles.label}>Answer</Text>
+          <TextNormal style={styles.label}>Answer</TextNormal>
           <TextInput
             style={globalStyles.textField}
             placeholder="Answer"

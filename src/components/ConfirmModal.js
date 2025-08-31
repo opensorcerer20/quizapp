@@ -1,7 +1,8 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { Modal, Pressable, StyleSheet, View } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
+import TextNormal from "./TextNormal";
 
 const ConfirmModal = ({
   scheme,
@@ -19,17 +20,17 @@ const ConfirmModal = ({
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>{message}</Text>
+          <TextNormal style={styles.modalText}>{message}</TextNormal>
           <View style={styles.buttonContainer}>
             <Pressable onPress={handleCancel} onLongPress={handleCancel} style={[globalStyles.button, scheme.disabled]}>
-              <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Cancel</Text>
+              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>Cancel</TextNormal>
             </Pressable>
             <Pressable
               onPress={handleConfirm}
               onLongPress={handleConfirm}
               style={[globalStyles.button, scheme.buttonBg]}
             >
-              <Text style={[scheme.buttonTxt, { fontSize: 16 }]}>Discard</Text>
+              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>Discard</TextNormal>
             </Pressable>
           </View>
         </View>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -11,6 +11,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import { importNewDeck } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
+import TextNormal from "../components/TextNormal";
 
 const NewDeck = () => {
   const [title, setTitle] = useState("");
@@ -63,9 +64,9 @@ const NewDeck = () => {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}>
-          <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
+          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
             Add a short descriptive title for the new deck.
-          </Text>
+          </TextNormal>
           <TextInput
             style={globalStyles.textField}
             placeholder="Deck Title"
@@ -74,9 +75,9 @@ const NewDeck = () => {
             onChangeText={setTitle}
             maxLength={64}
           />
-          <Text style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
+          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
             Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc
-          </Text>
+          </TextNormal>
           <TextInput
             style={styles.textInput}
             placeholder={"Question 1\nAnswer 1\nQuestion 2\nAnswer 2"}

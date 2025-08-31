@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { difference } from "lodash";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
 
 import { SAFE_WIDTH } from "../../common/constants";
@@ -11,6 +11,7 @@ import DeckTitle from "../Deck/DeckTitle";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { useTheme } from "../Providers/ThemeProvider";
+import TextNormal from "../TextNormal";
 
 export const QUESTION_FIRST = "qtoa";
 export const ANSWER_FIRST = "atoq";
@@ -150,10 +151,10 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             onResetClick={() => resetQuestionBag(true)}
             onStartOverClick={() => resetQuestionBag(false)}
           />
-          <Text style={[scheme.txt, styles.cardCounter]}>
+          <TextNormal style={[scheme.txt, styles.cardCounter]}>
             Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
             {currentState.originalBag.length}
-          </Text>
+          </TextNormal>
           {/* <View style={styles.switchContainer}>
             <StyledSwitch
               theme={theme}
@@ -176,10 +177,10 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
       {noEnabledQs && (
         <View style={styles.container}>
           <View style={[scheme.bgAntiPrimary, styles.noQContainer]}>
-            <Text style={styles.noQText}>Sorry, no questions are enabled for this deck.</Text>
-            <Text style={styles.noQText}>
+            <TextNormal style={styles.noQText}>Sorry, no questions are enabled for this deck.</TextNormal>
+            <TextNormal style={styles.noQText}>
               Please go to the deck View from the main Deck List and enable at least one card from this deck.
-            </Text>
+            </TextNormal>
           </View>
         </View>
       )}

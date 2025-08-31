@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+
+import TextNormal from "../TextNormal";
 
 const DeckTitle = ({ deckName, scheme }) => {
   return (
     <View style={{ alignContent: "center", padding: 5 }}>
       <View style={{ alignItems: "center" }}>
-        <Text style={[scheme.bgAccent3, scheme.txt, styles.title]}>Deck: {deckName}</Text>
+        <TextNormal style={[scheme.bgAccent3, scheme.txt, styles.title]}>Deck: {deckName}</TextNormal>
       </View>
     </View>
   );

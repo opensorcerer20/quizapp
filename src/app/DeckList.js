@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
 import { router, useLocalSearchParams, usePathname } from "expo-router";
-import { Dimensions, FlatList, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
 import { Button, FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -18,6 +18,7 @@ import FileHelpModal from "../components/FileHelpModal";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import QuizModal from "../components/QuizModal";
 import ScreenTemplate from "../components/ScreenTemplate";
+import TextNormal from "../components/TextNormal";
 
 const emptyImportSource = {
   mimeType: null,
@@ -180,7 +181,7 @@ export const DeckList = () => {
             scheme.border,
           ]}
         >
-          <Text
+          <TextNormal
             style={[
               styles.itemText,
               {
@@ -189,7 +190,7 @@ export const DeckList = () => {
             ]}
           >
             {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
-          </Text>
+          </TextNormal>
           <View style={styles.itemMenuButton}>
             <Button
               textColor={renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color}
@@ -330,7 +331,7 @@ export const DeckList = () => {
       <View style={styles.container}>
         {deckListData.length > 0 && (
           <View style={{ padding: 10 }}>
-            <Text style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</Text>
+            <TextNormal style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</TextNormal>
             <FlatList
               data={deckListData}
               renderItem={renderItem}
@@ -373,7 +374,7 @@ export const DeckList = () => {
           </View>
         )}
         {deckListData.length < 1 && (
-          <Text style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</Text>
+          <TextNormal style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</TextNormal>
         )}
         {showFab && (
           <>

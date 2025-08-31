@@ -140,8 +140,6 @@ itemMenuButton: {
     -   [x] deck screen
         -   [x] delete questions for a deck
 
-    -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
-
     -   [ ] language support
 
     -   [ ] deck list
@@ -157,34 +155,36 @@ itemMenuButton: {
         -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
         -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
         -   [ ] file help
-            - [ ] use same circle arrow on flip card
-            - [ ] animation when changing help pages
-            - [ ] quick attempt: swipe between help pages
+            -   [ ] use same circle arrow on flip card
+            -   [ ] animation when changing help pages
+            -   [ ] quick attempt: swipe between help pages
         -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
         -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
 
     -   [ ] android app icon needs to come down 2 pixels i think
 
-- [ ] llc
+    -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
 
-- [ ] set up ios app on TestFlight
-    - [ ] need po box
-    - [ ] need llc
-    - [ ] need DUNS (unique id for app store) and EIN (for tax purposes)
-    - [ ] set up organization account on apple app store (which hides developer name)
-- [ ] set up app on google play beta
+-   [ ] llc
 
-- [ ] confirm my personal info is hidden
+-   [ ] set up ios app on TestFlight
+    -   [ ] need po box
+    -   [ ] need llc
+    -   [ ] need DUNS (unique id for app store) and EIN (for tax purposes)
+    -   [ ] set up organization account on apple app store (which hides developer name)
+-   [ ] set up app on google play beta
 
-- [ ] open beta
+-   [ ] confirm my personal info is hidden
 
-- [ ] add tip to menu (needs llc name)
+-   [ ] open beta
+
+-   [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
     -   [ ] tip button (https://buymeacoffee.com/)
 
-- [ ] last chance for changes
+-   [ ] last chance for changes
 
-- [ ] app store page
+-   [ ] app store page
     -   [ ] link to repository
     -   [ ] instructions to build
 

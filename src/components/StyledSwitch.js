@@ -1,6 +1,7 @@
-import { Platform, Pressable, StyleSheet, Switch, Text, View } from "react-native";
+import { Platform, Pressable, StyleSheet, Switch, View } from "react-native";
 
 import { getBgScheme, getScheme } from "../common/util";
+import TextNormal from "./TextNormal";
 
 export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, labelTxt = null }) => {
   const scheme = getScheme(theme);
@@ -20,7 +21,7 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
       />
       {labelTxt !== null && (
         <Pressable onPress={onClick} onLongPress={onClick}>
-          <Text style={[txtStyle, styles.switchTxt]}>{labelTxt}</Text>
+          <TextNormal style={[txtStyle, styles.switchTxt]}>{labelTxt}</TextNormal>
         </Pressable>
       )}
     </View>
