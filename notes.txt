@@ -72,5 +72,4 @@ if "dont have permission"
 --- app.json
 --- git tag -a beta-v1.x -m "Tagging message"
 --- git push origin --tags
--- build android
--- build ios
+-- npx expo prebuild --clean
