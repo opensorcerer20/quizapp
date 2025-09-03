@@ -67,6 +67,10 @@ if "dont have permission"
 -- npx expo prebuild --clean
 
 - for new build
--- npx expo prebuild --clean
+-- UPDATE VERSION FIRST
+--- package.json
+--- app.json
+--- git tag -a beta-v1.x -m "Tagging message"
+--- git push origin --tags
 -- build android
 -- build ios

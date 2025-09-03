@@ -140,6 +140,18 @@ itemMenuButton: {
     -   [x] deck screen
         -   [x] delete questions for a deck
 
+    -   [ ] test cases
+        -   [ ] note all recent changes needed for beta
+
+    -   [ ] move deck list item out of deck list
+        -   [ ] deck list item
+        -   [ ] deck list item menu
+
+    -   [ ] keyboard covers buttons on new deck
+
+    -   [ ] STOP... what to do before launch?
+        -   [ ] QA work
+
     -   [ ] language support
 
     -   [ ] deck list
@@ -152,18 +164,29 @@ itemMenuButton: {
         -   [ ] the "MW" shows a card goes bigger at bottom
 
     -   [ ] general ui
+        -   [ ] constants for font size
         -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
         -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
         -   [ ] file help
             -   [ ] use same circle arrow on flip card
             -   [ ] animation when changing help pages
             -   [ ] quick attempt: swipe between help pages
-        -   [ ] theme does not respond to very first click with no setting, so no default is set upon launch
+        -   [ ] theme
+            -   [ ] detect system theme
+            -   [ ] does not respond to very first click with no setting, so no default is set upon launch
         -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
+        -   [ ] eyes for visibility need emphasis
+        -   [ ] ios
+            -   [ ] rename deck popup has transparency
 
     -   [ ] android app icon needs to come down 2 pixels i think
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
+    -   [ ] export decks and/or point to backup file
+
+    -   [ ] set minimum sdk versions
+        -   [ ] android
+        -   [ ] ios
 
 -   [ ] llc
 
