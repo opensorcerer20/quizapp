@@ -4,27 +4,22 @@ import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
 import { FAB } from "react-native-paper";
 
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-
 import { MAX_QUESTIONS, SAFE_WIDTH } from "../common/constants";
 import { loadDeckData, saveDeckData, updateDeckQuestionData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
-import { formatCardText, getScheme } from "../common/util";
-import ConfirmDeleteModal from "../components/Deck/ConfirmDeleteModal";
+import { getScheme } from "../common/util";
+import DeckScreenItem from "../components/Deck/DeckScreenItem";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
-import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
 const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
-  const { getLocalString } = useLocale();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
-  const [deleteCardId, setDeleteCardId] = useState(null);
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const scheme = getScheme(theme);
 
   const onAddQuestion = () => {
@@ -51,38 +46,12 @@ const DeckScreen = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View
-        key={item.id}
-        style={[scheme.bgAccent3, styles.item, { borderColor: scheme.txt.color, flexDirection: "row" }]}
-      >
-        <Pressable
-          style={{ flex: 1, paddingHorizontal: item.disabled ? 10 : 12, maxWidth: 50 }}
-          onPress={() => onVisibilityClick(!item?.disabled, item.id)}
-          onLongPress={() => onVisibilityClick(!item?.disabled, item.id)}
-        >
-          <FontAwesome6
-            name={item.disabled ? "eye-slash" : "eye"}
-            size={20}
-            color={scheme.txt.color}
-            style={styles.menuIcon}
-          />
-        </Pressable>
-        <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH * 0.7, flex: 10 }}>
-          <TextNormal style={[scheme.txt, styles.itemText]}>
-            <TextNormal style={{ fontWeight: "bold" }}>Q: </TextNormal>
-            {formatCardText(`${item.q}`)}
-          </TextNormal>
-          <TextNormal style={[scheme.txt, styles.itemText]}>
-            <TextNormal style={{ fontWeight: "bold" }}>A: </TextNormal>
-            {formatCardText(`${item.a}`)}
-          </TextNormal>
-        </View>
-        <Pressable onPress={() => setDeleteCardId(item.id)}>
-          <View>
-            <FontAwesome6 name="trash" size={20} color={scheme.txt.color} style={styles.menuIcon} />
-          </View>
-        </Pressable>
-      </View>
+      <DeckScreenItem
+        item={item}
+        scheme={scheme}
+        onVisibilityClick={onVisibilityClick}
+        handleDeleteConfirmClick={handleDeleteConfirmClick}
+      />
     );
   };
 
@@ -100,15 +69,10 @@ const DeckScreen = () => {
     }
   };
 
-  const handleDeleteCancelClick = () => {
-    setDeleteCardId(null);
-  };
-
-  const handleDeleteConfirmClick = async () => {
+  const handleDeleteConfirmClick = async (deleteCardId) => {
     const newQuestions = currentDeckData.questions.filter((question) => question.id !== deleteCardId);
     await updateDeckQuestionData(currentDeck.id, newQuestions);
     await loadDeckDataFromStorage();
-    setDeleteCardId(null);
   };
 
   // specific to expo router
@@ -182,14 +146,6 @@ const DeckScreen = () => {
               style={{ width: "100%" }}
               data={currentDeckData.questions}
               renderItem={renderItem}
-            />
-            <ConfirmDeleteModal
-              modalVisible={deleteCardId !== null}
-              handleModalClickAway={handleDeleteCancelClick}
-              scheme={scheme}
-              handleCancelClick={handleDeleteCancelClick}
-              handleConfirmClick={handleDeleteConfirmClick}
-              message={getLocalString("Are you sure you want to delete this card?")}
             />
           </>
         )}

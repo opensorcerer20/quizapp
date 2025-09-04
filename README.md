@@ -107,38 +107,27 @@ itemMenuButton: {
     -   [x] deck screen
         -   [x] delete questions for a deck
 
-    -   [ ] test cases
-        -   [ ] note all recent changes needed for beta
-
     -   [ ] move deck list item out of deck list
         -   [x] deck list item
         -   [x] deck list item menu
         -   [ ] rename deck when new deck added
 
-    -   [ ] keyboard covers buttons on new deck
+    -   [x] STOP... what work should be done before launch, and what should wait
 
-    -   [ ] STOP... what to do before launch?
-        -   [ ] QA work
+    -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
 
-    -   [ ] language support
+    -   [ ] test cases
+        -   [ ] note all recent changes needed for beta
 
     -   [ ] deck list
         -   [ ] dark mode odd lighter shade for name and dots
         -   [ ] order list by name, date added
         -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
-        -   [ ] quickly: use redux for deck list state
 
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom
 
     -   [ ] general ui
-        -   [ ] constants for font size
-        -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
-        -   [ ] use white overlay for dark theme to indicate height (instead of shadows)
-        -   [ ] file help
-            -   [ ] use same circle arrow on flip card
-            -   [ ] animation when changing help pages
-            -   [ ] quick attempt: swipe between help pages
         -   [ ] theme
             -   [ ] detect system theme
             -   [ ] does not respond to very first click with no setting, so no default is set upon launch
@@ -148,13 +137,16 @@ itemMenuButton: {
             -   [ ] rename deck popup has transparency
         -   [ ] FAB covers right side of items
             -   [ ] option 1: empty space below list
-            -   [ ] option 2: on scroll down, remove add button (google search "expo on scroll down")
+            -   [ ] --> option 2: on scroll down, remove add button (google search "expo on scroll down")
+        -   [ ] keyboard covers buttons on new deck
+        -   [ ] constants for font size
+        -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
+
+    -   [x] deck screen item into separate component
 
     -   [ ] android app icon needs to come down 2 pixels i think
 
-    -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
-
-    -   [ ] export decks and/or point to backup file
+    -   [ ] language support?
 
     -   [ ] check @todos
 
@@ -178,6 +170,8 @@ itemMenuButton: {
     -   [ ] instructions to build
 
 -   [ ] open beta
+
+-   [ ] open beta fixes
 
 -   [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
@@ -215,6 +209,8 @@ itemMenuButton: {
 -   import big csv/txt file into smaller decks
 -   multi file select
 -   color blind mode
+-   export decks
+-   use redux for deck list state
 
 ## Completed Roadmap Development
 <details>
