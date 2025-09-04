@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
 import { FAB } from "react-native-paper";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -13,11 +13,13 @@ import { formatCardText, getScheme } from "../common/util";
 import ConfirmDeleteModal from "../components/Deck/ConfirmDeleteModal";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
+import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
 const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
+  const { getLocalString } = useLocale();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
   const [deleteCardId, setDeleteCardId] = useState(null);
@@ -35,14 +37,16 @@ const DeckScreen = () => {
   // sets either all checkboxes or specific checkbox "disabled" property
   const onVisibilityClick = (disabledValue, id = null) => {
     let newCurrentDeckData = JSON.parse(JSON.stringify(currentDeckData));
-    newCurrentDeckData.questions = newCurrentDeckData.questions.map((questionDatum) => {
-      if (!id || questionDatum.id === id) {
-        questionDatum.disabled = disabledValue;
-      }
-      return questionDatum;
-    });
-    saveDeckData(currentDeck.id, newCurrentDeckData);
-    setCurrentDeckData(newCurrentDeckData);
+    if (newCurrentDeckData.questions) {
+      newCurrentDeckData.questions = newCurrentDeckData.questions.map((questionDatum) => {
+        if (!id || questionDatum.id === id) {
+          questionDatum.disabled = disabledValue;
+        }
+        return questionDatum;
+      });
+      saveDeckData(currentDeck.id, newCurrentDeckData);
+      setCurrentDeckData(newCurrentDeckData);
+    }
   };
 
   const renderItem = ({ item }) => {
@@ -130,7 +134,8 @@ const DeckScreen = () => {
     }
   }, [deckId]);
 
-  const canAddQuestion = currentDeckData?.questions?.length < MAX_QUESTIONS;
+  const canAddQuestion = !currentDeckData?.questions?.length || currentDeckData.questions.length < MAX_QUESTIONS;
+  const questionsExist = currentDeckData && currentDeckData?.questions;
 
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
@@ -138,7 +143,14 @@ const DeckScreen = () => {
     <>
       <ScreenTemplate title={"Deck Settings"} hideButtons={true}>
         {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
-        {currentDeckData && (
+        {!questionsExist && (
+          <View style={styles.container}>
+            <TextNormal style={{ fontSize: Platform.OS === "ios" ? 20 : 16 }}>
+              There are no questions in this deck, add one with the add button below
+            </TextNormal>
+          </View>
+        )}
+        {questionsExist && (
           <>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
               {[
@@ -177,6 +189,7 @@ const DeckScreen = () => {
               scheme={scheme}
               handleCancelClick={handleDeleteCancelClick}
               handleConfirmClick={handleDeleteConfirmClick}
+              message={getLocalString("Are you sure you want to delete this card?")}
             />
           </>
         )}
@@ -193,6 +206,11 @@ const DeckScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: "90%",
+    marginHorizontal: "auto",
+    marginTop: 10,
+  },
   item: {
     width: "90%",
     flexDirection: "row",

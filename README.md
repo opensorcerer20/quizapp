@@ -178,6 +178,9 @@ itemMenuButton: {
         -   [ ] eyes for visibility need emphasis
         -   [ ] ios
             -   [ ] rename deck popup has transparency
+        -   [ ] FAB covers right side of items
+            -   [ ] option 1: empty space below list
+            -   [ ] option 2: on scroll down, remove add button (google search "expo on scroll down")
 
     -   [ ] android app icon needs to come down 2 pixels i think
 
@@ -199,6 +202,10 @@ itemMenuButton: {
 
 -   [ ] confirm my personal info is hidden
 
+-   [ ] app store page
+    -   [ ] link to repository
+    -   [ ] instructions to build
+
 -   [ ] open beta
 
 -   [ ] add tip to menu (needs llc name)
@@ -207,9 +214,7 @@ itemMenuButton: {
 
 -   [ ] last chance for changes
 
--   [ ] app store page
-    -   [ ] link to repository
-    -   [ ] instructions to build
+-   [ ] review popup: https://docs.expo.dev/versions/latest/sdk/storereview/
 
 -   [ ] launch 1.0
 

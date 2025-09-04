@@ -25,6 +25,12 @@ export const THEMES = {
   dark: "dark",
 };
 
+// @todo use later
+export const FONT_SIZES = {
+  ios: {},
+  android: {},
+};
+
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
 export const MIME_TYPE_TEXT = ["text/plain"];
 
@@ -98,5 +104,8 @@ export const LANGUAGE_LIBRARY = {
   },
   "Are you sure you want to delete this deck?": {
     en: "Are you sure you want to delete this deck?",
+  },
+  "Are you sure you want to delete this card?": {
+    en: "Are you sure you want to delete this card?",
   },
 };

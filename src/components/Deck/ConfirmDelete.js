@@ -3,7 +3,7 @@ import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { useLocale } from "../Providers/TranslationProvider";
 import TextNormal from "../TextNormal";
 
-const ConfirmDelete = ({ scheme, handleCancelClick, handleConfirmClick }) => {
+const ConfirmDelete = ({ scheme, handleCancelClick, handleConfirmClick, message = null }) => {
   const { getLocalString } = useLocale();
 
   return (
@@ -11,7 +11,7 @@ const ConfirmDelete = ({ scheme, handleCancelClick, handleConfirmClick }) => {
       <View style={[styles.modalView, scheme.bgAccent3, scheme.border]}>
         <View>
           <TextNormal style={[scheme.txt, { paddingBottom: 10 }]}>
-            {getLocalString("Are you sure you want to delete this deck?")}
+            {message ? message : getLocalString("Are you sure you want to delete this deck?")}
           </TextNormal>
         </View>
         <View style={{ flex: 1, flexDirection: "row" }}>
