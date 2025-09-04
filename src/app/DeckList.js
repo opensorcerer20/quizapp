@@ -2,21 +2,18 @@ import { useEffect, useState } from "react";
 
 import * as DocumentPicker from "expo-document-picker";
 import { router, useLocalSearchParams, usePathname } from "expo-router";
-import { Dimensions, FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
-import { Button, FAB, Portal } from "react-native-paper";
+import { FlatList, StyleSheet, View } from "react-native";
+import { FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED, SAFE_WIDTH } from "../common/constants";
+import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
-import { getBgScheme, getRandomInt, getScheme, sanitizeAll } from "../common/util";
-import ConfirmDeleteModal from "../components/Deck/ConfirmDeleteModal";
-import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "../components/Deck/DeckListMenu";
-import DeckRenameModal from "../components/Deck/DeckRenameModal";
-import { emptyDeck, getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
+import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import DeckListItem from "../components/Deck/DeckListItem";
+import { getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
 import FileHelpModal from "../components/FileHelpModal";
 import { useTheme } from "../components/Providers/ThemeProvider";
-import QuizModal from "../components/QuizModal";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
@@ -29,29 +26,16 @@ const emptyImportSource = {
 
 export const DeckList = () => {
   // AsyncStorage.clear();
-  const { width } = Dimensions.get("window");
 
   const [importSource, setImportSource] = useState(emptyImportSource);
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
-  const [menuState, setMenuState] = useState({
-    visible: false,
-    position: { top: 0, left: 0 },
-  });
-  const [deleteDeckId, setDeleteDeckId] = useState(null);
-  const [renameState, setRenameState] = useState({
-    deckId: null,
-    editingDeck: emptyDeck,
-    visible: false,
-    showCancel: false,
-  });
 
   const routeParams = useLocalSearchParams();
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
-  const schemeBg = getBgScheme(theme);
 
   const [fabOpen, setFabOpen] = useState(false);
   const onFABClick = ({ open }) => {
@@ -125,81 +109,9 @@ export const DeckList = () => {
     }
   };
 
-  const unSelectItem = () => {
-    setRenameState({ ...renameState, editingDeck: emptyDeck });
-    setMenuState({ ...menuState, visible: false });
-  };
-
-  const handleModalClickAway = () => {
-    unSelectItem();
-  };
-
-  const handleMenuPress = (event, item) => {
-    const { pageX, pageY } = event.nativeEvent;
-    const modalWidth = 100;
-    let modalX = Math.max(pageX - modalWidth, 0);
-    modalX = Math.min(SAFE_WIDTH - DECK_LIST_MENU_WIDTH, modalX);
-    setRenameState({ ...renameState, editingDeck: item });
-    setMenuState({ position: { top: pageY, left: modalX }, visible: true });
-  };
-
-  const handleViewClick = () => {
-    router.navigate({
-      pathname: "DeckScreen",
-      params: { deckId: renameState.editingDeck.id },
-    });
-    unSelectItem();
-  };
-
-  const handleRenameClick = () => {
-    const selected = deckListData.filter((deck) => deck.id === renameState.editingDeck.id);
-    if (selected.length === 1) {
-      setMenuState({ ...menuState, visible: false });
-      setRenameState({ ...renameState, showCancel: true, visible: true, editingDeck: selected[0] });
-    } else {
-      console.log("Error editing deck with id " + renameState.editingDeck.id);
-      unSelectItem();
-    }
-  };
-
-  const handleDeleteClick = () => {
-    const selectedId = renameState.editingDeck.id;
-    if (selectedId) {
-      setMenuState({ ...menuState, visible: false });
-      setDeleteDeckId(selectedId);
-    }
-  };
-
   const renderItem = ({ item }) => {
     return (
-      <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-        <View
-          style={[
-            styles.item,
-            scheme.bgAccent3,
-            renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
-            scheme.border,
-          ]}
-        >
-          <TextNormal
-            style={[
-              styles.itemText,
-              {
-                color: renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color,
-              },
-            ]}
-          >
-            {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
-          </TextNormal>
-          <View style={styles.itemMenuButton}>
-            <Button
-              textColor={renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color}
-              icon="dots-vertical"
-              onPress={(event) => handleMenuPress(event, item)}
-            />
-          </View>
-        </View>
-      </Pressable>
+      <DeckListItem item={item} onPressDeck={onPressDeck} onDeleteDeck={onDeleteDeck} onUpdateDeck={onUpdateDeck} />
     );
   };
 
@@ -241,34 +153,10 @@ export const DeckList = () => {
     await onAddDeck(newDeck, newDeckData);
 
     setImportSource(emptyImportSource);
-
-    // @todo this is too big for useState
-    setRenameState({ ...renameState, showCancel: false, visible: true, editingDeck: newDeck });
   };
 
-  const clearEditModal = () => {
-    setRenameState({ ...renameState, visible: false, editingDeck: emptyDeck });
-  };
-
-  const handleCancelClick = () => {
-    clearEditModal();
-  };
-
-  const handleDeleteCancelClick = () => {
-    setDeleteDeckId(null);
-    unSelectItem();
-  };
-
-  const handleRenameDeck = (deckId, name) => {
-    onUpdateDeck(deckId, { name: sanitizeAll(name) });
-    clearEditModal();
-  };
-
-  const handleConfirmClick = () => {
-    onDeleteDeck(deleteDeckId);
-    setDeleteDeckId(null);
-    unSelectItem();
-  };
+  // @todo issue moving deck list item out: need to trigger rename modal when deck is added
+  // setRenameState({ ...renameState, showCancel: false, visible: true, editingDeck: newDeck });
 
   const onClickNew = () => {
     router.navigate({
@@ -324,8 +212,6 @@ export const DeckList = () => {
   const showFab = path === "/" && deckListData.length < MAX_DECKS;
   const insets = useSafeAreaInsets();
 
-  //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
-
   return (
     <ScreenTemplate showBack={false} helpType={"list"}>
       <View style={styles.container}>
@@ -336,40 +222,6 @@ export const DeckList = () => {
               data={deckListData}
               renderItem={renderItem}
               contentContainerStyle={{ paddingBottom: insets.bottom }}
-            />
-            <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
-              <DeckRenameModal
-                initialDeckName={renameState.editingDeck.name}
-                editingDeck={renameState.editingDeck}
-                handleCancelClick={handleCancelClick}
-                handleRenameDeck={handleRenameDeck}
-                showCancel={renameState.showCancel}
-              />
-            </QuizModal>
-
-            <QuizModal
-              modalVisible={menuState.visible}
-              handleModalClickAway={handleModalClickAway}
-              modalContainerStyle={[
-                styles.menu,
-                {
-                  top: menuState.position.top,
-                  left: menuState.position.left,
-                },
-              ]}
-            >
-              <DeckListMenu
-                handleViewClick={handleViewClick}
-                handleRenameClick={handleRenameClick}
-                handleDeleteClick={handleDeleteClick}
-              />
-            </QuizModal>
-            <ConfirmDeleteModal
-              modalVisible={deleteDeckId !== null}
-              handleModalClickAway={handleDeleteCancelClick}
-              scheme={scheme}
-              handleCancelClick={handleDeleteCancelClick}
-              handleConfirmClick={handleConfirmClick}
             />
           </View>
         )}
@@ -421,38 +273,6 @@ export const DeckList = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  item: {
-    backgroundColor: "white",
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5,
-    flexDirection: "row",
-    margin: 2,
-    alignItems: "center",
-    // boxShadow: "10px 10px 5px black",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 5,
-        },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-      },
-      android: {
-        elevation: 10,
-      },
-    }),
-  },
-  itemText: {
-    flex: 10,
-    fontSize: 16,
-  },
-  itemMenuButton: {
-    flex: 1,
-    paddingHorizontal: 5,
-  },
   menu: {
     position: "absolute",
     backgroundColor: "white",

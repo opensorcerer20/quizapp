@@ -95,41 +95,8 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
-- [x] Simple way to create a deck
-    - [x] textbox: name of deck
-    - [x] "textarea" where questions are on odd lines and answers on even lines
-        - [x] limit 50 questions
-    - [x] reload deck list
-    - [x] add button to FAB (and shrink space between buttons)
-    - [x] help or tutorial
-    - [x] on back click, confirm leave if theres content
-
-- [x] delete confirm
-
-- [x] closed android beta
-
 - [ ] beta bugs/improvements
-    -   [x] example image for file help doesnt fit
-    -   [x] quizmodal move inside menu component
-    -   [x] consolidate modal styles (very similar)
-    -   [x] make appbar consistent between ios and android
-    -   [x] add cards to deck
-        -    [x] fab
-        -    [x] screen w blanks
-        -    [x] working question add
-        -    [x] deck name on add screen
-        -    [x] input labels on screen
-        -    [x] issue with back button after adding question, stack is incorrect, goes back to same page
-        -    [x] character limits
-        -    [x] test cancel/back
-        -    [x] test modal to leave with info on screen
-        -    [x] use different color for fab than list items
-        -    [x] new issue: submitting does not ALWAYS refresh list (try going in from start after refresh, attempt to submit with only question, then with answer, see if list refreshes)
-    -   [x] ui consolidation
-        -    [x] button style
-    -   [x] arrows for cards
-    -   [x] keyboard covering textbox
-    -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
+    ...
 
     -   [x] allow commas in csv
         -   [ ] ~~csv-parse library: https://csv.js.org/parse/examples/file_interaction/~~
@@ -144,8 +111,9 @@ itemMenuButton: {
         -   [ ] note all recent changes needed for beta
 
     -   [ ] move deck list item out of deck list
-        -   [ ] deck list item
-        -   [ ] deck list item menu
+        -   [x] deck list item
+        -   [x] deck list item menu
+        -   [ ] rename deck when new deck added
 
     -   [ ] keyboard covers buttons on new deck
 
@@ -185,7 +153,10 @@ itemMenuButton: {
     -   [ ] android app icon needs to come down 2 pixels i think
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
+
     -   [ ] export decks and/or point to backup file
+
+    -   [ ] check @todos
 
     -   [ ] set minimum sdk versions
         -   [ ] android
@@ -522,4 +493,40 @@ itemMenuButton: {
     -   [x] android
     -   [x] iphone
     -   [x] beta testing by other ppl (https://docs.expo.dev/review/overview/)
+
+- [x] Simple way to create a deck
+    - [x] textbox: name of deck
+    - [x] "textarea" where questions are on odd lines and answers on even lines
+        - [x] limit 50 questions
+    - [x] reload deck list
+    - [x] add button to FAB (and shrink space between buttons)
+    - [x] help or tutorial
+    - [x] on back click, confirm leave if theres content
+
+- [x] delete confirm
+
+- [x] closed android beta
+
+- [ ] beta bugs/improvements
+    -   [x] example image for file help doesnt fit
+    -   [x] quizmodal move inside menu component
+    -   [x] consolidate modal styles (very similar)
+    -   [x] make appbar consistent between ios and android
+    -   [x] add cards to deck
+        -    [x] fab
+        -    [x] screen w blanks
+        -    [x] working question add
+        -    [x] deck name on add screen
+        -    [x] input labels on screen
+        -    [x] issue with back button after adding question, stack is incorrect, goes back to same page
+        -    [x] character limits
+        -    [x] test cancel/back
+        -    [x] test modal to leave with info on screen
+        -    [x] use different color for fab than list items
+        -    [x] new issue: submitting does not ALWAYS refresh list (try going in from start after refresh, attempt to submit with only question, then with answer, see if list refreshes)
+    -   [x] ui consolidation
+        -    [x] button style
+    -   [x] arrows for cards
+    -   [x] keyboard covering textbox
+    -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
 </details>
