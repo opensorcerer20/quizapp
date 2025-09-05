@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
 import { FAB } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { MAX_QUESTIONS, SAFE_WIDTH } from "../common/constants";
 import { loadDeckData, saveDeckData, updateDeckQuestionData } from "../common/fileLib";
@@ -100,6 +101,7 @@ const DeckScreen = () => {
 
   const canAddQuestion = !currentDeckData?.questions?.length || currentDeckData.questions.length < MAX_QUESTIONS;
   const questionsExist = currentDeckData && currentDeckData?.questions;
+  const insets = useSafeAreaInsets();
 
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
@@ -121,13 +123,13 @@ const DeckScreen = () => {
                 {
                   icon: "✕",
                   color: scheme.buttonTxt.color,
-                  label: "Hide All Cards",
+                  label: "Hide All",
                   onPress: () => onVisibilityClick(true),
                 },
                 {
                   icon: "✓",
                   color: scheme.buttonTxt.color,
-                  label: "Show All Cards",
+                  label: "Show All",
                   onPress: () => onVisibilityClick(false),
                 },
               ].map(({ icon, color, label, onPress }) => (
@@ -143,6 +145,7 @@ const DeckScreen = () => {
             </View>
             <FlatList
               keyExtractor={(item) => item.id}
+              contentContainerStyle={{ paddingBottom: insets.bottom }}
               style={{ width: "100%" }}
               data={currentDeckData.questions}
               renderItem={renderItem}

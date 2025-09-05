@@ -97,7 +97,13 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         >
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
-            <TextNormal style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</TextNormal>
+            <TextNormal
+              numberOfLines={6}
+              ellipsizeMode="tail"
+              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}
+            >
+              {finalCardText}
+            </TextNormal>
           </View>
           {makeArrow("right")}
         </View>
@@ -106,7 +112,13 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         <View style={[cardStyle, cardBg]}>
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
-            <TextNormal style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}>{finalCardText}</TextNormal>
+            <TextNormal
+              numberOfLines={6}
+              ellipsizeMode="tail"
+              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}
+            >
+              {finalCardText}
+            </TextNormal>
           </View>
         </View>
       )}

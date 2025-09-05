@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { router } from "expo-router";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
 
 import { SAFE_WIDTH } from "../../common/constants";
 import { getBgScheme, getScheme, sanitizeAll } from "../../common/util";
@@ -100,7 +99,11 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 
   return (
     <>
-      <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
+      <Pressable
+        key={item.id}
+        onPress={() => onPressDeck(item.id)}
+        onLongPress={(event) => handleMenuPress(event, item)}
+      >
         <View
           style={[
             styles.container,
@@ -110,6 +113,8 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
           ]}
         >
           <TextNormal
+            numberOfLines={1}
+            ellipsizeMode="tail"
             style={[
               styles.txt,
               {
@@ -117,15 +122,8 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
               },
             ]}
           >
-            {item.name.length > 35 ? item.name.slice(0, 30) + "..." : item.name}
+            {item.name}
           </TextNormal>
-          <View style={styles.menuButton}>
-            <Button
-              textColor={renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color}
-              icon="dots-vertical"
-              onPress={(event) => handleMenuPress(event, item)}
-            />
-          </View>
         </View>
       </Pressable>
       <View>

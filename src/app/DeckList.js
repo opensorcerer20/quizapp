@@ -25,6 +25,7 @@ const emptyImportSource = {
 };
 
 export const DeckList = () => {
+  // reset storage
   // AsyncStorage.clear();
 
   const [importSource, setImportSource] = useState(emptyImportSource);

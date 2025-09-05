@@ -37,23 +37,20 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
           <FontAwesome6
             name={item.disabled ? "eye-slash" : "eye"}
             size={20}
-            color={scheme.txt.color}
+            color={item.disabled ? scheme.disabled.backgroundColor : scheme.txt.color}
             style={styles.menuIcon}
           />
         </Pressable>
-        <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH * 0.7, flex: 10 }}>
-          <TextNormal style={[scheme.txt, styles.itemText]}>
-            <TextNormal style={{ fontWeight: "bold" }}>Q: </TextNormal>
-            {formatCardText(`${item.q}`)}
-          </TextNormal>
-          <TextNormal style={[scheme.txt, styles.itemText]}>
-            <TextNormal style={{ fontWeight: "bold" }}>A: </TextNormal>
-            {formatCardText(`${item.a}`)}
-          </TextNormal>
-        </View>
-        <Pressable onPress={() => setDeleteCardId(item.id)}>
-          <View>
-            <FontAwesome6 name="trash" size={20} color={scheme.txt.color} style={styles.menuIcon} />
+        <Pressable onLongPress={() => setDeleteCardId(item.id)} style={{ flex: 1 }}>
+          <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH * 0.9 }}>
+            <TextNormal style={[scheme.txt, styles.itemText]}>
+              <TextNormal style={{ fontWeight: "bold" }}>Q: </TextNormal>
+              {formatCardText(`${item.q}`)}
+            </TextNormal>
+            <TextNormal style={[scheme.txt, styles.itemText]}>
+              <TextNormal style={{ fontWeight: "bold" }}>A: </TextNormal>
+              {formatCardText(`${item.a}`)}
+            </TextNormal>
           </View>
         </Pressable>
       </View>

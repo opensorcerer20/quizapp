@@ -107,14 +107,15 @@ itemMenuButton: {
     -   [x] deck screen
         -   [x] delete questions for a deck
 
-    -   [ ] move deck list item out of deck list
+    -   [x] move deck list item out of deck list
         -   [x] deck list item
         -   [x] deck list item menu
-        -   [ ] rename deck when new deck added
+        -   [ ] ~~rename deck when new deck added~~
 
     -   [x] STOP... what work should be done before launch, and what should wait
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
+        -   [ ] option 1: very visible backup button, user chooses where to write file
 
     -   [ ] test cases
         -   [ ] note all recent changes needed for beta
@@ -123,6 +124,10 @@ itemMenuButton: {
         -   [ ] dark mode odd lighter shade for name and dots
         -   [ ] order list by name, date added
         -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+        -   [ ] need help for long press
+
+    -   [ ] deck screen
+        -   [ ] need help for this screen: eye, long press
 
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom
@@ -135,9 +140,10 @@ itemMenuButton: {
         -   [ ] eyes for visibility need emphasis
         -   [ ] ios
             -   [ ] rename deck popup has transparency
-        -   [ ] FAB covers right side of items
-            -   [ ] option 1: empty space below list
-            -   [ ] --> option 2: on scroll down, remove add button (google search "expo on scroll down")
+        -   [x] FAB covers right side of items
+            -   [ ] ~~option 1: empty space below list~~ doesnt work
+            -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
+            -   [x] change trash/menu button to long press for item
         -   [ ] keyboard covers buttons on new deck
         -   [ ] constants for font size
         -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
