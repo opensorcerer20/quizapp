@@ -1,5 +1,6 @@
 //https://www.color-hex.com/color-palettes/
 
+import { Platform } from "react-native";
 import { SAFE_WIDTH } from "./constants";
 
 export const lightDarkBgColors = {
@@ -147,6 +148,10 @@ export const globalStyles = {
     padding: 10,
     borderRadius: 5,
     margin: 5,
+    height: Platform.select({
+      ios: 30,
+      android: 40,
+    }),
   },
   checkbox: {
     padding: 10,

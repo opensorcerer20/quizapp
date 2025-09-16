@@ -1,6 +1,7 @@
 import { DeckList } from "./DeckList";
+import Toast from 'react-native-toast-message';
 
-export default QuizApp = () => {
+const QuizApp = () => {
   // use to clear memory
   // useEffect(() => {
   //   saveDeckListData([]);
@@ -8,5 +9,12 @@ export default QuizApp = () => {
 
   // console.log("quizapp state " + JSON.stringify({ deckListData }));
 
-  return <DeckList />;
+  return (
+    <>
+      <DeckList />
+      <Toast />
+    </>
+  );
 };
+
+export default QuizApp;

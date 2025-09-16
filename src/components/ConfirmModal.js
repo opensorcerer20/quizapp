@@ -10,6 +10,8 @@ const ConfirmModal = ({
   handleCancel,
   handleConfirm,
   message = "You have unsaved data, do you want to discard it?",
+  cancelLabel = "Cancel",
+  confirmLabel = "Discard"
 }) => {
   return (
     <Modal
@@ -23,14 +25,14 @@ const ConfirmModal = ({
           <TextNormal style={styles.modalText}>{message}</TextNormal>
           <View style={styles.buttonContainer}>
             <Pressable onPress={handleCancel} onLongPress={handleCancel} style={[globalStyles.button, scheme.disabled]}>
-              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>Cancel</TextNormal>
+              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{cancelLabel}</TextNormal>
             </Pressable>
             <Pressable
               onPress={handleConfirm}
               onLongPress={handleConfirm}
               style={[globalStyles.button, scheme.buttonBg]}
             >
-              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>Discard</TextNormal>
+              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{confirmLabel}</TextNormal>
             </Pressable>
           </View>
         </View>
