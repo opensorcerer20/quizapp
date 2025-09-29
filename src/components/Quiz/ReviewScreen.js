@@ -191,6 +191,8 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    maxWidth: SAFE_WIDTH,
+    marginHorizontal: "auto",
   },
   noQContainer: {
     width: "95%",

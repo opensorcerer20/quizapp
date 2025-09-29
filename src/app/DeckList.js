@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-
 import * as DocumentPicker from "expo-document-picker";
-import { File, Paths } from 'expo-file-system';
 import { router, useLocalSearchParams, usePathname } from "expo-router";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -15,12 +12,11 @@ import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListItem from "../components/Deck/DeckListItem";
 import { getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
+import Export from "../components/Export";
 import FileHelpModal from "../components/FileHelpModal";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
-import ConfirmModal from "../components/ConfirmModal";
-import Toast from "react-native-toast-message";
 
 const emptyImportSource = {
   mimeType: null,
@@ -37,7 +33,6 @@ export const DeckList = () => {
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
 
   const routeParams = useLocalSearchParams();
 
@@ -162,51 +157,11 @@ export const DeckList = () => {
     setImportSource(emptyImportSource);
   };
 
-  // @todo issue moving deck list item out: need to trigger rename modal when deck is added
-  // setRenameState({ ...renameState, showCancel: false, visible: true, editingDeck: newDeck });
-
   const onClickNew = () => {
     router.navigate({
       pathname: "NewDeck",
       params: {},
     });
-  };
-
-  const onConfirmExport = async () => {
-    const content = 'This is the content of my text file.';
-
-    // console.log('before writing');
-    try {
-      /*
-      - save file to filesystem and be able to find that file
-        - documents?
-        - downloads?
-        - user picked?
-      - export decks as question 1\nanswer1\netc\netc, with 2 blank lines between decks, no titles
-      */
-      const file = new File(Paths.document, 'export.txt');
-      if (!file.exists) {
-        file.create(); // can throw an error if the file already exists or no permission to create it
-        file.write(content);
-        Toast.show({
-          type: 'success',
-          text1: 'File created',
-        });
-      } else {
-        Toast.show({
-          type: 'success',
-          text1: 'File already exists',
-        });
-      }
-      // console.error('success writing file:');
-    } catch (error) {
-      console.error('Error writing file:', error);
-      Toast.show({
-        type: 'error',
-        text1: 'Error writing file',
-      });
-    }
-    setConfirmModalVisible(false);
   };
 
   // actions after source specified
@@ -257,17 +212,15 @@ export const DeckList = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <ScreenTemplate showBack={false} helpType={"list"} showExport={true} onExport={() => console.log('export clicked')}>
+    <ScreenTemplate showBack={false} helpType={"list"}>
       <View style={styles.container}>
         {deckListData.length > 0 && (
           <View style={{ padding: 10 }}>
-            <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-              <TextNormal style={[scheme.txt, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</TextNormal>
-              <View style={{ marginLeft: "auto", marginRight: 0 }}>
-                <Pressable onPress={() => setConfirmModalVisible(true)}>
-                    <MaterialCommunityIcons name="file-download-outline" size={30} color={scheme.txt.color} />
-                </Pressable>
-              </View>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+              <TextNormal style={[scheme.txt, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>
+                Saved Decks
+              </TextNormal>
+              <Export deckListData={deckListData} />
             </View>
             <FlatList
               data={deckListData}
@@ -318,14 +271,6 @@ export const DeckList = () => {
         )}
         {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[globalStyles.fab, scheme.disabled]} />}
       </View>
-      <ConfirmModal
-          scheme={scheme}
-          confirmModalVisible={confirmModalVisible}
-          handleCancel={() => setConfirmModalVisible(false)}
-          handleConfirm={onConfirmExport}
-          message="Would you like to export all flash cards to export.txt?"
-          confirmLabel="Export"
-        />
     </ScreenTemplate>
   );
 };

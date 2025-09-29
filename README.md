@@ -115,15 +115,18 @@ itemMenuButton: {
     -   [x] STOP... what work should be done before launch, and what should wait
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
-        -   [ ] option 1: very visible backup button, user chooses where to write file
+        -   [x] very visible backup button, ~~user chooses where to write file~~
+        -   [ ] current working process
+            -   [x] write file to paths.cache (so system will delete it if needed)
+            -   [x] immediately share document
+            -   [x] user chooses what to do with it
+            -   [ ] test android
+            -   [ ] test ios
 
-    -   [ ] test cases
-        -   [ ] note all recent changes needed for beta
+    -   [ ] question: do we bring back dot menu and remove fab?
 
     -   [ ] deck list
         -   [ ] dark mode odd lighter shade for name and dots
-        -   [ ] order list by name, date added
-        -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
         -   [ ] need help for long press
 
     -   [ ] deck screen
@@ -138,12 +141,13 @@ itemMenuButton: {
             -   [ ] does not respond to very first click with no setting, so no default is set upon launch
         -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
         -   [ ] eyes for visibility need emphasis
-        -   [ ] ios
-            -   [ ] rename deck popup has transparency
+        -   [x] ios
+            -   [x] rename deck popup has transparency
         -   [x] FAB covers right side of items
             -   [ ] ~~option 1: empty space below list~~ doesnt work
             -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
-            -   [x] change trash/menu button to long press for item
+            -   [ ] ~~change trash/menu button to long press for item~~
+            -   [ ] use swipe to delete
         -   [ ] keyboard covers buttons on new deck
         -   [ ] constants for font size
         -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
@@ -178,6 +182,10 @@ itemMenuButton: {
 -   [ ] open beta
 
 -   [ ] open beta fixes
+
+-   [ ] delayed stuff from earlier
+    -   [ ] order list by name, date added
+    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
 
 -   [ ] add tip to menu (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
