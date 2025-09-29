@@ -1,5 +1,6 @@
 //https://www.color-hex.com/color-palettes/
 
+import { Platform } from "react-native";
 import { SAFE_WIDTH } from "./constants";
 
 export const lightDarkBgColors = {
@@ -10,9 +11,9 @@ export const lightDarkBgColors = {
     antiBaseBg: "#efefef",
     antiTxtBg: "#121212",
     bgAccent1: "#343434",
-    bgAccent3: "#4a63ac99",
-    cardQ: "#4a63ac66",
-    cardA: "#4a63acff",
+    bgAccent3: "#4a63ac",
+    cardQ: "#4a63ac",
+    cardA: "#4a63ac",
     buttonBg: "#3650A1",
     buttonTxt: "#efefef",
     disabled: "#787878",
@@ -26,8 +27,8 @@ export const lightDarkBgColors = {
     antiTxtBg: "#ffffff",
     bgAccent1: "#ffffff",
     bgAccent3: "#d5c5e3",
-    cardQ: "#d5c5e366",
-    cardA: "#d5c5e3ff",
+    cardQ: "#d5c5e3",
+    cardA: "#d5c5e3",
     buttonBg: "#90589C",
     buttonTxt: "#efefef",
     disabled: "#787878",
@@ -147,6 +148,10 @@ export const globalStyles = {
     padding: 10,
     borderRadius: 5,
     margin: 5,
+    height: Platform.select({
+      ios: 30,
+      android: 40,
+    }),
   },
   checkbox: {
     padding: 10,

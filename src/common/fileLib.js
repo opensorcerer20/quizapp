@@ -56,6 +56,31 @@ export const loadAllDecks = async () => {
   return await loadStorageData(DECK_DATA_KEY);
 };
 
+export const getExportData = async () => {
+  let data = [];
+  const allDecks = await loadAllDecks();
+
+  const deckData = await Promise.all(
+    allDecks.map(async (deck) => {
+      const [selectedDeck, selectedDeckData] = await loadDeckData(deck.id);
+      return { ...selectedDeckData, deck: deck };
+    })
+  );
+
+  // sort decks with most recent first
+  deckData.sort((a, b) => b.deck.createdAt - a.deck.createdAt);
+
+  deckData.map((deck) => {
+    data.push("===");
+    data.push(`=== Deck name: ${deck.deck.name}`);
+    deck.questions.map((questionObj) => {
+      data.push(questionObj.q);
+      data.push(questionObj.a);
+    });
+  });
+  return data.join("\n");
+};
+
 const loadStorageData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);

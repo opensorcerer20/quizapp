@@ -12,6 +12,7 @@ import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import DeckListItem from "../components/Deck/DeckListItem";
 import { getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
+import Export from "../components/Export";
 import FileHelpModal from "../components/FileHelpModal";
 import { useTheme } from "../components/Providers/ThemeProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
@@ -156,9 +157,6 @@ export const DeckList = () => {
     setImportSource(emptyImportSource);
   };
 
-  // @todo issue moving deck list item out: need to trigger rename modal when deck is added
-  // setRenameState({ ...renameState, showCancel: false, visible: true, editingDeck: newDeck });
-
   const onClickNew = () => {
     router.navigate({
       pathname: "NewDeck",
@@ -218,7 +216,12 @@ export const DeckList = () => {
       <View style={styles.container}>
         {deckListData.length > 0 && (
           <View style={{ padding: 10 }}>
-            <TextNormal style={[scheme.txt, { paddingVertical: 7, paddingHorizontal: 3 }]}>Saved Decks</TextNormal>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+              <TextNormal style={[scheme.txt, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>
+                Saved Decks
+              </TextNormal>
+              <Export deckListData={deckListData} />
+            </View>
             <FlatList
               data={deckListData}
               renderItem={renderItem}

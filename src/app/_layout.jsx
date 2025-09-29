@@ -9,7 +9,7 @@ import {
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
 import { TranslationProvider } from "../components/Providers/TranslationProvider";
 
-export default RootLayout = () => {
+const RootLayout = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -37,3 +37,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
 });
+
+export default RootLayout;
