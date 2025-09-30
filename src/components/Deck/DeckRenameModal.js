@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { trim } from "lodash";
 import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 
+import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 import { useLocale } from "../Providers/TranslationProvider";
@@ -25,7 +26,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
     setDeckName(initialDeckName);
   }, []);
 
-  const submitBgStyle = submitEnabled ? scheme.buttonBg : scheme.disabled;
+  const submitBgStyle = submitEnabled ? scheme.buttonBg : scheme.bgDisabled;
 
   return (
     <View style={[styles.container, styles.centeredView]}>
@@ -38,7 +39,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
         </TextNormal>
         <View style={{ flex: 1, flexDirection: "row" }}>
           {showCancel && (
-            <Pressable style={[styles.button, scheme.disabled]} onPress={handleCancelClick}>
+            <Pressable style={[styles.button, scheme.bgDisabled]} onPress={handleCancelClick}>
               <TextNormal style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Cancel")}</TextNormal>
             </Pressable>
           )}
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     padding: 4,
-    backgroundColor: "white",
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
     width: 250,
     borderRadius: 5,
     borderWidth: 1,

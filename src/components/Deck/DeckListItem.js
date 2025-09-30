@@ -4,7 +4,8 @@ import { router } from "expo-router";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import { SAFE_WIDTH } from "../../common/constants";
-import { getBgScheme, getScheme, sanitizeAll } from "../../common/util";
+import { globalStyles } from "../../common/lib";
+import { getScheme, sanitizeAll } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
 import QuizModal from "../../components/QuizModal";
 import TextNormal from "../../components/TextNormal";
@@ -30,7 +31,6 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
-  const schemeBg = getBgScheme(theme);
 
   const unSelectItem = () => {
     setRenameState({ ...renameState, editingDeck: emptyDeck });
@@ -107,7 +107,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
         <View
           style={[
             styles.container,
-            scheme.bgAccent3,
+            scheme.bgPrimary,
             renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
             scheme.border,
           ]}
@@ -118,7 +118,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
             style={[
               styles.txt,
               {
-                color: renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color,
+                color: renameState.editingDeck?.id === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
               },
             ]}
           >
@@ -168,7 +168,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 10,
     marginVertical: 5,
     borderRadius: 5,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     // boxShadow: "10px 10px 5px black",
     ...Platform.select({
       ios: {
-        shadowColor: "#000",
+        shadowColor: globalStyles.bgBlack.backgroundColor,
         shadowOffset: {
           width: 0,
           height: 5,
@@ -201,10 +201,10 @@ const styles = StyleSheet.create({
   },
   menu: {
     position: "absolute",
-    backgroundColor: "white",
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 10,
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,

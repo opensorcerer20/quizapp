@@ -15,6 +15,7 @@ import { getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/Qu
 import Export from "../components/Export";
 import FileHelpModal from "../components/FileHelpModal";
 import { useTheme } from "../components/Providers/ThemeProvider";
+import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
@@ -33,6 +34,7 @@ export const DeckList = () => {
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
+  const { getLocalString } = useLocale();
 
   const routeParams = useLocalSearchParams();
 
@@ -217,8 +219,8 @@ export const DeckList = () => {
         {deckListData.length > 0 && (
           <View style={{ padding: 10 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              <TextNormal style={[scheme.txt, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>
-                Saved Decks
+              <TextNormal style={[scheme.txtForBg, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>
+                {getLocalString("Saved Decks")}
               </TextNormal>
               <Export deckListData={deckListData} />
             </View>
@@ -269,7 +271,7 @@ export const DeckList = () => {
             <FileHelpModal scheme={scheme} showModal={showFileHelp} setShowModal={setShowFileHelp} />
           </>
         )}
-        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[globalStyles.fab, scheme.disabled]} />}
+        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[globalStyles.fab, scheme.bgDisabled]} />}
       </View>
     </ScreenTemplate>
   );
@@ -279,10 +281,10 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   menu: {
     position: "absolute",
-    backgroundColor: "white",
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 10,
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,

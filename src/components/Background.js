@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
 
-import { getBgScheme } from "../common/util";
+import { getScheme } from "../common/util";
 
 // via google.com ai
 const Background = ({ theme, children }) => {
-  const schemeBg = getBgScheme(theme);
+  const scheme = getScheme(theme);
   return (
     // <LinearGradient
     //   colors={[schemeBg.bgAccent2, schemeBg.bgAccent1, schemeBg.bgAccent2]} // Array of colors for the gradient
@@ -12,7 +12,7 @@ const Background = ({ theme, children }) => {
     //   start={{ x: 0, y: 0 }} // Optional: start point of the gradient (top-left)
     //   end={{ x: 1, y: 1 }} // Optional: end point of the gradient (bottom-right)
     // >
-    <View style={[styles.background, { backgroundColor: schemeBg.bgAccent1 }]}>{children}</View>
+    <View style={[styles.background, scheme.bg]}>{children}</View>
     // </LinearGradient>
   );
 };

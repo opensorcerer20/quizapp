@@ -104,7 +104,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   }, []);
 
-  // console.log("showtutorial " + JSON.stringify(showTutorial));
+  console.log("scheme.txt.color " + JSON.stringify(scheme.txt.color));
 
   return (
     <>
@@ -121,18 +121,22 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
                   label: "Q -> A",
                   style: {
                     backgroundColor:
-                      showFirst === QUESTION_FIRST ? scheme.buttonBg.backgroundColor : scheme.disabled.backgroundColor,
-                    color: scheme.buttonTxt.color,
+                      showFirst === QUESTION_FIRST
+                        ? scheme.bgAccent.backgroundColor
+                        : scheme.bgDisabled2.backgroundColor,
                   },
+                  checkedColor: scheme.txt.color,
+                  uncheckedColor: scheme.txt.color,
                 },
                 {
                   value: ANSWER_FIRST,
                   label: "A -> Q",
                   style: {
                     backgroundColor:
-                      showFirst === ANSWER_FIRST ? scheme.buttonBg.backgroundColor : scheme.disabled.backgroundColor,
-                    color: scheme.buttonTxt.color,
+                      showFirst === ANSWER_FIRST ? scheme.bgAccent.backgroundColor : scheme.bgDisabled2.backgroundColor,
                   },
+                  checkedColor: scheme.txt.color,
+                  uncheckedColor: scheme.txt.color,
                 },
               ]}
             />
@@ -176,9 +180,11 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
       {!hasQuestionData && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
       {noEnabledQs && (
         <View style={styles.container}>
-          <View style={[scheme.bgAntiPrimary, styles.noQContainer]}>
-            <TextNormal style={styles.noQText}>Sorry, no questions are enabled for this deck.</TextNormal>
-            <TextNormal style={styles.noQText}>
+          <View style={[scheme.bg, styles.noQContainer]}>
+            <TextNormal style={[styles.noQText, scheme.txtForBg]}>
+              Sorry, no questions are enabled for this deck.
+            </TextNormal>
+            <TextNormal style={[styles.noQText, scheme.txtForBg]}>
               Please go to the deck View from the main Deck List and enable at least one card from this deck.
             </TextNormal>
           </View>

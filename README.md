@@ -143,7 +143,7 @@ itemMenuButton: {
         -   [ ] eyes for visibility need emphasis
         -   [x] ios
             -   [x] rename deck popup has transparency
-        -   [x] FAB covers right side of items
+        -   [ ] FAB covers right side of items
             -   [ ] ~~option 1: empty space below list~~ doesnt work
             -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
             -   [ ] ~~change trash/menu button to long press for item~~

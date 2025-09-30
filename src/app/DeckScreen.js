@@ -155,7 +155,7 @@ const DeckScreen = () => {
         {!currentDeckData && <TextNormal style={scheme.txt}>Loading question data...</TextNormal>}
         <FAB
           icon="plus"
-          style={[globalStyles.fab, canAddQuestion ? scheme.buttonBg : scheme.disabled]}
+          style={[globalStyles.fab, canAddQuestion ? scheme.buttonBg : scheme.bgDisabled]}
           color={scheme.buttonTxt.color}
           onPress={canAddQuestion ? onAddQuestion : () => {}}
         />

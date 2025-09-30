@@ -1,78 +1,61 @@
 //https://www.color-hex.com/color-palettes/
 
 import { Platform } from "react-native";
+
 import { SAFE_WIDTH } from "./constants";
 
-export const lightDarkBgColors = {
+/*
+accent #8B5DFF
+secondary #6A42C2
+primary #563A9C
+dark #121212
+light #f2f2f7
+*/
+const lightDarkBgColors = {
   schemeBgDark: {
-    baseBg: "#121212",
-    baseBg2: "#232323",
-    baseBg3: "#343434",
-    antiBaseBg: "#efefef",
-    antiTxtBg: "#121212",
-    bgAccent1: "#343434",
-    bgAccent3: "#4a63ac",
-    cardQ: "#4a63ac",
-    cardA: "#4a63ac",
-    buttonBg: "#3650A1",
-    buttonTxt: "#efefef",
+    accent: "#8B5DFF",
+    secondary: "#6A42C2",
+    primary: "#563A9C",
+    bg: "#000000",
+    txt: "#dedede",
     disabled: "#787878",
-    txt: "#efefef",
+    disabled2: "#a9a9a9",
+    bgAccent3: "#4a63ac",
+    buttonBg: "#3650A1",
+    buttonTxt: "#dedede",
   },
   schemeBgLight: {
-    baseBg: "#ffffff",
-    baseBg2: "#ffffff",
-    baseBg3: "#ffffff",
-    antiBaseBg: "#121212",
-    antiTxtBg: "#ffffff",
-    bgAccent1: "#ffffff",
-    bgAccent3: "#d5c5e3",
-    cardQ: "#d5c5e3",
-    cardA: "#d5c5e3",
-    buttonBg: "#90589C",
-    buttonTxt: "#efefef",
+    accent: "#E2D2F1",
+    secondary: "#c3add8",
+    primary: "#9d81b8",
+    txt: "#000000",
+    bg: "#dedede",
     disabled: "#787878",
-    txt: "#121212",
+    disabled2: "#a9a9a9",
+    bgAccent3: "#d5c5e3",
+    buttonBg: "#90589C",
+    buttonTxt: "#dedede",
   },
 };
 
 export const lightDarkStyles = {
   schemeDark: {
-    baseBg: { backgroundColor: lightDarkBgColors.schemeBgDark.baseBg },
-    baseBg2: { backgroundColor: lightDarkBgColors.schemeBgDark.baseBg2 },
-    baseBg3: { backgroundColor: lightDarkBgColors.schemeBgDark.baseBg3 },
-    bgPrimary: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent1,
-    },
-    bgAntiPrimary: {
-      // equivalent to light primary
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent1,
-    },
-    disabled: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.disabled,
-    },
-    cardQ: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.cardQ,
-    },
-    cardA: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.cardA,
-    },
-    bgAccent1: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent1,
-    },
-    bgAccent3: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3,
-    },
+    bgAccent: { backgroundColor: lightDarkBgColors.schemeBgDark.accent },
+    bgSecondary: { backgroundColor: lightDarkBgColors.schemeBgDark.secondary },
+    bgPrimary: { backgroundColor: lightDarkBgColors.schemeBgDark.primary },
+    bg: { backgroundColor: lightDarkBgColors.schemeBgDark.bg },
+    txt: { fontSize: 16, color: lightDarkBgColors.schemeBgDark.txt },
+    txtForBg: { fontSize: 16, color: lightDarkBgColors.schemeBgDark.txt },
+    bgDisabled: { backgroundColor: lightDarkBgColors.schemeBgDark.disabled },
+    bgDisabled2: { backgroundColor: lightDarkBgColors.schemeBgDark.disabled2 },
+    txtDisabled: { fontSize: 16, color: lightDarkBgColors.schemeBgDark.disabled },
     border: {
-      borderColor: lightDarkBgColors.schemeBgDark.antiBaseBg,
+      borderColor: lightDarkBgColors.schemeBgDark.accent,
       borderWidth: 1,
     },
-    txt: {
-      fontSize: 16,
-      color: lightDarkBgColors.schemeBgDark.txt,
-    },
-    antiTxtBg: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.antiTxtBg,
+
+    bgAccent3: {
+      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3,
     },
     buttonBg: {
       backgroundColor: lightDarkBgColors.schemeBgDark.buttonBg,
@@ -82,41 +65,22 @@ export const lightDarkStyles = {
     },
   },
   schemeLight: {
-    baseBg: { backgroundColor: lightDarkBgColors.schemeBgLight.baseBg },
-    baseBg2: { backgroundColor: lightDarkBgColors.schemeBgLight.baseBg2 },
-    baseBg3: { backgroundColor: lightDarkBgColors.schemeBgLight.baseBg3 },
-    bgPrimary: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent1,
-    },
-    bgAntiPrimary: {
-      // equivalent to dark primary
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent1,
-    },
-    disabled: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.disabled,
-    },
-    cardQ: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.cardQ,
-    },
-    cardA: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.cardA,
-    },
-    bgAccent1: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent1,
-    },
-    bgAccent3: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent3,
-    },
+    bgAccent: { backgroundColor: lightDarkBgColors.schemeBgLight.accent },
+    bgSecondary: { backgroundColor: lightDarkBgColors.schemeBgLight.secondary },
+    bgPrimary: { backgroundColor: lightDarkBgColors.schemeBgLight.primary },
+    bg: { backgroundColor: lightDarkBgColors.schemeBgLight.bg },
+    txt: { fontSize: 16, color: lightDarkBgColors.schemeBgLight.txt },
+    txtForBg: { fontSize: 16, color: lightDarkBgColors.schemeBgLight.txt },
+    bgDisabled: { backgroundColor: lightDarkBgColors.schemeBgLight.disabled },
+    bgDisabled2: { backgroundColor: lightDarkBgColors.schemeBgLight.disabled },
+    txtDisabled: { fontSize: 16, color: lightDarkBgColors.schemeBgLight.disabled },
     border: {
-      borderColor: lightDarkBgColors.schemeBgLight.antiBaseBg,
+      borderColor: lightDarkBgColors.schemeBgLight.accent,
       borderWidth: 1,
     },
-    txt: {
-      fontSize: 16,
-      color: lightDarkBgColors.schemeBgLight.txt,
-    },
-    antiTxtBg: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.antiTxtBg,
+
+    bgAccent3: {
+      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent3,
     },
     buttonBg: {
       backgroundColor: lightDarkBgColors.schemeBgLight.buttonBg,
@@ -156,5 +120,17 @@ export const globalStyles = {
   checkbox: {
     padding: 10,
     margin: 10,
+  },
+  bgWhite: {
+    backgroundColor: lightDarkBgColors.schemeBgLight.bg,
+  },
+  bgBlack: {
+    backgroundColor: lightDarkBgColors.schemeBgDark.bg,
+  },
+  txtWhite: {
+    color: lightDarkBgColors.schemeBgDark.txt, // note that for white text, you need dark bg
+  },
+  txtBlack: {
+    color: lightDarkBgColors.schemeBgLight.txt,
   },
 };

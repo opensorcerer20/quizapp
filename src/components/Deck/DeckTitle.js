@@ -6,7 +6,7 @@ const DeckTitle = ({ deckName, scheme }) => {
   return (
     <View style={{ alignContent: "center", padding: 5 }}>
       <View style={{ alignItems: "center" }}>
-        <TextNormal style={[scheme.bgAccent3, scheme.txt, styles.title]}>Deck: {deckName}</TextNormal>
+        <TextNormal style={[scheme.bgPrimary, scheme.txt, styles.title]}>Deck: {deckName}</TextNormal>
       </View>
     </View>
   );

@@ -17,14 +17,14 @@ const CancelSubmit = ({
       <Pressable
         onPress={onBackClick}
         onLongPress={onBackClick}
-        style={[globalStyles.button, scheme.disabled, styles.buttonStyle]}
+        style={[globalStyles.button, scheme.bgDisabled, styles.buttonStyle]}
       >
         <TextNormal style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>{cancelLabel}</TextNormal>
       </Pressable>
       <Pressable
         onPress={submitDisabled ? () => {} : handleSubmit}
         onLongPress={submitDisabled ? () => {} : handleSubmit}
-        style={[globalStyles.button, scheme.buttonBg, submitDisabled ? scheme.disabled : {}, styles.buttonStyle]}
+        style={[globalStyles.button, scheme.buttonBg, submitDisabled ? scheme.bgDisabled : {}, styles.buttonStyle]}
       >
         <TextNormal style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>{submitLabel}</TextNormal>
       </Pressable>

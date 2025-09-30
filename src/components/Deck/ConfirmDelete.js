@@ -15,7 +15,7 @@ const ConfirmDelete = ({ scheme, handleCancelClick, handleConfirmClick, message 
           </TextNormal>
         </View>
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <Pressable style={[styles.button, scheme.disabled]} onPress={handleCancelClick}>
+          <Pressable style={[styles.button, scheme.bgDisabled]} onPress={handleCancelClick}>
             <TextNormal style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Cancel")}</TextNormal>
           </Pressable>
           <Pressable style={[styles.button, scheme.buttonBg]} onPress={handleConfirmClick}>

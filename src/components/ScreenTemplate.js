@@ -18,7 +18,7 @@ const ScreenTemplate = ({
   const scheme = getScheme(theme);
   return (
     <>
-      <View style={[styles.container, scheme.bgPrimary, scheme.txt]}>
+      <View style={[styles.container, scheme.bg, scheme.txt]}>
         <StatusBar barStyle={"default"} />
         <Background theme={theme}>
           <Toolbar

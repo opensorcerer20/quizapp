@@ -11,7 +11,7 @@ const ConfirmModal = ({
   handleConfirm,
   message = "You have unsaved data, do you want to discard it?",
   cancelLabel = "Cancel",
-  confirmLabel = "Discard"
+  confirmLabel = "Discard",
 }) => {
   return (
     <Modal
@@ -24,7 +24,11 @@ const ConfirmModal = ({
         <View style={styles.modalView}>
           <TextNormal style={styles.modalText}>{message}</TextNormal>
           <View style={styles.buttonContainer}>
-            <Pressable onPress={handleCancel} onLongPress={handleCancel} style={[globalStyles.button, scheme.disabled]}>
+            <Pressable
+              onPress={handleCancel}
+              onLongPress={handleCancel}
+              style={[globalStyles.button, scheme.bgDisabled]}
+            >
               <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{cancelLabel}</TextNormal>
             </Pressable>
             <Pressable
@@ -51,12 +55,12 @@ const styles = StyleSheet.create({
   modalView: {
     width: SAFE_WIDTH * 0.9,
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
     borderRadius: 10,
     padding: 35,
     alignItems: "center",
     elevation: 5, // Shadow for Android
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: {
       width: 0,
       height: 2,
