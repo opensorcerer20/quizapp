@@ -60,10 +60,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   navContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
   },
   button: {
     minWidth: "20%",
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingVertical: 12,
   },
   buttonLeft: {
     borderTopLeftRadius: 10,
