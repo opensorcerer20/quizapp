@@ -170,24 +170,9 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
     marginTop: 10,
   },
-  item: {
-    width: "90%",
-    flexDirection: "row",
-    paddingRight: 10,
-    paddingVertical: 5,
-    borderRadius: 5,
-    marginVertical: 2,
-    marginHorizontal: "auto",
-    alignItems: "center",
-    borderWidth: 1,
-  },
   setAllButton: {
     flexDirection: "row",
     maxWidth: SAFE_WIDTH * 0.4,
-  },
-  itemText: {
-    fontSize: 16,
-    maxWidth: "90%",
   },
 });
 
