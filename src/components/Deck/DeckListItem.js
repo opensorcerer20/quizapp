@@ -3,8 +3,9 @@ import { useState } from "react";
 import { router } from "expo-router";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
-import { SAFE_WIDTH } from "../../common/constants";
-import { getBgScheme, getScheme, sanitizeAll } from "../../common/util";
+import { SAFE_WIDTH, THEMES } from "../../common/constants";
+import { globalStyles } from "../../common/lib";
+import { getScheme, sanitizeAll } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
 import QuizModal from "../../components/QuizModal";
 import TextNormal from "../../components/TextNormal";
@@ -12,6 +13,7 @@ import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "./DeckListMenu";
 import DeckRenameModal from "./DeckRenameModal";
 import { emptyDeck } from "./QuizDeck";
+import { Button } from "react-native-paper";
 
 export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) => {
   // AsyncStorage.clear();
@@ -30,7 +32,6 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
-  const schemeBg = getBgScheme(theme);
 
   const unSelectItem = () => {
     setRenameState({ ...renameState, editingDeck: emptyDeck });
@@ -102,83 +103,89 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
       <Pressable
         key={item.id}
         onPress={() => onPressDeck(item.id)}
-        onLongPress={(event) => handleMenuPress(event, item)}
+        onLongPress={() => onPressDeck(item.id)}
       >
         <View
           style={[
             styles.container,
-            scheme.bgAccent3,
+            scheme.bgPrimary,
             renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
-            scheme.border,
+            { borderWidth: 1, borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color }
           ]}
         >
+          <View style={styles.menuButton}>
+            <Button
+              textColor={scheme.txt.color}
+              icon="dots-vertical"
+              onPress={(event) => handleMenuPress(event, item)}
+              contentStyle={{width: 30}}
+            />
+          </View>
           <TextNormal
             numberOfLines={1}
             ellipsizeMode="tail"
             style={[
               styles.txt,
               {
-                color: renameState.editingDeck?.id === item.id ? schemeBg.antiTxtBg : scheme.txt.color,
+                color: renameState.editingDeck?.id === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
+                fontSize: item.name.length >= 24 ? 14 : 18
               },
             ]}
           >
             {item.name}
           </TextNormal>
-        </View>
-      </Pressable>
-      <View>
-        <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
-          <DeckRenameModal
-            initialDeckName={renameState.editingDeck.name}
-            editingDeck={renameState.editingDeck}
-            handleCancelClick={handleCancelClick}
-            handleRenameDeck={handleRenameDeck}
-            showCancel={renameState.showCancel}
-          />
-        </QuizModal>
-
-        <QuizModal
-          modalVisible={menuState.visible}
-          handleModalClickAway={handleModalClickAway}
-          modalContainerStyle={[
-            styles.menu,
-            {
-              top: menuState.position.top,
-              left: menuState.position.left,
-            },
-          ]}
-        >
-          <DeckListMenu
-            handleViewClick={handleViewClick}
-            handleRenameClick={handleRenameClick}
-            handleDeleteClick={handleDeleteClick}
-          />
-        </QuizModal>
-        <ConfirmDeleteModal
-          modalVisible={deleteDeckId !== null}
-          handleModalClickAway={handleDeleteCancelClick}
-          scheme={scheme}
-          handleCancelClick={handleDeleteCancelClick}
-          handleConfirmClick={handleConfirmDeleteClick}
-        />
       </View>
+      </Pressable>
+      <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
+        <DeckRenameModal
+          initialDeckName={renameState.editingDeck.name}
+          editingDeck={renameState.editingDeck}
+          handleCancelClick={handleCancelClick}
+          handleRenameDeck={handleRenameDeck}
+          showCancel={renameState.showCancel}
+        />
+      </QuizModal>
+
+      <QuizModal
+        modalVisible={menuState.visible}
+        handleModalClickAway={handleModalClickAway}
+        modalContainerStyle={[
+          styles.menu,
+          {
+            top: menuState.position.top,
+            left: menuState.position.left,
+          },
+        ]}
+      >
+        <DeckListMenu
+          handleViewClick={handleViewClick}
+          handleRenameClick={handleRenameClick}
+          handleDeleteClick={handleDeleteClick}
+        />
+      </QuizModal>
+      <ConfirmDeleteModal
+        modalVisible={deleteDeckId !== null}
+        handleModalClickAway={handleDeleteCancelClick}
+        scheme={scheme}
+        handleCancelClick={handleDeleteCancelClick}
+        handleConfirmClick={handleConfirmDeleteClick}
+      />
     </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5,
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
+    padding: 8,
+    borderRadius: 8,
     flexDirection: "row",
     margin: 2,
     alignItems: "center",
     // boxShadow: "10px 10px 5px black",
     ...Platform.select({
       ios: {
-        shadowColor: "#000",
+        shadowColor: globalStyles.bgBlack.backgroundColor,
         shadowOffset: {
           width: 0,
           height: 5,
@@ -192,19 +199,18 @@ const styles = StyleSheet.create({
     }),
   },
   txt: {
-    flex: 10,
+    flex: 11,
     fontSize: 16,
   },
   menuButton: {
     flex: 1,
-    paddingHorizontal: 5,
   },
   menu: {
     position: "absolute",
-    backgroundColor: "white",
+    backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 10,
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,

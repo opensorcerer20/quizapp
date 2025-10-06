@@ -1,20 +1,19 @@
 import { Platform, Pressable, StyleSheet, Switch, View } from "react-native";
 
-import { getBgScheme, getScheme } from "../common/util";
+import { getScheme } from "../common/util";
 import TextNormal from "./TextNormal";
 
 export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, labelTxt = null }) => {
   const scheme = getScheme(theme);
-  const schemeBg = getBgScheme(theme);
   return (
     <View style={styles.container}>
       <Switch
         trackColor={{
-          false: schemeBg.bgAccent3,
-          true: schemeBg.bgAccent3,
+          false: scheme.bgAccent.backgroundColor,
+          true: scheme.bgAccent.backgroundColor,
         }}
-        ios_backgroundColor={schemeBg.bgAccent3}
-        thumbColor={!!optionValue ? scheme.txt.color : schemeBg.disabled}
+        ios_backgroundColor={scheme.bgAccent.backgroundColor}
+        thumbColor={!!optionValue ? scheme.txt.color : scheme.txtDisabled.color}
         onValueChange={onClick}
         value={!!optionValue}
         style={styles.switch}

@@ -5,7 +5,8 @@ import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } f
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { SAFE_WIDTH } from "../../common/constants";
+import { SAFE_WIDTH, THEMES } from "../../common/constants";
+import { globalStyles } from "../../common/lib";
 import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 import { ANSWER_FIRST } from "../Quiz/ReviewScreen";
@@ -19,6 +20,7 @@ const CARDTYPE_QUESTION = "question";
 const CARDTYPE_ANSWER = "answer";
 
 const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerTextStyle }) => {
+  //console.log("headerTextStyle " + JSON.stringify(headerTextStyle));
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);
@@ -149,14 +151,17 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
     };
   });
 
-  const headerTextStyle = { color: scheme.antiTxtBg.backgroundColor, fontSize: 20 };
+  const headerTextStyle = {
+    color: theme === THEMES.dark ? globalStyles.txtBlack.color : globalStyles.txtWhite.color,
+    fontSize: 20,
+  };
 
   const questionCard = (
     <CardContent
       cardType={isReversed ? CARDTYPE_ANSWER : CARDTYPE_QUESTION}
       cardText={regularText}
       cardStyle={[styles.card, scheme.border]}
-      cardBg={isReversed ? scheme.cardA : scheme.cardQ}
+      cardBg={isReversed ? scheme.bgSecondary : scheme.bgPrimary}
       textStyle={scheme.txt}
       headerTextStyle={headerTextStyle}
     />
@@ -167,7 +172,7 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
       cardType={isReversed ? CARDTYPE_QUESTION : CARDTYPE_ANSWER}
       cardText={flippedText}
       cardStyle={[styles.card, scheme.border]}
-      cardBg={isReversed ? scheme.cardQ : scheme.cardA}
+      cardBg={isReversed ? scheme.bgPrimary : scheme.bgSecondary}
       textStyle={scheme.txt}
       headerTextStyle={headerTextStyle}
     />
@@ -225,6 +230,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 300,
+    maxWidth: SAFE_WIDTH,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -233,15 +239,6 @@ const styles = StyleSheet.create({
     height: "auto",
     minHeight: 250,
     backfaceVisibility: "hidden",
-  },
-  cardTypeText: {
-    color: "black",
-    fontSize: Platform.OS === "ios" ? 16 : 14,
-    paddingRight: 10,
-  },
-  cardText: {
-    color: "black",
-    fontSize: Platform.OS === "ios" ? 16 : 14,
   },
   l: {
     fontSize: Platform.OS === "ios" ? 24 : 20,
@@ -261,7 +258,7 @@ const styles = StyleSheet.create({
   viewShadow: {
     ...Platform.select({
       ios: {
-        shadowColor: "#000",
+        shadowColor: globalStyles.bgBlack.backgroundColor,
         shadowOffset: {
           width: 0,
           height: 5,

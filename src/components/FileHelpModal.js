@@ -8,6 +8,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
+import { globalStyles } from "../common/lib";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
@@ -61,7 +62,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           left: SAFE_WIDTH / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: MODAL_WIDTH,
         },
-        scheme.baseBg3,
+        scheme.bg,
         { borderColor: scheme.bgAccent3.backgroundColor },
       ]}
     >
@@ -130,7 +131,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
 const styles = StyleSheet.create({
   modalContainer: {
     position: "absolute",
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,
     shadowRadius: 4,

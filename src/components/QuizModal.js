@@ -1,5 +1,7 @@
 import { Modal, Pressable, StyleSheet, View } from "react-native";
 
+import { globalStyles } from "../common/lib";
+
 const QuizModal = ({
   modalVisible = false,
   handleModalClickAway = () => {},
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
   },
   overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)" },
   textStyle: {
-    color: "white",
+    color: globalStyles.txtWhite.color,
     fontWeight: "bold",
     textAlign: "center",
   },

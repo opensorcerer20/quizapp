@@ -155,7 +155,7 @@ const DeckScreen = () => {
         {!currentDeckData && <TextNormal style={scheme.txt}>Loading question data...</TextNormal>}
         <FAB
           icon="plus"
-          style={[globalStyles.fab, canAddQuestion ? scheme.buttonBg : scheme.disabled]}
+          style={[globalStyles.fab, canAddQuestion ? scheme.buttonBg : scheme.bgDisabled]}
           color={scheme.buttonTxt.color}
           onPress={canAddQuestion ? onAddQuestion : () => {}}
         />
@@ -170,24 +170,9 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
     marginTop: 10,
   },
-  item: {
-    width: "90%",
-    flexDirection: "row",
-    paddingRight: 10,
-    paddingVertical: 5,
-    borderRadius: 5,
-    marginVertical: 2,
-    marginHorizontal: "auto",
-    alignItems: "center",
-    borderWidth: 1,
-  },
   setAllButton: {
     flexDirection: "row",
     maxWidth: SAFE_WIDTH * 0.4,
-  },
-  itemText: {
-    fontSize: 16,
-    maxWidth: "90%",
   },
 });
 

@@ -1,6 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
 import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
+import { globalStyles } from "../common/lib";
 import HelpMenu, { HELP_MODAL_WIDTH } from "./HelpMenu";
 import QuizModal from "./QuizModal";
 
@@ -16,7 +17,7 @@ const HelpMenuModal = ({ showModal, setShowModal, scheme, helpType }) => {
           left: SAFE_WIDTH / 2 - HELP_MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: HELP_MODAL_WIDTH,
         },
-        scheme.baseBg3,
+        scheme.bg,
         { borderColor: scheme.bgAccent3.backgroundColor, borderWidth: 1 },
       ]}
     >
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   helpModal: {
     position: "absolute",
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,
     shadowRadius: 4,

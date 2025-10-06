@@ -73,7 +73,7 @@ const Export = () => {
     <>
       <View style={{ marginLeft: "auto", marginRight: 0 }}>
         <Pressable onPress={() => setConfirmModalVisible(true)}>
-          <MaterialCommunityIcons name="file-download-outline" size={30} color={scheme.txt.color} />
+          <MaterialCommunityIcons name="file-download-outline" size={30} color={scheme.txtForBg.color} />
         </Pressable>
       </View>
       <ConfirmModal

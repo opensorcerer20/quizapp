@@ -44,7 +44,7 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
   const buttonFlex = showHelpButton ? { flexDirection: "row" } : {};
   return (
     <>
-      <View style={[scheme.bgAccent3, styles.container]}>
+      <View style={[scheme.bgPrimary, styles.container]}>
         <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
           {showBack && (
             <Pressable onPress={onBackClick}>

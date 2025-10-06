@@ -1,5 +1,6 @@
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
+import { globalStyles } from "../common/lib";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
@@ -15,8 +16,8 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
           left: 20,
           width: "auto",
         },
-        scheme.baseBg3,
-        { borderColor: scheme.bgAccent1.backgroundColor, borderWidth: 1 },
+        scheme.bg,
+        { borderColor: scheme.txtForBg.color, borderWidth: 1 },
       ]}
     >
       <Pressable onPress={onClickNew}>
@@ -36,7 +37,7 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
 const styles = StyleSheet.create({
   menuModal: {
     position: "absolute",
-    shadowColor: "#000",
+    shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,
     shadowRadius: 4,

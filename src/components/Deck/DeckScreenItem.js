@@ -37,7 +37,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
           <FontAwesome6
             name={item.disabled ? "eye-slash" : "eye"}
             size={20}
-            color={item.disabled ? scheme.disabled.backgroundColor : scheme.txt.color}
+            color={item.disabled ? scheme.bgDisabled.backgroundColor : scheme.txt.color}
             style={styles.menuIcon}
           />
         </Pressable>
