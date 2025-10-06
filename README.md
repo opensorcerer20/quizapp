@@ -123,7 +123,7 @@ itemMenuButton: {
             -   [ ] test android
             -   [ ] test ios
 
-    -   [ ] question: do we bring back dot menu and remove fab?
+    -   [x] question: do we bring back dot menu and remove fab?
 
     -   [ ] deck list
         -   [ ] dark mode odd lighter shade for name and dots
@@ -131,6 +131,7 @@ itemMenuButton: {
 
     -   [ ] deck screen
         -   [ ] need help for this screen: eye, long press
+        -   [ ] slide for delete?
 
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom
@@ -151,6 +152,7 @@ itemMenuButton: {
         -   [ ] keyboard covers buttons on new deck
         -   [ ] constants for font size
         -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
+        -   [ ] help text bigger
 
     -   [x] deck screen item into separate component
 

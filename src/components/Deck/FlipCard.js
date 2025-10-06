@@ -20,7 +20,7 @@ const CARDTYPE_QUESTION = "question";
 const CARDTYPE_ANSWER = "answer";
 
 const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerTextStyle }) => {
-  console.log("headerTextStyle " + JSON.stringify(headerTextStyle));
+  //console.log("headerTextStyle " + JSON.stringify(headerTextStyle));
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);

@@ -104,7 +104,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   }, []);
 
-  console.log("scheme.txt.color " + JSON.stringify(scheme.txt.color));
+  //console.log("scheme.txt.color " + JSON.stringify(scheme.txt.color));
 
   return (
     <>

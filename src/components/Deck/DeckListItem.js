@@ -118,7 +118,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
               textColor={scheme.txt.color}
               icon="dots-vertical"
               onPress={(event) => handleMenuPress(event, item)}
-              contentStyle={{width: 20}}
+              contentStyle={{width: 30}}
             />
           </View>
           <TextNormal
@@ -177,7 +177,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: globalStyles.bgWhite.backgroundColor,
-    padding: 12,
+    padding: 8,
     borderRadius: 8,
     flexDirection: "row",
     margin: 2,
