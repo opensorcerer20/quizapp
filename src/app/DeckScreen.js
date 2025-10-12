@@ -1,12 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
-import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
+import {
+  router,
+  useFocusEffect,
+  useLocalSearchParams,
+} from "expo-router";
+import {
+  FlatList,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import { FAB } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { MAX_QUESTIONS, SAFE_WIDTH } from "../common/constants";
-import { loadDeckData, saveDeckData, updateDeckQuestionData } from "../common/fileLib";
+import { MAX_QUESTIONS } from "../common/constants";
+import {
+  loadDeckData,
+  saveDeckData,
+  updateDeckQuestionData,
+} from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
 import DeckScreenItem from "../components/Deck/DeckScreenItem";
@@ -135,11 +153,11 @@ const DeckScreen = () => {
               ].map(({ icon, color, label, onPress }) => (
                 <Pressable
                   key={label}
-                  style={[globalStyles.button, scheme.buttonBg, styles.setAllButton]}
+                  style={[scheme.buttonBg, styles.button]}
                   onPress={onPress}
                 >
-                  <TextNormal style={{ color }}>{icon}</TextNormal>
-                  <TextNormal style={{ color, paddingHorizontal: 5 }}>{label}</TextNormal>
+                  <TextNormal style={{color}}>{icon}</TextNormal>
+                  <TextNormal style={{color}}>{label}</TextNormal>
                 </Pressable>
               ))}
             </View>
@@ -170,9 +188,14 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
     marginTop: 10,
   },
-  setAllButton: {
+  button: {
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: "row",
-    maxWidth: SAFE_WIDTH * 0.4,
+    gap: 4,
+    margin: 5,
   },
 });
 

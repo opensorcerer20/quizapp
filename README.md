@@ -156,6 +156,8 @@ itemMenuButton: {
 
     -   [x] deck screen item into separate component
 
+    -   [ ] update all help screens
+
     -   [ ] android app icon needs to come down 2 pixels i think
 
     -   [ ] language support?

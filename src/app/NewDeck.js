@@ -1,7 +1,14 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -16,7 +23,7 @@ import TextNormal from "../components/TextNormal";
 const NewDeck = () => {
   const [title, setTitle] = useState("");
   const [questionData, setQuestionData] = useState("");
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -38,16 +45,16 @@ const NewDeck = () => {
 
   const handleConfirm = () => {
     router.back();
-    setConfirmModalVisible(false); // Hide the modal
+    setModalVisible(false);
   };
 
   const handleCancel = () => {
-    setConfirmModalVisible(false); // Hide the modal
+    setModalVisible(false);
   };
 
   const onBackClick = () => {
     if (title.length > 0 || questionData.length > 0) {
-      setConfirmModalVisible(true);
+      setModalVisible(true);
     } else {
       router.back();
     }
@@ -97,10 +104,12 @@ const NewDeck = () => {
         </Pressable>
       </KeyboardAvoidingView>
       <ConfirmModal
+        message="You have unsaved data, do you want to discard it?"
         scheme={scheme}
-        confirmModalVisible={confirmModalVisible}
+        modalVisible={modalVisible}
         handleCancel={handleCancel}
         handleConfirm={handleConfirm}
+        confirmLabel="Discard"
       />
     </ScreenTemplate>
   );

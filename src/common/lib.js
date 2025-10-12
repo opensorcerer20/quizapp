@@ -26,10 +26,10 @@ const lightDarkBgColors = {
   },
   schemeBgLight: {
     accent: "#E2D2F1",
-    secondary: "#c3add8",
-    primary: "#9d81b8",
+    secondary: "#D0BBE3",
+    primary: "#C4A2E3",
     txt: "#000000",
-    bg: "#dedede",
+    bg: "#efefef",
     disabled: "#787878",
     disabled2: "#a9a9a9",
     bgAccent3: "#d5c5e3",
@@ -109,11 +109,18 @@ export const globalStyles = {
     bottom: 0,
   },
   button: {
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+  },
+  button2: {
     padding: 10,
     borderRadius: 5,
     margin: 5,
     height: Platform.select({
-      ios: 30,
+      ios: 42,
       android: 40,
     }),
   },

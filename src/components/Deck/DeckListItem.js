@@ -1,22 +1,35 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
+import { Button } from "react-native-paper";
 
-import { SAFE_WIDTH, THEMES } from "../../common/constants";
+import {
+  SAFE_WIDTH,
+  THEMES,
+} from "../../common/constants";
 import { globalStyles } from "../../common/lib";
-import { getScheme, sanitizeAll } from "../../common/util";
+import {
+  getScheme,
+  sanitizeAll,
+} from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
 import QuizModal from "../../components/QuizModal";
 import TextNormal from "../../components/TextNormal";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import ConfirmModal from "../ConfirmModal";
+import { useLocale } from "../Providers/TranslationProvider";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "./DeckListMenu";
 import DeckRenameModal from "./DeckRenameModal";
 import { emptyDeck } from "./QuizDeck";
-import { Button } from "react-native-paper";
 
 export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) => {
   // AsyncStorage.clear();
+  const { getLocalString } = useLocale();
 
   const [menuState, setMenuState] = useState({
     visible: false,
@@ -163,12 +176,13 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
           handleDeleteClick={handleDeleteClick}
         />
       </QuizModal>
-      <ConfirmDeleteModal
-        modalVisible={deleteDeckId !== null}
-        handleModalClickAway={handleDeleteCancelClick}
+      <ConfirmModal
+        message={getLocalString("Are you sure you want to delete this deck?")}
         scheme={scheme}
-        handleCancelClick={handleDeleteCancelClick}
-        handleConfirmClick={handleConfirmDeleteClick}
+        modalVisible={deleteDeckId !== null}
+        handleCancel={handleDeleteCancelClick}
+        handleConfirm={handleConfirmDeleteClick}
+        confirmLabel="Delete"
       />
     </>
   );

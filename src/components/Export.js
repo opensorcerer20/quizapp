@@ -1,8 +1,15 @@
 import { useState } from "react";
 
-import { File, Paths } from "expo-file-system";
+import {
+  File,
+  Paths,
+} from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import { Alert, Pressable, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  View,
+} from "react-native";
 import Toast from "react-native-toast-message";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -13,7 +20,7 @@ import ConfirmModal from "./ConfirmModal";
 import { useTheme } from "./Providers/ThemeProvider";
 
 const Export = () => {
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -66,20 +73,20 @@ const Export = () => {
         Alert.alert("Sharing error", "Failed to share the file.");
       }
     }
-    setConfirmModalVisible(false);
+    setModalVisible(false);
   };
 
   return (
     <>
       <View style={{ marginLeft: "auto", marginRight: 0 }}>
-        <Pressable onPress={() => setConfirmModalVisible(true)}>
+        <Pressable onPress={() => setModalVisible(true)}>
           <MaterialCommunityIcons name="file-download-outline" size={30} color={scheme.txtForBg.color} />
         </Pressable>
       </View>
       <ConfirmModal
         scheme={scheme}
-        confirmModalVisible={confirmModalVisible}
-        handleCancel={() => setConfirmModalVisible(false)}
+        modalVisible={modalVisible}
+        handleCancel={() => setModalVisible(false)}
         handleConfirm={onConfirmExport}
         message="Would you like to export all flash cards?"
         confirmLabel="Export"

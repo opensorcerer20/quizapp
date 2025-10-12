@@ -1,14 +1,18 @@
 import { useState } from "react";
 
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import { SAFE_WIDTH } from "../../common/constants";
 import { formatCardText } from "../../common/util";
+import ConfirmModal from "../ConfirmModal";
 import { useLocale } from "../Providers/TranslationProvider";
 import TextNormal from "../TextNormal";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityClick }) => {
   const { getLocalString } = useLocale();
@@ -54,13 +58,13 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
           </View>
         </Pressable>
       </View>
-      <ConfirmDeleteModal
-        modalVisible={deleteCardId !== null}
-        handleModalClickAway={handleDeleteCancelClick}
-        scheme={scheme}
-        handleCancelClick={handleDeleteCancelClick}
-        handleConfirmClick={onDeleteConfirmClick}
+      <ConfirmModal
         message={getLocalString("Are you sure you want to delete this card?")}
+        scheme={scheme}
+        modalVisible={deleteCardId !== null}
+        handleCancel={handleDeleteCancelClick}
+        handleConfirm={onDeleteConfirmClick}
+        confirmLabel="Delete"
       />
     </>
   );

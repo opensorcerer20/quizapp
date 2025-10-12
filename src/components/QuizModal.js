@@ -1,4 +1,9 @@
-import { Modal, Pressable, StyleSheet, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import { globalStyles } from "../common/lib";
 
@@ -14,7 +19,7 @@ const QuizModal = ({
   }
 
   return (
-    <Modal transparent animationType="fade" visible={modalVisible}>
+    <Modal transparent animationType="fade" visible={modalVisible} onRequestClose={handleModalClickAway}>
       <Pressable style={styles.overlay} onPress={() => handleModalClickAway()}>
         <View style={[styles.centeredView, ...modalContainerStyle]}>
           <Pressable onPress={() => {}}>

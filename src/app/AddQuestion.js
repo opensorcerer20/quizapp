@@ -1,12 +1,35 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
-import { router, useLocalSearchParams } from "expo-router";
-import { KeyboardAvoidingView, Platform, StyleSheet, TextInput, View } from "react-native";
+import {
+  router,
+  useLocalSearchParams,
+} from "expo-router";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
-import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED } from "../common/constants";
-import { loadDeckFromStorage, loadQuestionsFromStorage, updateDeckQuestionData } from "../common/fileLib";
+import {
+  MAX_CHAR_LIMIT,
+  NEW_QUESTION_ADDED,
+} from "../common/constants";
+import {
+  loadDeckFromStorage,
+  loadQuestionsFromStorage,
+  updateDeckQuestionData,
+} from "../common/fileLib";
 import { globalStyles } from "../common/lib";
-import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import {
+  getRandomInt,
+  getScheme,
+  sanitizeAll,
+} from "../common/util";
 import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
@@ -18,7 +41,7 @@ const AddQuestion = () => {
   const { deckId } = useLocalSearchParams();
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [currentDeck, setCurrentDeck] = useState(null);
 
   const { theme } = useTheme();
@@ -50,16 +73,16 @@ const AddQuestion = () => {
 
   const handleConfirm = () => {
     router.back();
-    setConfirmModalVisible(false);
+    setModalVisible(false);
   };
 
   const handleCancel = () => {
-    setConfirmModalVisible(false);
+    setModalVisible(false);
   };
 
   const onBackClick = () => {
     if (question.length > 0 || answer.length > 0) {
-      setConfirmModalVisible(true);
+      setModalVisible(true);
     } else {
       router.back();
     }
@@ -111,10 +134,12 @@ const AddQuestion = () => {
           submitDisabled={question.length === 0 || answer.length === 0}
         />
         <ConfirmModal
+          message="You have unsaved data, do you want to discard it?"
           scheme={scheme}
-          confirmModalVisible={confirmModalVisible}
+          modalVisible={modalVisible}
           handleCancel={handleCancel}
           handleConfirm={handleConfirm}
+          confirmLabel="Discard"
         />
       </KeyboardAvoidingView>
     </ScreenTemplate>

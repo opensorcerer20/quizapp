@@ -1,46 +1,57 @@
-import { Modal, Pressable, StyleSheet, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import TextNormal from "./TextNormal";
 
+const ConfirmModalButton = ({ scheme, handlePress, bgstyle, label }) => {
+  return (
+    <Pressable onPress={handlePress} onLongPress={handlePress} style={[globalStyles.button, bgstyle]}>
+      <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{label}</TextNormal>
+    </Pressable>
+  );
+};
+
 const ConfirmModal = ({
   scheme,
-  confirmModalVisible,
+  modalVisible,
   handleCancel,
   handleConfirm,
-  message = "You have unsaved data, do you want to discard it?",
+  message,
   cancelLabel = "Cancel",
-  confirmLabel = "Discard",
+  confirmLabel = "Accept",
 }) => {
   return (
     <Modal
       animationType="fade"
       transparent={true}
-      visible={confirmModalVisible}
+      visible={modalVisible}
       onRequestClose={handleCancel} // Handle Android back button
     >
-      <View style={styles.centeredView}>
+      <Pressable style={styles.centeredView} onPress={handleCancel}>
         <View style={styles.modalView}>
           <TextNormal style={styles.modalText}>{message}</TextNormal>
           <View style={styles.buttonContainer}>
-            <Pressable
-              onPress={handleCancel}
-              onLongPress={handleCancel}
-              style={[globalStyles.button, scheme.bgDisabled]}
-            >
-              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{cancelLabel}</TextNormal>
-            </Pressable>
-            <Pressable
-              onPress={handleConfirm}
-              onLongPress={handleConfirm}
-              style={[globalStyles.button, scheme.buttonBg]}
-            >
-              <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{confirmLabel}</TextNormal>
-            </Pressable>
+            <ConfirmModalButton
+              scheme={scheme}
+              handlePress={handleCancel}
+              label={cancelLabel}
+              bgstyle={scheme.bgDisabled}
+            />
+            <ConfirmModalButton
+              scheme={scheme}
+              handlePress={handleConfirm}
+              label={confirmLabel}
+              bgstyle={scheme.buttonBg}
+            />
           </View>
         </View>
-      </View>
+      </Pressable>
     </Modal>
   );
 };
