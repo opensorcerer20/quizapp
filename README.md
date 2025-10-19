@@ -125,6 +125,12 @@ itemMenuButton: {
 
     -   [x] question: do we bring back dot menu and remove fab?
 
+    -   [ ] all modals like rename
+        -    [ ] not flush with sides
+        -    [ ] rounded edges
+        -    [ ] consistent buttons
+        -    [ ] change bg color: light = white, dark = purple
+
     -   [ ] deck list
         -   [ ] dark mode odd lighter shade for name and dots
         -   [ ] need help for long press
