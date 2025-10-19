@@ -21,7 +21,7 @@ const lightDarkBgColors = {
     disabled: "#787878",
     disabled2: "#a9a9a9",
     bgAccent3: "#4a63ac",
-    buttonBg: "#3650A1",
+    buttonBg: "#6443b6",
     buttonTxt: "#dedede",
   },
   schemeBgLight: {
@@ -111,8 +111,8 @@ export const globalStyles = {
   button: {
     padding: 12,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     margin: 5,
   },
   button2: {
