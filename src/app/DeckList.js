@@ -245,14 +245,14 @@ export const DeckList = () => {
                 fabStyle={scheme.buttonBg}
                 actions={[
                   {
-                    icon: "form-textbox", // material community icon
-                    label: "Create Deck",
-                    onPress: onClickNew,
-                  },
-                  {
                     icon: "help", // material community icon
                     label: "File Help",
                     onPress: showFileHelpModal,
+                  },
+                  {
+                    icon: "form-textbox", // material community icon
+                    label: "Create Deck",
+                    onPress: onClickNew,
                   },
                   {
                     icon: "text", // material community icon
