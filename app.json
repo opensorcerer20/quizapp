@@ -12,11 +12,7 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
-      "icon": {
-        "dark": "./assets/ios-dark.png",
-        "light": "./assets/ios-light.png",
-        "tinted": "./assets/ios-tinted.png"
-      }
+      "icon": "./assets/ios-light.png"
     },
     "android": {
       "package": "com.opensorcerer20.flashcardlibrary",
