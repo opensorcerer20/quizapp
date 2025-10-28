@@ -1,17 +1,17 @@
-import {
-  Modal,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Modal, Pressable, StyleSheet, View } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import TextNormal from "./TextNormal";
 
-const ConfirmModalButton = ({ scheme, handlePress, bgstyle, label }) => {
+const ConfirmModalButton = ({ scheme, handlePress, bgstyle, label, disabled = false }) => {
   return (
-    <Pressable onPress={handlePress} onLongPress={handlePress} style={[globalStyles.button, bgstyle]}>
+    <Pressable
+      onPress={handlePress}
+      onLongPress={handlePress}
+      style={[globalStyles.button, bgstyle]}
+      disabled={disabled}
+    >
       <TextNormal style={[scheme.buttonTxt, { fontSize: 16 }]}>{label}</TextNormal>
     </Pressable>
   );
@@ -25,6 +25,8 @@ const ConfirmModal = ({
   message,
   cancelLabel = "Cancel",
   confirmLabel = "Accept",
+  submitEnabled = true,
+  children,
 }) => {
   return (
     <Modal
@@ -36,6 +38,7 @@ const ConfirmModal = ({
       <Pressable style={styles.centeredView} onPress={handleCancel}>
         <View style={styles.modalView}>
           <TextNormal style={styles.modalText}>{message}</TextNormal>
+          {children}
           <View style={styles.buttonContainer}>
             <ConfirmModalButton
               scheme={scheme}
@@ -48,6 +51,7 @@ const ConfirmModal = ({
               handlePress={handleConfirm}
               label={confirmLabel}
               bgstyle={scheme.buttonBg}
+              disabled={!submitEnabled}
             />
           </View>
         </View>

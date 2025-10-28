@@ -1,23 +1,12 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import {
-  Platform,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 
-import {
-  SAFE_WIDTH,
-  THEMES,
-} from "../../common/constants";
+import { SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
-import {
-  getScheme,
-  sanitizeAll,
-} from "../../common/util";
+import { getScheme, sanitizeAll } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
 import QuizModal from "../../components/QuizModal";
 import TextNormal from "../../components/TextNormal";
@@ -113,17 +102,16 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 
   return (
     <>
-      <Pressable
-        key={item.id}
-        onPress={() => onPressDeck(item.id)}
-        onLongPress={() => onPressDeck(item.id)}
-      >
+      <Pressable key={item.id} onPress={() => onPressDeck(item.id)} onLongPress={() => onPressDeck(item.id)}>
         <View
           style={[
             styles.container,
             scheme.bgPrimary,
             renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
-            { borderWidth: 1, borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color }
+            {
+              borderWidth: 1,
+              borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color,
+            },
           ]}
         >
           <View style={styles.menuButton}>
@@ -131,7 +119,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
               textColor={scheme.txt.color}
               icon="dots-vertical"
               onPress={(event) => handleMenuPress(event, item)}
-              contentStyle={{width: 30}}
+              contentStyle={{ width: 30 }}
             />
           </View>
           <TextNormal
@@ -141,24 +129,22 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
               styles.txt,
               {
                 color: renameState.editingDeck?.id === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
-                fontSize: item.name.length >= 24 ? 14 : 18
+                fontSize: item.name.length >= 24 ? 14 : 18,
               },
             ]}
           >
             {item.name}
           </TextNormal>
-      </View>
+        </View>
       </Pressable>
-      <QuizModal modalVisible={renameState.visible} handleModalClickAway={() => {}}>
-        <DeckRenameModal
-          initialDeckName={renameState.editingDeck.name}
-          editingDeck={renameState.editingDeck}
-          handleCancelClick={handleCancelClick}
-          handleRenameDeck={handleRenameDeck}
-          showCancel={renameState.showCancel}
-        />
-      </QuizModal>
-
+      <DeckRenameModal
+        initialDeckName={renameState.editingDeck.name}
+        editingDeckId={renameState.editingDeck.id}
+        handleCancelClick={handleCancelClick}
+        handleRenameDeck={handleRenameDeck}
+        showCancel={renameState.showCancel}
+        visible={renameState.visible}
+      />
       <QuizModal
         modalVisible={menuState.visible}
         handleModalClickAway={handleModalClickAway}
@@ -168,6 +154,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
             top: menuState.position.top,
             left: menuState.position.left,
           },
+          styles.modalBg,
         ]}
       >
         <DeckListMenu

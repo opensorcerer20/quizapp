@@ -16,7 +16,7 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
           left: 20,
           width: "auto",
         },
-        scheme.bg,
+        scheme.modalBg,
         { borderColor: scheme.txtForBg.color, borderWidth: 1 },
       ]}
     >

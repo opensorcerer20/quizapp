@@ -62,7 +62,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           left: SAFE_WIDTH / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: MODAL_WIDTH,
         },
-        scheme.bg,
+        scheme.modalBg,
         { borderColor: scheme.bgAccent3.backgroundColor },
       ]}
     >

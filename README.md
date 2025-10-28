@@ -125,11 +125,10 @@ itemMenuButton: {
 
     -   [x] question: do we bring back dot menu and remove fab?
 
-    -   [ ] all modals like rename
-        -    [ ] not flush with sides
-        -    [ ] rounded edges
-        -    [ ] consistent buttons
-        -    [ ] change bg color: light = white, dark = purple
+    -   [ ] use react native Modal for modals
+        -    [x] rename needs changing
+        -    [x] consistent buttons
+        -    [ ] change bg color: light = white, dark = not quite black
 
     -   [ ] deck list
         -   [ ] dark mode odd lighter shade for name and dots

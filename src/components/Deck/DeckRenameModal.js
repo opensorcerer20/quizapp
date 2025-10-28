@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
 import { trim } from "lodash";
-import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Platform, StyleSheet, TextInput } from "react-native";
 
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
+import ConfirmModal from "../ConfirmModal";
 import { useTheme } from "../Providers/ThemeProvider";
 import { useLocale } from "../Providers/TranslationProvider";
 import TextNormal from "../TextNormal";
 
-const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, handleRenameDeck, showCancel = true }) => {
+const DeckRenameModal = ({ initialDeckName, editingDeckId, handleCancelClick, handleRenameDeck, visible = false }) => {
   const { getLocalString } = useLocale();
   const [deckName, setDeckName] = useState("");
   const [submitEnabled, setSubmitEnabled] = useState(true);
@@ -24,38 +25,21 @@ const DeckRenameModal = ({ initialDeckName, editingDeck, handleCancelClick, hand
 
   useEffect(() => {
     setDeckName(initialDeckName);
-  }, []);
-
-  const submitBgStyle = submitEnabled ? scheme.buttonBg : scheme.bgDisabled;
+  }, [initialDeckName]);
 
   return (
-    <View style={[styles.container, styles.centeredView]}>
-      <View style={[styles.modalView, scheme.bgAccent3, scheme.border]}>
-        <View>
-          <TextNormal style={[scheme.txt, { paddingBottom: 10 }]}>{getLocalString("Name this deck")}</TextNormal>
-        </View>
-        <TextNormal style={styles.modalText}>
-          <TextInput style={styles.textInput} onChangeText={onDeckNameUpdate} value={deckName} />
-        </TextNormal>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          {showCancel && (
-            <Pressable style={[styles.button, scheme.bgDisabled]} onPress={handleCancelClick}>
-              <TextNormal style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Cancel")}</TextNormal>
-            </Pressable>
-          )}
-          <Pressable
-            style={[styles.button, submitBgStyle]}
-            onPress={() => {
-              if (submitEnabled) {
-                handleRenameDeck(editingDeck.id, deckName);
-              }
-            }}
-          >
-            <TextNormal style={[styles.textStyle, scheme.buttonTxt]}>{getLocalString("Submit")}</TextNormal>
-          </Pressable>
-        </View>
-      </View>
-    </View>
+    <ConfirmModal
+      scheme={scheme}
+      modalVisible={visible}
+      handleCancel={handleCancelClick}
+      handleConfirm={() => handleRenameDeck(editingDeckId, deckName)}
+      message={getLocalString("Name this deck")}
+      submitEnabled={submitEnabled}
+    >
+      <TextNormal style={styles.modalText}>
+        <TextInput style={styles.textInput} onChangeText={onDeckNameUpdate} value={deckName} />
+      </TextNormal>
+    </ConfirmModal>
   );
 };
 
