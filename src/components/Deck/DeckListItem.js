@@ -102,7 +102,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 
   return (
     <>
-      <Pressable key={item.id} onPress={() => onPressDeck(item.id)} onLongPress={() => onPressDeck(item.id)}>
+      <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
         <View
           style={[
             styles.container,

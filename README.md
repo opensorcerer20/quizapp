@@ -125,18 +125,16 @@ itemMenuButton: {
 
     -   [x] question: do we bring back dot menu and remove fab?
 
-    -   [ ] use react native Modal for modals
+    -   [x] use react native Modal for modals
         -    [x] rename needs changing
         -    [x] consistent buttons
-        -    [ ] change bg color: light = white, dark = not quite black
+        -    [x] change bg color: light = white, dark = not quite black
 
     -   [ ] deck list
-        -   [ ] dark mode odd lighter shade for name and dots
-        -   [ ] need help for long press
+        -   [x] dark mode odd lighter shade for name and dots
 
     -   [ ] deck screen
-        -   [ ] need help for this screen: eye, long press
-        -   [ ] slide for delete?
+        -   [ ] slide for delete
 
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom
@@ -157,11 +155,11 @@ itemMenuButton: {
         -   [ ] keyboard covers buttons on new deck
         -   [ ] constants for font size
         -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
-        -   [ ] help text bigger
 
     -   [x] deck screen item into separate component
 
     -   [ ] update all help screens
+        -   [ ] help text bigger
 
     -   [ ] android app icon needs to come down 2 pixels i think
 

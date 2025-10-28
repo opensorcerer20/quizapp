@@ -243,26 +243,35 @@ export const DeckList = () => {
                 icon="plus"
                 color={scheme.buttonTxt.color}
                 fabStyle={scheme.buttonBg}
+                backdropColor={scheme.bg.backgroundColor}
                 actions={[
                   {
                     icon: "help", // material community icon
                     label: "File Help",
                     onPress: showFileHelpModal,
+                    labelTextColor: scheme.buttonTxt.color,
+                    labelStyle: { fontWeight: "bold" },
                   },
                   {
                     icon: "form-textbox", // material community icon
                     label: "Create Deck",
                     onPress: onClickNew,
+                    labelTextColor: scheme.buttonTxt.color,
+                    labelStyle: { fontWeight: "bold" },
                   },
                   {
                     icon: "text", // material community icon
                     label: "Import TXT",
                     onPress: () => onPressImport("txt"),
+                    labelTextColor: scheme.buttonTxt.color,
+                    labelStyle: { fontWeight: "bold" },
                   },
                   {
                     icon: "table", // material community icon
                     label: "Import CSV",
                     onPress: () => onPressImport("csv"),
+                    labelTextColor: scheme.buttonTxt.color,
+                    labelStyle: { fontWeight: "bold" },
                   },
                 ]}
                 onStateChange={onFABClick}

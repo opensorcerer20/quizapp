@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-import {
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
@@ -31,7 +27,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
     <>
       <View
         key={item.id}
-        style={[scheme.bgAccent3, styles.container, { borderColor: scheme.txt.color, flexDirection: "row" }]}
+        style={[scheme.bgAccent, styles.container, { borderColor: scheme.txt.color, flexDirection: "row" }]}
       >
         <Pressable
           style={{ flex: 1, paddingHorizontal: item.disabled ? 10 : 12, maxWidth: 50 }}

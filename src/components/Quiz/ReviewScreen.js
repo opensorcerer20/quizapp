@@ -122,21 +122,25 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
                   style: {
                     backgroundColor:
                       showFirst === QUESTION_FIRST
-                        ? scheme.bgAccent.backgroundColor
-                        : scheme.bgDisabled2.backgroundColor,
+                        ? scheme.bgSecondary.backgroundColor
+                        : scheme.bgDisabled.backgroundColor,
                   },
                   checkedColor: scheme.txt.color,
                   uncheckedColor: scheme.txt.color,
+                  labelStyle: { fontWeight: "bold" },
                 },
                 {
                   value: ANSWER_FIRST,
                   label: "A -> Q",
                   style: {
                     backgroundColor:
-                      showFirst === ANSWER_FIRST ? scheme.bgAccent.backgroundColor : scheme.bgDisabled2.backgroundColor,
+                      showFirst === ANSWER_FIRST
+                        ? scheme.bgSecondary.backgroundColor
+                        : scheme.bgDisabled.backgroundColor,
                   },
                   checkedColor: scheme.txt.color,
                   uncheckedColor: scheme.txt.color,
+                  labelStyle: { fontWeight: "bold" },
                 },
               ]}
             />

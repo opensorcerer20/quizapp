@@ -36,8 +36,8 @@ const ConfirmModal = ({
       onRequestClose={handleCancel} // Handle Android back button
     >
       <Pressable style={styles.centeredView} onPress={handleCancel}>
-        <View style={styles.modalView}>
-          <TextNormal style={styles.modalText}>{message}</TextNormal>
+        <View style={[scheme.modalBg, styles.modalView]}>
+          <TextNormal style={[scheme.txt, styles.modalText]}>{message}</TextNormal>
           {children}
           <View style={styles.buttonContainer}>
             <ConfirmModalButton
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   modalView: {
     width: SAFE_WIDTH * 0.9,
     margin: 20,
-    backgroundColor: globalStyles.bgWhite.backgroundColor,
     borderRadius: 10,
     padding: 35,
     alignItems: "center",

@@ -63,7 +63,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           width: MODAL_WIDTH,
         },
         scheme.modalBg,
-        { borderColor: scheme.bgAccent3.backgroundColor },
+        { borderColor: scheme.bgAccent.backgroundColor },
       ]}
     >
       <View style={{ flexDirection: "column" }}>

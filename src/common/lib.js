@@ -4,13 +4,6 @@ import { Platform } from "react-native";
 
 import { SAFE_WIDTH } from "./constants";
 
-/*
-accent #8B5DFF
-secondary #6A42C2
-primary #563A9C
-dark #121212
-light #f2f2f7
-*/
 const lightDarkBgColors = {
   schemeBgDark: {
     accent: "#8B5DFF",
@@ -20,8 +13,7 @@ const lightDarkBgColors = {
     modalBg: "#232323",
     txt: "#dedede",
     disabled: "#787878",
-    disabled2: "#a9a9a9",
-    bgAccent3: "#4a63ac",
+    // accent2: "#4a63ac",
     buttonBg: "#6443b6",
     buttonTxt: "#dedede",
   },
@@ -32,11 +24,10 @@ const lightDarkBgColors = {
     txt: "#000000",
     bg: "#efefef",
     modalBg: "#efefef",
-    disabled: "#787878",
-    disabled2: "#a9a9a9",
-    bgAccent3: "#d5c5e3",
-    buttonBg: "#90589C",
-    buttonTxt: "#dedede",
+    disabled: "#898989",
+    // accent2: "#d5c5e3",
+    buttonBg: "#C4A2E3",
+    buttonTxt: "#000000",
   },
 };
 
@@ -50,16 +41,15 @@ export const lightDarkStyles = {
     txt: { fontSize: 16, color: lightDarkBgColors.schemeBgDark.txt },
     txtForBg: { fontSize: 16, color: lightDarkBgColors.schemeBgDark.txt },
     bgDisabled: { backgroundColor: lightDarkBgColors.schemeBgDark.disabled },
-    bgDisabled2: { backgroundColor: lightDarkBgColors.schemeBgDark.disabled2 },
     txtDisabled: { fontSize: 16, color: lightDarkBgColors.schemeBgDark.disabled },
     border: {
       borderColor: lightDarkBgColors.schemeBgDark.accent,
       borderWidth: 1,
     },
 
-    bgAccent3: {
-      backgroundColor: lightDarkBgColors.schemeBgDark.bgAccent3,
-    },
+    // bgAccent2: {
+    //   backgroundColor: lightDarkBgColors.schemeBgDark.accent2,
+    // },
     buttonBg: {
       backgroundColor: lightDarkBgColors.schemeBgDark.buttonBg,
     },
@@ -76,16 +66,15 @@ export const lightDarkStyles = {
     txt: { fontSize: 16, color: lightDarkBgColors.schemeBgLight.txt },
     txtForBg: { fontSize: 16, color: lightDarkBgColors.schemeBgLight.txt },
     bgDisabled: { backgroundColor: lightDarkBgColors.schemeBgLight.disabled },
-    bgDisabled2: { backgroundColor: lightDarkBgColors.schemeBgLight.disabled },
     txtDisabled: { fontSize: 16, color: lightDarkBgColors.schemeBgLight.disabled },
     border: {
       borderColor: lightDarkBgColors.schemeBgLight.accent,
       borderWidth: 1,
     },
 
-    bgAccent3: {
-      backgroundColor: lightDarkBgColors.schemeBgLight.bgAccent3,
-    },
+    // bgAccent2: {
+    //   backgroundColor: lightDarkBgColors.schemeBgLight.accent2,
+    // },
     buttonBg: {
       backgroundColor: lightDarkBgColors.schemeBgLight.buttonBg,
     },
