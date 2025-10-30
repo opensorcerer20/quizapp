@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { router } from "expo-router";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
 
 import { SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
@@ -12,6 +11,7 @@ import QuizModal from "../../components/QuizModal";
 import TextNormal from "../../components/TextNormal";
 import ConfirmModal from "../ConfirmModal";
 import { useLocale } from "../Providers/TranslationProvider";
+import SwipeableListItem, { makeButtonSettings } from "../SwipeableListItem";
 import DeckListMenu, { DECK_LIST_MENU_WIDTH } from "./DeckListMenu";
 import DeckRenameModal from "./DeckRenameModal";
 import { emptyDeck } from "./QuizDeck";
@@ -103,39 +103,57 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
   return (
     <>
       <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-        <View
-          style={[
-            styles.container,
-            scheme.bgPrimary,
-            renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
-            {
-              borderWidth: 1,
-              borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color,
+        <SwipeableListItem
+          item={item}
+          leftBtnSettings={makeButtonSettings(
+            () => {
+              console.log(">>> left press");
             },
-          ]}
+            "View",
+            "#15ed44"
+          )}
+          rightBtnSettings={makeButtonSettings(
+            () => {
+              console.log(">>> right press");
+            },
+            "Delete",
+            "#cc0000"
+          )}
         >
-          <View style={styles.menuButton}>
+          <View
+            style={[
+              styles.container,
+              scheme.bgPrimary,
+              renameState.editingDeck?.id === item.id ? { backgroundColor: scheme.txt.color } : {},
+              {
+                borderWidth: 1,
+                borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color,
+              },
+            ]}
+          >
+            {/* <View style={styles.menuButton}>
             <Button
               textColor={scheme.txt.color}
               icon="dots-vertical"
               onPress={(event) => handleMenuPress(event, item)}
               contentStyle={{ width: 30 }}
             />
+          </View> */}
+            <TextNormal
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={[
+                styles.txt,
+                {
+                  color: renameState.editingDeck?.id === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
+                  fontSize: item.name.length >= 24 ? 14 : 18,
+                },
+              ]}
+            >
+              {item.name}
+            </TextNormal>
           </View>
-          <TextNormal
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={[
-              styles.txt,
-              {
-                color: renameState.editingDeck?.id === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
-                fontSize: item.name.length >= 24 ? 14 : 18,
-              },
-            ]}
-          >
-            {item.name}
-          </TextNormal>
-        </View>
+        </SwipeableListItem>
       </Pressable>
       <DeckRenameModal
         initialDeckName={renameState.editingDeck.name}

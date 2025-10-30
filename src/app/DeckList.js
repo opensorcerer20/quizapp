@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as DocumentPicker from "expo-document-picker";
 import { router, useLocalSearchParams, usePathname } from "expo-router";
 import { FlatList, StyleSheet, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -217,7 +218,7 @@ export const DeckList = () => {
     <ScreenTemplate showBack={false} helpType={"list"}>
       <View style={styles.container}>
         {deckListData.length > 0 && (
-          <View style={{ padding: 10 }}>
+          <GestureHandlerRootView style={{ padding: 10 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <TextNormal style={[scheme.txtForBg, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>
                 {getLocalString("Saved Decks")}
@@ -226,10 +227,17 @@ export const DeckList = () => {
             </View>
             <FlatList
               data={deckListData}
-              renderItem={renderItem}
+              renderItem={({ item }) => (
+                <DeckListItem
+                  item={item}
+                  onPressDeck={onPressDeck}
+                  onDeleteDeck={onDeleteDeck}
+                  onUpdateDeck={onUpdateDeck}
+                />
+              )}
               contentContainerStyle={{ paddingBottom: insets.bottom }}
             />
-          </View>
+          </GestureHandlerRootView>
         )}
         {deckListData.length < 1 && (
           <TextNormal style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</TextNormal>

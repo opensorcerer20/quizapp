@@ -136,6 +136,22 @@ itemMenuButton: {
     -   [ ] deck screen
         -   [ ] slide for delete
 
+
+    -   [ ] i think i need to set up safe insets at top-ish level
+```
+        <View
+            style={[
+              styles.container,
+              {
+                paddingTop: insets.top,
+                paddingBottom: insets.bottom,
+                paddingLeft: insets.left,
+                paddingRight: insets.right,
+              },
+            ]}
+        >
+```
+
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom
 
