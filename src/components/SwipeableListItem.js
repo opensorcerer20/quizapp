@@ -30,10 +30,16 @@ const checkBtn = (btn) => {
   }
 };
 
-export default function SwipeableListItem({ item, leftBtnSettings, rightBtnSettings, children }) {
+export default function SwipeableListItem({
+  style = {},
+  item,
+  leftBtnSettings = null,
+  rightBtnSettings = null,
+  children,
+}) {
   const swipeRef = useRef(null);
-  checkBtn(leftBtnSettings);
-  checkBtn(rightBtnSettings);
+  if (leftBtnSettings) checkBtn(leftBtnSettings);
+  if (rightBtnSettings) checkBtn(rightBtnSettings);
 
   const close = () => {
     if (swipeRef.current && typeof swipeRef.current.close === "function") {
@@ -48,25 +54,34 @@ export default function SwipeableListItem({ item, leftBtnSettings, rightBtnSetti
 
   return (
     <Swipeable
+      containerStyle={style}
       ref={swipeRef}
-      renderLeftActions={() => (
-        <ButtonAction
-          label={leftBtnSettings.label}
-          labelColor={leftBtnSettings.txtColor}
-          color={leftBtnSettings.bgColor}
-          onPress={() => handleBtnPress(leftBtnSettings.onPress)}
-          btnStyles={[styles.actionsContainer, styles.actions, { alignItems: "flex-start" }]}
-        />
-      )}
-      renderRightActions={() => (
-        <ButtonAction
-          label={rightBtnSettings.label}
-          labelColor={rightBtnSettings.txtColor}
-          color={rightBtnSettings.bgColor}
-          onPress={() => handleBtnPress(rightBtnSettings.onPress)}
-          btnStyles={[styles.actionsContainer, styles.actions, { alignItems: "flex-end" }]}
-        />
-      )}
+      renderLeftActions={() =>
+        !leftBtnSettings ? (
+          <></>
+        ) : (
+          <ButtonAction
+            label={leftBtnSettings.label}
+            labelColor={leftBtnSettings.txtColor}
+            color={leftBtnSettings.bgColor}
+            onPress={() => handleBtnPress(leftBtnSettings.onPress)}
+            btnStyles={[styles.actionsContainer, styles.actions, { alignItems: "flex-start" }]}
+          />
+        )
+      }
+      renderRightActions={() =>
+        !rightBtnSettings ? (
+          <></>
+        ) : (
+          <ButtonAction
+            label={rightBtnSettings.label}
+            labelColor={rightBtnSettings.txtColor}
+            color={rightBtnSettings.bgColor}
+            onPress={() => handleBtnPress(rightBtnSettings.onPress)}
+            btnStyles={[styles.actionsContainer, styles.actions, { alignItems: "flex-end" }]}
+          />
+        )
+      }
       overshootLeft={false}
       overshootRight={false}
     >

@@ -53,10 +53,10 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
     setMenuState({ position: { top: pageY, left: modalX }, visible: true });
   };
 
-  const handleViewClick = () => {
+  const handleViewClick = (id) => {
     router.navigate({
       pathname: "DeckScreen",
-      params: { deckId: renameState.editingDeck.id },
+      params: { deckId: id },
     });
     unSelectItem();
   };
@@ -105,14 +105,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
       <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
         <SwipeableListItem
           item={item}
-          leftBtnSettings={makeButtonSettings(
-            () => {
-              console.log(">>> left press");
-            },
-            "View",
-            "#15ed44",
-            "#000000"
-          )}
+          leftBtnSettings={makeButtonSettings(() => handleViewClick(item.id), "View", "#15ed44", "#000000")}
           rightBtnSettings={makeButtonSettings(
             () => {
               console.log(">>> right press");

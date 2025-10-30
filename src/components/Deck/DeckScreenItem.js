@@ -8,6 +8,7 @@ import { SAFE_WIDTH } from "../../common/constants";
 import { formatCardText } from "../../common/util";
 import ConfirmModal from "../ConfirmModal";
 import { useLocale } from "../Providers/TranslationProvider";
+import SwipeableListItem, { makeButtonSettings } from "../SwipeableListItem";
 import TextNormal from "../TextNormal";
 
 const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityClick }) => {
@@ -24,7 +25,18 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
   };
 
   return (
-    <>
+    <SwipeableListItem
+      style={{ marginHorizontal: 10 }}
+      item={item}
+      rightBtnSettings={makeButtonSettings(
+        () => {
+          console.log(">>> right press");
+        },
+        "Delete",
+        "#cc0000",
+        "#ffffff"
+      )}
+    >
       <View
         key={item.id}
         style={[scheme.bgAccent, styles.container, { borderColor: scheme.txt.color, flexDirection: "row" }]}
@@ -62,13 +74,12 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
         handleConfirm={onDeleteConfirmClick}
         confirmLabel="Delete"
       />
-    </>
+    </SwipeableListItem>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
     flexDirection: "row",
     paddingRight: 10,
     paddingVertical: 5,
