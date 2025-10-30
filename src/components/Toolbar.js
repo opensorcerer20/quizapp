@@ -48,26 +48,26 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
           {showBack && (
             <Pressable onPress={onBackClick}>
-              <MaterialCommunityIcons name="arrow-left" size={24} color={scheme.txt.color} />
+              <MaterialCommunityIcons name="arrow-left" size={28} color={scheme.txt.color} />
             </Pressable>
           )}
           {!showBack && (
             <Pressable onPress={() => setShowMenu(!showMenu)}>
-              <MaterialCommunityIcons name="menu" size={24} color={scheme.txt.color} />
+              <MaterialCommunityIcons name="menu" size={28} color={scheme.txt.color} />
             </Pressable>
           )}
         </View>
 
         <View style={{ flex: 8 }}>
-          <TextNormal style={scheme.txt}>{title || getLocalString("Flashcard Library")}</TextNormal>
+          <TextNormal style={[scheme.txt, { fontSize: 20 }]}>{title || getLocalString("Flashcard Library")}</TextNormal>
         </View>
         <View style={[{ flex: 2, alignItems: "flex-end", marginRight: 15 }, buttonFlex]}>
           <Pressable style={showHelpButton ? { flex: 1 } : {}} onPress={toggleTheme}>
-            <MaterialCommunityIcons name={themeIcon} size={24} color={scheme.txt.color} />
+            <MaterialCommunityIcons name={themeIcon} size={28} color={scheme.txt.color} />
           </Pressable>
           {showHelpButton && (
             <Pressable style={{ flex: 1 }} onPress={() => setShowHelp(!showHelp)}>
-              <MaterialCommunityIcons name="help" size={24} color={scheme.txt.color} />
+              <MaterialCommunityIcons name="help" size={28} color={scheme.txt.color} />
             </Pressable>
           )}
         </View>

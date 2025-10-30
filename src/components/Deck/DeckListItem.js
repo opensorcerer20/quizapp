@@ -110,14 +110,16 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
               console.log(">>> left press");
             },
             "View",
-            "#15ed44"
+            "#15ed44",
+            "#000000"
           )}
           rightBtnSettings={makeButtonSettings(
             () => {
               console.log(">>> right press");
             },
             "Delete",
-            "#cc0000"
+            "#cc0000",
+            "#ffffff"
           )}
         >
           <View
@@ -196,10 +198,11 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: globalStyles.bgWhite.backgroundColor,
-    padding: 8,
+    padding: 12,
     borderRadius: 8,
     flexDirection: "row",
-    margin: 2,
+    marginVertical: 4,
+    marginHorizontal: 2,
     alignItems: "center",
     // boxShadow: "10px 10px 5px black",
     ...Platform.select({

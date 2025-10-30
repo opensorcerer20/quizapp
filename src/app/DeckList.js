@@ -220,7 +220,9 @@ export const DeckList = () => {
         {deckListData.length > 0 && (
           <GestureHandlerRootView style={{ padding: 10 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              <TextNormal style={[scheme.txtForBg, { flex: 1, paddingVertical: 7, paddingHorizontal: 3 }]}>
+              <TextNormal
+                style={[scheme.txtForBg, { flex: 1, paddingVertical: 7, paddingHorizontal: 3, fontSize: 20 }]}
+              >
                 {getLocalString("Saved Decks")}
               </TextNormal>
               <Export deckListData={deckListData} />
