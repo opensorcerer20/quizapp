@@ -114,12 +114,6 @@ export const DeckList = () => {
     }
   };
 
-  const renderItem = ({ item }) => {
-    return (
-      <DeckListItem item={item} onPressDeck={onPressDeck} onDeleteDeck={onDeleteDeck} onUpdateDeck={onUpdateDeck} />
-    );
-  };
-
   const onPressImport = async (type) => {
     const fileType = type === "csv" ? MIME_TYPE_CSV : MIME_TYPE_TEXT;
     try {
