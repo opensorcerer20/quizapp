@@ -130,11 +130,30 @@ itemMenuButton: {
         -    [x] consistent buttons
         -    [x] change bg color: light = white, dark = not quite black
 
-    -   [ ] deck list
+    -   [x] deck list
         -   [x] dark mode odd lighter shade for name and dots
+        -   [x] slide for view
+        -   [x] slide for delete
 
     -   [ ] deck screen
-        -   [ ] slide for delete
+        -   [x] slide for delete
+        -   [ ] deck rename
+
+
+    -   [ ] set up safe insets at top-ish level
+```
+        <View
+            style={[
+              styles.container,
+              {
+                paddingTop: insets.top,
+                paddingBottom: insets.bottom,
+                paddingLeft: insets.left,
+                paddingRight: insets.right,
+              },
+            ]}
+        >
+```
 
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom

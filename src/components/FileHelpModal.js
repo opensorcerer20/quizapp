@@ -4,7 +4,6 @@ import { Image } from "expo-image";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-//import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";

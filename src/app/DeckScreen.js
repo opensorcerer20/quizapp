@@ -1,30 +1,13 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import {
-  router,
-  useFocusEffect,
-  useLocalSearchParams,
-} from "expo-router";
-import {
-  FlatList,
-  Platform,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { MAX_QUESTIONS } from "../common/constants";
-import {
-  loadDeckData,
-  saveDeckData,
-  updateDeckQuestionData,
-} from "../common/fileLib";
+import { loadDeckData, saveDeckData, updateDeckQuestionData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
 import DeckScreenItem from "../components/Deck/DeckScreenItem";
@@ -129,7 +112,7 @@ const DeckScreen = () => {
         {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
         {!questionsExist && (
           <View style={styles.container}>
-            <TextNormal style={{ fontSize: Platform.OS === "ios" ? 20 : 16 }}>
+            <TextNormal style={{ fontSize: Platform.OS === "ios" ? 24 : 20 }}>
               There are no questions in this deck, add one with the add button below
             </TextNormal>
           </View>
@@ -151,23 +134,20 @@ const DeckScreen = () => {
                   onPress: () => onVisibilityClick(false),
                 },
               ].map(({ icon, color, label, onPress }) => (
-                <Pressable
-                  key={label}
-                  style={[scheme.buttonBg, styles.button]}
-                  onPress={onPress}
-                >
-                  <TextNormal style={{color}}>{icon}</TextNormal>
-                  <TextNormal style={{color}}>{label}</TextNormal>
+                <Pressable key={label} style={[scheme.buttonBg, styles.button]} onPress={onPress}>
+                  <TextNormal style={{ color, fontSize: Platform.OS === "ios" ? 20 : 16 }}>{icon}</TextNormal>
+                  <TextNormal style={{ color, fontSize: Platform.OS === "ios" ? 20 : 16 }}>{label}</TextNormal>
                 </Pressable>
               ))}
             </View>
-            <FlatList
-              keyExtractor={(item) => item.id}
-              contentContainerStyle={{ paddingBottom: insets.bottom }}
-              style={{ width: "100%" }}
-              data={currentDeckData.questions}
-              renderItem={renderItem}
-            />
+            <GestureHandlerRootView>
+              <FlatList
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={{ paddingBottom: insets.bottom }}
+                data={currentDeckData.questions}
+                renderItem={renderItem}
+              />
+            </GestureHandlerRootView>
           </>
         )}
         {!currentDeckData && <TextNormal style={scheme.txt}>Loading question data...</TextNormal>}
@@ -191,8 +171,8 @@ const styles = StyleSheet.create({
   button: {
     padding: 12,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flexDirection: "row",
     gap: 4,
     margin: 5,

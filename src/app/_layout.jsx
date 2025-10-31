@@ -9,6 +9,8 @@ import {
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
 import { TranslationProvider } from "../components/Providers/TranslationProvider";
 
+// @todo remove SafeAreaView after using "useSafeArea"
+
 const RootLayout = () => {
   return (
     <SafeAreaProvider>
