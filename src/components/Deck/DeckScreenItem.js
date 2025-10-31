@@ -29,12 +29,11 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
       style={{ marginHorizontal: 10 }}
       item={item}
       rightBtnSettings={makeButtonSettings(
-        () => {
-          console.log(">>> right press");
-        },
-        "Delete",
+        () => setDeleteCardId(item.id),
+        null,
         "#cc0000",
-        "#ffffff"
+        "#ffffff",
+        "trash-can-outline"
       )}
     >
       <View
@@ -53,7 +52,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
             style={styles.menuIcon}
           />
         </Pressable>
-        <Pressable onLongPress={() => setDeleteCardId(item.id)} style={{ flex: 1 }}>
+        <Pressable style={{ flex: 1 }}>
           <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH * 0.9 }}>
             <TextNormal style={[scheme.txt, styles.itemText]}>
               <TextNormal style={{ fontWeight: "bold" }}>Q: </TextNormal>

@@ -3,7 +3,9 @@ import { useRef } from "react";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 
-function ButtonAction({ onPress, btnStyles, color, label, labelColor }) {
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
+function ButtonAction({ onPress, btnStyles, color, label, labelColor, icon }) {
   const buttonStyle = {
     borderRadius: 8,
     paddingHorizontal: 12,
@@ -16,17 +18,24 @@ function ButtonAction({ onPress, btnStyles, color, label, labelColor }) {
   return (
     <View style={btnStyles}>
       <Pressable onPress={onPress} style={buttonStyle} hitSlop={8}>
-        <Text style={{ color: labelColor, fontWeight: "700" }}>{label}</Text>
+        {icon && <MaterialCommunityIcons name={icon} size={24} color={labelColor} />}
+        {!icon && <Text style={{ color: labelColor, fontWeight: "700" }}>{label}</Text>}
       </Pressable>
     </View>
   );
 }
 
-export const makeButtonSettings = (onPress, label, bgColor, txtColor) => ({ onPress, label, bgColor, txtColor });
+export const makeButtonSettings = (onPress, label = null, bgColor, txtColor, icon = null) => ({
+  onPress,
+  label,
+  icon,
+  bgColor,
+  txtColor,
+});
 
 const checkBtn = (btn) => {
-  if (!btn.onPress || typeof btn.onPress !== "function" || !btn.label || !btn.bgColor || !btn.txtColor) {
-    throw new Error("button wrong format");
+  if (!btn.onPress || typeof btn.onPress !== "function" || (!btn.label && !btn.icon) || !btn.bgColor || !btn.txtColor) {
+    throw new Error("button settings error");
   }
 };
 
@@ -66,6 +75,7 @@ export default function SwipeableListItem({
             color={leftBtnSettings.bgColor}
             onPress={() => handleBtnPress(leftBtnSettings.onPress)}
             btnStyles={[styles.actionsContainer, styles.actions, { alignItems: "flex-start" }]}
+            icon={leftBtnSettings.icon}
           />
         )
       }
@@ -79,6 +89,7 @@ export default function SwipeableListItem({
             color={rightBtnSettings.bgColor}
             onPress={() => handleBtnPress(rightBtnSettings.onPress)}
             btnStyles={[styles.actionsContainer, styles.actions, { alignItems: "flex-end" }]}
+            icon={rightBtnSettings.icon}
           />
         )
       }

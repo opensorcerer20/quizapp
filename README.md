@@ -130,14 +130,17 @@ itemMenuButton: {
         -    [x] consistent buttons
         -    [x] change bg color: light = white, dark = not quite black
 
-    -   [ ] deck list
+    -   [x] deck list
         -   [x] dark mode odd lighter shade for name and dots
+        -   [x] slide for view
+        -   [x] slide for delete
 
     -   [ ] deck screen
-        -   [ ] slide for delete
+        -   [x] slide for delete
+        -   [ ] deck rename
 
 
-    -   [ ] i think i need to set up safe insets at top-ish level
+    -   [ ] set up safe insets at top-ish level
 ```
         <View
             style={[
