@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB, Portal } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, NEW_DECK_ADDED } from "../common/constants";
+import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
@@ -98,22 +98,6 @@ export const DeckList = () => {
     saveDeckListData(newDeckListData);
   };
 
-  const onUpdateDeck = async (deckId, data) => {
-    let updatedDeck = deckListData.filter((deck) => deck.id === deckId);
-    if (updatedDeck.length === 1) {
-      updatedDeck[0].name = data.name;
-      const newDeckListData = deckListData.map((deck) => {
-        if (deck.id === deckId) {
-          return updatedDeck[0];
-        }
-        return deck;
-      });
-      await updateDeckListData(newDeckListData);
-    } else {
-      console.log("couldnt edit single deck with id " + deckId);
-    }
-  };
-
   const onPressImport = async (type) => {
     const fileType = type === "csv" ? MIME_TYPE_CSV : MIME_TYPE_TEXT;
     try {
@@ -169,9 +153,9 @@ export const DeckList = () => {
   }, [importSource]);
 
   useEffect(() => {
-    if (routeParams[NEW_DECK_ADDED] === "true") {
+    if (routeParams[RELOAD_LIST] === "true") {
       setReload(true);
-      router.setParams({ NEW_DECK_ADDED: false });
+      router.setParams({ RELOAD_LIST: false });
     }
   }, [routeParams]);
 
@@ -224,12 +208,7 @@ export const DeckList = () => {
             <FlatList
               data={deckListData}
               renderItem={({ item }) => (
-                <DeckListItem
-                  item={item}
-                  onPressDeck={onPressDeck}
-                  onDeleteDeck={onDeleteDeck}
-                  onUpdateDeck={onUpdateDeck}
-                />
+                <DeckListItem item={item} onPressDeck={onPressDeck} onDeleteDeck={onDeleteDeck} />
               )}
               contentContainerStyle={{ paddingBottom: insets.bottom }}
             />
@@ -246,7 +225,7 @@ export const DeckList = () => {
                 visible
                 icon="plus"
                 color={scheme.buttonTxt.color}
-                fabStyle={scheme.buttonBg}
+                fabStyle={[globalStyles.fab, scheme.buttonBg]}
                 backdropColor={scheme.bg.backgroundColor}
                 actions={[
                   {

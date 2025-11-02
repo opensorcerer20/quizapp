@@ -92,27 +92,12 @@ itemMenuButton: {
 </Component1>
 ```
 - beta testing ios requires using testflight: https://docs.expo.dev/tutorial/eas/ios-production-build/
+- when trying to set "search parameters" for the router, i had to use the following to go back to main screen: `router.replace({ pathname: "/", params: { RELOAD_LIST: true } });`
 
 ## Current Roadmap Development
 
 - [ ] beta bugs/improvements
     ...
-
-    -   [x] allow commas in csv
-        -   [ ] ~~csv-parse library: https://csv.js.org/parse/examples/file_interaction/~~
-        -   [ ] ~~lightweight parser: https://github.com/rufuspollock/csv.js~~
-        -   [ ] ~~use papa parse~~
-        -   [x] use ai generated parser
-
-    -   [x] deck screen
-        -   [x] delete questions for a deck
-
-    -   [x] move deck list item out of deck list
-        -   [x] deck list item
-        -   [x] deck list item menu
-        -   [ ] ~~rename deck when new deck added~~
-
-    -   [x] STOP... what work should be done before launch, and what should wait
 
     -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
         -   [x] very visible backup button, ~~user chooses where to write file~~
@@ -135,9 +120,9 @@ itemMenuButton: {
         -   [x] slide for view
         -   [x] slide for delete
 
-    -   [ ] deck screen
+    -   [x] deck screen
         -   [x] slide for delete
-        -   [ ] deck rename
+        -   [x] deck rename
 
 
     -   [ ] set up safe insets at top-ish level
@@ -166,14 +151,17 @@ itemMenuButton: {
         -   [ ] eyes for visibility need emphasis
         -   [x] ios
             -   [x] rename deck popup has transparency
-        -   [ ] FAB covers right side of items
+        -   [x] FAB covers right side of items
             -   [ ] ~~option 1: empty space below list~~ doesnt work
             -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
             -   [ ] ~~change trash/menu button to long press for item~~
-            -   [ ] use swipe to delete
+            -   [x] use swipe to delete
         -   [ ] keyboard covers buttons on new deck
-        -   [ ] constants for font size
-        -   [ ] handle more narrow screen eg fold 3 (eg buttons on deck screen too wide)
+        -   [ ] fabs
+            -   [ ] trash at bottom of screen hidden by fab (move fab up)
+            -   [ ] fab different distance from bottom between deckscreen and decklist
+            -   [ ] fab shadow different between deckscreen and decklist
+
 
     -   [x] deck screen item into separate component
 
@@ -208,6 +196,7 @@ itemMenuButton: {
 -   [ ] open beta
 
 -   [ ] open beta fixes
+    -   [ ] tbd
 
 -   [ ] delayed stuff from earlier
     -   [ ] order list by name, date added
@@ -245,11 +234,9 @@ itemMenuButton: {
 -   load Google Drive spreadsheet
 -   Questions with random content with a variable and its resolver
 -   record question/answer via microphone
--   parent mode
 -   import big csv/txt file into smaller decks
 -   multi file select
 -   color blind mode
--   export decks
 -   use redux for deck list state
 
 ## Completed Roadmap Development
@@ -565,4 +552,21 @@ itemMenuButton: {
     -   [x] arrows for cards
     -   [x] keyboard covering textbox
     -   [x] dismiss ios keyboard by touching screen ("expo ios hide keyboard")
+
+    -   [x] allow commas in csv
+        -   [ ] ~~csv-parse library: https://csv.js.org/parse/examples/file_interaction/~~
+        -   [ ] ~~lightweight parser: https://github.com/rufuspollock/csv.js~~
+        -   [ ] ~~use papa parse~~
+        -   [x] use ai generated parser
+
+    -   [x] deck screen
+        -   [x] delete questions for a deck
+
+    -   [x] move deck list item out of deck list
+        -   [x] deck list item
+        -   [x] deck list item menu
+        -   [ ] ~~rename deck when new deck added~~
+
+    -   [x] STOP... what work should be done before launch, and what should wait
+
 </details>

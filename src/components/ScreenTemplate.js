@@ -9,11 +9,16 @@ import Toolbar from "./Toolbar";
 const ScreenTemplate = ({
   title = null,
   showBack = true,
-  onBackClick = () => router.back(),
+  onBackClick = null,
   helpType = null,
   hideButtons = false,
   children,
 }) => {
+  if (onBackClick === null) {
+    onBackClick = () => {
+      router.replace({ pathname: "/", params: { RELOAD_LIST: true } });
+    };
+  }
   const { theme } = useTheme();
   const scheme = getScheme(theme);
   return (

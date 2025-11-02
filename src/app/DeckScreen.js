@@ -7,9 +7,10 @@ import { FAB } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { MAX_QUESTIONS } from "../common/constants";
-import { loadDeckData, saveDeckData, updateDeckQuestionData } from "../common/fileLib";
+import { loadAllDecks, loadDeckData, saveDeckData, saveDeckListData, updateDeckQuestionData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
+import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import DeckScreenItem from "../components/Deck/DeckScreenItem";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
@@ -20,6 +21,7 @@ const DeckScreen = () => {
   const { deckId } = useLocalSearchParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -46,15 +48,25 @@ const DeckScreen = () => {
     }
   };
 
-  const renderItem = ({ item }) => {
-    return (
-      <DeckScreenItem
-        item={item}
-        scheme={scheme}
-        onVisibilityClick={onVisibilityClick}
-        handleDeleteConfirmClick={handleDeleteConfirmClick}
-      />
-    );
+  const handleRenameDeck = async (deckId, newName) => {
+    // currently, to rename one deck, it's in a list in local memory, so the list needs to be updated
+    const deckListData = await loadAllDecks();
+    let updatedDeck = deckListData.filter((deck) => deck.id == deckId);
+    if (updatedDeck.length === 1) {
+      updatedDeck[0].name = newName;
+      const newDeckListData = deckListData.map((deck) => {
+        if (deck.id === deckId) {
+          return updatedDeck[0];
+        }
+        return deck;
+      });
+
+      saveDeckListData(newDeckListData);
+      setCurrentDeck(updatedDeck[0]);
+      setShowModal(false);
+    } else {
+      console.log("couldnt edit deck with id " + deckId);
+    }
   };
 
   const loadDeckDataFromStorage = async () => {
@@ -77,7 +89,6 @@ const DeckScreen = () => {
     await loadDeckDataFromStorage();
   };
 
-  // specific to expo router
   useFocusEffect(
     useCallback(() => {
       // re-fetch data
@@ -109,7 +120,14 @@ const DeckScreen = () => {
   return (
     <>
       <ScreenTemplate title={"Deck Settings"} hideButtons={true}>
-        {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
+        {currentDeck && (
+          <DeckTitle
+            deckName={currentDeck.name}
+            scheme={scheme}
+            showEdit={true}
+            onEditPress={() => setShowModal(true)}
+          />
+        )}
         {!questionsExist && (
           <View style={styles.container}>
             <TextNormal style={{ fontSize: Platform.OS === "ios" ? 24 : 20 }}>
@@ -135,8 +153,8 @@ const DeckScreen = () => {
                 },
               ].map(({ icon, color, label, onPress }) => (
                 <Pressable key={label} style={[scheme.buttonBg, styles.button]} onPress={onPress}>
-                  <TextNormal style={{ color, fontSize: Platform.OS === "ios" ? 20 : 16 }}>{icon}</TextNormal>
-                  <TextNormal style={{ color, fontSize: Platform.OS === "ios" ? 20 : 16 }}>{label}</TextNormal>
+                  <TextNormal style={{ color, fontSize: 18, marginHorizontal: 3 }}>{icon}</TextNormal>
+                  <TextNormal style={{ color, fontSize: 18, marginHorizontal: 3 }}>{label}</TextNormal>
                 </Pressable>
               ))}
             </View>
@@ -145,7 +163,14 @@ const DeckScreen = () => {
                 keyExtractor={(item) => item.id}
                 contentContainerStyle={{ paddingBottom: insets.bottom }}
                 data={currentDeckData.questions}
-                renderItem={renderItem}
+                renderItem={(item) => (
+                  <DeckScreenItem
+                    item={item.item}
+                    scheme={scheme}
+                    onVisibilityClick={onVisibilityClick}
+                    handleDeleteConfirmClick={handleDeleteConfirmClick}
+                  />
+                )}
               />
             </GestureHandlerRootView>
           </>
@@ -157,6 +182,16 @@ const DeckScreen = () => {
           color={scheme.buttonTxt.color}
           onPress={canAddQuestion ? onAddQuestion : () => {}}
         />
+        {currentDeck && (
+          <DeckRenameModal
+            initialDeckName={currentDeck.name}
+            editingDeckId={deckId}
+            handleCancelClick={() => setShowModal(false)}
+            handleRenameDeck={handleRenameDeck}
+            showCancel={true}
+            visible={showModal}
+          />
+        )}
       </ScreenTemplate>
     </>
   );
@@ -176,6 +211,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 4,
     margin: 5,
+    borderWidth: 1,
+    borderColor: "#00000066",
   },
 });
 

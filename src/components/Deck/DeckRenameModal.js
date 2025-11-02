@@ -12,7 +12,7 @@ import TextNormal from "../TextNormal";
 
 const DeckRenameModal = ({ initialDeckName, editingDeckId, handleCancelClick, handleRenameDeck, visible = false }) => {
   const { getLocalString } = useLocale();
-  const [deckName, setDeckName] = useState("");
+  const [deckName, setDeckName] = useState(initialDeckName);
   const [submitEnabled, setSubmitEnabled] = useState(true);
 
   const { theme } = useTheme();
@@ -25,7 +25,7 @@ const DeckRenameModal = ({ initialDeckName, editingDeckId, handleCancelClick, ha
 
   useEffect(() => {
     setDeckName(initialDeckName);
-  }, [initialDeckName]);
+  }, [visible]);
 
   return (
     <ConfirmModal

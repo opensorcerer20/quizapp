@@ -5,47 +5,28 @@ import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import { THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
-import { getScheme, sanitizeAll } from "../../common/util";
+import { getScheme } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
 import TextNormal from "../../components/TextNormal";
 import ConfirmModal from "../ConfirmModal";
 import { useLocale } from "../Providers/TranslationProvider";
 import SwipeableListItem, { makeButtonSettings } from "../SwipeableListItem";
 
-export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) => {
+export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
   // AsyncStorage.clear();
   const { getLocalString } = useLocale();
 
   const [deleteDeckId, setDeleteDeckId] = useState(null);
-  // const [renameState, setRenameState] = useState({
-  //   deckId: null,
-  //   editingDeck: emptyDeck,
-  //   visible: false,
-  //   showCancel: false,
-  // });
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
-
-  // const unSelectItem = () => {
-  //   setRenameState({ ...renameState, editingDeck: emptyDeck });
-  // };
-
-  // const handleModalClickAway = () => {
-  //   unSelectItem();
-  // };
 
   const handleViewClick = (id) => {
     router.navigate({
       pathname: "DeckScreen",
       params: { deckId: id },
     });
-    // unSelectItem();
   };
-
-  // const handleRenameClick = () => {
-  // setRenameState({ ...renameState, showCancel: true, visible: true, editingDeck: item });
-  // };
 
   const handleDeleteClick = (selectedId) => {
     if (selectedId) {
@@ -53,28 +34,13 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
     }
   };
 
-  // const clearEditModal = () => {
-  //   setRenameState({ ...renameState, visible: false, editingDeck: emptyDeck });
-  // };
-
-  const handleCancelClick = () => {
-    clearEditModal();
-  };
-
   const handleDeleteCancelClick = () => {
     setDeleteDeckId(null);
-    // unSelectItem();
-  };
-
-  const handleRenameDeck = (deckId, name) => {
-    onUpdateDeck(deckId, { name: sanitizeAll(name) });
-    clearEditModal();
   };
 
   const handleConfirmDeleteClick = () => {
     onDeleteDeck(deleteDeckId);
     setDeleteDeckId(null);
-    // unSelectItem();
   };
 
   //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
@@ -123,14 +89,6 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck, onUpdateDeck }) 
           </View>
         </SwipeableListItem>
       </Pressable>
-      {/* <DeckRenameModal
-        initialDeckName={renameState.editingDeck.name}
-        editingDeckId={renameState.editingDeck.id}
-        handleCancelClick={handleCancelClick}
-        handleRenameDeck={handleRenameDeck}
-        showCancel={renameState.showCancel}
-        visible={renameState.visible}
-      /> */}
       <ConfirmModal
         message={getLocalString("Are you sure you want to delete this deck?")}
         scheme={scheme}

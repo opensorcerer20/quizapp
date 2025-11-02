@@ -1,14 +1,7 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-} from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -39,7 +32,7 @@ const NewDeck = () => {
     // handle submit
     const result = await importNewDeck(title, questionData);
     if (result) {
-      router.replace({ pathname: "/", params: { NEW_DECK_ADDED: true } });
+      router.replace({ pathname: "/", params: { RELOAD_LIST: true } });
     }
   };
 

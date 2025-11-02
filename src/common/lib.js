@@ -100,6 +100,12 @@ export const globalStyles = {
     margin: 16,
     right: 0,
     bottom: 0,
+    borderWidth: 1,
+    borderColor: "#00000033",
+    width: 70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     padding: 12,
