@@ -158,9 +158,10 @@ itemMenuButton: {
             -   [x] use swipe to delete
         -   [ ] keyboard covers buttons on new deck
         -   [ ] fabs
+            -   [ ] csv option covered by fab
             -   [ ] trash at bottom of screen hidden by fab (move fab up)
             -   [ ] fab different distance from bottom between deckscreen and decklist
-            -   [ ] fab shadow different between deckscreen and decklist
+            -   [ ] fab shadow different between deckscreen and decklist (seems like cleanup issue)
 
 
     -   [x] deck screen item into separate component
