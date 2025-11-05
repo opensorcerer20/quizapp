@@ -4,13 +4,14 @@ import * as DocumentPicker from "expo-document-picker";
 import { router, useLocalSearchParams, usePathname } from "expo-router";
 import { FlatList, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { FAB, Portal } from "react-native-paper";
+import { FAB } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import AddDeckModal from "../components/AddDeckModal";
 import DeckListItem from "../components/Deck/DeckListItem";
 import { getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
 import Export from "../components/Export";
@@ -34,6 +35,7 @@ export const DeckList = () => {
   const [importSource, setImportSource] = useState(emptyImportSource);
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
+  const [showAddMenu, setShowAddMenu] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
   const { getLocalString } = useLocale();
 
@@ -219,51 +221,24 @@ export const DeckList = () => {
         )}
         {showFab && (
           <>
-            <Portal>
-              <FAB.Group
-                open={fabOpen}
-                visible
-                icon="plus"
-                color={scheme.buttonTxt.color}
-                fabStyle={[globalStyles.fab, scheme.buttonBg]}
-                backdropColor={scheme.bg.backgroundColor}
-                actions={[
-                  {
-                    icon: "help", // material community icon
-                    label: "File Help",
-                    onPress: showFileHelpModal,
-                    labelTextColor: scheme.buttonTxt.color,
-                    labelStyle: { fontWeight: "bold" },
-                  },
-                  {
-                    icon: "form-textbox", // material community icon
-                    label: "Create Deck",
-                    onPress: onClickNew,
-                    labelTextColor: scheme.buttonTxt.color,
-                    labelStyle: { fontWeight: "bold" },
-                  },
-                  {
-                    icon: "text", // material community icon
-                    label: "Import TXT",
-                    onPress: () => onPressImport("txt"),
-                    labelTextColor: scheme.buttonTxt.color,
-                    labelStyle: { fontWeight: "bold" },
-                  },
-                  {
-                    icon: "table", // material community icon
-                    label: "Import CSV",
-                    onPress: () => onPressImport("csv"),
-                    labelTextColor: scheme.buttonTxt.color,
-                    labelStyle: { fontWeight: "bold" },
-                  },
-                ]}
-                onStateChange={onFABClick}
-              />
-            </Portal>
+            <FAB
+              icon="plus"
+              style={[globalStyles.fab, globalStyles.fabButton, scheme.buttonBg]}
+              color={scheme.txt.color}
+              onPress={() => setShowAddMenu(true)}
+            />
+            <AddDeckModal
+              scheme={scheme}
+              showModal={showAddMenu}
+              setShowModal={setShowAddMenu}
+              onPressCreate={onClickNew}
+              onPressTxt={() => onPressImport("txt")}
+              onPressCsv={() => onPressImport("csv")}
+              onPressHelp={() => setShowFileHelp(true)}
+            />
             <FileHelpModal scheme={scheme} showModal={showFileHelp} setShowModal={setShowFileHelp} />
           </>
         )}
-        {deckListData.length >= MAX_DECKS && <FAB icon="plus" style={[globalStyles.fab, scheme.bgDisabled]} />}
       </View>
     </ScreenTemplate>
   );

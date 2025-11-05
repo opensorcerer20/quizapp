@@ -97,16 +97,19 @@ export const globalStyles = {
   },
   fab: {
     position: "absolute",
-    margin: 16,
     right: 0,
     bottom: 0,
+    bottom: 34,
+  },
+  fabButton: {
+    margin: 16,
     borderWidth: 1,
     borderColor: "#000000",
+    borderRadius: 10,
     width: 70,
     height: 70,
     alignItems: "center",
     justifyContent: "center",
-    bottom: 34,
   },
   button: {
     padding: 12,

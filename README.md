@@ -158,11 +158,11 @@ itemMenuButton: {
             -   [x] use swipe to delete
         -   [ ] keyboard covers buttons on new deck
         -   [ ] fabs
-            -   [ ] csv option covered by fab
-            -   [ ] trash at bottom of screen hidden by fab (move fab up)
-            -   [ ] fab different distance from bottom between deckscreen and decklist
-            -   [ ] fab shadow different between deckscreen and decklist (seems like cleanup issue)
-
+            -   [x] csv option covered by fab
+            -   [x] trash at bottom of screen hidden by fab (move fab up)
+            -   [x] fab different distance from bottom between deckscreen and decklist
+            -   [x] fab shadow different between deckscreen and decklist (seems like cleanup issue)
+            -   [x] replace fab group (shadow issue on router return) with modal
 
     -   [x] deck screen item into separate component
 
@@ -175,11 +175,11 @@ itemMenuButton: {
 
     -   [ ] check @todos
 
-    -   [ ] set minimum sdk versions
-        -   [ ] android
-        -   [ ] ios
-
 -   [ ] llc
+
+-   [ ] set minimum sdk versions
+    -   [ ] android
+    -   [ ] ios
 
 -   [ ] set up ios app on TestFlight
     -   [ ] need po box
