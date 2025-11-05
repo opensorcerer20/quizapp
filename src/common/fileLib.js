@@ -12,7 +12,7 @@ export const loadDemoData = async () => {
       const demoDeckData = require("../../assets/demodeck.json");
 
       const deckListData = [];
-      const numDecks = 21;
+      const numDecks = 1; // change number to test multiple decks
       for (let i = 0; i < numDecks; i++) {
         let id = getRandomInt(100000, 999999);
         deckListData.push({ ...demoDeckData.demoDeckData, id });
