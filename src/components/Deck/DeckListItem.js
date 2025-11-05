@@ -3,7 +3,7 @@ import { useState } from "react";
 import { router } from "expo-router";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
-import { THEMES } from "../../common/constants";
+import { SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
@@ -103,12 +103,13 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: SAFE_WIDTH * 0.95,
     backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 12,
     borderRadius: 8,
     flexDirection: "row",
     marginVertical: 4,
-    marginHorizontal: 2,
+    marginHorizontal: "auto",
     alignItems: "center",
     // boxShadow: "10px 10px 5px black",
     ...Platform.select({

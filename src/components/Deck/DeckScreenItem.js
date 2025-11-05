@@ -38,7 +38,11 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
     >
       <View
         key={item.id}
-        style={[scheme.bgAccent, styles.container, { borderColor: scheme.txt.color, flexDirection: "row" }]}
+        style={[
+          item.disabled ? scheme.bgDisabled : scheme.bgAccent,
+          styles.container,
+          { borderColor: scheme.txt.color, flexDirection: "row" },
+        ]}
       >
         <Pressable
           style={{ flex: 1, paddingHorizontal: item.disabled ? 10 : 12, maxWidth: 50 }}
@@ -48,7 +52,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
           <FontAwesome6
             name={item.disabled ? "eye-slash" : "eye"}
             size={20}
-            color={item.disabled ? scheme.bgDisabled.backgroundColor : scheme.txt.color}
+            color={scheme.txt.color}
             style={styles.menuIcon}
           />
         </Pressable>
@@ -79,6 +83,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
 
 const styles = StyleSheet.create({
   container: {
+    width: SAFE_WIDTH * 0.95,
     flexDirection: "row",
     paddingRight: 10,
     paddingVertical: 5,

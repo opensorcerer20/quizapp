@@ -101,11 +101,12 @@ export const globalStyles = {
     right: 0,
     bottom: 0,
     borderWidth: 1,
-    borderColor: "#00000033",
+    borderColor: "#000000",
     width: 70,
     height: 70,
     alignItems: "center",
     justifyContent: "center",
+    bottom: 34,
   },
   button: {
     padding: 12,

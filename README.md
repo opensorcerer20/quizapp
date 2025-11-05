@@ -148,7 +148,7 @@ itemMenuButton: {
             -   [ ] detect system theme
             -   [ ] does not respond to very first click with no setting, so no default is set upon launch
         -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
-        -   [ ] eyes for visibility need emphasis
+        -   [x] eyes for visibility need emphasis
         -   [x] ios
             -   [x] rename deck popup has transparency
         -   [x] FAB covers right side of items

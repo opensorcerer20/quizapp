@@ -10,9 +10,16 @@ export const loadDemoData = async () => {
     // console.log("demo checks: " + JSON.stringify({ hasDeckData, hasQaDecks }));
     if (!hasDeckData && !hasQaDecks) {
       const demoDeckData = require("../../assets/demodeck.json");
-      const deckId = getRandomInt(100000, 999999);
-      await saveDeckListData([{ ...demoDeckData.demoDeckData, id: deckId }]);
-      await saveDeckData(deckId, { ...demoDeckData.demoDeckQuestionData, id: deckId });
+
+      const deckListData = [];
+      const numDecks = 21;
+      for (let i = 0; i < numDecks; i++) {
+        let id = getRandomInt(100000, 999999);
+        deckListData.push({ ...demoDeckData.demoDeckData, id });
+        await saveDeckData(id, { ...demoDeckData.demoDeckQuestionData, id });
+      }
+
+      await saveDeckListData(deckListData);
       return true;
     }
   } catch (e) {
