@@ -47,24 +47,24 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
 
   return (
     <>
-      <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-        <SwipeableListItem
-          item={item}
-          leftBtnSettings={makeButtonSettings(
-            () => handleViewClick(item.id),
-            null,
-            scheme.buttonBg.backgroundColor,
-            scheme.buttonTxt.color,
-            "credit-card-edit-outline"
-          )}
-          rightBtnSettings={makeButtonSettings(
-            () => handleDeleteClick(item.id),
-            null,
-            "#cc0000",
-            "#ffffff",
-            "trash-can-outline"
-          )}
-        >
+      <SwipeableListItem
+        item={item}
+        leftBtnSettings={makeButtonSettings(
+          () => handleViewClick(item.id),
+          null,
+          scheme.buttonBg.backgroundColor,
+          scheme.buttonTxt.color,
+          "credit-card-edit-outline"
+        )}
+        rightBtnSettings={makeButtonSettings(
+          () => handleDeleteClick(item.id),
+          null,
+          "#cc0000",
+          "#ffffff",
+          "trash-can-outline"
+        )}
+      >
+        <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
           <View
             style={[
               styles.container,
@@ -87,8 +87,8 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
               {item.name}
             </TextNormal>
           </View>
-        </SwipeableListItem>
-      </Pressable>
+        </Pressable>
+      </SwipeableListItem>
       <ConfirmModal
         message={getLocalString("Are you sure you want to delete this deck?")}
         scheme={scheme}
