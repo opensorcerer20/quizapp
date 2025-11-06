@@ -157,7 +157,7 @@ itemMenuButton: {
             -   [ ] ~~change trash/menu button to long press for item~~
             -   [x] use swipe to delete
         -   [ ] keyboard covers buttons on new deck
-        -   [ ] fabs
+        -   [x] fabs
             -   [x] csv option covered by fab
             -   [x] trash at bottom of screen hidden by fab (move fab up)
             -   [x] fab different distance from bottom between deckscreen and decklist
