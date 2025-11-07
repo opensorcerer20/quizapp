@@ -3,6 +3,8 @@ import { useState } from "react";
 import { router } from "expo-router";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
 import { SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
@@ -49,13 +51,6 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
     <>
       <SwipeableListItem
         item={item}
-        leftBtnSettings={makeButtonSettings(
-          () => handleViewClick(item.id),
-          null,
-          scheme.buttonBg.backgroundColor,
-          scheme.buttonTxt.color,
-          "credit-card-edit-outline"
-        )}
         rightBtnSettings={makeButtonSettings(
           () => handleDeleteClick(item.id),
           null,
@@ -64,30 +59,37 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
           "trash-can-outline"
         )}
       >
-        <Pressable key={item.id} onPress={() => onPressDeck(item.id)}>
-          <View
-            style={[
-              styles.container,
-              scheme.bgPrimary,
-              deleteDeckId === item.id ? { backgroundColor: scheme.txt.color } : {},
-              {
-                borderWidth: 1,
-                borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color,
-              },
-            ]}
-          >
-            <TextNormal
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={{
-                color: deleteDeckId === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
-                fontSize: item.name.length >= 24 ? 14 : 18,
-              }}
-            >
-              {item.name}
-            </TextNormal>
+        <View
+          style={[
+            styles.container,
+            scheme.bgPrimary,
+            deleteDeckId === item.id ? { backgroundColor: scheme.txt.color } : {},
+            {
+              borderWidth: 1,
+              borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color,
+            },
+          ]}
+        >
+          <View style={{ flexDirection: "row" }}>
+            <Pressable onPress={() => handleViewClick(item.id)} style={{ marginVertical: "auto" }}>
+              <View style={[scheme.buttonBg, { borderColor: scheme.txt.color, paddingRight: 15 }]}>
+                <MaterialCommunityIcons name={"cog"} size={20} color={scheme.txtForBg.color} />
+              </View>
+            </Pressable>
+            <Pressable onPress={() => onPressDeck(item.id)}>
+              <TextNormal
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{
+                  color: deleteDeckId === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
+                  fontSize: item.name.length >= 24 ? 14 : 18,
+                }}
+              >
+                {item.name}
+              </TextNormal>
+            </Pressable>
           </View>
-        </Pressable>
+        </View>
       </SwipeableListItem>
       <ConfirmModal
         message={getLocalString("Are you sure you want to delete this deck?")}

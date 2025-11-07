@@ -44,19 +44,6 @@ export const DeckList = () => {
   const { theme } = useTheme();
   const scheme = getScheme(theme);
 
-  const [fabOpen, setFabOpen] = useState(false);
-  const onFABClick = ({ open }) => {
-    setFabOpen(!!open);
-  };
-
-  const showFileHelpModal = () => {
-    setFabOpen(false);
-
-    setTimeout(() => {
-      setShowFileHelp(true);
-    }, 300);
-  };
-
   const loadDeckListData = async () => {
     let newDeckListData = await loadAllDecks();
     if (Array.isArray(newDeckListData)) {
