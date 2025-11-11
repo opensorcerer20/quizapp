@@ -72,7 +72,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
         >
           <View style={{ flexDirection: "row" }}>
             <Pressable onPress={() => handleViewClick(item.id)} style={{ marginVertical: "auto" }}>
-              <View style={[scheme.buttonBg, { borderColor: scheme.txt.color, paddingRight: 15 }]}>
+              <View style={[scheme.bgPrimary, { borderColor: scheme.txt.color, paddingRight: 15 }]}>
                 <MaterialCommunityIcons name={"cog"} size={20} color={scheme.txtForBg.color} />
               </View>
             </Pressable>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -18,6 +18,12 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
   const { getLocalString } = useLocale();
   const [currentPage, setCurrentPage] = useState(0);
 
+  const csvHelp = [
+    ["Question 1", "Answer 1", "(ignored)"],
+    ["Question 2", "Answer 2", ""],
+    ["What is 2 + 2?", "4", ""],
+  ];
+
   const pages = [
     <View style={{ flexDirection: "column" }}>
       <MaterialCommunityIcons
@@ -26,10 +32,27 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         size={24}
         color={scheme.txt.color}
       />
-      <TextNormal style={[scheme.txt, { flex: 1 }]}>
+      <TextNormal style={[scheme.txt, { flex: 1, fontSize: 20 }]}>
         {getLocalString("TXT files should alternate between question (odd lines) and answers (even lines)")}
       </TextNormal>
-      {/* @todo disabled text box with text */}
+
+      <TextInput
+        editable={false}
+        multiline={true}
+        numberOfLines={4}
+        value={"Question 1\nAnswer 1\nWhat is 2 + 2?\nfour"}
+        style={{
+          borderWidth: 1,
+          borderColor: scheme.txt.color,
+          padding: 8,
+          borderRadius: 4,
+          marginTop: 8,
+          color: scheme.txtDisabled.color,
+          fontSize: 20,
+          height: 128,
+          textAlignVertical: "top",
+        }}
+      />
     </View>,
     <View style={{ flexDirection: "column" }}>
       <MaterialCommunityIcons
@@ -38,10 +61,33 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         size={24}
         color={scheme.txt.color}
       />
-      <TextNormal style={[scheme.txt, { flex: 1 }]}>
+      <TextNormal style={[scheme.txt, { flex: 1, fontSize: 20 }]}>
         {getLocalString("CSV files should be saved as CSV files, with questions in column 1 and answers in column 2")}
       </TextNormal>
-      {/* @todo grid like spreadsheet */}
+      <View style={{ marginTop: 12, width: "100%" }}>
+        {csvHelp.map((row, rowIdx) => (
+          <View key={rowIdx} style={{ flexDirection: "row" }}>
+            {row.map((value, colIdx) => (
+              <View
+                key={colIdx}
+                style={{
+                  flex: 1,
+                  height: 36,
+                  maxWidth: 80,
+                  borderWidth: 1,
+                  padding: 4,
+                  borderColor: scheme.txt.color,
+                  justifyContent: "center",
+                  alignItems: "left",
+                  overflow: "scroll",
+                }}
+              >
+                <TextNormal style={[scheme.txt, { fontSize: 12 }]}>{value}</TextNormal>
+              </View>
+            ))}
+          </View>
+        ))}
+      </View>
     </View>,
   ];
 

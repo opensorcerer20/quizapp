@@ -169,12 +169,12 @@ itemMenuButton: {
 
     -   [x] deck screen item into separate component
 
--   [ ] update help
+-   [x] update help
     -   [x] update all help screens
     -   [x] help text bigger
-    -   [ ] file help renders versions of text/spreadsheet
+    -   [x] file help renders versions of text/spreadsheet
 
--   [ ] slide delete should be same height as card (mwmwmw)
+-   [x] slide delete should be same height as card (mwmwmw)
 
 -   [ ] hamburger menu: add value or remove
 
