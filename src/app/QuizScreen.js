@@ -54,7 +54,7 @@ const QuizScreen = () => {
   if (whichScreen === "review") {
     return (
       <>
-        <ScreenTemplate title={"Review Deck"} helpType={"deck"}>
+        <ScreenTemplate title={"Review Deck"} helpType={"review"}>
           {!!currentDeck && (
             <ReviewScreen
               currentDeck={currentDeck}

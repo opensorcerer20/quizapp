@@ -139,6 +139,9 @@ itemMenuButton: {
             ]}
         >
 ```
+    -   [ ] gear background needs to match deck list item
+
+    -   [ ] MW title on deck list goes outside container
 
     -   [ ] review screen
         -   [ ] the "MW" shows a card goes bigger at bottom
@@ -156,7 +159,7 @@ itemMenuButton: {
             -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
             -   [ ] ~~change trash/menu button to long press for item~~
             -   [x] use swipe to delete
-        -   [ ] keyboard covers buttons on new deck
+        -   [ ] ~~keyboard covers buttons on new deck~~
         -   [x] fabs
             -   [x] csv option covered by fab
             -   [x] trash at bottom of screen hidden by fab (move fab up)
@@ -166,14 +169,20 @@ itemMenuButton: {
 
     -   [x] deck screen item into separate component
 
-    -   [ ] update all help screens
-        -   [ ] help text bigger
+-   [ ] update help
+    -   [x] update all help screens
+    -   [x] help text bigger
+    -   [ ] file help renders versions of text/spreadsheet
 
-    -   [ ] android app icon needs to come down 2 pixels i think
+-   [ ] slide delete should be same height as card (mwmwmw)
 
-    -   [ ] language support?
+-   [ ] hamburger menu: add value or remove
 
-    -   [ ] check @todos
+-   [ ] android app icon needs to come down 2 pixels i think
+
+-   [ ] language support?
+
+-   [ ] check @todos
 
 -   [ ] llc
 

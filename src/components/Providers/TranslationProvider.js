@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-import { LANGUAGE_LIBRARY } from "../../common/constants";
+import { LANGUAGE_LIBRARY } from "../../common/translation";
 
 // createContext() can accept a value for testing the context without wrapping, but undefined is fine
 const LocaleContext = createContext(null);
@@ -20,7 +20,10 @@ export const TranslationProvider = ({ children }) => {
         lang,
 
         getLocalString: (strKey) => {
-          return LANGUAGE_LIBRARY[strKey][lang] ?? strKey;
+          if (strKey && lang && (!LANGUAGE_LIBRARY[strKey] || !LANGUAGE_LIBRARY[strKey][lang])) {
+            console.log('missing translation for "' + strKey + '" for language "' + lang + '"');
+          }
+          return LANGUAGE_LIBRARY[strKey] && LANGUAGE_LIBRARY[strKey][lang] ? LANGUAGE_LIBRARY[strKey][lang] : strKey;
         },
         // toggleTheme: () => setTheme(theme === THEMES.light ? THEMES.dark : THEMES.light),
       }}

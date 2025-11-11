@@ -4,32 +4,57 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_WIDTH } from "../common/constants";
+import { useLocale } from "./Providers/TranslationProvider";
 import TextNormal from "./TextNormal";
 
 export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
 
+const HelpHeader = ({ scheme, title, onPress }) => {
+  return (
+    <View style={styles.helpHeader}>
+      <TextNormal style={[scheme.txt, styles.helpTitle, { flex: 11 }]}>{title}</TextNormal>
+      <Pressable onPress={onPress}>
+        <FontAwesome6 name="square-xmark" size={24} color={scheme.txt.color} style={{ textAlign: "right", flex: 1 }} />
+      </Pressable>
+    </View>
+  );
+};
+
+const HelpItem = ({ schemeTxt, icon, text }) => {
+  return (
+    <View style={styles.helpItem}>
+      <TextNormal style={[schemeTxt, styles.helpParaIcon]}>{icon}</TextNormal>
+      <TextNormal style={[schemeTxt, styles.helpPara]}>{text}</TextNormal>
+    </View>
+  );
+};
+
 const HelpContent = (helpType, scheme) => {
-  // @todo need translations
-  // const { getLocalString } = useLocale();
-  if (helpType === "deck") {
+  const { getLocalString } = useLocale();
+
+  if (helpType === "review") {
     return {
-      title: "Deck Help",
+      title: getLocalString("Review Help"),
       items: [
         {
           icon: <MaterialCommunityIcons name="toggle-switch-outline" size={24} color={scheme.txt.color} />,
-          text: '"Reverse Q & A" to change the card "Answer" to "Question" and vice versa',
+          text: getLocalString('"Reverse Q & A" to change the card "Answer" to "Question" and vice versa'),
         },
+        // {
+        //   icon: <MaterialCommunityIcons name="toggle-switch-outline" size={24} color={scheme.txt.color} />,
+        //   text: getLocalString('"Turn Card Off" to disable the card the next time the deck is shuffled'),
+        // },
         {
-          icon: <MaterialCommunityIcons name="toggle-switch-outline" size={24} color={scheme.txt.color} />,
-          text: '"Turn Card Off" to disable the card the next time the deck is shuffled',
-        },
-        {
-          icon: <FontAwesome6 name="reply" size={24} color={scheme.txt.color} />,
-          text: "Replay the deck in the same order",
+          icon: <MaterialCommunityIcons name="chevron-double-right" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Flip card over"),
         },
         {
           icon: <FontAwesome6 name="shuffle" size={24} color={scheme.txt.color} />,
-          text: "Shuffle the deck in a new order",
+          text: getLocalString("Shuffle the deck in a new order"),
+        },
+        {
+          icon: <FontAwesome6 name="reply" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Replay the deck in the same order"),
         },
       ],
     };
@@ -37,30 +62,70 @@ const HelpContent = (helpType, scheme) => {
 
   if (helpType === "list") {
     return {
-      title: "Deck Help",
+      title: getLocalString("Deck List Help"),
       items: [
         {
+          icon: <MaterialCommunityIcons name="weather-sunny" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Light / Dark theme"),
+        },
+        {
+          icon: <MaterialCommunityIcons name="file-download-outline" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Export all deck data"),
+        },
+        {
+          icon: <MaterialCommunityIcons name="cog" size={24} color={scheme.txt.color} />,
+          text: getLocalString("View and edit deck settings"),
+        },
+        {
+          icon: <MaterialCommunityIcons name="trash-can-outline" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Swipe right to delete"),
+        },
+        {
           icon: <MaterialCommunityIcons name="plus" size={24} color={scheme.txt.color} />,
-          text: "Add a new deck",
+          text: getLocalString("Add a new deck"),
         },
         {
           icon: <MaterialCommunityIcons name="alert-outline" size={24} color={scheme.txt.color} />,
-          text: "No more than 50 questions per deck",
+          text: getLocalString("No more than 50 questions per deck"),
         },
         {
           icon: <MaterialCommunityIcons name="alert-outline" size={24} color={scheme.txt.color} />,
-          text: "No more than 20 decks may be active",
+          text: getLocalString("No more than 20 decks may be active"),
+        },
+      ],
+    };
+  }
+
+  if (helpType === "deck") {
+    return {
+      title: getLocalString("Deck Help"),
+      items: [
+        {
+          icon: <MaterialCommunityIcons name="pencil" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Edit deck title"),
         },
         {
           icon: <MaterialCommunityIcons name="eye-outline" size={24} color={scheme.txt.color} />,
-          text: '"View" a deck to turn cards on and off',
+          text: getLocalString("Turn cards on and off"),
+        },
+        {
+          icon: <MaterialCommunityIcons name="trash-can-outline" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Swipe right to delete"),
+        },
+        {
+          icon: <MaterialCommunityIcons name="plus" size={24} color={scheme.txt.color} />,
+          text: getLocalString("Add a new question and answer"),
+        },
+        {
+          icon: <MaterialCommunityIcons name="alert-outline" size={24} color={scheme.txt.color} />,
+          text: getLocalString("No more than 50 questions per deck"),
         },
       ],
     };
   }
 
   return {
-    title: "Error loading help",
+    title: getLocalString("Error loading help"),
     items: [],
   };
 };
@@ -71,29 +136,12 @@ const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
   return (
     <View style={{ padding: 15 }}>
       <View style={{ width: HELP_MODAL_WIDTH }}>
-        <View style={styles.helpHeader}>
-          <TextNormal style={[styles.helpTitle, scheme.txt, { flex: 11 }]}>{title}</TextNormal>
-          <Pressable onPress={() => setShowModal(false)}>
-            {/* @todo use space-between */}
-            {/* @todo top of help with title and x should be extracted */}
-            <FontAwesome6
-              name="square-xmark"
-              size={24}
-              color={scheme.txt.color}
-              style={{ textAlign: "right", flex: 1 }}
-            />
-          </Pressable>
-        </View>
+        <HelpHeader scheme={scheme} title={title} onPress={() => setShowModal(false)} />
         {items.length > 0 &&
-          items.map((item, key) => (
-            <View key={key} style={styles.helpItem}>
-              <TextNormal style={[styles.helpParaIcon, scheme.txt]}>{item.icon}</TextNormal>
-              <TextNormal style={[styles.helpPara, scheme.txt]}>{item.text}</TextNormal>
-            </View>
-          ))}
+          items.map((item, key) => <HelpItem key={key} schemeTxt={scheme.txt} icon={item.icon} text={item.text} />)}
         {items.length === 0 && (
           <View>
-            <TextNormal>Unknown help type</TextNormal>
+            <TextNormal>{getLocalString("Unknown help type")}</TextNormal>
           </View>
         )}
       </View>
@@ -113,6 +161,7 @@ const styles = StyleSheet.create({
   helpItem: {
     flexDirection: "row",
     width: contentWidth,
+    marginVertical: 5,
   },
   helpTitle: {
     fontWeight: "bold",
@@ -124,6 +173,7 @@ const styles = StyleSheet.create({
   },
   helpPara: {
     marginBottom: 10,
+    fontSize: 20,
   },
 });
 

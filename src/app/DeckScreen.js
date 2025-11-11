@@ -119,7 +119,7 @@ const DeckScreen = () => {
 
   return (
     <>
-      <ScreenTemplate title={"Deck Settings"} hideButtons={true}>
+      <ScreenTemplate title={"Deck Settings"} helpType={"deck"}>
         {currentDeck && (
           <DeckTitle
             deckName={currentDeck.name}

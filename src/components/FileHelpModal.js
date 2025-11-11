@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { Image } from "expo-image";
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -8,6 +7,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
+import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
@@ -15,6 +15,7 @@ const MODAL_WIDTH = SAFE_WIDTH * 0.9;
 const SAFE_MODAL_WIDTH = MODAL_WIDTH * 0.95;
 
 const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
+  const { getLocalString } = useLocale();
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = [
@@ -26,12 +27,9 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         color={scheme.txt.color}
       />
       <TextNormal style={[scheme.txt, { flex: 1 }]}>
-        TXT files should alternate between question (odd lines) and answers (even lines)
+        {getLocalString("TXT files should alternate between question (odd lines) and answers (even lines)")}
       </TextNormal>
-      <Image
-        source={require("../../assets/txt_example.png")}
-        style={{ flex: 1, width: 430, height: 144, alignSelf: "center", transform: [{ scale: 0.55 }] }}
-      />
+      {/* @todo disabled text box with text */}
     </View>,
     <View style={{ flexDirection: "column" }}>
       <MaterialCommunityIcons
@@ -41,12 +39,9 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         color={scheme.txt.color}
       />
       <TextNormal style={[scheme.txt, { flex: 1 }]}>
-        CSV files should be saved as CSV files, with questions in column 1 and answers in column 2
+        {getLocalString("CSV files should be saved as CSV files, with questions in column 1 and answers in column 2")}
       </TextNormal>
-      <Image
-        source={require("../../assets/csv_example.png")}
-        style={{ flex: 1, width: 376, height: 171, alignSelf: "center", transform: [{ scale: 0.6 }] }}
-      />
+      {/* @todo grid like spreadsheet */}
     </View>,
   ];
 
@@ -73,7 +68,6 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           ]}
         >
           <TextNormal style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>File Help</TextNormal>
-          {/* @todo use space-between */}
           <Pressable onPress={() => setShowModal(false)}>
             <FontAwesome6
               name="square-xmark"
