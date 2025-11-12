@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { StatusBar, StyleSheet, View } from "react-native";
 
-import { getScheme } from "../common/util";
+import { getInsetPadding, getScheme } from "../common/util";
 import Background from "./Background";
 import { useTheme } from "./Providers/ThemeProvider";
 import Toolbar from "./Toolbar";
@@ -21,9 +21,11 @@ const ScreenTemplate = ({
   }
   const { theme } = useTheme();
   const scheme = getScheme(theme);
+  const insetStyle = getInsetPadding();
+
   return (
     <>
-      <View style={[styles.container, scheme.bg, scheme.txt]}>
+      <View style={[styles.container, insetStyle, scheme.bg, scheme.txt]}>
         <StatusBar barStyle={"default"} />
         <Background theme={theme}>
           <Toolbar

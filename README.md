@@ -97,16 +97,14 @@ itemMenuButton: {
 ## Current Roadmap Development
 
 - [ ] beta bugs/improvements
-    ...
-
-    -   [ ] back up to storage: needed because with adding questions, files no longer have all questions
+    -   [x] back up to storage: needed because with adding questions, files no longer have all questions
         -   [x] very visible backup button, ~~user chooses where to write file~~
-        -   [ ] current working process
+        -   [x] current working process
             -   [x] write file to paths.cache (so system will delete it if needed)
             -   [x] immediately share document
             -   [x] user chooses what to do with it
-            -   [ ] test android
-            -   [ ] test ios
+            -   [x] test android
+            -   [x] test ios
 
     -   [x] question: do we bring back dot menu and remove fab?
 
@@ -125,21 +123,9 @@ itemMenuButton: {
         -   [x] deck rename
 
 
-    -   [ ] set up safe insets at top-ish level
-```
-        <View
-            style={[
-              styles.container,
-              {
-                paddingTop: insets.top,
-                paddingBottom: insets.bottom,
-                paddingLeft: insets.left,
-                paddingRight: insets.right,
-              },
-            ]}
-        >
-```
-    -   [ ] gear background needs to match deck list item
+    -   [x] set up safe insets at top-ish level
+
+    -   [x] gear background needs to match deck list item
 
     -   [ ] MW title on deck list goes outside container
 

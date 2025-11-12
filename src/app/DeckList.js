@@ -5,7 +5,6 @@ import { router, useLocalSearchParams, usePathname } from "expo-router";
 import { FlatList, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
@@ -179,14 +178,20 @@ export const DeckList = () => {
 
   const path = usePathname();
   const showFab = path === "/" && deckListData.length < MAX_DECKS;
-  const insets = useSafeAreaInsets();
 
   return (
     <ScreenTemplate showBack={false} helpType={"list"}>
       <View style={styles.container}>
         {deckListData.length > 0 && (
-          <GestureHandlerRootView style={{ padding: 10 }}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <GestureHandlerRootView style={{ padding: 0 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingHorizontal: 10,
+              }}
+            >
               <TextNormal
                 style={[scheme.txtForBg, { flex: 1, paddingVertical: 7, paddingHorizontal: 3, fontSize: 20 }]}
               >
@@ -199,7 +204,7 @@ export const DeckList = () => {
               renderItem={({ item }) => (
                 <DeckListItem item={item} onPressDeck={onPressDeck} onDeleteDeck={onDeleteDeck} />
               )}
-              contentContainerStyle={{ paddingBottom: insets.bottom }}
+              // contentContainerStyle={{ paddingBottom: insetStyle.paddingBottom }}
             />
           </GestureHandlerRootView>
         )}

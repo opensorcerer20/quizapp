@@ -36,4 +36,6 @@ export const MIME_TYPE_TEXT = ["text/plain"];
 
 const { width } = Dimensions.get("window");
 export const SAFE_MARGIN = Math.round(width / 20); // 5% width
-export const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
+// export const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
+// @todo TESTING WIDTH
+export const SAFE_WIDTH = width; // 95% width

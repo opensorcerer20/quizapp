@@ -30,7 +30,7 @@ const Export = () => {
         `export_${new Date()
           .toISOString()
           .replace("T", "_")
-          .replace(/[^0-9_]/g, "")}.txt`
+          .replace(/[^0-9_]/g, "")}.txt` // filename is ymd_hms.txt
       );
       if (!file.exists) {
         file.create(); // can throw an error if the file already exists or no permission to create it
@@ -56,14 +56,14 @@ const Export = () => {
     if (file) {
       try {
         if (!(await Sharing.isAvailableAsync())) {
-          Alert.alert("Sharing not available", "Your device does not support sharing.");
+          Alert.alert("Error exporting data", "Your device does not support saving text files");
           return;
         }
 
-        await Sharing.shareAsync(file.uri, { mimeType: "text/plain", dialogTitle: "Share this file!" });
+        await Sharing.shareAsync(file.uri, { mimeType: "text/plain", dialogTitle: "Save export file" });
       } catch (error) {
         console.error("Error sharing file:", error);
-        Alert.alert("Sharing error", "Failed to share the file.");
+        Alert.alert("Error exporting data", "Error exporting data to text file for saving");
       }
     }
     setModalVisible(false);

@@ -4,7 +4,6 @@ import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { MAX_QUESTIONS } from "../common/constants";
 import { loadAllDecks, loadDeckData, saveDeckData, saveDeckListData, updateDeckQuestionData } from "../common/fileLib";
@@ -113,7 +112,6 @@ const DeckScreen = () => {
 
   const canAddQuestion = !currentDeckData?.questions?.length || currentDeckData.questions.length < MAX_QUESTIONS;
   const questionsExist = currentDeckData && currentDeckData?.questions;
-  const insets = useSafeAreaInsets();
 
   // console.log("questiondata " + JSON.stringify(currentDeckData));
 
@@ -161,7 +159,7 @@ const DeckScreen = () => {
             <GestureHandlerRootView>
               <FlatList
                 keyExtractor={(item) => item.id}
-                contentContainerStyle={{ paddingBottom: insets.bottom }}
+                // contentContainerStyle={{ paddingBottom: insets.bottom }}
                 data={currentDeckData.questions}
                 renderItem={(item) => (
                   <DeckScreenItem

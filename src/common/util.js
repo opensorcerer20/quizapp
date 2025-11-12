@@ -1,3 +1,4 @@
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import sanitizeHtml from "sanitize-html";
 
 import { MAX_CHAR_LIMIT, MAX_CHAR_LIMIT_L, MAX_CHAR_LIMIT_XL, MAX_CHAR_LIMIT_XXL, THEMES } from "./constants";
@@ -81,4 +82,17 @@ export const getScheme = (theme) => {
 
 const styles = {
   ...lightDarkStyles,
+};
+
+export const getInsetPadding = () => {
+  const insets = useSafeAreaInsets();
+  if (insets && insets.top) {
+    return {
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      paddingLeft: insets.left ? insets.left : 5,
+      paddingRight: insets.right ? insets.right : 5,
+    };
+  }
+  return {};
 };
