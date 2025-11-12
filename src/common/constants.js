@@ -39,3 +39,136 @@ export const SAFE_MARGIN = Math.round(width / 20); // 5% width
 // export const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
 // @todo TESTING WIDTH
 export const SAFE_WIDTH = width; // 95% width
+
+// source: https://gist.github.com/aminnj/5ca372aa2def72fb017b531c894afdca
+const charWidths = {
+  " ": 4.4453125,
+  "!": 4.4453125,
+  '"': 5.6796875,
+  "#": 8.8984375,
+  $: 8.8984375,
+  "%": 14.2265625,
+  "&": 10.671875,
+  "'": 3.0546875,
+  "(": 5.328125,
+  ")": 5.328125,
+  "*": 6.2265625,
+  "+": 9.34375,
+  ",": 4.4453125,
+  "-": 5.328125,
+  ".": 4.4453125,
+  "/": 4.4453125,
+  0: 8.8984375,
+  1: 7.7228125,
+  2: 8.8984375,
+  3: 8.8984375,
+  4: 8.8984375,
+  5: 8.8984375,
+  6: 8.8984375,
+  7: 8.8984375,
+  8: 8.8984375,
+  9: 8.8984375,
+  ":": 4.4453125,
+  ";": 4.4453125,
+  "<": 9.34375,
+  "=": 9.34375,
+  ">": 9.34375,
+  "?": 8.8984375,
+  "@": 16.2421875,
+  A: 10.671875,
+  B: 10.671875,
+  C: 11.5546875,
+  D: 11.5546875,
+  E: 10.671875,
+  F: 9.7734375,
+  G: 12.4453125,
+  H: 11.5546875,
+  I: 4.4453125,
+  J: 8,
+  K: 10.671875,
+  L: 8.8984375,
+  M: 13.328125,
+  N: 11.5546875,
+  O: 12.4453125,
+  P: 10.671875,
+  Q: 12.4453125,
+  R: 11.5546875,
+  S: 10.671875,
+  T: 9.7734375,
+  U: 11.5546875,
+  V: 10.671875,
+  W: 15.1015625,
+  X: 10.671875,
+  Y: 10.671875,
+  Z: 9.7734375,
+  "[": 4.4453125,
+  "\\": 4.4453125,
+  "]": 4.4453125,
+  "^": 7.5078125,
+  _: 8.8984375,
+  "`": 5.328125,
+  a: 8.8984375,
+  b: 8.8984375,
+  c: 8,
+  d: 8.8984375,
+  e: 8.8984375,
+  f: 4.15921875,
+  g: 8.8984375,
+  h: 8.8984375,
+  i: 3.5546875,
+  j: 3.5546875,
+  k: 8,
+  l: 3.5546875,
+  m: 13.328125,
+  n: 8.8984375,
+  o: 8.8984375,
+  p: 8.8984375,
+  q: 8.8984375,
+  r: 5.328125,
+  s: 8,
+  t: 4.4453125,
+  u: 8.8984375,
+  v: 8,
+  w: 11.5546875,
+  x: 8,
+  y: 8,
+  z: 8,
+  "{": 5.34375,
+  "|": 4.15625,
+  "}": 5.34375,
+  "~": 9.34375,
+};
+
+const getAllStrWidths = (str) => {
+  if (typeof str !== "string") throw new Error("Invalid string for getStrWidth");
+  const allWidths = [];
+  for (let i = 0; i < str.length; i++) {
+    allWidths.push(charWidths[str[i]] || 9);
+  }
+  return allWidths;
+};
+
+export const getStrWidth = (str) => {
+  if (typeof str !== "string") throw new Error("Invalid string for getStrWidth");
+  return str.split("").reduce((acc, currVal) => {
+    return acc + charWidths[currVal] || 9; // arbitrary value 9 if char not specified in known widths
+  }, 0);
+};
+
+export const clipWideString = (str, maxPixelLength = 360) => {
+  const allWidths = getAllStrWidths(str);
+  const strWidth = allWidths.reduce((a, c) => a + c, 0);
+  if (strWidth > maxPixelLength) {
+    let newStr = "";
+    let strTot = 0;
+    for (let i = 0; i < str.length; i++) {
+      if (strTot + allWidths[i] > maxPixelLength) {
+        return newStr;
+      }
+      newStr = newStr + str[i];
+      strTot += allWidths[i];
+    }
+    return newStr;
+  }
+  return str;
+};

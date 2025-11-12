@@ -5,7 +5,7 @@ import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { SAFE_WIDTH, THEMES } from "../../common/constants";
+import { clipWideString, getStrWidth, SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
@@ -46,6 +46,8 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
   };
 
   //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
+  const nameWidth = getStrWidth(item.name);
+  const itemName = nameWidth > 280 ? clipWideString(item.name, 280) + "..." : item.name;
 
   return (
     <>
@@ -82,10 +84,10 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
                 ellipsizeMode="tail"
                 style={{
                   color: deleteDeckId === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
-                  fontSize: item.name.length >= 24 ? 14 : 18,
+                  fontSize: 18,
                 }}
               >
-                {item.name}
+                {itemName}
               </TextNormal>
             </Pressable>
           </View>

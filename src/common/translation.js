@@ -134,6 +134,9 @@ export const LANGUAGE_LIBRARY = {
   "Review Help": {
     en: "Review Help",
   },
+  "There are no questions in this deck, add one with the add button below": {
+    en: "There are no questions in this deck, add one with the add button below",
+  },
   /*
   "xxx": {
     en: "xxx",

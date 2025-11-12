@@ -127,16 +127,12 @@ itemMenuButton: {
 
     -   [x] gear background needs to match deck list item
 
-    -   [ ] MW title on deck list goes outside container
+    -   [x] MW title on deck list goes outside container
 
-    -   [ ] review screen
-        -   [ ] the "MW" shows a card goes bigger at bottom
+    -   [x] review screen
+        -   [x] the "MW" shows a card goes bigger at bottom
 
-    -   [ ] general ui
-        -   [ ] theme
-            -   [ ] detect system theme
-            -   [ ] does not respond to very first click with no setting, so no default is set upon launch
-        -   [ ] handle android back button to launch confirm modal (new deck, add question, etc) ("expo detect android back")
+    -   [x] general ui
         -   [x] eyes for visibility need emphasis
         -   [x] ios
             -   [x] rename deck popup has transparency
@@ -162,7 +158,9 @@ itemMenuButton: {
 
 -   [x] slide delete should be same height as card (mwmwmw)
 
--   [ ] hamburger menu: add value or remove
+-   [ ] handle android back button WHEN ON MODAL TO DISMISS MODAL AND SHOW WARNING (new deck, add question, etc) ("expo detect android back")
+
+-   [ ] hamburger menu: about points to repository
 
 -   [ ] android app icon needs to come down 2 pixels i think
 
@@ -195,10 +193,13 @@ itemMenuButton: {
     -   [ ] tbd
 
 -   [ ] delayed stuff from earlier
+    -   [ ] theme
+        -   [ ] detect system theme
+        -   [ ] does not respond to very first click with no setting, so no default is set upon launch
     -   [ ] order list by name, date added
     -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
 
--   [ ] add tip to menu (needs llc name)
+-   [ ] add hamburger menu with tip (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
     -   [ ] tip button (https://buymeacoffee.com/)
 

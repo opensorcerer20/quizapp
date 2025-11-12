@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
 
@@ -13,6 +13,7 @@ import DeckRenameModal from "../components/Deck/DeckRenameModal";
 import DeckScreenItem from "../components/Deck/DeckScreenItem";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
+import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
@@ -21,6 +22,7 @@ const DeckScreen = () => {
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const { getLocalString } = useLocale();
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -128,8 +130,8 @@ const DeckScreen = () => {
         )}
         {!questionsExist && (
           <View style={styles.container}>
-            <TextNormal style={{ fontSize: Platform.OS === "ios" ? 24 : 20 }}>
-              There are no questions in this deck, add one with the add button below
+            <TextNormal style={{ fontSize: 20, padding: 20 }}>
+              {getLocalString("There are no questions in this deck, add one with the add button below")}
             </TextNormal>
           </View>
         )}
