@@ -139,36 +139,35 @@ const charWidths = {
   "~": 9.34375,
 };
 
-const getAllStrWidths = (str) => {
-  if (typeof str !== "string") throw new Error("Invalid string for getStrWidth");
-  const allWidths = [];
-  for (let i = 0; i < str.length; i++) {
-    allWidths.push(charWidths[str[i]] || 9);
-  }
-  return allWidths;
-};
+// Default width for characters not in the charWidths map
+const DEFAULT_CHAR_WIDTH =
+  Object.keys(charWidths).length > 0
+    ? Object.values(charWidths).reduce((a, c) => a + c, 0) / Object.keys(charWidths).length
+    : 0;
 
 export const getStrWidth = (str) => {
   if (typeof str !== "string") throw new Error("Invalid string for getStrWidth");
   return str.split("").reduce((acc, currVal) => {
-    return acc + charWidths[currVal] || 9; // arbitrary value 9 if char not specified in known widths
+    return acc + (charWidths[currVal] ?? DEFAULT_CHAR_WIDTH);
   }, 0);
 };
 
+// arbitrary default width of 360 for mobile phone
 export const clipWideString = (str, maxPixelLength = 360) => {
-  const allWidths = getAllStrWidths(str);
-  const strWidth = allWidths.reduce((a, c) => a + c, 0);
-  if (strWidth > maxPixelLength) {
-    let newStr = "";
-    let strTot = 0;
-    for (let i = 0; i < str.length; i++) {
-      if (strTot + allWidths[i] > maxPixelLength) {
-        return newStr;
-      }
-      newStr = newStr + str[i];
-      strTot += allWidths[i];
+  if (typeof str !== "string") throw new Error("Invalid string for clipWideString");
+  if (str.length < 11) return str;
+
+  let totalWidth = 0;
+  let clippedIndex = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    const charWidth = charWidths[str[i]] ?? DEFAULT_CHAR_WIDTH;
+    if (totalWidth + charWidth > maxPixelLength) {
+      break;
     }
-    return newStr;
+    totalWidth += charWidth;
+    clippedIndex = i + 1;
   }
-  return str;
+
+  return str.slice(0, clippedIndex);
 };
