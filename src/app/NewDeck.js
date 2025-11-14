@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { router } from "expo-router";
-import { Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput } from "react-native";
+import { BackHandler, Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -56,6 +56,24 @@ const NewDeck = () => {
   const hideKeyboard = () => {
     Keyboard.dismiss();
   };
+
+  useEffect(() => {
+    let subscr;
+    if (Platform.OS === "android") {
+      const handleBackPress = () => {
+        setModalVisible(true);
+        return true; // Return true to prevent default back action
+      };
+
+      // Add the event listener when the component mounts
+      subscr = BackHandler.addEventListener("hardwareBackPress", handleBackPress);
+    }
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      if (Platform.OS === "android") subscr.remove();
+    };
+  }, []);
 
   return (
     <ScreenTemplate showBack={true} onBackClick={onBackClick}>

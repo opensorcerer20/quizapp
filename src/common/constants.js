@@ -25,12 +25,6 @@ export const THEMES = {
   dark: "dark",
 };
 
-// @todo use later
-export const FONT_SIZES = {
-  ios: {},
-  android: {},
-};
-
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
 export const MIME_TYPE_TEXT = ["text/plain"];
 

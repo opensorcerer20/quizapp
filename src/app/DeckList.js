@@ -63,7 +63,6 @@ export const DeckList = () => {
     });
   };
 
-  // @todo use importNewDeck to handle all new deck imports (or at least new deck creation via textarea)
   const onAddDeck = async (newDeck, newDeckData) => {
     let newDeckListData = deckListData.slice();
 

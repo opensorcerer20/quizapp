@@ -48,7 +48,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           borderRadius: 4,
           marginTop: 8,
           color: scheme.txtDisabled.color,
-          fontSize: 20,
+          fontSize: 12,
           height: 128,
           textAlignVertical: "top",
         }}

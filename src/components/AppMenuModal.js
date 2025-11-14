@@ -20,7 +20,6 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
         { borderColor: scheme.txtForBg.color, borderWidth: 1 },
       ]}
     >
-      {/* @todo add more value for hamburger menu */}
       <Pressable onPress={onClickNew}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>Make new deck</TextNormal>

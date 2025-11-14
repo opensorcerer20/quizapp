@@ -96,77 +96,15 @@ itemMenuButton: {
 
 ## Current Roadmap Development
 
-- [ ] beta bugs/improvements
-    -   [x] back up to storage: needed because with adding questions, files no longer have all questions
-        -   [x] very visible backup button, ~~user chooses where to write file~~
-        -   [x] current working process
-            -   [x] write file to paths.cache (so system will delete it if needed)
-            -   [x] immediately share document
-            -   [x] user chooses what to do with it
-            -   [x] test android
-            -   [x] test ios
-
-    -   [x] question: do we bring back dot menu and remove fab?
-
-    -   [x] use react native Modal for modals
-        -    [x] rename needs changing
-        -    [x] consistent buttons
-        -    [x] change bg color: light = white, dark = not quite black
-
-    -   [x] deck list
-        -   [x] dark mode odd lighter shade for name and dots
-        -   [x] slide for view
-        -   [x] slide for delete
-
-    -   [x] deck screen
-        -   [x] slide for delete
-        -   [x] deck rename
-
-
-    -   [x] set up safe insets at top-ish level
-
-    -   [x] gear background needs to match deck list item
-
-    -   [x] MW title on deck list goes outside container
-
-    -   [x] review screen
-        -   [x] the "MW" shows a card goes bigger at bottom
-
-    -   [x] general ui
-        -   [x] eyes for visibility need emphasis
-        -   [x] ios
-            -   [x] rename deck popup has transparency
-        -   [x] FAB covers right side of items
-            -   [ ] ~~option 1: empty space below list~~ doesnt work
-            -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
-            -   [ ] ~~change trash/menu button to long press for item~~
-            -   [x] use swipe to delete
-        -   [ ] ~~keyboard covers buttons on new deck~~
-        -   [x] fabs
-            -   [x] csv option covered by fab
-            -   [x] trash at bottom of screen hidden by fab (move fab up)
-            -   [x] fab different distance from bottom between deckscreen and decklist
-            -   [x] fab shadow different between deckscreen and decklist (seems like cleanup issue)
-            -   [x] replace fab group (shadow issue on router return) with modal
-
-    -   [x] deck screen item into separate component
-
--   [x] update help
-    -   [x] update all help screens
-    -   [x] help text bigger
-    -   [x] file help renders versions of text/spreadsheet
-
--   [x] slide delete should be same height as card (mwmwmw)
-
--   [ ] handle android back button WHEN ON MODAL TO DISMISS MODAL AND SHOW WARNING (new deck, add question, etc) ("expo detect android back")
-
--   [ ] hamburger menu: about points to repository
+-   [x] handle android back button WHEN ON MODAL TO DISMISS MODAL AND SHOW WARNING (new deck, add question, etc) ("expo detect android back")
 
 -   [ ] android app icon needs to come down 2 pixels i think
 
 -   [ ] language support?
 
 -   [ ] check @todos
+    -   [ ] @todo remove SafeAreaView after using "useSafeArea"
+    -   [x] other todos
 
 -   [ ] llc
 
@@ -198,6 +136,7 @@ itemMenuButton: {
         -   [ ] does not respond to very first click with no setting, so no default is set upon launch
     -   [ ] order list by name, date added
     -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+    -   [ ] hamburger menu: about points to repository
 
 -   [ ] add hamburger menu with tip (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
@@ -565,5 +504,66 @@ itemMenuButton: {
         -   [ ] ~~rename deck when new deck added~~
 
     -   [x] STOP... what work should be done before launch, and what should wait
+- [x] beta bugs/improvements
+    -   [x] back up to storage: needed because with adding questions, files no longer have all questions
+        -   [x] very visible backup button, ~~user chooses where to write file~~
+        -   [x] current working process
+            -   [x] write file to paths.cache (so system will delete it if needed)
+            -   [x] immediately share document
+            -   [x] user chooses what to do with it
+            -   [x] test android
+            -   [x] test ios
+
+    -   [x] question: do we bring back dot menu and remove fab?
+
+    -   [x] use react native Modal for modals
+        -    [x] rename needs changing
+        -    [x] consistent buttons
+        -    [x] change bg color: light = white, dark = not quite black
+
+    -   [x] deck list
+        -   [x] dark mode odd lighter shade for name and dots
+        -   [x] slide for view
+        -   [x] slide for delete
+
+    -   [x] deck screen
+        -   [x] slide for delete
+        -   [x] deck rename
+
+
+    -   [x] set up safe insets at top-ish level
+
+    -   [x] gear background needs to match deck list item
+
+    -   [x] MW title on deck list goes outside container
+
+    -   [x] review screen
+        -   [x] the "MW" shows a card goes bigger at bottom
+
+    -   [x] general ui
+        -   [x] eyes for visibility need emphasis
+        -   [x] ios
+            -   [x] rename deck popup has transparency
+        -   [x] FAB covers right side of items
+            -   [ ] ~~option 1: empty space below list~~ doesnt work
+            -   [ ] ~~option 2: on scroll down, remove add button (google search "expo on scroll down")~~ does work, but if item exactly at bottom with no scroll, it will be covered
+            -   [ ] ~~change trash/menu button to long press for item~~
+            -   [x] use swipe to delete
+        -   [ ] ~~keyboard covers buttons on new deck~~
+        -   [x] fabs
+            -   [x] csv option covered by fab
+            -   [x] trash at bottom of screen hidden by fab (move fab up)
+            -   [x] fab different distance from bottom between deckscreen and decklist
+            -   [x] fab shadow different between deckscreen and decklist (seems like cleanup issue)
+            -   [x] replace fab group (shadow issue on router return) with modal
+
+    -   [x] deck screen item into separate component
+
+-   [x] update help
+    -   [x] update all help screens
+    -   [x] help text bigger
+    -   [x] file help renders versions of text/spreadsheet
+
+-   [x] slide delete should be same height as card (mwmwmw)
 
 </details>

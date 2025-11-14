@@ -53,7 +53,6 @@ export const randomizeQBag = (bag) => {
     .map(({ value }) => value);
 };
 
-// @todo handle all new deck imports (or at least new deck creation via textarea)
 export const importNewDeck = async (title, questionData) => {
   const deckListData = await loadAllDecks();
   // generate deck id that doesnt already exist
@@ -106,7 +105,6 @@ export const getQuestionObjectsFromRawData = (mimeType, rawQuestionData) => {
 
   // plain text does not require additional processing (at this time)
   if (mimeType === "csv") {
-    // @todo parse csv here
     questions = parseStringToColumns(rawQuestionData, 2);
     questions = questions.flat(); // change [[1, 2],[3, 4]]] to [1,2,3,4]
   }
