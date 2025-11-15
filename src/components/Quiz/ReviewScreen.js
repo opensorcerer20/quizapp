@@ -11,12 +11,14 @@ import DeckTitle from "../Deck/DeckTitle";
 import FlipCard from "../Deck/FlipCard";
 import { emptyQuestion, randomizeQBag } from "../Deck/QuizDeck";
 import { useTheme } from "../Providers/ThemeProvider";
+import { useLocale } from "../Providers/TranslationProvider";
 import TextNormal from "../TextNormal";
 
 export const QUESTION_FIRST = "qtoa";
 export const ANSWER_FIRST = "atoq";
 
 export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuestionData }) => {
+  const { getLocalString } = useLocale();
   const [showFirst, setShowFirst] = useState(QUESTION_FIRST);
   const [noEnabledQs, setNoEnabledQs] = useState(false);
 
@@ -160,7 +162,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
             onStartOverClick={() => resetQuestionBag(false)}
           />
           <TextNormal style={[scheme.txt, styles.cardCounter]}>
-            Card {currentState.originalBag.length - currentState.questionBag.length} of{" "}
+            {getLocalString("Card")} {currentState.originalBag.length - currentState.questionBag.length} of{" "}
             {currentState.originalBag.length}
           </TextNormal>
           {/* <View style={styles.switchContainer}>
@@ -186,10 +188,12 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
         <View style={styles.container}>
           <View style={[scheme.bg, styles.noQContainer]}>
             <TextNormal style={[styles.noQText, scheme.txtForBg]}>
-              Sorry, no questions are enabled for this deck.
+              {getLocalString("Sorry, no questions are enabled for this deck.")}
             </TextNormal>
             <TextNormal style={[styles.noQText, scheme.txtForBg]}>
-              Please go to the deck View from the main Deck List and enable at least one card from this deck.
+              {getLocalString(
+                "Please go to the deck View from the main Deck List and enable at least one card from this deck."
+              )}
             </TextNormal>
           </View>
         </View>

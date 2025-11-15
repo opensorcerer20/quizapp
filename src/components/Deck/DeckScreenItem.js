@@ -75,7 +75,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
         modalVisible={deleteCardId !== null}
         handleCancel={handleDeleteCancelClick}
         handleConfirm={onDeleteConfirmClick}
-        confirmLabel="Delete"
+        confirmLabel={getLocalString("Delete")}
       />
     </SwipeableListItem>
   );

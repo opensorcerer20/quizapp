@@ -9,6 +9,7 @@ import { SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
 import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
+import { useLocale } from "../Providers/TranslationProvider";
 import { ANSWER_FIRST } from "../Quiz/ReviewScreen";
 import TextNormal from "../TextNormal";
 
@@ -21,6 +22,7 @@ const CARDTYPE_ANSWER = "answer";
 
 const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerTextStyle }) => {
   //console.log("headerTextStyle " + JSON.stringify(headerTextStyle));
+  const { getLocalString } = useLocale();
   const finalCardText = formatCardText(cardText);
 
   const fontSize = getFontSize(finalCardText.length);
@@ -49,7 +51,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
           },
         ]}
       >
-        {cardType === CARDTYPE_ANSWER ? "Answer" : "Question"}
+        {cardType === CARDTYPE_ANSWER ? getLocalString("Answer") : getLocalString("Question")}
       </TextNormal>
     </View>
   );

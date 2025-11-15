@@ -1,10 +1,12 @@
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import { globalStyles } from "../common/lib";
+import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
 const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme }) => {
+  const { getLocalString } = useLocale();
   return (
     <QuizModal
       modalVisible={showModal}
@@ -22,12 +24,12 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
     >
       <Pressable onPress={onClickNew}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
-          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>Make new deck</TextNormal>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Make new deck")}</TextNormal>
         </View>
       </Pressable>
       <Pressable onPress={onClickHelp}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
-          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>Deck file help</TextNormal>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Deck file help")}</TextNormal>
         </View>
       </Pressable>
     </QuizModal>

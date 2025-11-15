@@ -19,8 +19,8 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const csvHelp = [
-    ["Question 1", "Answer 1", "(ignored)"],
-    ["Question 2", "Answer 2", ""],
+    [getLocalString("Question") + " 1", getLocalString("Answer") + " 1", "(" + getLocalString("ignored") + ")"],
+    [getLocalString("Question") + " 2", getLocalString("Answer") + " 2", ""],
     ["What is 2 + 2?", "4", ""],
   ];
 
@@ -40,7 +40,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         editable={false}
         multiline={true}
         numberOfLines={4}
-        value={"Question 1\nAnswer 1\nWhat is 2 + 2?\nfour"}
+        value={getLocalString("Question") + " 1\n" + getLocalString("Answer") + " 1\nWhat is 2 + 2?\nfour"}
         style={{
           borderWidth: 1,
           borderColor: scheme.txt.color,
@@ -48,7 +48,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
           borderRadius: 4,
           marginTop: 8,
           color: scheme.txtDisabled.color,
-          fontSize: 12,
+          fontSize: 16,
           height: 128,
           textAlignVertical: "top",
         }}
@@ -113,7 +113,9 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
             { flex: 2, width: SAFE_MODAL_WIDTH + 10, marginHorizontal: "auto", marginTop: 5, padding: 10 },
           ]}
         >
-          <TextNormal style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>File Help</TextNormal>
+          <TextNormal style={[styles.modalTitle, scheme.txt, { flex: 11, paddingLeft: 5 }]}>
+            {getLocalString("File Help")}
+          </TextNormal>
           <Pressable onPress={() => setShowModal(false)}>
             <FontAwesome6
               name="square-xmark"

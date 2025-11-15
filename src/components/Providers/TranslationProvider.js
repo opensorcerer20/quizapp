@@ -21,7 +21,7 @@ export const TranslationProvider = ({ children }) => {
 
         getLocalString: (strKey) => {
           if (strKey && lang && (!LANGUAGE_LIBRARY[strKey] || !LANGUAGE_LIBRARY[strKey][lang])) {
-            console.log('missing translation for "' + strKey + '" for language "' + lang + '"');
+            // console.log('missing translation for "' + strKey + '" for language "' + lang + '"');
           }
           return LANGUAGE_LIBRARY[strKey] && LANGUAGE_LIBRARY[strKey][lang] ? LANGUAGE_LIBRARY[strKey][lang] : strKey;
         },

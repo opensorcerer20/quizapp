@@ -98,12 +98,12 @@ itemMenuButton: {
 
 -   [x] handle android back button WHEN ON MODAL TO DISMISS MODAL AND SHOW WARNING (new deck, add question, etc) ("expo detect android back")
 
--   [ ] android app icon needs to come down 2 pixels i think
+-   [x] ~~android app icon needs to come down 2 pixels i think~~ i think this is expo go only
 
--   [ ] language support?
+-   [ ] set up (but dont implement) language support
 
--   [ ] check @todos
-    -   [ ] @todo remove SafeAreaView after using "useSafeArea"
+-   [x] check @todos
+    -   [ ] ~~@todo remove SafeAreaView after using "useSafeArea"~~
     -   [x] other todos
 
 -   [ ] llc
@@ -137,6 +137,7 @@ itemMenuButton: {
     -   [ ] order list by name, date added
     -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
     -   [ ] hamburger menu: about points to repository
+    -   [ ] translations
 
 -   [ ] add hamburger menu with tip (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"

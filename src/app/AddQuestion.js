@@ -11,10 +11,12 @@ import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
 import { useTheme } from "../components/Providers/ThemeProvider";
+import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
 const AddQuestion = () => {
+  const { getLocalString } = useLocale();
   const { deckId } = useLocalSearchParams();
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -96,14 +98,14 @@ const AddQuestion = () => {
   }, []);
 
   return (
-    <ScreenTemplate title={"Add Question"} showBack={true} onBackClick={onBackClick}>
+    <ScreenTemplate title={getLocalString("Add Question")} showBack={true} onBackClick={onBackClick}>
       {currentDeck && <DeckTitle deckName={currentDeck.name} scheme={scheme} />}
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <View>
-          <TextNormal style={styles.label}>Question</TextNormal>
+          <TextNormal style={styles.label}>{getLocalString("Question")}</TextNormal>
           <TextInput
             style={globalStyles.textField}
-            placeholder="Question"
+            placeholder={getLocalString("Question")}
             placeholderTextColor="#aaaaaa"
             value={question}
             onChangeText={setQuestion}
@@ -111,10 +113,10 @@ const AddQuestion = () => {
           />
         </View>
         <View>
-          <TextNormal style={styles.label}>Answer</TextNormal>
+          <TextNormal style={styles.label}>{getLocalString("Answer")}</TextNormal>
           <TextInput
             style={globalStyles.textField}
-            placeholder="Answer"
+            placeholder={getLocalString("Answer")}
             placeholderTextColor="#aaaaaa"
             value={answer}
             onChangeText={setAnswer}
@@ -125,16 +127,16 @@ const AddQuestion = () => {
           scheme={scheme}
           handleSubmit={handleSubmit}
           onBackClick={onBackClick}
-          submitLabel="Add Question"
+          submitLabel={getLocalString("Add Question")}
           submitDisabled={question.length === 0 || answer.length === 0}
         />
         <ConfirmModal
-          message="You have unsaved data, do you want to discard it?"
+          message={getLocalString("You have unsaved data, do you want to discard it?")}
           scheme={scheme}
           modalVisible={modalVisible}
           handleCancel={handleCancel}
           handleConfirm={handleConfirm}
-          confirmLabel="Discard"
+          confirmLabel={getLocalString("Discard")}
         />
       </KeyboardAvoidingView>
     </ScreenTemplate>

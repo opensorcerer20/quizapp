@@ -3,6 +3,7 @@ import { Modal, Pressable, StyleSheet, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { globalStyles } from "../common/lib";
+import { useLocale } from "./Providers/TranslationProvider";
 import TextNormal from "./TextNormal";
 
 const AddDeckButton = ({ scheme, onPressBtn, callback, label, icon }) => (
@@ -18,6 +19,7 @@ const AddDeckButton = ({ scheme, onPressBtn, callback, label, icon }) => (
 );
 
 const AddDeckModal = ({ showModal, setShowModal, onPressCreate, onPressTxt, onPressCsv, onPressHelp, scheme }) => {
+  const { getLocalString } = useLocale();
   const onPressBtn = (callback) => {
     setShowModal(false);
     callback();
@@ -38,28 +40,28 @@ const AddDeckModal = ({ showModal, setShowModal, onPressCreate, onPressTxt, onPr
               onPressBtn={onPressBtn}
               callback={onPressCreate}
               icon="form-textbox"
-              label="Create Deck"
+              label={getLocalString("Create Deck")}
             />
             <AddDeckButton
               scheme={scheme}
               onPressBtn={onPressBtn}
               callback={onPressTxt}
               icon="text"
-              label="Import TXT"
+              label={getLocalString("Import TXT")}
             />
             <AddDeckButton
               scheme={scheme}
               onPressBtn={onPressBtn}
               callback={onPressCsv}
               icon="table"
-              label="Import CSV"
+              label={getLocalString("Import CSV")}
             />
             <AddDeckButton
               scheme={scheme}
               onPressBtn={onPressBtn}
               callback={onPressHelp}
               icon="help"
-              label="File Help"
+              label={getLocalString("File Help")}
             />
           </View>
         </View>

@@ -30,13 +30,12 @@ const emptyImportSource = {
 export const DeckList = () => {
   // reset storage
   // AsyncStorage.clear();
-
+  const { getLocalString } = useLocale();
   const [importSource, setImportSource] = useState(emptyImportSource);
   const [deckListData, setDeckListData] = useState([]);
   const [reload, setReload] = useState(false);
   const [showAddMenu, setShowAddMenu] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
-  const { getLocalString } = useLocale();
 
   const routeParams = useLocalSearchParams();
 
@@ -208,7 +207,9 @@ export const DeckList = () => {
           </GestureHandlerRootView>
         )}
         {deckListData.length < 1 && (
-          <TextNormal style={[scheme.txt, { padding: 10 }]}>No decks in memory, please add a deck</TextNormal>
+          <TextNormal style={[scheme.txt, { padding: 10 }]}>
+            {getLocalString("No decks in memory, please add a deck")}
+          </TextNormal>
         )}
         {showFab && (
           <>

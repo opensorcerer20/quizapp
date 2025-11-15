@@ -5,6 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import { loadDeckData, updateDeckQuestionData } from "../common/fileLib";
 import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
+import { useLocale } from "../components/Providers/TranslationProvider";
 import { ReviewScreen } from "../components/Quiz/ReviewScreen";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
@@ -14,6 +15,7 @@ later there will be a quiz screen etc
 */
 
 const QuizScreen = () => {
+  const { getLocalString } = useLocale();
   const { deckId } = useLocalSearchParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckQuestionData, setCurrentDeckQuestionData] = useState([]);
@@ -62,12 +64,14 @@ const QuizScreen = () => {
               updateQuestionData={updateQuestionData}
             />
           )}
-          {!currentDeck && <TextNormal style={[scheme.txt, { padding: 10 }]}>Loading...</TextNormal>}
+          {!currentDeck && (
+            <TextNormal style={[scheme.txt, { padding: 10 }]}>{getLocalString("Loading")}...</TextNormal>
+          )}
         </ScreenTemplate>
       </>
     );
   }
-  return <TextNormal style={[scheme.txt, { padding: 10 }]}>Error: no screen specified</TextNormal>;
+  return <TextNormal style={[scheme.txt, { padding: 10 }]}>{getLocalString("Error: no screen specified")}</TextNormal>;
 };
 
 export default QuizScreen;

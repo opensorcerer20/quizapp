@@ -99,7 +99,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
         modalVisible={deleteDeckId !== null}
         handleCancel={handleDeleteCancelClick}
         handleConfirm={handleConfirmDeleteClick}
-        confirmLabel="Delete"
+        confirmLabel={getLocalString("Delete")}
       />
     </>
   );

@@ -10,10 +10,12 @@ import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import { importNewDeck } from "../components/Deck/QuizDeck";
 import { useTheme } from "../components/Providers/ThemeProvider";
+import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
 const NewDeck = () => {
+  const { getLocalString } = useLocale();
   const [title, setTitle] = useState("");
   const [questionData, setQuestionData] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -83,22 +85,33 @@ const NewDeck = () => {
       >
         <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}>
           <TextNormal style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
-            Add a short descriptive title for the new deck.
+            {getLocalString("Add a short descriptive title for the new deck.")}
           </TextNormal>
           <TextInput
             style={globalStyles.textField}
-            placeholder="Deck Title"
+            placeholder={getLocalString("Deck Title")}
             placeholderTextColor="#aaaaaa"
             value={title}
             onChangeText={setTitle}
             maxLength={64}
           />
           <TextNormal style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
-            Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc
+            {getLocalString(
+              "Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc"
+            )}
           </TextNormal>
           <TextInput
             style={styles.textInput}
-            placeholder={"Question 1\nAnswer 1\nQuestion 2\nAnswer 2"}
+            placeholder={
+              getLocalString("Question") +
+              " 1\n" +
+              getLocalString("Answer") +
+              " 1\n" +
+              getLocalString("Question") +
+              " 2\n" +
+              getLocalString("Answer") +
+              " 2"
+            }
             placeholderTextColor="#aaaaaa"
             value={questionData}
             onChangeText={updateText}
@@ -115,12 +128,12 @@ const NewDeck = () => {
         </Pressable>
       </KeyboardAvoidingView>
       <ConfirmModal
-        message="You have unsaved data, do you want to discard it?"
+        message={getLocalString("You have unsaved data, do you want to discard it?")}
         scheme={scheme}
         modalVisible={modalVisible}
         handleCancel={handleCancel}
         handleConfirm={handleConfirm}
-        confirmLabel="Discard"
+        confirmLabel={getLocalString("Discard")}
       />
     </ScreenTemplate>
   );

@@ -11,8 +11,10 @@ import { getExportData } from "../common/fileLib";
 import { getScheme } from "../common/util";
 import ConfirmModal from "./ConfirmModal";
 import { useTheme } from "./Providers/ThemeProvider";
+import { useLocale } from "./Providers/TranslationProvider";
 
 const Export = () => {
+  const { getLocalString } = useLocale();
   const [modalVisible, setModalVisible] = useState(false);
 
   const { theme } = useTheme();
@@ -81,8 +83,8 @@ const Export = () => {
         modalVisible={modalVisible}
         handleCancel={() => setModalVisible(false)}
         handleConfirm={onConfirmExport}
-        message="Would you like to export all flash cards?"
-        confirmLabel="Export"
+        message={getLocalString("Would you like to export all flash cards?")}
+        confirmLabel={getLocalString("Export")}
       />
     </>
   );

@@ -5,6 +5,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
+import { useLocale } from "../Providers/TranslationProvider";
 
 const NavButton = ({ enabled, onClick, children, scheme, extraStyles = {} }) => {
   return (
@@ -19,6 +20,7 @@ const NavButton = ({ enabled, onClick, children, scheme, extraStyles = {} }) => 
 };
 
 export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, onResetClick, onStartOverClick }) => {
+  const { getLocalString } = useLocale();
   const { theme } = useTheme();
 
   const scheme = getScheme(theme);
@@ -29,7 +31,7 @@ export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, on
           enabled={true}
           scheme={scheme}
           onClick={onResetClick}
-          buttonText="Remix"
+          buttonText={getLocalString("Remix")}
           extraStyles={styles.buttonLeft}
         >
           <FontAwesome6 name="shuffle" size={24} color={scheme.txt.color} />
@@ -44,7 +46,7 @@ export const DeckNav = ({ prevEnabled, onPrevClick, nextEnabled, onNextClick, on
           enabled={true}
           scheme={scheme}
           onClick={onStartOverClick}
-          buttonText="Reload"
+          buttonText={getLocalString("Reload")}
           extraStyles={styles.buttonRight}
         >
           <FontAwesome6 name="reply" size={24} color={scheme.txt.color} />

@@ -18,11 +18,11 @@ import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
 
 const DeckScreen = () => {
+  const { getLocalString } = useLocale();
   const { deckId } = useLocalSearchParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckData, setCurrentDeckData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const { getLocalString } = useLocale();
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
@@ -175,7 +175,7 @@ const DeckScreen = () => {
             </GestureHandlerRootView>
           </>
         )}
-        {!currentDeckData && <TextNormal style={scheme.txt}>Loading question data...</TextNormal>}
+        {!currentDeckData && <TextNormal style={scheme.txt}>{getLocalString("Loading question data...")}</TextNormal>}
         <FAB
           icon="plus"
           style={[globalStyles.fab, globalStyles.fabButton, canAddQuestion ? scheme.buttonBg : scheme.bgDisabled]}
