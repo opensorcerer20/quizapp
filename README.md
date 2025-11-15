@@ -100,7 +100,7 @@ itemMenuButton: {
 
 -   [x] ~~android app icon needs to come down 2 pixels i think~~ i think this is expo go only
 
--   [ ] set up (but dont implement) language support
+-   [x] set up (but dont implement) language support
 
 -   [x] check @todos
     -   [ ] ~~@todo remove SafeAreaView after using "useSafeArea"~~
