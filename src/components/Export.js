@@ -73,7 +73,7 @@ const Export = () => {
 
   return (
     <>
-      <View style={{ marginLeft: "auto", marginRight: 0 }}>
+      <View style={{ marginLeft: "auto", marginRight: 0, paddingVertical: 7 }}>
         <Pressable onPress={() => setModalVisible(true)}>
           <MaterialCommunityIcons name="file-download-outline" size={36} color={scheme.txtForBg.color} />
         </Pressable>
