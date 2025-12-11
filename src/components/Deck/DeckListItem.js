@@ -78,7 +78,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
                 <MaterialCommunityIcons name={"cog"} size={20} color={scheme.txtForBg.color} />
               </View>
             </Pressable>
-            <Pressable onPress={() => onPressDeck(item.id)}>
+            <Pressable onPress={() => onPressDeck(item.id)} style={{ flex: 1 }}>
               <TextNormal
                 numberOfLines={1}
                 ellipsizeMode="tail"

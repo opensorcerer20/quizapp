@@ -2,7 +2,7 @@
   "expo": {
     "name": "Flashcard Library",
     "slug": "flashcardlibrary",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
@@ -30,12 +30,13 @@
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0"
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 36,
+            "buildToolsVersion": "36.0.0",
+            "minSdkVersion": 32
           },
           "ios": {
-            "deploymentTarget": "15.1"
+            "deploymentTarget": "16.4.1"
           }
         }
       ]

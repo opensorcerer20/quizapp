@@ -13,8 +13,8 @@ Initial idea: someone going on a multi country tour wants to learn the local lan
 - [x] complete alpha for testing
 - [x] apply alpha testing changes
 - [x] last changes before getting beta testers
-- [ ] closed beta testing (started 7/24)
-- [ ] set up llc
+- [x] closed beta testing (started 7/24)
+- [x] set up llc
 - [ ] open beta testing
 - [ ] apply beta testing changes
 - [ ] launch 1.0!
@@ -87,7 +87,7 @@ itemMenuButton: {
 - incredibly important note with flexbox if you have "jitter" of ui components: you can mix "flex: #" and "width: #"
 ```
 <Component1 style={{ flexDirection: "row" }}>
-  <Component2 style={{ flex: 10 }} />
+  <Component2 style={{ flex: 1 }} /> { /* takes all remaining space */ }
   <Component3 style={{ width: 55 }} />
 </Component1>
 ```
@@ -106,26 +106,46 @@ itemMenuButton: {
     -   [ ] ~~@todo remove SafeAreaView after using "useSafeArea"~~
     -   [x] other todos
 
--   [ ] llc
+-   [x] llc
 
 -   [ ] set minimum sdk versions
-    -   [ ] android
-    -   [ ] ios
+    -   [ ] ios (17 if possible, 18 is fine)
+    -   [ ] test on ios 17/18
+    -   [ ] android (12 if possible, 14 is fine)
+    -   [ ] test on android 12/14
 
--   [ ] set up ios app on TestFlight
-    -   [ ] need po box
-    -   [ ] need llc
-    -   [ ] need DUNS (unique id for app store) and EIN (for tax purposes)
-    -   [ ] set up organization account on apple app store (which hides developer name)
--   [ ] set up app on google play beta
+-   [ ] set up CLOSED BETA FOR ONLY ME ios app on TestFlight
+    -   [x] need business address
+    -   [x] need llc
+    -   [x] need DUNS (unique id for app store) and EIN (for tax purposes)
+    -   [x] set up organization account on apple app store (which hides developer name)
+    -   [ ] set up testflight track for closed beta
+    -   [ ] production build
+    -   [ ] put on closed beta track
 
--   [ ] confirm my personal info is hidden
+-   [ ] set up CLOSED BETA FOR ONLY ME app on google play beta
+    -   [ ] create closed beta track
+    -   [ ] production build
+    -   [ ] put on beta track
+
+-   [ ] CONFIRM PERSONAL INFO IS HIDDEN
+
+-   [ ] done with personal info test
 
 -   [ ] app store page
     -   [ ] link to repository
     -   [ ] instructions to build
+    -   [ ] apple app store
+    -   [ ] google play
 
--   [ ] open beta
+-   [ ] start open beta test
+
+-   [ ] open beta ios / testflight
+    -   [ ] "To set up a public beta with TestFlight, you must upload a beta build to App Store Connect, create a public link under the "TestFlight" tab, and enable public testing for that build. Testers can then use the public link to download and install the app via the free TestFlight app."
+
+-   [ ] open beta google play
+
+-   [ ] open beta launch
 
 -   [ ] open beta fixes
     -   [ ] tbd
