@@ -2,20 +2,20 @@
   "expo": {
     "name": "Flashcard Library",
     "slug": "flashcardlibrary",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.opensorcerer20.flashcardlibrary",
+      "bundleIdentifier": "com.cocoadroidllc.flashcardlibrary",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
       "icon": "./assets/ios-light.png"
     },
     "android": {
-      "package": "com.opensorcerer20.flashcardlibrary",
+      "package": "com.cocoadroidllc.flashcardlibrary",
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -36,7 +36,7 @@
             "minSdkVersion": 32
           },
           "ios": {
-            "deploymentTarget": "16.4.1"
+            "deploymentTarget": "17.0"
           }
         }
       ]
@@ -48,7 +48,7 @@
       }
     },
     "scheme": [
-      "com.opensorcerer20.flashcardlibrary"
+      "com.cocoadroidllc.flashcardlibrary"
     ]
   }
 }

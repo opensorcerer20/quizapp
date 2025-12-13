@@ -109,10 +109,13 @@ itemMenuButton: {
 -   [x] llc
 
 -   [ ] set minimum sdk versions
-    -   [ ] ios (17 if possible, 18 is fine)
-    -   [ ] test on ios 17/18
+    -   [x] ios (17 if possible, 18 is fine)
+    -   [x] test on ios 17
+    -   [ ] test on ios 18
     -   [ ] android (12 if possible, 14 is fine)
-    -   [ ] test on android 12/14
+    -   [ ] test on android 12
+    -   [ ] test on android 13
+    -   [ ] test on android 14
 
 -   [ ] set up CLOSED BETA FOR ONLY ME ios app on TestFlight
     -   [x] need business address
@@ -120,7 +123,7 @@ itemMenuButton: {
     -   [x] need DUNS (unique id for app store) and EIN (for tax purposes)
     -   [x] set up organization account on apple app store (which hides developer name)
     -   [ ] set up testflight track for closed beta
-    -   [ ] production build
+    -   [x] production build
     -   [ ] put on closed beta track
 
 -   [ ] set up CLOSED BETA FOR ONLY ME app on google play beta
@@ -158,8 +161,9 @@ itemMenuButton: {
     -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
     -   [ ] hamburger menu: about points to repository
     -   [ ] translations
+    -   [ ] pick light/dark primary color, base other colors off it
 
--   [ ] add hamburger menu with tip (needs llc name)
+-   [ ] add hamburger menu tip (needs llc name)
     -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
     -   [ ] tip button (https://buymeacoffee.com/)
 

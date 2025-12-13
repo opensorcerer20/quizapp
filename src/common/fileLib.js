@@ -55,7 +55,8 @@ export const setFlag = async (key, value) => {
 };
 
 export const getFlag = async (key) => {
-  await loadStorageData(key);
+  const value = await loadStorageData(key);
+  return value;
 };
 
 // @todo change so this is NOT exported
