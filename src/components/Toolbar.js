@@ -13,12 +13,14 @@ import HelpMenuModal from "./HelpMenuModal";
 import { useTheme } from "./Providers/ThemeProvider";
 import { useLocale } from "./Providers/TranslationProvider";
 import TextNormal from "./TextNormal";
+import TutorialModal from "./TutorialModal";
 
 const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
   const { getLocalString } = useLocale();
   const [showHelp, setShowHelp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const { theme, toggleTheme } = useTheme();
   const themeIcon = theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
@@ -29,6 +31,14 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
 
     setTimeout(() => {
       setShowFileHelp(true);
+    }, 300);
+  };
+
+  const showTutorialModal = () => {
+    setShowMenu(false);
+
+    setTimeout(() => {
+      setShowTutorial(true);
     }, 300);
   };
 
@@ -78,10 +88,12 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         setShowModal={setShowMenu}
         onClickHelp={() => showFileHelpModal()}
         onClickNew={() => onClickNew()}
+        onClickTutorial={() => showTutorialModal()}
         scheme={scheme}
       />
       <HelpMenuModal showModal={showHelp} setShowModal={setShowHelp} scheme={scheme} helpType={helpType} />
       <FileHelpModal showModal={showFileHelp} setShowModal={setShowFileHelp} scheme={scheme} />
+      <TutorialModal showModal={showTutorial} setShowModal={setShowTutorial} scheme={scheme} />
     </>
   );
 };

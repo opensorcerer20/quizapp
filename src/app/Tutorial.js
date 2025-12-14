@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 
-import { useRouter } from "expo-router";
 import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -11,18 +10,13 @@ const PAGES = [
   { key: "3", content: "You're ready to start using the app!" },
 ];
 
-export default function TutorialScreen() {
+export default function Tutorial({ onClose }) {
   const [page, setPage] = useState(0);
   const flatListRef = useRef(null);
-  const router = useRouter();
 
   const onViewableItemsChanged = useRef(({ viewableItems }) => {
     if (viewableItems.length > 0) setPage(viewableItems[0].index);
   }).current;
-
-  const onClickDone = () => {
-    router.replace({ pathname: "/", params: { TUTORIAL_COMPLETE: true } });
-  };
 
   return (
     <View style={styles.container}>
@@ -46,7 +40,7 @@ export default function TutorialScreen() {
           <View key={i} style={[styles.dot, { opacity: i === page ? 1 : 0.3 }]} />
         ))}
       </View>
-      <TouchableOpacity style={styles.doneButton} onPress={onClickDone}>
+      <TouchableOpacity style={styles.doneButton} onPress={onClose}>
         <Text style={styles.doneText}>Done</Text>
       </TouchableOpacity>
     </View>

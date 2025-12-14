@@ -6,8 +6,16 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
 
-import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST } from "../common/constants";
-import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
+import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST, TUTORIAL_KEY } from "../common/constants";
+import {
+  getFlag,
+  loadAllDecks,
+  loadDemoData,
+  removeStorageData,
+  saveDeckData,
+  saveDeckListData,
+  setFlag,
+} from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import AddDeckModal from "../components/AddDeckModal";
@@ -19,6 +27,7 @@ import { useTheme } from "../components/Providers/ThemeProvider";
 import { useLocale } from "../components/Providers/TranslationProvider";
 import ScreenTemplate from "../components/ScreenTemplate";
 import TextNormal from "../components/TextNormal";
+import TutorialModal from "../components/TutorialModal";
 
 const emptyImportSource = {
   mimeType: null,
@@ -36,11 +45,23 @@ export const DeckList = () => {
   const [reload, setReload] = useState(false);
   const [showAddMenu, setShowAddMenu] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const routeParams = useLocalSearchParams();
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
+
+  const checkTutorial = async () => {
+    // await setFlag(TUTORIAL_KEY, true);
+    // await setFlag(TUTORIAL_KEY, false);
+    const tutFlag = await getFlag(TUTORIAL_KEY);
+    // console.log("tutflag " + JSON.stringify(tutFlag));
+    if (!tutFlag) {
+      setShowTutorial(true);
+    }
+  };
+  checkTutorial();
 
   const loadDeckListData = async () => {
     let newDeckListData = await loadAllDecks();
@@ -155,6 +176,12 @@ export const DeckList = () => {
     }
   }, [reload]);
 
+  useEffect(() => {
+    if (!showTutorial) {
+      setFlag(TUTORIAL_KEY, true);
+    }
+  }, [showTutorial]);
+
   // load data first time
   useEffect(() => {
     const loadData = async () => {
@@ -232,6 +259,7 @@ export const DeckList = () => {
           </>
         )}
       </View>
+      <TutorialModal showModal={showTutorial} setShowModal={setShowTutorial} scheme={scheme} />
     </ScreenTemplate>
   );
 };
