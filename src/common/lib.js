@@ -16,6 +16,7 @@ const lightDarkBgColors = {
     // accent2: "#4a63ac",
     buttonBg: "#6443b6",
     buttonTxt: "#dedede",
+    link: "#8B5DFF",
   },
   schemeBgLight: {
     accent: "#E2D2F1",
@@ -28,6 +29,7 @@ const lightDarkBgColors = {
     // accent2: "#d5c5e3",
     buttonBg: "#C4A2E3",
     buttonTxt: "#000000",
+    link: "#6A42C2",
   },
 };
 
@@ -56,6 +58,7 @@ export const lightDarkStyles = {
     buttonTxt: {
       color: lightDarkBgColors.schemeBgDark.buttonTxt,
     },
+    link: { color: lightDarkBgColors.schemeBgDark.link },
   },
   schemeLight: {
     bgAccent: { backgroundColor: lightDarkBgColors.schemeBgLight.accent },
@@ -81,6 +84,7 @@ export const lightDarkStyles = {
     buttonTxt: {
       color: lightDarkBgColors.schemeBgLight.buttonTxt,
     },
+    link: { color: lightDarkBgColors.schemeBgLight.link },
   },
 };
 
