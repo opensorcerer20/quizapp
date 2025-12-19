@@ -15,6 +15,7 @@ const replaytutorial = require("../../assets/tutorial/replaytutorial.png");
 const slidetodelete = require("../../assets/tutorial/slidetodelete.png");
 
 const PAGES = [
+  { content: "Welcome to your Flashcard Library!" },
   { content: "You can store several flash card decks", img: lightlist },
   { content: "Swipe left to delete a deck", img: slidetodelete },
   { content: "Click the + button to add a deck", img: adddeck },
@@ -48,7 +49,7 @@ export default function Tutorial({ onClose }) {
                 <Image
                   // Use require with the relative path to your image
                   source={item.img}
-                  style={{ width: 300, height: 600 }}
+                  style={{ width: 300, height: 600, borderWidth: 2, borderRadius: 10, borderColor: scheme.txt.color }}
                   alt="ALT TEXT" // Add alt text for accessibility
                 />
               )}
@@ -74,7 +75,6 @@ export default function Tutorial({ onClose }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     justifyContent: "center",
   },
   page: {
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
   },
   doneText: {
     fontSize: 18,
-    color: "#007AFF",
     fontWeight: "bold",
   },
 });
