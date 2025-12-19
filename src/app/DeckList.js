@@ -53,10 +53,7 @@ export const DeckList = () => {
   const scheme = getScheme(theme);
 
   const checkTutorial = async () => {
-    // await setFlag(TUTORIAL_KEY, true);
-    // await setFlag(TUTORIAL_KEY, false);
     const tutFlag = await getFlag(TUTORIAL_KEY);
-    // console.log("tutflag " + JSON.stringify(tutFlag));
     if (!tutFlag) {
       setShowTutorial(true);
     }

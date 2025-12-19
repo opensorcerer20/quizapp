@@ -20,11 +20,6 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClic
     }
   };
 
-  const replayTutorial = async () => {
-    // await setFlag(TUTORIAL_KEY, false);
-    // setShowModal(false);
-  };
-
   return (
     <QuizModal
       modalVisible={showModal}
