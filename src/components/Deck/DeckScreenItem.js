@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Pressable, StyleSheet, View } from "react-native";
 
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { SAFE_WIDTH } from "../../common/constants";
 import { formatCardText } from "../../common/util";
@@ -45,15 +45,15 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
         ]}
       >
         <Pressable
-          style={{ flex: 1, paddingHorizontal: item.disabled ? 10 : 12, maxWidth: 50 }}
+          style={{ paddingHorizontal: item.disabled ? 10 : 12, width: 52, alignItems: "center" }}
           onPress={() => onVisibilityClick(!item?.disabled, item.id)}
           onLongPress={() => onVisibilityClick(!item?.disabled, item.id)}
         >
-          <FontAwesome6
-            name={item.disabled ? "eye-slash" : "eye"}
+          <MaterialCommunityIcons
+            name={item.disabled ? "eye-off" : "eye"}
             size={20}
             color={scheme.txt.color}
-            style={styles.menuIcon}
+            style={{ borderWidth: 1, borderRadius: 5, borderColor: scheme.txt.color, padding: 2 }}
           />
         </Pressable>
         <Pressable style={{ flex: 1 }}>
@@ -100,9 +100,6 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     maxWidth: "90%",
-  },
-  menuIcon: {
-    width: 30,
   },
 });
 

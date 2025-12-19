@@ -1,12 +1,25 @@
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import { Linking, Platform, Pressable, StyleSheet, View } from "react-native";
+
+import Feather from "@expo/vector-icons/Feather";
 
 import { globalStyles } from "../common/lib";
 import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
-const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme }) => {
+const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClickTutorial, scheme }) => {
   const { getLocalString } = useLocale();
+
+  const openExternalLink = async (url) => {
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      console.error(`Don't know how to open this URL: ${url}`);
+    }
+  };
+
   return (
     <QuizModal
       modalVisible={showModal}
@@ -30,6 +43,23 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, scheme
       <Pressable onPress={onClickHelp}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Deck file help")}</TextNormal>
+        </View>
+      </Pressable>
+      <Pressable onPress={onClickTutorial}>
+        <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Replay Tutorial")}</TextNormal>
+        </View>
+      </Pressable>
+      <Pressable
+        onPress={() =>
+          openExternalLink(
+            "https://docs.google.com/forms/d/e/1FAIpQLScpH0v_HBuTTtsufGerFiSlcoirCmDflgdTaS199Tioz0pzLw/viewform?usp=sharing&ouid=100598572439498221042"
+          )
+        }
+      >
+        <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Beta Feedback")} </TextNormal>
+          <Feather name="external-link" size={24} color={scheme.txt.color} />
         </View>
       </Pressable>
     </QuizModal>
