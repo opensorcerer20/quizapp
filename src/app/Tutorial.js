@@ -49,11 +49,11 @@ export default function Tutorial({ onClose }) {
                 <Image
                   // Use require with the relative path to your image
                   source={item.img}
-                  style={{ width: 300, height: 600, borderWidth: 2, borderRadius: 10, borderColor: scheme.txt.color }}
-                  alt="ALT TEXT" // Add alt text for accessibility
+                  style={{ width: 225, height: 450, borderWidth: 2, borderRadius: 10, borderColor: scheme.txt.color }}
+                  resizeMethod="scale"
                 />
               )}
-              <Text style={[scheme.txt, styles.text]}>{item.content}</Text>
+              <Text style={[scheme.txt, styles.text, { height: 100 }]}>{item.content}</Text>
             </View>
           );
         }}
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    height: 400,
   },
   page: {
     width,
@@ -106,8 +107,8 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     position: "absolute",
-    bottom: 20,
-    right: 30,
+    bottom: 50,
+    right: 20,
     padding: 10,
   },
   doneText: {
