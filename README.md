@@ -117,7 +117,7 @@ itemMenuButton: {
     -   [ ] test on android 13
     -   [ ] test on android 14
 
--   [ ] set up CLOSED BETA FOR ONLY ME ios app on TestFlight
+-   [ ] set up CLOSED BETA FOR FAMILY ios app on TestFlight
     -   [x] need business address
     -   [x] need llc
     -   [x] need DUNS (unique id for app store) and EIN (for tax purposes)
@@ -126,7 +126,7 @@ itemMenuButton: {
     -   [x] production build
     -   [ ] put on closed beta track
 
--   [ ] set up CLOSED BETA FOR ONLY ME app on google play beta
+-   [ ] set up CLOSED BETA FOR FAMILY app on google play beta
     -   [ ] create closed beta track
     -   [ ] production build
     -   [ ] put on beta track
@@ -145,6 +145,8 @@ itemMenuButton: {
 
 -   [ ] open beta ios / testflight
     -   [ ] "To set up a public beta with TestFlight, you must upload a beta build to App Store Connect, create a public link under the "TestFlight" tab, and enable public testing for that build. Testers can then use the public link to download and install the app via the free TestFlight app."
+    -   [ ] option 1: free app (faster, easier, can simply have buy coffee link)
+    -   [ ] option 2: paid app (can get direct sales for app, but have to provide info like phone number)
 
 -   [ ] open beta google play
 
