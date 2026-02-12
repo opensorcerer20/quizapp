@@ -2,7 +2,7 @@
   "expo": {
     "name": "Flashcard Library",
     "slug": "flashcardlibrary",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
@@ -25,30 +25,7 @@
     },
     "owner": "opensorcerer20",
     "plugins": [
-      "expo-router",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "compileSdkVersion": 36,
-            "targetSdkVersion": 36,
-            "buildToolsVersion": "36.0.0",
-            "minSdkVersion": 32
-          },
-          "ios": {
-            "deploymentTarget": "17.0"
-          }
-        }
-      ]
-    ],
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "7a960274-0ed7-421e-bf44-53940aadcc5f"
-      }
-    },
-    "scheme": [
-      "com.cocoadroidllc.flashcardlibrary"
+      "expo-router"
     ]
   }
 }

@@ -138,7 +138,7 @@ const DEFAULT_CHAR_WIDTH =
     : 0;
 
 export const getStrWidth = (str) => {
-  if (typeof str !== "string") throw new Error("Invalid string for getStrWidth");
+  if (typeof str !== "string") throw new Error(`Invalid string for getStrWidth: ${str}`);
   return str.split("").reduce((acc, currVal) => {
     return acc + (charWidths[currVal] ?? DEFAULT_CHAR_WIDTH);
   }, 0);

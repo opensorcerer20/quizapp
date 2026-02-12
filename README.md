@@ -126,6 +126,36 @@ itemMenuButton: {
     -   [x] production build
     -   [ ] put on closed beta track
 
+-   [ ] shift from expo mobile app to pwa (no install)
+    -   [ ] ~~change "fileLib" references to "nativeFileLib"~~
+    -   [ ] ~~add blank "webFileLib" library~~
+    -   [ ] change storage to indexeddb
+-   [ ] pwa install
+    -   [ ] service worker
+    -   [ ] manual refresh (cache invalidate)
+    -   [ ] version check to notify user to refresh
+
+-   [ ] delayed stuff from earlier
+    -   [ ] theme
+        -   [ ] detect system theme
+        -   [ ] does not respond to very first click with no setting, so no default is set upon launch
+    -   [ ] order list by name, date added
+    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+    -   [ ] hamburger menu: about points to repository
+    -   [ ] translations
+    -   [ ] pick light/dark primary color, base other colors off it
+
+-   [ ] add hamburger menu tip (needs llc name)
+    -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
+    -   [ ] tip button (https://buymeacoffee.com/)
+
+-   [ ] last chance for changes
+
+-   [ ] review popup: https://docs.expo.dev/versions/latest/sdk/storereview/
+
+-   [ ] launch 1.0
+
+## Discarded store todo
 -   [ ] set up CLOSED BETA FOR FAMILY app on google play beta
     -   [ ] create closed beta track
     -   [ ] production build
@@ -154,27 +184,6 @@ itemMenuButton: {
 
 -   [ ] open beta fixes
     -   [ ] tbd
-
--   [ ] delayed stuff from earlier
-    -   [ ] theme
-        -   [ ] detect system theme
-        -   [ ] does not respond to very first click with no setting, so no default is set upon launch
-    -   [ ] order list by name, date added
-    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
-    -   [ ] hamburger menu: about points to repository
-    -   [ ] translations
-    -   [ ] pick light/dark primary color, base other colors off it
-
--   [ ] add hamburger menu tip (needs llc name)
-    -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
-    -   [ ] tip button (https://buymeacoffee.com/)
-
--   [ ] last chance for changes
-
--   [ ] review popup: https://docs.expo.dev/versions/latest/sdk/storereview/
-
--   [ ] launch 1.0
-
 
 ## Planned future dev
 
