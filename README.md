@@ -6,6 +6,10 @@ Generic React Native Expo app to ask questions from a given question file after 
 
 Initial idea: someone going on a multi country tour wants to learn the local language at each place. With this app, they can load a file of terms to learn for each language, and can do a flip card quiz on the go.
 
+## Recent Personal Redirect and Open For Contributions
+
+I'm tuning into my personal tastes and focusing more on functionality I'd like to add. I can make some concessions for ready-made builds, but if I actually want to support this on the app stores, I'd need help maintaining and polishing it. send an email to opensorcerer20@gmail.com or ping me on github if you want to contribute!
+
 ## Roadmap
 
 - [x] initial development
@@ -15,9 +19,15 @@ Initial idea: someone going on a multi country tour wants to learn the local lan
 - [x] last changes before getting beta testers
 - [x] closed beta testing (started 7/24)
 - [x] set up llc
-- [ ] open beta testing
-- [ ] apply beta testing changes
-- [ ] launch 1.0!
+- [ ] ~~open beta testing~~
+- [ ] ~~apply beta testing changes~~
+- [ ] ~~launch 1.0!~~
+- [ ] quiz mode (you must pick answer)
+- [ ] car mode (hear question, wait 5 seconds, hear answer, wait 5, next question...)
+- [ ] language mode
+  - [ ] set language for questions and answers
+  - [ ] car mode uses that language
+
 
 ## FAQ
 
@@ -93,86 +103,6 @@ itemMenuButton: {
 ```
 - beta testing ios requires using testflight: https://docs.expo.dev/tutorial/eas/ios-production-build/
 - when trying to set "search parameters" for the router, i had to use the following to go back to main screen: `router.replace({ pathname: "/", params: { RELOAD_LIST: true } });`
-
-## Current Roadmap Development
-
--   [x] handle android back button WHEN ON MODAL TO DISMISS MODAL AND SHOW WARNING (new deck, add question, etc) ("expo detect android back")
-
--   [x] ~~android app icon needs to come down 2 pixels i think~~ i think this is expo go only
-
--   [x] set up (but dont implement) language support
-
--   [x] check @todos
-    -   [ ] ~~@todo remove SafeAreaView after using "useSafeArea"~~
-    -   [x] other todos
-
--   [x] llc
-
--   [ ] set minimum sdk versions
-    -   [x] ios (17 if possible, 18 is fine)
-    -   [x] test on ios 17
-    -   [ ] test on ios 18
-    -   [ ] android (12 if possible, 14 is fine)
-    -   [ ] test on android 12
-    -   [ ] test on android 13
-    -   [ ] test on android 14
-
--   [ ] set up CLOSED BETA FOR ONLY ME ios app on TestFlight
-    -   [x] need business address
-    -   [x] need llc
-    -   [x] need DUNS (unique id for app store) and EIN (for tax purposes)
-    -   [x] set up organization account on apple app store (which hides developer name)
-    -   [ ] set up testflight track for closed beta
-    -   [x] production build
-    -   [ ] put on closed beta track
-
--   [ ] set up CLOSED BETA FOR ONLY ME app on google play beta
-    -   [ ] create closed beta track
-    -   [ ] production build
-    -   [ ] put on beta track
-
--   [ ] CONFIRM PERSONAL INFO IS HIDDEN
-
--   [ ] done with personal info test
-
--   [ ] app store page
-    -   [ ] link to repository
-    -   [ ] instructions to build
-    -   [ ] apple app store
-    -   [ ] google play
-
--   [ ] start open beta test
-
--   [ ] open beta ios / testflight
-    -   [ ] "To set up a public beta with TestFlight, you must upload a beta build to App Store Connect, create a public link under the "TestFlight" tab, and enable public testing for that build. Testers can then use the public link to download and install the app via the free TestFlight app."
-
--   [ ] open beta google play
-
--   [ ] open beta launch
-
--   [ ] open beta fixes
-    -   [ ] tbd
-
--   [ ] delayed stuff from earlier
-    -   [ ] theme
-        -   [ ] detect system theme
-        -   [ ] does not respond to very first click with no setting, so no default is set upon launch
-    -   [ ] order list by name, date added
-    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
-    -   [ ] hamburger menu: about points to repository
-    -   [ ] translations
-    -   [ ] pick light/dark primary color, base other colors off it
-
--   [ ] add hamburger menu tip (needs llc name)
-    -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
-    -   [ ] tip button (https://buymeacoffee.com/)
-
--   [ ] last chance for changes
-
--   [ ] review popup: https://docs.expo.dev/versions/latest/sdk/storereview/
-
--   [ ] launch 1.0
-
 
 ## Planned future dev
 
@@ -590,5 +520,81 @@ itemMenuButton: {
     -   [x] file help renders versions of text/spreadsheet
 
 -   [x] slide delete should be same height as card (mwmwmw)
+-   [x] handle android back button WHEN ON MODAL TO DISMISS MODAL AND SHOW WARNING (new deck, add question, etc) ("expo detect android back")
+
+-   [x] ~~android app icon needs to come down 2 pixels i think~~ i think this is expo go only
+
+-   [x] set up (but dont implement) language support
+
+-   [x] check @todos
+    -   [ ] ~~@todo remove SafeAreaView after using "useSafeArea"~~
+    -   [x] other todos
+
+-   [x] llc
+
+-   [ ] set minimum sdk versions
+    -   [x] ios (17 if possible, 18 is fine)
+    -   [x] test on ios 17
+    -   [ ] test on ios 18
+    -   [ ] android (12 if possible, 14 is fine)
+    -   [ ] test on android 12
+    -   [ ] test on android 13
+    -   [ ] test on android 14
+
+-   [ ] set up CLOSED BETA FOR ONLY ME ios app on TestFlight
+    -   [x] need business address
+    -   [x] need llc
+    -   [x] need DUNS (unique id for app store) and EIN (for tax purposes)
+    -   [x] set up organization account on apple app store (which hides developer name)
+    -   [ ] set up testflight track for closed beta
+    -   [x] production build
+    -   [ ] put on closed beta track
+
+-   [ ] set up CLOSED BETA FOR ONLY ME app on google play beta
+    -   [ ] create closed beta track
+    -   [ ] production build
+    -   [ ] put on beta track
+
+-   [ ] CONFIRM PERSONAL INFO IS HIDDEN
+
+-   [ ] done with personal info test
+
+-   [ ] app store page
+    -   [ ] link to repository
+    -   [ ] instructions to build
+    -   [ ] apple app store
+    -   [ ] google play
+
+-   [ ] start open beta test
+
+-   [ ] open beta ios / testflight
+    -   [ ] "To set up a public beta with TestFlight, you must upload a beta build to App Store Connect, create a public link under the "TestFlight" tab, and enable public testing for that build. Testers can then use the public link to download and install the app via the free TestFlight app."
+
+-   [ ] open beta google play
+
+-   [ ] open beta launch
+
+-   [ ] open beta fixes
+    -   [ ] tbd
+
+-   [ ] delayed stuff from earlier
+    -   [ ] theme
+        -   [ ] detect system theme
+        -   [ ] does not respond to very first click with no setting, so no default is set upon launch
+    -   [ ] order list by name, date added
+    -   [ ] decklistmenu and deckrenamemodal need to include quizmodal and basebg3
+    -   [ ] hamburger menu: about points to repository
+    -   [ ] translations
+    -   [ ] pick light/dark primary color, base other colors off it
+
+-   [ ] add hamburger menu tip (needs llc name)
+    -   [ ] (free users only) tips: after certain amount of uses, tip popup with option to "dont show again"
+    -   [ ] tip button (https://buymeacoffee.com/)
+
+-   [ ] last chance for changes
+
+-   [ ] review popup: https://docs.expo.dev/versions/latest/sdk/storereview/
+
+-   [ ] launch 1.0
 
 </details>
