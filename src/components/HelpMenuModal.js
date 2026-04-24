@@ -1,6 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
-import { SAFE_WIDTH } from "../common/constants";
+import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import HelpMenu, { HELP_MODAL_WIDTH } from "./HelpMenu";
 import QuizModal from "./QuizModal";
@@ -14,7 +14,7 @@ const HelpMenuModal = ({ showModal, setShowModal, scheme, helpType }) => {
         styles.helpModal,
         {
           top: Platform.OS === "ios" ? 100 : 50,
-          left: SAFE_WIDTH / 2 - HELP_MODAL_WIDTH / 2,
+          left: SAFE_WIDTH / 2 - HELP_MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: HELP_MODAL_WIDTH,
         },
         scheme.modalBg,

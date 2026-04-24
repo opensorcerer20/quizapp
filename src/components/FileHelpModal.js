@@ -5,7 +5,7 @@ import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { SAFE_WIDTH } from "../common/constants";
+import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
@@ -99,9 +99,8 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         styles.modalContainer,
         {
           top: Platform.OS === "ios" ? 100 : 50,
-          left: SAFE_WIDTH / 2 - MODAL_WIDTH / 2,
+          left: SAFE_WIDTH / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: MODAL_WIDTH,
-          marginHorizontal: "auto",
         },
         scheme.modalBg,
         { borderColor: scheme.bgAccent.backgroundColor },

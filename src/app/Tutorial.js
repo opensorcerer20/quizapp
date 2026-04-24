@@ -15,13 +15,14 @@ const replaytutorial = require("../../assets/tutorial/replaytutorial.png");
 const slidetodelete = require("../../assets/tutorial/slidetodelete.png");
 
 const PAGES = [
-  { content: "Welcome to your Flashcard Library!" },
-  { content: "You can store several flash card decks", img: lightlist },
-  { content: "Swipe left to delete a deck", img: slidetodelete },
-  { content: "Click the + button to add a deck", img: adddeck },
-  { content: "Click on a deck to go through the flash cards", img: reviewdeck_1q },
-  { content: "Click on a deck gear to change deck settings", img: decksettings },
-  { content: "Click the menu to replay this tutorial.", img: replaytutorial },
+  { content: "Tutorial cannot be done until changes are completed" },
+  // { content: "Welcome to your Flashcard Library!" },
+  // { content: "You can store several flash card decks", img: lightlist },
+  // { content: "Swipe left to delete a deck", img: slidetodelete },
+  // { content: "Click the + button to add a deck", img: adddeck },
+  // { content: "Click on a deck to go through the flash cards", img: reviewdeck_1q },
+  // { content: "Click on a deck gear to change deck settings", img: decksettings },
+  // { content: "Click the menu to replay this tutorial.", img: replaytutorial },
 ];
 
 export default function Tutorial({ onClose }) {

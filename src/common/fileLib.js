@@ -51,6 +51,10 @@ export const checkIfExists = async (key, startsWith = false) => {
 };
 
 export const setFlag = async (key, value) => {
+  if (typeof key !== "string") {
+    console.log("non-string key in setflag: '" + key + "'");
+    return false;
+  }
   await saveStorageData(key, value);
 };
 
@@ -90,6 +94,10 @@ export const getExportData = async () => {
 };
 
 const loadStorageData = async (key) => {
+  if (typeof key !== "string") {
+    console.log("non-string key in loadStorageData");
+    return false;
+  }
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -131,6 +139,10 @@ export const loadQuestionsFromStorage = async (deckId) => {
 
 // DO NOT EXPORT
 const saveStorageData = async (key, value) => {
+  if (typeof key !== "string") {
+    console.log("non-string key in saveStorageData: '" + key + "'");
+    return false;
+  }
   try {
     // console.log("saving with key " + key + " value " + JSON.stringify(value));
     await AsyncStorage.setItem(key, JSON.stringify(value));
@@ -174,6 +186,10 @@ export const updateDeckQuestionData = async (deckId, questions) => {
 };
 
 export const removeStorageData = async (key) => {
+  if (typeof key !== "string") {
+    console.log("non-string key in removeStorageData");
+    return false;
+  }
   try {
     const value = await AsyncStorage.removeItem(key);
     return true;

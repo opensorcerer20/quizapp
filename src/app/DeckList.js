@@ -6,16 +6,8 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
 
-import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST, TUTORIAL_KEY } from "../common/constants";
-import {
-  getFlag,
-  loadAllDecks,
-  loadDemoData,
-  removeStorageData,
-  saveDeckData,
-  saveDeckListData,
-  setFlag,
-} from "../common/fileLib";
+import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST } from "../common/constants";
+import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
 import AddDeckModal from "../components/AddDeckModal";
@@ -51,14 +43,6 @@ export const DeckList = () => {
 
   const { theme } = useTheme();
   const scheme = getScheme(theme);
-
-  const checkTutorial = async () => {
-    const tutFlag = await getFlag(TUTORIAL_KEY);
-    if (!tutFlag) {
-      setShowTutorial(true);
-    }
-  };
-  checkTutorial();
 
   const loadDeckListData = async () => {
     let newDeckListData = await loadAllDecks();
@@ -172,12 +156,6 @@ export const DeckList = () => {
       loadData();
     }
   }, [reload]);
-
-  useEffect(() => {
-    if (!showTutorial) {
-      setFlag(TUTORIAL_KEY, true);
-    }
-  }, [showTutorial]);
 
   // load data first time
   useEffect(() => {
