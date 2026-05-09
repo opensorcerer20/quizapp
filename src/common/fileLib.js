@@ -1,12 +1,10 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { DECK_DATA_KEY, DECK_QA_KEY } from "./constants";
 import { getRandomInt } from "./util";
 
-export const loadDemoData = async () => {
+export const loadDemoData = () => {
   try {
-    const hasDeckData = await checkIfExists(DECK_DATA_KEY);
-    const hasQaDecks = await checkIfExists(DECK_QA_KEY, true);
+    const hasDeckData = checkIfExists(DECK_DATA_KEY);
+    const hasQaDecks = checkIfExists(DECK_QA_KEY, true);
     // console.log("demo checks: " + JSON.stringify({ hasDeckData, hasQaDecks }));
     if (!hasDeckData && !hasQaDecks) {
       const demoDeckData = require("../../assets/demodeck.json");
@@ -16,28 +14,28 @@ export const loadDemoData = async () => {
       for (let i = 0; i < numDecks; i++) {
         let id = getRandomInt(100000, 999999);
         deckListData.push({ ...demoDeckData.demoDeckData, id });
-        await saveDeckData(id, { ...demoDeckData.demoDeckQuestionData, id });
+        saveDeckData(id, { ...demoDeckData.demoDeckQuestionData, id });
       }
 
-      await saveDeckListData(deckListData);
+      saveDeckListData(deckListData);
       return true;
     }
   } catch (e) {
-    console.log("Error retrieving keys from AsyncStorage:", e);
+    console.log("Error retrieving keys from localStorage:", e);
   }
   return false;
 };
 
 /**
- * Check if key exists in async storage
+ * Check if key exists in storage
  *
  * @param {string} key
  * @param {boolean} startsWith - if true, checks all keys to see if "key" exists as start of key
  * @returns boolean
  */
-export const checkIfExists = async (key, startsWith = false) => {
+export const checkIfExists = (key, startsWith = false) => {
   try {
-    const keys = await AsyncStorage.getAllKeys();
+    const keys = Object.keys(localStorage);
     if (startsWith) {
       return keys.filter((thisKey) => thisKey.indexOf(key) === 0).length > 0;
     }
@@ -45,39 +43,37 @@ export const checkIfExists = async (key, startsWith = false) => {
     // console.log("result " + JSON.stringify(keys.indexOf(key) > -1));
     return keys.indexOf(key) > -1;
   } catch (e) {
-    console.log("Error retrieving keys from AsyncStorage:", e);
+    console.log("Error retrieving keys from localStorage:", e);
   }
   return false;
 };
 
-export const setFlag = async (key, value) => {
+export const setFlag = (key, value) => {
   if (typeof key !== "string") {
     console.log("non-string key in setflag: '" + key + "'");
     return false;
   }
-  await saveStorageData(key, value);
+  saveStorageData(key, value);
 };
 
-export const getFlag = async (key) => {
-  const value = await loadStorageData(key);
+export const getFlag = (key) => {
+  const value = loadStorageData(key);
   return value;
 };
 
 // @todo change so this is NOT exported
-export const loadAllDecks = async () => {
-  return await loadStorageData(DECK_DATA_KEY);
+export const loadAllDecks = () => {
+  return loadStorageData(DECK_DATA_KEY);
 };
 
-export const getExportData = async () => {
+export const getExportData = () => {
   let data = [];
-  const allDecks = await loadAllDecks();
+  const allDecks = loadAllDecks();
 
-  const deckData = await Promise.all(
-    allDecks.map(async (deck) => {
-      const [selectedDeck, selectedDeckData] = await loadDeckData(deck.id);
-      return { ...selectedDeckData, deck: deck };
-    })
-  );
+  const deckData = allDecks.map((deck) => {
+    const [selectedDeck, selectedDeckData] = loadDeckData(deck.id);
+    return { ...selectedDeckData, deck: deck };
+  });
 
   // sort decks with most recent first
   deckData.sort((a, b) => b.deck.createdAt - a.deck.createdAt);
@@ -93,13 +89,13 @@ export const getExportData = async () => {
   return data.join("\n");
 };
 
-const loadStorageData = async (key) => {
+const loadStorageData = (key) => {
   if (typeof key !== "string") {
     console.log("non-string key in loadStorageData");
     return false;
   }
   try {
-    const value = await AsyncStorage.getItem(key);
+    const value = localStorage.getItem(key);
     if (value !== null) {
       return JSON.parse(value);
     }
@@ -108,9 +104,9 @@ const loadStorageData = async (key) => {
   }
 };
 
-export const loadDeckFromStorage = async (deckId) => {
+export const loadDeckFromStorage = (deckId) => {
   try {
-    const deckListJson = await AsyncStorage.getItem(DECK_DATA_KEY);
+    const deckListJson = localStorage.getItem(DECK_DATA_KEY);
     if (deckListJson !== null) {
       const deckListData = JSON.parse(deckListJson);
       const deck = deckListData.filter((deck) => deck.id == deckId);
@@ -121,10 +117,10 @@ export const loadDeckFromStorage = async (deckId) => {
   }
 };
 
-export const loadDeckData = async (deckId) => {
+export const loadDeckData = (deckId) => {
   if (deckId) {
-    const selectedDeck = await loadDeckFromStorage(deckId);
-    const selectedDeckData = await loadQuestionsFromStorage(deckId);
+    const selectedDeck = loadDeckFromStorage(deckId);
+    const selectedDeckData = loadQuestionsFromStorage(deckId);
     if (selectedDeck && Array.isArray(selectedDeckData?.questions) && selectedDeckData.questions.length) {
       return [selectedDeck, selectedDeckData];
     }
@@ -133,38 +129,28 @@ export const loadDeckData = async (deckId) => {
   return [null, []];
 };
 
-export const loadQuestionsFromStorage = async (deckId) => {
-  return await loadStorageData(DECK_QA_KEY + `_${deckId}`);
+export const loadQuestionsFromStorage = (deckId) => {
+  return loadStorageData(DECK_QA_KEY + `_${deckId}`);
 };
 
 // DO NOT EXPORT
-const saveStorageData = async (key, value) => {
+const saveStorageData = (key, value) => {
   if (typeof key !== "string") {
     console.log("non-string key in saveStorageData: '" + key + "'");
     return false;
   }
   try {
     // console.log("saving with key " + key + " value " + JSON.stringify(value));
-    await AsyncStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
     return true;
   } catch (error) {
     console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
   }
 };
 
-export const saveDeckListData = async (deckListData) => {
+export const saveDeckListData = (deckListData) => {
   try {
-    await saveStorageData(DECK_DATA_KEY, deckListData);
-    return true;
-  } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
-  }
-  return false;
-};
-
-export const saveDeckData = async (deckId, deckData) => {
-  try {
-    await saveStorageData(DECK_QA_KEY + `_${deckId}`, deckData);
+    saveStorageData(DECK_DATA_KEY, deckListData);
     return true;
   } catch (error) {
     console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
@@ -172,11 +158,21 @@ export const saveDeckData = async (deckId, deckData) => {
   return false;
 };
 
-export const updateDeckQuestionData = async (deckId, questions) => {
+export const saveDeckData = (deckId, deckData) => {
   try {
-    const deckData = await loadStorageData(DECK_QA_KEY + `_${deckId}`);
+    saveStorageData(DECK_QA_KEY + `_${deckId}`, deckData);
+    return true;
+  } catch (error) {
+    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+  }
+  return false;
+};
+
+export const updateDeckQuestionData = (deckId, questions) => {
+  try {
+    const deckData = loadStorageData(DECK_QA_KEY + `_${deckId}`);
     if (deckData) {
-      await saveStorageData(DECK_QA_KEY + `_${deckId}`, { ...deckData, questions });
+      saveStorageData(DECK_QA_KEY + `_${deckId}`, { ...deckData, questions });
     }
     return true;
   } catch (error) {
@@ -185,13 +181,13 @@ export const updateDeckQuestionData = async (deckId, questions) => {
   return false;
 };
 
-export const removeStorageData = async (key) => {
+export const removeStorageData = (key) => {
   if (typeof key !== "string") {
     console.log("non-string key in removeStorageData");
     return false;
   }
   try {
-    const value = await AsyncStorage.removeItem(key);
+    const value = localStorage.removeItem(key);
     return true;
   } catch (e) {
     console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));

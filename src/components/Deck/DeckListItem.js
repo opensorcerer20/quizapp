@@ -15,7 +15,7 @@ import { useLocale } from "../Providers/TranslationProvider";
 import SwipeableListItem, { makeButtonSettings } from "../SwipeableListItem";
 
 export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
-  // AsyncStorage.clear();
+  // localstorage.clear();
   const { getLocalString } = useLocale();
 
   const [deleteDeckId, setDeleteDeckId] = useState(null);
