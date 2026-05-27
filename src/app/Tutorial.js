@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import { SAFE_WIDTH } from "../common/constants";
 import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     height: 400,
   },
   page: {
-    width,
+    width: SAFE_WIDTH,
     justifyContent: "center",
     alignItems: "center",
     flex: 1,

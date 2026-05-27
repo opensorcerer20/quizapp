@@ -1,7 +1,8 @@
-import { Linking, Platform, Pressable, StyleSheet, View } from "react-native";
+import { Dimensions, Linking, Platform, Pressable, StyleSheet, View } from "react-native";
 
 import Feather from "@expo/vector-icons/Feather";
 
+import { SCREEN_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
@@ -27,8 +28,8 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClic
       modalContainerStyle={[
         styles.menuModal,
         {
-          top: Platform.OS === "ios" ? 90 : 40,
-          left: 20,
+          top: 60,
+          left: Dimensions.get("window").width / 2 - SCREEN_WIDTH / 2 + 20,
           width: "auto",
         },
         scheme.modalBg,

@@ -7,7 +7,7 @@ import { SAFE_WIDTH } from "../common/constants";
 import { useLocale } from "./Providers/TranslationProvider";
 import TextNormal from "./TextNormal";
 
-export const HELP_MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
+export const MODAL_WIDTH = Math.min(SAFE_WIDTH, 300);
 
 const HelpHeader = ({ scheme, title, onPress }) => {
   return (
@@ -135,7 +135,7 @@ const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
 
   return (
     <View style={{ padding: 15 }}>
-      <View style={{ width: HELP_MODAL_WIDTH }}>
+      <View style={{ width: MODAL_WIDTH }}>
         <HelpHeader scheme={scheme} title={title} onPress={() => setShowModal(false)} />
         {items.length > 0 &&
           items.map((item, key) => <HelpItem key={key} schemeTxt={scheme.txt} icon={item.icon} text={item.text} />)}
@@ -149,8 +149,8 @@ const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
   );
 };
 
-const headerWidth = HELP_MODAL_WIDTH - 30;
-const contentWidth = HELP_MODAL_WIDTH - 70;
+const headerWidth = MODAL_WIDTH - 30;
+const contentWidth = MODAL_WIDTH - 70;
 
 const styles = StyleSheet.create({
   helpHeader: {

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Flashcard Library",
     "slug": "flashcardlibrary",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "automatic",
@@ -24,6 +24,14 @@
       "softwareKeyboardLayoutMode": "pan"
     },
     "owner": "opensorcerer20",
+    "web": {
+      "favicon": "./assets/adaptive-icon.png",
+      "name": "Flashcard Library",
+      "shortName": "Flashcards",
+      "backgroundColor": "#121212",
+      "themeColor": "#121212",
+      "display": "standalone"
+    },
     "plugins": [
       "expo-router",
       [

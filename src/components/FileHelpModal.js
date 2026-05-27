@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Dimensions, Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -98,8 +98,8 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
       modalContainerStyle={[
         styles.modalContainer,
         {
-          top: Platform.OS === "ios" ? 100 : 50,
-          left: SAFE_WIDTH / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
+          top: Platform.OS === "android" ? 50 : 100,
+          left: Dimensions.get("window").width / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
           width: MODAL_WIDTH,
         },
         scheme.modalBg,
