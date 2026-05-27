@@ -107,7 +107,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: SAFE_WIDTH * 0.95,
+    width: SAFE_WIDTH,
     backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 12,
     borderRadius: 8,

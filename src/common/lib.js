@@ -90,7 +90,7 @@ export const lightDarkStyles = {
 
 export const globalStyles = {
   textField: {
-    width: SAFE_WIDTH * 0.9,
+    width: SAFE_WIDTH,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,

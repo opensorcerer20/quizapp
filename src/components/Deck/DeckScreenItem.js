@@ -57,7 +57,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
           />
         </Pressable>
         <Pressable style={{ flex: 1 }}>
-          <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH * 0.9 }}>
+          <View style={{ flexDirection: "col", maxWidth: SAFE_WIDTH }}>
             <TextNormal style={[scheme.txt, styles.itemText]}>
               <TextNormal style={{ fontWeight: "bold" }}>Q: </TextNormal>
               {formatCardText(`${item.q}`)}
@@ -83,7 +83,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
 
 const styles = StyleSheet.create({
   container: {
-    width: SAFE_WIDTH * 0.95,
+    width: SAFE_WIDTH,
     flexDirection: "row",
     paddingRight: 10,
     paddingVertical: 5,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   setAllButton: {
     flexDirection: "row",
-    maxWidth: SAFE_WIDTH * 0.4,
+    maxWidth: SAFE_WIDTH,
   },
   itemText: {
     fontSize: 16,

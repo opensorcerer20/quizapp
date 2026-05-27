@@ -84,7 +84,7 @@ const NewDeck = () => {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}>
-          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
+          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
             {getLocalString("Add a short descriptive title for the new deck.")}
           </TextNormal>
           <TextInput
@@ -95,7 +95,7 @@ const NewDeck = () => {
             onChangeText={setTitle}
             maxLength={64}
           />
-          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH * 0.9, marginHorizontal: "auto", marginVertical: 16 }]}>
+          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
             {getLocalString(
               "Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc"
             )}

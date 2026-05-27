@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.5)", // Semi-transparent background
   },
   modalView: {
-    width: SAFE_WIDTH * 0.9,
+    width: SAFE_WIDTH,
     margin: 20,
     borderRadius: 10,
     padding: 35,

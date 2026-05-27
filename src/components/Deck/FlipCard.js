@@ -106,7 +106,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
             <TextNormal
               numberOfLines={6}
               ellipsizeMode="tail"
-              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}
+              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.8 }]}
             >
               {finalCardText}
             </TextNormal>
@@ -121,7 +121,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
             <TextNormal
               numberOfLines={6}
               ellipsizeMode="tail"
-              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}
+              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.8 }]}
             >
               {finalCardText}
             </TextNormal>
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   flipCard: {
-    width: SAFE_WIDTH * 0.95,
+    width: SAFE_WIDTH,
     height: "auto",
     minHeight: 250,
     backfaceVisibility: "hidden",

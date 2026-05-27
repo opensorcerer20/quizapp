@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   switchContainer: {
     marginHorizontal: "auto",
     padding: Platform.OS === "ios" ? 5 : 0,
-    width: SAFE_WIDTH * 0.7,
+    width: SAFE_WIDTH,
   },
   cardCounter: {
     margin: "auto",

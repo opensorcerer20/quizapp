@@ -11,7 +11,7 @@ import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
-const MODAL_WIDTH = SAFE_WIDTH * 0.9;
+const MODAL_WIDTH = SAFE_WIDTH;
 const SAFE_MODAL_WIDTH = MODAL_WIDTH * 0.95;
 
 const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
