@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { Dimensions, Platform } from "react-native";
 
 export const DECK_DATA_KEY = "DECK_DATA";
 export const DECK_QA_KEY = "DECK_QA";
@@ -28,12 +28,13 @@ export const THEMES = {
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
 export const MIME_TYPE_TEXT = ["text/plain"];
 
-export const SCREEN_WIDTH = Platform.OS === "web" ? 420 : Dimensions.get("window");
+export const SCREEN_WIDTH = Platform.OS === "web" ? 360 : Dimensions.get("window").width;
+export const SCREEN_HEIGHT = Platform.OS === "web" ? 700 : Dimensions.get("window").height;
 // const width = Math.min(Dimensions.get("window").width);
 export const SAFE_MARGIN = Math.round(SCREEN_WIDTH / 20); // 5% width
 // export const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
 // @todo TESTING WIDTH
-export const SAFE_WIDTH = SCREEN_WIDTH * 0.8;
+export const SAFE_WIDTH = SCREEN_WIDTH * 0.9;
 
 // source: https://gist.github.com/aminnj/5ca372aa2def72fb017b531c894afdca
 const charWidths = {

@@ -1,7 +1,6 @@
 import { Dimensions, Linking, Platform, Pressable, StyleSheet, View } from "react-native";
 
-import Feather from "@expo/vector-icons/Feather";
-
+//import Feather from "@expo/vector-icons/Feather";
 import { SCREEN_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import { useLocale } from "./Providers/TranslationProvider";
@@ -46,7 +45,7 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClic
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Deck file help")}</TextNormal>
         </View>
       </Pressable>
-      <Pressable onPress={onClickTutorial}>
+      {/* <Pressable onPress={onClickTutorial}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Replay Tutorial")}</TextNormal>
         </View>
@@ -62,7 +61,7 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClic
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Beta Feedback")} </TextNormal>
           <Feather name="external-link" size={24} color={scheme.txt.color} />
         </View>
-      </Pressable>
+      </Pressable> */}
     </QuizModal>
   );
 };

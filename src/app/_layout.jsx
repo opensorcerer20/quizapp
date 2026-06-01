@@ -10,6 +10,10 @@ import {
   SafeAreaView,
 } from "react-native-safe-area-context";
 
+import {
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from "../common/constants";
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
 import { TranslationProvider } from "../components/Providers/TranslationProvider";
 
@@ -51,14 +55,14 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
     paddingVertical: Platform.OS === "web" ? 24 : 0,
     paddingHorizontal: Platform.OS === "web" ? 24 : 0,
   },
   phoneShell: {
     width: "100%",
-    maxWidth: 420,
-    minHeight: 720,
+    maxWidth: SCREEN_WIDTH,
+    minHeight: SCREEN_HEIGHT,
+    maxHeight: SCREEN_HEIGHT,
     flex: 1,
     backgroundColor: "#121212",
     borderRadius: Platform.OS === "web" ? 28 : 0,
