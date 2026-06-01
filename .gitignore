@@ -10,3 +10,11 @@ assets/.DS_Store
 temp/
 .prettierrc.json
 ios/
+dist/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

@@ -69,28 +69,34 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
             {
               borderWidth: 1,
               borderColor: theme === THEMES.dark ? globalStyles.txtWhite.color : globalStyles.txtBlack.color,
+              flexDirection: "row",
             },
           ]}
         >
-          <View style={{ flexDirection: "row" }}>
-            <Pressable onPress={() => handleViewClick(item.id)} style={{ marginVertical: "auto" }}>
-              <View style={[scheme.bgPrimary, { borderColor: scheme.txt.color, paddingRight: 15 }]}>
-                <MaterialCommunityIcons name={"cog"} size={20} color={scheme.txtForBg.color} />
-              </View>
-            </Pressable>
-            <Pressable onPress={() => onPressDeck(item.id)} style={{ flex: 1 }}>
-              <TextNormal
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={{
-                  color: deleteDeckId === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
-                  fontSize: 18,
-                }}
-              >
-                {itemName}
-              </TextNormal>
-            </Pressable>
-          </View>
+          <Pressable onPress={() => handleViewClick(item.id)} style={{ marginVertical: "auto" }}>
+            <View
+              style={[
+                scheme.bgPrimary,
+                { borderColor: scheme.txt.color, paddingLeft: 5, paddingRight: 5, paddingVertical: 5 },
+              ]}
+            >
+              <MaterialCommunityIcons name={"cog"} size={20} color={scheme.txtForBg.color} />
+            </View>
+          </Pressable>
+          <Pressable onPress={() => onPressDeck(item.id)} style={{ flex: 1 }}>
+            <TextNormal
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={{
+                color: deleteDeckId === item.id ? scheme.bg.backgroundColor : scheme.txt.color,
+                fontSize: 18,
+                paddingVertical: 5,
+                paddingLeft: 5,
+              }}
+            >
+              {itemName}
+            </TextNormal>
+          </Pressable>
         </View>
       </SwipeableListItem>
       <ConfirmModal
@@ -109,7 +115,7 @@ const styles = StyleSheet.create({
   container: {
     width: SAFE_WIDTH,
     backgroundColor: globalStyles.bgWhite.backgroundColor,
-    padding: 12,
+    padding: 5,
     borderRadius: 8,
     flexDirection: "row",
     marginVertical: 4,
