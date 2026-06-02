@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -54,6 +58,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
             size={20}
             color={scheme.txt.color}
             style={{ borderWidth: 1, borderRadius: 5, borderColor: scheme.txt.color, padding: 2 }}
+            testID="visibility-icon"
           />
         </Pressable>
         <Pressable style={{ flex: 1 }}>

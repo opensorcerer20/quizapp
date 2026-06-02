@@ -10,6 +10,20 @@ Initial idea: someone going on a multi country tour wants to learn the local lan
 
 I'm tuning into my personal tastes and focusing more on functionality I'd like to add. I can make some concessions for ready-made builds, but if I actually want to support this on the app stores, I'd need help maintaining and polishing it. send an email to opensorcerer20@gmail.com or ping me on github if you want to contribute!
 
+## Playwright help
+
+### Open the trace viewer for a failed test
+`npx playwright show-trace test-results/my-test/trace.zip`
+
+### Run tests in UI mode for interactive debugging
+`npx playwright test --ui`
+
+### Debug a specific test with the inspector
+`npx playwright test mytest.spec.ts --debug`
+
+### Codegen when playwright runs on port 8081
+`playwright codegen localhost:8081`
+
 ## Roadmap
 
 - [x] initial development

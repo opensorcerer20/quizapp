@@ -1,11 +1,21 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { clipWideString, getStrWidth, SAFE_WIDTH, THEMES } from "../../common/constants";
+import {
+  clipWideString,
+  getStrWidth,
+  SAFE_WIDTH,
+  THEMES,
+} from "../../common/constants";
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
@@ -80,7 +90,12 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
                 { borderColor: scheme.txt.color, paddingLeft: 5, paddingRight: 5, paddingVertical: 5 },
               ]}
             >
-              <MaterialCommunityIcons name={"cog"} size={20} color={scheme.txtForBg.color} />
+              <MaterialCommunityIcons
+                name={"cog"}
+                size={20}
+                color={scheme.txtForBg.color}
+                testID="deck-settings-icon"
+              />
             </View>
           </Pressable>
           <Pressable onPress={() => onPressDeck(item.id)} style={{ flex: 1 }}>

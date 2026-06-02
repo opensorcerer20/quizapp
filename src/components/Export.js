@@ -1,8 +1,15 @@
 import { useState } from "react";
 
-import { File, Paths } from "expo-file-system";
+import {
+  File,
+  Paths,
+} from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import { Alert, Pressable, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  View,
+} from "react-native";
 import Toast from "react-native-toast-message";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -75,7 +82,12 @@ const Export = () => {
     <>
       <View style={{ marginLeft: "auto", marginRight: 0, paddingVertical: 7 }}>
         <Pressable onPress={() => setModalVisible(true)}>
-          <MaterialCommunityIcons name="file-download-outline" size={36} color={scheme.txtForBg.color} />
+          <MaterialCommunityIcons
+            name="file-download-outline"
+            size={36}
+            color={scheme.txtForBg.color}
+            testID="download-icon"
+          />
         </Pressable>
       </View>
       <ConfirmModal

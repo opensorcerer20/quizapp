@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -58,12 +62,12 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
           {showBack && (
             <Pressable onPress={onBackClick}>
-              <MaterialCommunityIcons name="arrow-left" size={28} color={scheme.txt.color} />
+              <MaterialCommunityIcons name="arrow-left" size={28} color={scheme.txt.color} testID="back-arrow-icon" />
             </Pressable>
           )}
           {!showBack && (
             <Pressable onPress={() => setShowMenu(!showMenu)}>
-              <MaterialCommunityIcons name="menu" size={28} color={scheme.txt.color} />
+              <MaterialCommunityIcons name="menu" size={28} color={scheme.txt.color} testID="menu-icon" />
             </Pressable>
           )}
         </View>
@@ -73,11 +77,11 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         </View>
         <View style={[{ flex: 2, alignItems: "flex-end", marginRight: 15 }, buttonFlex]}>
           <Pressable style={showHelpButton ? { flex: 1 } : {}} onPress={toggleTheme}>
-            <MaterialCommunityIcons name={themeIcon} size={28} color={scheme.txt.color} />
+            <MaterialCommunityIcons name={themeIcon} size={28} color={scheme.txt.color} testID="light-dark-icon" />
           </Pressable>
           {showHelpButton && (
             <Pressable style={{ flex: 1 }} onPress={() => setShowHelp(!showHelp)}>
-              <MaterialCommunityIcons name="help" size={28} color={scheme.txt.color} />
+              <MaterialCommunityIcons name="help" size={28} color={scheme.txt.color} testID="help-icon" />
             </Pressable>
           )}
         </View>

@@ -1,4 +1,8 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -14,7 +18,13 @@ const HelpHeader = ({ scheme, title, onPress }) => {
     <View style={styles.helpHeader}>
       <TextNormal style={[scheme.txt, styles.helpTitle, { flex: 11 }]}>{title}</TextNormal>
       <Pressable onPress={onPress}>
-        <FontAwesome6 name="square-xmark" size={24} color={scheme.txt.color} style={{ textAlign: "right", flex: 1 }} />
+        <FontAwesome6
+          name="square-xmark"
+          size={24}
+          color={scheme.txt.color}
+          style={{ textAlign: "right", flex: 1 }}
+          testID="help-close-button"
+        />
       </Pressable>
     </View>
   );

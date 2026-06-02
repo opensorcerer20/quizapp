@@ -1,6 +1,12 @@
 import { useRef } from "react";
 
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -18,7 +24,7 @@ function ButtonAction({ onPress, btnStyles, color, label, labelColor, icon }) {
   return (
     <View style={btnStyles}>
       <Pressable onPress={onPress} style={buttonStyle} hitSlop={8}>
-        {icon && <MaterialCommunityIcons name={icon} size={24} color={labelColor} />}
+        {icon && <MaterialCommunityIcons name={icon} size={24} color={labelColor} testID={label} />}
         {!icon && <Text style={{ color: labelColor, fontWeight: "700" }}>{label}</Text>}
       </Pressable>
     </View>

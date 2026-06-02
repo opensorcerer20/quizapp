@@ -25,11 +25,12 @@
     },
     "owner": "opensorcerer20",
     "web": {
-      "favicon": "./assets/adaptive-icon.png",
+      "favicon": "./assets/favicon.png",
       "name": "Flashcard Library",
       "shortName": "Flashcards",
       "backgroundColor": "#121212",
       "themeColor": "#121212",
+      "output": "static",
       "display": "standalone"
     },
     "plugins": [
@@ -57,6 +58,9 @@
     },
     "scheme": [
       "com.cocoadroidllc.flashcardlibrary"
-    ]
+    ],
+    "experiments": {
+      "baseUrl": "/flashcard_library"
+    }
   }
 }

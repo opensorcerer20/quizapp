@@ -1,4 +1,9 @@
-import { Modal, Pressable, StyleSheet, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -12,7 +17,7 @@ const AddDeckButton = ({ scheme, onPressBtn, callback, label, icon }) => (
     onPress={() => onPressBtn(callback)}
   >
     <View style={[globalStyles.fabButton, scheme.buttonBg, { borderColor: scheme.txt.color, marginVertical: 10 }]}>
-      <MaterialCommunityIcons name={icon} size={36} color={scheme.txtForBg.color} />
+      <MaterialCommunityIcons name={icon} size={36} color={scheme.txtForBg.color} testID={label} />
     </View>
     <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{label}</TextNormal>
   </Pressable>

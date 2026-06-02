@@ -1,8 +1,15 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { clipWideString, getStrWidth } from "../../common/constants";
+import {
+  clipWideString,
+  getStrWidth,
+} from "../../common/constants";
 import { useLocale } from "../Providers/TranslationProvider";
 import TextNormal from "../TextNormal";
 
@@ -20,7 +27,13 @@ const DeckTitle = ({ deckName, scheme, showEdit = false, onEditPress = () => {} 
           </TextNormal>
           {showEdit && (
             <Pressable onPress={onEditPress}>
-              <MaterialCommunityIcons name="pencil" size={26} color={scheme.txt.color} style={{ marginLeft: 10 }} />
+              <MaterialCommunityIcons
+                name="pencil"
+                size={26}
+                color={scheme.txt.color}
+                style={{ marginLeft: 10 }}
+                testID="edit-icon"
+              />
             </Pressable>
           )}
         </View>

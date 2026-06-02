@@ -1,11 +1,21 @@
 import { useState } from "react";
 
-import { Dimensions, Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { SAFE_MARGIN, SAFE_WIDTH } from "../common/constants";
+import {
+  SAFE_MARGIN,
+  SAFE_WIDTH,
+} from "../common/constants";
 import { globalStyles } from "../common/lib";
 import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
@@ -132,7 +142,14 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
               style={{ flex: 1, paddingLeft: 5 }}
               onPress={() => (currentPage > 0 ? setCurrentPage((currentPage + pages.length - 1) % pages.length) : null)}
             >
-              {currentPage > 0 && <MaterialCommunityIcons name="chevron-left" size={36} color={scheme.txt.color} />}
+              {currentPage > 0 && (
+                <MaterialCommunityIcons
+                  name="chevron-left"
+                  size={36}
+                  color={scheme.txt.color}
+                  testID="next-page-icon"
+                />
+              )}
             </Pressable>
             <View
               style={{ flex: 10, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 20 }}
@@ -146,7 +163,12 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
               }
             >
               {currentPage < pages.length - 1 && (
-                <MaterialCommunityIcons name="chevron-right" size={36} color={scheme.txt.color} />
+                <MaterialCommunityIcons
+                  name="chevron-right"
+                  size={36}
+                  color={scheme.txt.color}
+                  testID="prev-page-icon"
+                />
               )}
             </Pressable>
           </View>

@@ -1,13 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
 
-import { Platform, Pressable, StyleSheet, View } from "react-native";
-import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { SAFE_WIDTH, THEMES } from "../../common/constants";
+import {
+  SAFE_WIDTH,
+  THEMES,
+} from "../../common/constants";
 import { globalStyles } from "../../common/lib";
-import { formatCardText, getFontSize, getScheme } from "../../common/util";
+import {
+  formatCardText,
+  getFontSize,
+  getScheme,
+} from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 import { useLocale } from "../Providers/TranslationProvider";
 import { ANSWER_FIRST } from "../Quiz/ReviewScreen";
@@ -69,7 +89,12 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
           marginHorizontal: 5,
         }}
       >
-        <MaterialCommunityIcons name={"chevron-double-" + direction} size={24} color={textStyle.color} />
+        <MaterialCommunityIcons
+          name={"chevron-double-" + direction}
+          size={24}
+          color={textStyle.color}
+          testID="flip-card-icon"
+        />
       </View>
     );
   };
