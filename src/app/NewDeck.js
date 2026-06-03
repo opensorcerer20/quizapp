@@ -1,7 +1,17 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import { router } from "expo-router";
-import { BackHandler, Keyboard, KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput } from "react-native";
+import {
+  BackHandler,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -83,49 +93,49 @@ const NewDeck = () => {
         style={[styles.container, { flex: 1 }]}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}>
-          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
-            {getLocalString("Add a short descriptive title for the new deck.")}
-          </TextNormal>
-          <TextInput
-            style={globalStyles.textField}
-            placeholder={getLocalString("Deck Title")}
-            placeholderTextColor="#aaaaaa"
-            value={title}
-            onChangeText={setTitle}
-            maxLength={64}
-          />
-          <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
-            {getLocalString(
-              "Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc"
-            )}
-          </TextNormal>
-          <TextInput
-            style={styles.textInput}
-            placeholder={
-              getLocalString("Question") +
-              " 1\n" +
-              getLocalString("Answer") +
-              " 1\n" +
-              getLocalString("Question") +
-              " 2\n" +
-              getLocalString("Answer") +
-              " 2"
-            }
-            placeholderTextColor="#aaaaaa"
-            value={questionData}
-            onChangeText={updateText}
-            multiline={true}
-            numberOfLines={100}
-            textAlignVertical="top"
-          />
-          <CancelSubmit
-            scheme={scheme}
-            handleSubmit={() => handleSubmit(title, questionData)}
-            onBackClick={onBackClick}
-            submitDisabled={questionData.length === 0 || title.length === 0}
-          />
-        </Pressable>
+        {/* <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}> */}
+        <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
+          {getLocalString("Add a short descriptive title for the new deck.")}
+        </TextNormal>
+        <TextInput
+          style={globalStyles.textField}
+          placeholder={getLocalString("Deck Title")}
+          placeholderTextColor="#aaaaaa"
+          value={title}
+          onChangeText={setTitle}
+          maxLength={64}
+        />
+        <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
+          {getLocalString(
+            "Add questions and answers, with a question on lines 1, 3, 5, etc, and answers on lines 2, 4, 6, etc"
+          )}
+        </TextNormal>
+        <TextInput
+          style={styles.textInput}
+          placeholder={
+            getLocalString("Question") +
+            " 1\n" +
+            getLocalString("Answer") +
+            " 1\n" +
+            getLocalString("Question") +
+            " 2\n" +
+            getLocalString("Answer") +
+            " 2"
+          }
+          placeholderTextColor="#aaaaaa"
+          value={questionData}
+          onChangeText={updateText}
+          multiline={true}
+          numberOfLines={100}
+          textAlignVertical="top"
+        />
+        <CancelSubmit
+          scheme={scheme}
+          handleSubmit={() => handleSubmit(title, questionData)}
+          onBackClick={onBackClick}
+          submitDisabled={questionData.length === 0 || title.length === 0}
+        />
+        {/* </Pressable> */}
       </KeyboardAvoidingView>
       <ConfirmModal
         message={getLocalString("You have unsaved data, do you want to discard it?")}

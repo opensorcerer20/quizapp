@@ -1,6 +1,14 @@
-import { Modal, Pressable, StyleSheet, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
-import { SAFE_WIDTH } from "../common/constants";
+import {
+  SAFE_WIDTH,
+  SCREEN_HEIGHT,
+} from "../common/constants";
 import { globalStyles } from "../common/lib";
 import TextNormal from "./TextNormal";
 
@@ -35,8 +43,8 @@ const ConfirmModal = ({
       visible={modalVisible}
       onRequestClose={handleCancel} // Handle Android back button
     >
-      <Pressable style={styles.centeredView} onPress={handleCancel}>
-        <View style={[scheme.modalBg, styles.modalView]}>
+      <View style={styles.centeredView}>
+        <View style={[scheme.modalBg, styles.modalView, { position: "absolute", top: SCREEN_HEIGHT / 2 - 100 }]}>
           <TextNormal style={[scheme.txt, styles.modalText]}>{message}</TextNormal>
           {children}
           <View style={styles.buttonContainer}>
@@ -55,7 +63,7 @@ const ConfirmModal = ({
             />
           </View>
         </View>
-      </Pressable>
+      </View>
     </Modal>
   );
 };

@@ -1,4 +1,7 @@
-import { Dimensions, Platform } from "react-native";
+import {
+  Dimensions,
+  Platform,
+} from "react-native";
 
 export const DECK_DATA_KEY = "DECK_DATA";
 export const DECK_QA_KEY = "DECK_QA";

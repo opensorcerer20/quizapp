@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import { trim } from "lodash";
-import { Platform, StyleSheet, TextInput } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";

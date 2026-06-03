@@ -88,7 +88,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
 
 const styles = StyleSheet.create({
   container: {
-    width: SAFE_WIDTH,
+    width: SAFE_WIDTH - 10,
     flexDirection: "row",
     paddingRight: 10,
     paddingVertical: 5,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   setAllButton: {
     flexDirection: "row",
-    maxWidth: SAFE_WIDTH,
+    maxWidth: SAFE_WIDTH - 10,
   },
   itemText: {
     fontSize: 16,

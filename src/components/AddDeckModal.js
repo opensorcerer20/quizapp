@@ -38,7 +38,7 @@ const AddDeckModal = ({ showModal, setShowModal, onPressCreate, onPressTxt, onPr
       onRequestClose={() => setShowModal(false)} // Handle Android back button
     >
       <Pressable style={styles.centeredView} onPress={() => setShowModal(false)}>
-        <View style={[scheme.modalBg, styles.modalView]}>
+        <View style={[scheme.modalBg, styles.modalView, { position: "absolute", top: 50 }]}>
           <View style={{ flexDirection: "column" }}>
             <AddDeckButton
               scheme={scheme}
