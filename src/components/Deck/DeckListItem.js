@@ -82,6 +82,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
               flexDirection: "row",
             },
           ]}
+          testID="deck-list-item"
         >
           <Pressable onPress={() => handleViewClick(item.id)} style={{ marginVertical: "auto" }}>
             <View

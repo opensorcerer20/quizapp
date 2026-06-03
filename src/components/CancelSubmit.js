@@ -1,4 +1,8 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -18,6 +22,7 @@ const CancelSubmit = ({
         onPress={onBackClick}
         onLongPress={onBackClick}
         style={[globalStyles.button, scheme.bgDisabled, styles.buttonStyle]}
+        testID="cancel"
       >
         <TextNormal style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>{cancelLabel}</TextNormal>
       </Pressable>
@@ -25,6 +30,7 @@ const CancelSubmit = ({
         onPress={submitDisabled ? () => {} : handleSubmit}
         onLongPress={submitDisabled ? () => {} : handleSubmit}
         style={[globalStyles.button, scheme.buttonBg, submitDisabled ? scheme.bgDisabled : {}, styles.buttonStyle]}
+        testID="submit"
       >
         <TextNormal style={[scheme.buttonTxt, { fontSize: 16, fontWeight: "bold" }]}>{submitLabel}</TextNormal>
       </Pressable>

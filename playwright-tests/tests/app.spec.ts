@@ -56,3 +56,33 @@ test('should load review screen', async ({ page }) => {
   // await helpButton2.click();
   // await expect(page.getByText('Review Help')).toBeHidden();
 });
+
+test('create new card', async ({ page }) => {
+  await page.goto('http://localhost:8081/');
+
+  await expect(page.getByText('Sample Spanish Deck')).toBeVisible();
+  await page
+    .getByTestId('deck-list-item')
+    .filter({ hasText: 'Sample Spanish Deck' })
+    .getByTestId('deck-settings-icon')
+    .click();
+  await expect(page.getByText('Deck Settings')).toBeVisible();
+  await expect(page.getByText('Deck: Sample Spanish Deck')).toBeVisible();
+  await expect(page.getByText('new front')).toBeHidden();
+  await expect(page.getByText('new back')).toBeHidden();
+  await page.getByTestId('fab').click();
+
+  const questionInput = page.getByTestId('question-input');
+  await questionInput.click();
+  await questionInput.fill('new front');
+
+  const answerInput = page.getByTestId('answer-input');
+  await answerInput.click();
+  await answerInput.fill('new back');
+  await page
+    .getByTestId('submit')
+    .filter({hasText: 'Add Question'})
+    .click();
+  await expect(page.getByText('new front')).toBeVisible();
+  await expect(page.getByText('new back')).toBeVisible();
+});

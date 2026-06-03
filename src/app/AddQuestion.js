@@ -1,12 +1,36 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
-import { router, useLocalSearchParams } from "expo-router";
-import { BackHandler, KeyboardAvoidingView, Platform, StyleSheet, TextInput, View } from "react-native";
+import {
+  router,
+  useLocalSearchParams,
+} from "expo-router";
+import {
+  BackHandler,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
-import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED } from "../common/constants";
-import { loadDeckFromStorage, loadQuestionsFromStorage, updateDeckQuestionData } from "../common/fileLib";
+import {
+  MAX_CHAR_LIMIT,
+  NEW_QUESTION_ADDED,
+} from "../common/constants";
+import {
+  loadDeckFromStorage,
+  loadQuestionsFromStorage,
+  updateDeckQuestionData,
+} from "../common/fileLib";
 import { globalStyles } from "../common/lib";
-import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import {
+  getRandomInt,
+  getScheme,
+  sanitizeAll,
+} from "../common/util";
 import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
@@ -110,6 +134,7 @@ const AddQuestion = () => {
             value={question}
             onChangeText={setQuestion}
             maxLength={MAX_CHAR_LIMIT}
+            testID="question-input"
           />
         </View>
         <View>
@@ -121,6 +146,7 @@ const AddQuestion = () => {
             value={answer}
             onChangeText={setAnswer}
             maxLength={MAX_CHAR_LIMIT}
+            testID="answer-input"
           />
         </View>
         <CancelSubmit
