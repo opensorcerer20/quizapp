@@ -51,7 +51,7 @@ I'm tuning into my personal tastes and focusing more on functionality I'd like t
 -   Why not support mixed quotes for csv parsing?
     -   I only support either zero quotes or full quotes for csv. Attempting to code for a combination of quoted and unquoted values increases the required parsing logic, so I put that off.
 
-## notes
+## Technical Notes
 
 -   issue: using Text with style fontSize with either "1.2em" or "20px" caused it to crash; just use numbers I guess?
 -   couldn't see a way to test random sort
