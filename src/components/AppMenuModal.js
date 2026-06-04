@@ -1,4 +1,11 @@
-import { Dimensions, Linking, Platform, Pressable, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  Linking,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 //import Feather from "@expo/vector-icons/Feather";
 import { SCREEN_WIDTH } from "../common/constants";
@@ -45,23 +52,11 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClic
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Deck file help")}</TextNormal>
         </View>
       </Pressable>
-      {/* <Pressable onPress={onClickTutorial}>
+      <Pressable onPress={onClickTutorial}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
-          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Replay Tutorial")}</TextNormal>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Show Tutorial")}</TextNormal>
         </View>
       </Pressable>
-      <Pressable
-        onPress={() =>
-          openExternalLink(
-            "https://docs.google.com/forms/d/e/1FAIpQLScpH0v_HBuTTtsufGerFiSlcoirCmDflgdTaS199Tioz0pzLw/viewform?usp=sharing&ouid=100598572439498221042"
-          )
-        }
-      >
-        <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
-          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Beta Feedback")} </TextNormal>
-          <Feather name="external-link" size={24} color={scheme.txt.color} />
-        </View>
-      </Pressable> */}
     </QuizModal>
   );
 };
