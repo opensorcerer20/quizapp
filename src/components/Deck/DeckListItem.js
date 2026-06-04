@@ -84,6 +84,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
           ]}
           testID="deck-list-item"
         >
+          {/* import { TouchableOpacity } from 'react-native-gesture-handler'; */}
           <Pressable onPress={() => handleViewClick(item.id)} style={{ marginVertical: "auto" }}>
             <View
               style={[

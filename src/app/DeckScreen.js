@@ -1,12 +1,31 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
-import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import {
+  router,
+  useFocusEffect,
+  useLocalSearchParams,
+} from "expo-router";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
 
 import { MAX_QUESTIONS } from "../common/constants";
-import { loadAllDecks, loadDeckData, saveDeckData, saveDeckListData, updateDeckQuestionData } from "../common/fileLib";
+import {
+  loadAllDecks,
+  loadDeckData,
+  saveDeckData,
+  saveDeckListData,
+  updateDeckQuestionData,
+} from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
@@ -86,7 +105,7 @@ const DeckScreen = () => {
 
   const handleDeleteConfirmClick = async (deleteCardId) => {
     const newQuestions = currentDeckData.questions.filter((question) => question.id !== deleteCardId);
-    await updateDeckQuestionData(currentDeck.id, newQuestions);
+    updateDeckQuestionData(currentDeck.id, newQuestions);
     await loadDeckDataFromStorage();
   };
 
@@ -111,6 +130,23 @@ const DeckScreen = () => {
       setCurrentDeckData([]);
     }
   }, [deckId]);
+
+  // handle page refresh where data is unrecoverable
+  /*
+    const router = useRouter();
+    const { missingData } = useMyGlobalState();
+
+    useEffect(() => {
+      if (!missingData) {
+        // Data is gone! Send them back to a safe place.
+        router.replace('/home');
+      }
+    }, [missingData]);
+
+    if (!missingData) {
+      return <Text>Loading or redirecting...</Text>; // Brief flash while redirecting
+    }
+  */
 
   const canAddQuestion = !currentDeckData?.questions?.length || currentDeckData.questions.length < MAX_QUESTIONS;
   const questionsExist = currentDeckData && currentDeckData?.questions;

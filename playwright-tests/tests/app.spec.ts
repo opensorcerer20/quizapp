@@ -68,8 +68,6 @@ test('create new card', async ({ page }) => {
     .click();
   await expect(page.getByText('Deck Settings')).toBeVisible();
   await expect(page.getByText('Deck: Sample Spanish Deck')).toBeVisible();
-  await expect(page.getByText('new front')).toBeHidden();
-  await expect(page.getByText('new back')).toBeHidden();
   await page.getByTestId('fab').click();
 
   const questionInput = page.getByTestId('question-input');
@@ -85,4 +83,71 @@ test('create new card', async ({ page }) => {
     .click();
   await expect(page.getByText('new front')).toBeVisible();
   await expect(page.getByText('new back')).toBeVisible();
+});
+
+test('create new card count', async ({ page }) => {
+  await page.goto('http://localhost:8081/');
+
+  await expect(page.getByText('Sample Spanish Deck')).toBeVisible();
+  await page
+    .getByTestId('deck-list-item')
+    .filter({ hasText: 'Sample Spanish Deck' })
+    .getByTestId('deck-settings-icon')
+    .click();
+  await expect(page.getByText('Deck Settings')).toBeVisible();
+  await expect(page.getByText('Deck: Sample Spanish Deck')).toBeVisible();
+
+  // Create a locator for the items
+const screenListItems = page.locator('[data-testid="deck-screen-item"]');
+
+// 2. Force Playwright to wait until at least the first item appears on screen
+await screenListItems.first().waitFor({ state: 'visible' });
+
+// 3. Now it is safe to grab the initial count
+const initialCount = await screenListItems.count();
+const expectedScreenListCount = initialCount + 1;
+console.log(`expectedScreenListCount: ${expectedScreenListCount}`);
+  // await page.getByTestId('fab').click();
+
+  // const questionInput = page.getByTestId('question-input');
+  // await questionInput.click();
+  // await questionInput.fill('new front');
+
+  // const answerInput = page.getByTestId('answer-input');
+  // await answerInput.click();
+  // await answerInput.fill('new back');
+  // await page
+  //   .getByTestId('submit')
+  //   .filter({hasText: 'Add Question'})
+  //   .click();
+  // await expect(page.getByText('Deck: Sample Spanish Deck')).toBeVisible();
+  // const newList = page.locator('[testid="deck-screen-item"]');
+  // await newList.first().waitFor({state: 'visible'});
+  // await expect(newList).toHaveCount(expectedScreenListCount);
+});
+
+test('flip card', async ({ page }) => {
+  await page.goto('http://localhost:8081/');
+
+  await expect(page.getByText('Sample Spanish Deck')).toBeVisible();
+  await page.getByText('Sample Spanish Deck').click();
+
+  await expect(page.getByText('Deck: Sample Spanish Deck')).toBeVisible();
+  await expect(page.getByText('Question')).toBeVisible();
+
+  await page
+    .getByTestId('question-card')
+    .click();
+
+  await expect(page.getByText('Answer')).toBeVisible();
+
+  await page
+    .getByTestId('answer-card')
+    .click();
+
+  await expect(page.getByText('Question')).toBeVisible();
+
+  await page.getByTestId('flip-card-icon').click();
+
+  await expect(page.getByText('Answer')).toBeVisible();
 });

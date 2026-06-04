@@ -125,6 +125,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
               height: 200,
             },
           ]}
+          testID="question-card"
         >
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
@@ -140,7 +141,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
         </View>
       )}
       {cardType === CARDTYPE_ANSWER && (
-        <View style={[cardStyle, cardBg, { borderWidth: 1, borderColor: "#000000" }]}>
+        <View style={[cardStyle, cardBg, { borderWidth: 1, borderColor: "#000000" }]} testID="answer-card">
           <View style={{ flexDirection: "column" }}>
             <CardHeader />
             <TextNormal

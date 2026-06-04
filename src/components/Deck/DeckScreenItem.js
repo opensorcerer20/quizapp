@@ -39,6 +39,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
         "#ffffff",
         "trash-can-outline"
       )}
+      data-testid="deck-screen-item"
     >
       <View
         key={item.id}
