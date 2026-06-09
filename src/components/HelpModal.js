@@ -1,11 +1,14 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  StyleSheet,
+} from "react-native";
 
-import { SAFE_MARGIN } from "../common/constants";
 import { globalStyles } from "../common/lib";
-import HelpMenu, { MODAL_WIDTH } from "./HelpMenu";
+import HelpContent, { MODAL_WIDTH } from "./HelpContent";
 import QuizModal from "./QuizModal";
 
-const HelpMenuModal = ({ showModal, setShowModal, scheme, helpType }) => {
+const HelpModal = ({ showModal, setShowModal, scheme, helpType }) => {
   return (
     <QuizModal
       modalVisible={showModal}
@@ -14,14 +17,14 @@ const HelpMenuModal = ({ showModal, setShowModal, scheme, helpType }) => {
         styles.helpModal,
         {
           top: Platform.OS === "android" ? 50 : 100,
-          left: Dimensions.get("window").width / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
+          left: Dimensions.get("window").width / 2 - MODAL_WIDTH / 2,
           width: MODAL_WIDTH,
         },
         scheme.modalBg,
         { borderColor: scheme.bgAccent.backgroundColor, borderWidth: 1 },
       ]}
     >
-      <HelpMenu scheme={scheme} helpType={helpType} setShowModal={setShowModal} />
+      <HelpContent scheme={scheme} helpType={helpType} setShowModal={setShowModal} />
     </QuizModal>
   );
 };
@@ -40,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HelpMenuModal;
+export default HelpModal;

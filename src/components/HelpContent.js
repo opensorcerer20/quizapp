@@ -39,7 +39,7 @@ const HelpItem = ({ schemeTxt, icon, text }) => {
   );
 };
 
-const HelpContent = (helpType, scheme) => {
+const HelpList = (helpType, scheme) => {
   const { getLocalString } = useLocale();
 
   if (helpType === "review") {
@@ -140,8 +140,8 @@ const HelpContent = (helpType, scheme) => {
   };
 };
 
-const HelpMenu = ({ scheme, helpType = "list", setShowModal }) => {
-  const { title, items } = HelpContent(helpType, scheme);
+const HelpContent = ({ scheme, helpType = "list", setShowModal }) => {
+  const { title, items } = HelpList(helpType, scheme);
 
   return (
     <View style={{ padding: 15 }}>
@@ -187,4 +187,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HelpMenu;
+export default HelpContent;

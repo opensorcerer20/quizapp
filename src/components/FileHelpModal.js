@@ -1,27 +1,17 @@
 import { useState } from "react";
 
-import {
-  Dimensions,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { Dimensions, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import {
-  SAFE_MARGIN,
-  SAFE_WIDTH,
-} from "../common/constants";
+import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
-const MODAL_WIDTH = SAFE_WIDTH;
+const MODAL_WIDTH = SAFE_WIDTH - 20;
 const SAFE_MODAL_WIDTH = MODAL_WIDTH * 0.95;
 
 const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
@@ -89,7 +79,6 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
                   borderColor: scheme.txt.color,
                   justifyContent: "center",
                   alignItems: "left",
-                  overflow: "scroll",
                 }}
               >
                 <TextNormal style={[scheme.txt, { fontSize: 12 }]}>{value}</TextNormal>
@@ -109,7 +98,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         styles.modalContainer,
         {
           top: Platform.OS === "android" ? 50 : 100,
-          left: Dimensions.get("window").width / 2 - MODAL_WIDTH / 2 + SAFE_MARGIN / 2,
+          left: Dimensions.get("window").width / 2 - MODAL_WIDTH / 2,
           width: MODAL_WIDTH,
         },
         scheme.modalBg,
@@ -135,43 +124,25 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
             />
           </Pressable>
         </View>
+        <View style={{ flexDirection: "row", alignItems: "center", height: 300 }}>
+          <Pressable onPress={() => (currentPage > 0 ? setCurrentPage(currentPage - 1) : null)} style={{ width: 36 }}>
+            {currentPage > 0 && (
+              <MaterialCommunityIcons name="chevron-left" size={36} color={scheme.txt.color} testID="next-page-icon" />
+            )}
+          </Pressable>
 
-        <View style={{ flex: 9 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Pressable
-              style={{ flex: 1, paddingLeft: 5 }}
-              onPress={() => (currentPage > 0 ? setCurrentPage((currentPage + pages.length - 1) % pages.length) : null)}
-            >
-              {currentPage > 0 && (
-                <MaterialCommunityIcons
-                  name="chevron-left"
-                  size={36}
-                  color={scheme.txt.color}
-                  testID="next-page-icon"
-                />
-              )}
-            </Pressable>
-            <View
-              style={{ flex: 10, width: SAFE_MODAL_WIDTH - 40, height: 320, overflow: "scroll", paddingHorizontal: 20 }}
-            >
-              {pages[currentPage]}
-            </View>
-            <Pressable
-              style={{ flex: 1, paddingRight: 5, alignItems: "flex-end" }}
-              onPress={() =>
-                currentPage < pages.length - 1 ? setCurrentPage((currentPage + pages.length + 1) % pages.length) : null
-              }
-            >
-              {currentPage < pages.length - 1 && (
-                <MaterialCommunityIcons
-                  name="chevron-right"
-                  size={36}
-                  color={scheme.txt.color}
-                  testID="prev-page-icon"
-                />
-              )}
-            </Pressable>
+          <View style={{ flex: 1 }}>
+            <Text>{pages[currentPage]}</Text>
           </View>
+
+          <Pressable
+            onPress={() => (currentPage < pages.length - 1 ? setCurrentPage(currentPage + 1) : null)}
+            style={{ width: 36 }}
+          >
+            {currentPage < pages.length - 1 && (
+              <MaterialCommunityIcons name="chevron-right" size={36} color={scheme.txt.color} testID="next-page-icon" />
+            )}
+          </Pressable>
         </View>
         <View style={{ flex: 1, width: 50, alignSelf: "center", marginVertical: 10 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>

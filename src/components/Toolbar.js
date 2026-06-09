@@ -13,7 +13,7 @@ import { THEMES } from "../common/constants";
 import { getScheme } from "../common/util";
 import AppMenuModal from "./AppMenuModal";
 import FileHelpModal from "./FileHelpModal";
-import HelpMenuModal from "./HelpMenuModal";
+import HelpModal from "./HelpModal";
 import { useTheme } from "./Providers/ThemeProvider";
 import { useLocale } from "./Providers/TranslationProvider";
 import TextNormal from "./TextNormal";
@@ -95,7 +95,7 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         onClickTutorial={() => showTutorialModal()}
         scheme={scheme}
       />
-      <HelpMenuModal showModal={showHelp} setShowModal={setShowHelp} scheme={scheme} helpType={helpType} />
+      <HelpModal showModal={showHelp} setShowModal={setShowHelp} scheme={scheme} helpType={helpType} />
       <FileHelpModal showModal={showFileHelp} setShowModal={setShowFileHelp} scheme={scheme} />
       <TutorialModal showModal={showTutorial} setShowModal={setShowTutorial} scheme={scheme} />
     </>
