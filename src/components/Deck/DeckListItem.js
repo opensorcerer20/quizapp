@@ -1,21 +1,11 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import {
-  Platform,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import {
-  clipWideString,
-  getStrWidth,
-  SAFE_WIDTH,
-  THEMES,
-} from "../../common/constants";
+import { clipWideString, getStrWidth, SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
 import { useTheme } from "../../components/Providers/ThemeProvider";
@@ -114,6 +104,11 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
               {itemName}
             </TextNormal>
           </Pressable>
+          <View style={{ width: 60 }}>
+            <View style={{ marginLeft: "auto", marginRight: 5 }}>
+              <MaterialCommunityIcons name={"transfer-left"} size={20} color={scheme.bgAccent.backgroundColor} />
+            </View>
+          </View>
         </View>
       </SwipeableListItem>
       <ConfirmModal
@@ -130,7 +125,7 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: SAFE_WIDTH,
+    width: SAFE_WIDTH - 10,
     backgroundColor: globalStyles.bgWhite.backgroundColor,
     padding: 5,
     borderRadius: 8,

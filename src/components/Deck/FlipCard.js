@@ -1,33 +1,13 @@
-import React, {
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  Platform,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
-import Animated, {
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import {
-  SAFE_WIDTH,
-  THEMES,
-} from "../../common/constants";
+import { SAFE_WIDTH, THEMES } from "../../common/constants";
 import { globalStyles } from "../../common/lib";
-import {
-  formatCardText,
-  getFontSize,
-  getScheme,
-} from "../../common/util";
+import { formatCardText, getFontSize, getScheme } from "../../common/util";
 import { useTheme } from "../Providers/ThemeProvider";
 import { useLocale } from "../Providers/TranslationProvider";
 import { ANSWER_FIRST } from "../Quiz/ReviewScreen";
@@ -132,7 +112,7 @@ const CardContent = ({ cardType, cardText, cardStyle, cardBg, textStyle, headerT
             <TextNormal
               numberOfLines={6}
               ellipsizeMode="tail"
-              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.8 }]}
+              style={[textStyle, textSizeStyle, { width: SAFE_WIDTH * 0.7 }]}
             >
               {finalCardText}
             </TextNormal>
@@ -265,7 +245,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   flipCard: {
-    width: SAFE_WIDTH,
+    width: SAFE_WIDTH - 40,
     height: "auto",
     minHeight: 250,
     backfaceVisibility: "hidden",

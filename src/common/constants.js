@@ -1,7 +1,4 @@
-import {
-  Dimensions,
-  Platform,
-} from "react-native";
+import { Dimensions, Platform } from "react-native";
 
 export const DECK_DATA_KEY = "DECK_DATA";
 export const DECK_QA_KEY = "DECK_QA";
@@ -13,10 +10,10 @@ export const NEW_QUESTION_ADDED = "NEW_QUESTION_ADDED";
 export const MAX_DECKS = 20;
 export const MAX_QUESTIONS = 50;
 
-export const MAX_CHAR_LIMIT_XXL = 10;
-export const MAX_CHAR_LIMIT_XL = 40;
-export const MAX_CHAR_LIMIT_L = 80;
-export const MAX_CHAR_LIMIT = 120;
+export const MAX_CHAR_LIMIT_XXL = 20;
+export const MAX_CHAR_LIMIT_XL = 80;
+export const MAX_CHAR_LIMIT_L = 160;
+export const MAX_CHAR_LIMIT = 240;
 
 export const VIEWS = {
   homeView: "homeView",

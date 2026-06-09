@@ -1,24 +1,10 @@
-import {
-  useRef,
-  useState,
-} from "react";
+import { useRef, useState } from "react";
 
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Dimensions, FlatList, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import {
-  SAFE_WIDTH,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-} from "../common/constants";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
+import { SAFE_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH } from "../common/constants";
 import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
 
@@ -58,8 +44,8 @@ export default function TutorialOrig({ onClose }) {
           <FlatList
             ref={flatListRef}
             data={PAGES}
-            horizontal
-            pagingEnabled
+            horizontal={true}
+            pagingEnabled={true}
             showsHorizontalScrollIndicator={true}
             renderItem={({ item, key }) => {
               return (
@@ -85,14 +71,24 @@ export default function TutorialOrig({ onClose }) {
             onViewableItemsChanged={onViewableItemsChanged}
             viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
           />
-          <View style={styles.dotsContainer}>
+          {/* <View style={styles.dotsContainer}>
             {PAGES.map((_, i) => (
               <View key={i} style={[styles.dot, { opacity: i === page ? 1 : 0.3 }]} />
             ))}
+          </View> */}
+          <View style={[styles.dotsContainer, { bottom: 50 }]}>
+            <MaterialCommunityIcons
+              name="chevron-triple-right"
+              size={36}
+              color={scheme.txt.color}
+              testID="next-page-icon"
+            />
           </View>
-          <TouchableOpacity style={styles.doneButton} onPress={onClose}>
-            <Text style={[styles.doneText, scheme.link]}>Done</Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity style={styles.doneButton} onPress={onClose}>
+              <Text style={[styles.doneText, scheme.link]}>Done</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -106,11 +102,11 @@ const styles = StyleSheet.create({
     height: 400,
   },
   page: {
-    width: Platform.OS === "web" ? SAFE_WIDTH + 20 : SAFE_WIDTH,
+    width: SAFE_WIDTH + 10,
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    paddingTop: Platform.OS === "web" ? 30 : 10,
+    paddingTop: 20,
   },
   text: {
     fontSize: 24,
