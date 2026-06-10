@@ -1,6 +1,5 @@
 import { Stack } from "expo-router";
 import {
-  Platform,
   StyleSheet,
   View,
 } from "react-native";
@@ -11,6 +10,7 @@ import {
 } from "react-native-safe-area-context";
 
 import {
+  IS_MOBILE,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
 } from "../common/constants";
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    paddingVertical: Platform.OS === "web" ? 24 : 0,
-    paddingHorizontal: Platform.OS === "web" ? 24 : 0,
+    paddingVertical: IS_MOBILE ? 0 : 24,
+    paddingHorizontal: IS_MOBILE ? 0 : 24,
   },
   phoneShell: {
     width: "100%",
@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
     maxHeight: SCREEN_HEIGHT,
     flex: 1,
     backgroundColor: "#121212",
-    borderRadius: Platform.OS === "web" ? 28 : 0,
+    borderRadius: IS_MOBILE ? 0 : 28,
     overflow: "hidden",
-    borderWidth: Platform.OS === "web" ? 1 : 0,
+    borderWidth: IS_MOBILE ? 0 : 1,
     borderColor: "#333",
   },
 });

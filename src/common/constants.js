@@ -1,4 +1,4 @@
-import { Dimensions, Platform } from "react-native";
+import { Dimensions } from "react-native";
 
 export const DECK_DATA_KEY = "DECK_DATA";
 export const DECK_QA_KEY = "DECK_QA";
@@ -28,8 +28,15 @@ export const THEMES = {
 export const MIME_TYPE_CSV = ["text/csv", "text/comma-separated-values"];
 export const MIME_TYPE_TEXT = ["text/plain"];
 
-export const SCREEN_WIDTH = Platform.OS === "web" ? 360 : Dimensions.get("window").width;
-export const SCREEN_HEIGHT = Platform.OS === "web" ? 700 : Dimensions.get("window").height;
+/*
+393 × 852 px for your medium phone size and 
+440 × 956 px for your large phone size.
+*/
+const MIN_WIDTH = 440;
+const MIN_HEIGHT = 956;
+export const SCREEN_WIDTH = Math.min(MIN_WIDTH, Dimensions.get("window").width);
+export const SCREEN_HEIGHT = Math.min(MIN_HEIGHT, Dimensions.get("window").height);
+export const IS_MOBILE = SCREEN_HEIGHT < MIN_HEIGHT || SCREEN_WIDTH < MIN_WIDTH;
 // const width = Math.min(Dimensions.get("window").width);
 export const SAFE_MARGIN = Math.round(SCREEN_WIDTH / 20); // 5% width
 // export const SAFE_WIDTH = width - Math.round(width / 20); // 95% width
