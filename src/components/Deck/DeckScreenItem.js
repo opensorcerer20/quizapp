@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-import {
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -44,7 +40,7 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
       <View
         key={item.id}
         style={[
-          item.disabled ? scheme.bgDisabled : scheme.bgAccent,
+          item.disabled ? scheme.bgDisabled : scheme.bgPrimary,
           styles.container,
           { borderColor: scheme.txt.color, flexDirection: "row" },
         ]}
@@ -74,6 +70,15 @@ const DeckScreenItem = ({ item, scheme, handleDeleteConfirmClick, onVisibilityCl
             </TextNormal>
           </View>
         </Pressable>
+        <View style={{ width: 60 }}>
+          <View style={{ marginLeft: "auto", marginRight: 5 }}>
+            <MaterialCommunityIcons
+              name={"transfer-left"}
+              size={20}
+              color={item.disabled ? scheme.txt.color : scheme.bgAccent.backgroundColor}
+            />
+          </View>
+        </View>
       </View>
       <ConfirmModal
         message={getLocalString("Are you sure you want to delete this card?")}
