@@ -30,7 +30,7 @@
       "shortName": "Flashcards",
       "backgroundColor": "#121212",
       "themeColor": "#121212",
-      "output": "static",
+      "output": "single",
       "display": "standalone"
     },
     "plugins": [
