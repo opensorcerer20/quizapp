@@ -1,11 +1,7 @@
 import { useState } from "react";
 
 import { router } from "expo-router";
-import {
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -14,6 +10,7 @@ import { getScheme } from "../common/util";
 import AppMenuModal from "./AppMenuModal";
 import FileHelpModal from "./FileHelpModal";
 import HelpModal from "./HelpModal";
+import InstallModal from "./InstallModal";
 import { useTheme } from "./Providers/ThemeProvider";
 import { useLocale } from "./Providers/TranslationProvider";
 import TextNormal from "./TextNormal";
@@ -25,6 +22,7 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showFileHelp, setShowFileHelp] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
+  const [showInstall, setShowInstall] = useState(false);
 
   const { theme, toggleTheme } = useTheme();
   const themeIcon = theme === THEMES.dark ? "moon-waning-crescent" : "weather-sunny";
@@ -43,6 +41,14 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
 
     setTimeout(() => {
       setShowTutorial(true);
+    }, 300);
+  };
+
+  const showInstallModal = () => {
+    setShowMenu(false);
+
+    setTimeout(() => {
+      setShowInstall(true);
     }, 300);
   };
 
@@ -93,11 +99,13 @@ const Toolbar = ({ title, showBack, helpType, hideButtons, onBackClick }) => {
         onClickHelp={() => showFileHelpModal()}
         onClickNew={() => onClickNew()}
         onClickTutorial={() => showTutorialModal()}
+        onClickInstall={() => showInstallModal()}
         scheme={scheme}
       />
       <HelpModal showModal={showHelp} setShowModal={setShowHelp} scheme={scheme} helpType={helpType} />
       <FileHelpModal showModal={showFileHelp} setShowModal={setShowFileHelp} scheme={scheme} />
       <TutorialModal showModal={showTutorial} setShowModal={setShowTutorial} scheme={scheme} />
+      <InstallModal showModal={showInstall} setShowModal={setShowInstall} scheme={scheme} />
     </>
   );
 };

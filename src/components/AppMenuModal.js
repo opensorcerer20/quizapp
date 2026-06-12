@@ -1,11 +1,4 @@
-import {
-  Dimensions,
-  Linking,
-  Platform,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Dimensions, Platform, Pressable, StyleSheet, View } from "react-native";
 
 //import Feather from "@expo/vector-icons/Feather";
 import { SCREEN_WIDTH } from "../common/constants";
@@ -14,18 +7,26 @@ import { useLocale } from "./Providers/TranslationProvider";
 import QuizModal from "./QuizModal";
 import TextNormal from "./TextNormal";
 
-const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClickTutorial, scheme }) => {
+const AppMenuModal = ({
+  showModal,
+  setShowModal,
+  onClickHelp,
+  onClickNew,
+  onClickTutorial,
+  onClickInstall,
+  scheme,
+}) => {
   const { getLocalString } = useLocale();
 
-  const openExternalLink = async (url) => {
-    const supported = await Linking.canOpenURL(url);
+  // const openExternalLink = async (url) => {
+  //   const supported = await Linking.canOpenURL(url);
 
-    if (supported) {
-      await Linking.openURL(url);
-    } else {
-      console.error(`Don't know how to open this URL: ${url}`);
-    }
-  };
+  //   if (supported) {
+  //     await Linking.openURL(url);
+  //   } else {
+  //     console.error(`Don't know how to open this URL: ${url}`);
+  //   }
+  // };
 
   return (
     <QuizModal
@@ -50,6 +51,11 @@ const AppMenuModal = ({ showModal, setShowModal, onClickHelp, onClickNew, onClic
       <Pressable onPress={onClickHelp}>
         <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
           <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("Deck file help")}</TextNormal>
+        </View>
+      </Pressable>
+      <Pressable onPress={onClickInstall}>
+        <View style={[styles.menuItem, { borderColor: scheme.txt.color }]}>
+          <TextNormal style={[scheme.txt, { fontSize: 16 }]}>{getLocalString("How to Install")}</TextNormal>
         </View>
       </Pressable>
       <Pressable onPress={onClickTutorial}>
