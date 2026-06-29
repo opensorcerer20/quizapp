@@ -2,7 +2,7 @@
 
 **A mobile-first flashcard app built with React Native and Expo.**
 
-[![Version](https://img.shields.io/badge/version-0.8.2-blue)](https://github.com/opensorcerer20/quizapp/releases)
+[![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/opensorcerer20/quizapp/releases)
 [![PWA](https://img.shields.io/badge/PWA-ready-brightgreen)](https://opensorcerer20.github.io/flashcard_library)
 [![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android%20%7C%20Web-lightgrey)](https://expo.dev)
 
