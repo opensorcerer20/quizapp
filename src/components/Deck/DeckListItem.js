@@ -45,7 +45,6 @@ export const DeckListItem = ({ item, onPressDeck, onDeleteDeck }) => {
     setDeleteDeckId(null);
   };
 
-  //console.log("testing console log (show debug data here) " + JSON.stringify({ editingDeck: renameState.editingDeck }));
   const nameWidth = getStrWidth(item.name);
   const itemName = nameWidth > 280 ? clipWideString(item.name, 280) + "..." : item.name;
 

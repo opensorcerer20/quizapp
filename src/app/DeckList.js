@@ -57,7 +57,6 @@ export const DeckList = () => {
     setReload(false);
   };
 
-  // @todo select "review" or "quiz"
   const onPressDeck = async (id) => {
     router.navigate({
       pathname: "QuizScreen",
