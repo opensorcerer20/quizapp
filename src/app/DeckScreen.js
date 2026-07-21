@@ -1,31 +1,12 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import {
-  router,
-  useFocusEffect,
-  useLocalSearchParams,
-} from "expo-router";
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FAB } from "react-native-paper";
 
 import { MAX_QUESTIONS } from "../common/constants";
-import {
-  loadAllDecks,
-  loadDeckData,
-  saveDeckData,
-  saveDeckListData,
-  updateDeckQuestionData,
-} from "../common/fileLib";
+import { loadAllDecks, loadDeckData, saveDeckData, saveDeckListData, updateDeckQuestionData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
 import { getScheme } from "../common/util";
 import DeckRenameModal from "../components/Deck/DeckRenameModal";
@@ -207,6 +188,7 @@ const DeckScreen = () => {
                     handleDeleteConfirmClick={handleDeleteConfirmClick}
                   />
                 )}
+                testID="deck-screen-list"
               />
             </GestureHandlerRootView>
           </>

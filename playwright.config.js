@@ -12,11 +12,16 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [["html", { open: "never" }]],
+  timeout: 15000,
   use: {
     // Port 8081 is the default port for Expo web
     baseURL: "http://localhost:8181",
     trace: "on-first-retry",
+    // Limit individual actions like .click() or .fill()
+    actionTimeout: 15000,
+    // Limit page loading times via page.goto()
+    navigationTimeout: 15000,
   },
   // Automatically spin up the Expo dev server before running tests
   webServer: {
@@ -50,4 +55,8 @@ export default defineConfig({
     //   use: { ...devices["Pixel 5"] },
     // },
   ],
+  expect: {
+    // Limit web assertions like expect(locator).toBeVisible()
+    timeout: 15000,
+  },
 });

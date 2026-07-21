@@ -204,6 +204,7 @@ export const DeckList = () => {
               renderItem={({ item }) => (
                 <DeckListItem item={item} onPressDeck={onPressDeck} onDeleteDeck={onDeleteDeck} />
               )}
+              testID="deck-list"
               // contentContainerStyle={{ paddingBottom: insetStyle.paddingBottom }}
             />
           </GestureHandlerRootView>
