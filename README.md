@@ -67,6 +67,7 @@ npm install
 npx expo start          # start the dev server (Expo Go or dev build)
 npx expo start --web    # run in browser / PWA mode
 npx playwright test     # run the E2E test suite
+npx playwright codegen --channel=chrome --device="" --viewport-size="1280,1020" # run big screen codegen
 ```
 
 **Note:** The project includes a `package.json` override for `use-latest-callback` (`^0.2.3`) to resolve a runtime error in the FAB component. Don't remove it.

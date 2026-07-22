@@ -1,14 +1,7 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useState } from "react";
 
 import { trim } from "lodash";
-import {
-  Platform,
-  StyleSheet,
-  TextInput,
-} from "react-native";
+import { Platform, StyleSheet, TextInput } from "react-native";
 
 import { globalStyles } from "../../common/lib";
 import { getScheme } from "../../common/util";
@@ -22,6 +15,15 @@ const DeckRenameModal = ({ initialDeckName, editingDeckId, handleCancelClick, ha
   const [deckName, setDeckName] = useState(initialDeckName);
   const [submitEnabled, setSubmitEnabled] = useState(true);
 
+  // replace useeffect
+  const [prevVisible, setPrevVisible] = useState(visible);
+  if (visible !== prevVisible) {
+    setPrevVisible(visible);
+    if (visible) {
+      setDeckName(initialDeckName);
+    }
+  }
+
   const { theme } = useTheme();
   const scheme = getScheme(theme);
 
@@ -29,10 +31,6 @@ const DeckRenameModal = ({ initialDeckName, editingDeckId, handleCancelClick, ha
     setDeckName(text);
     setSubmitEnabled(trim(text) != "");
   };
-
-  useEffect(() => {
-    setDeckName(initialDeckName);
-  }, [visible]);
 
   return (
     <ConfirmModal
