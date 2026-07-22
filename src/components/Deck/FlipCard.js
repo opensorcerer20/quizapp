@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Platform, Pressable, StyleSheet, View } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
@@ -201,22 +201,11 @@ const TheCard = ({ isFlipped, cardStyle, direction = "y", duration = 500, regula
 };
 
 const FlipCard = ({ answerText, questionText, showFirst }) => {
-  const [localQuestion, setLocalQuestion] = useState("");
-  const [localAnswer, setLocalAnswer] = useState("");
-
   const isFlipped = useSharedValue(false);
 
   const handlePress = () => {
     isFlipped.value = !isFlipped.value;
   };
-
-  useEffect(() => {
-    setLocalAnswer(answerText);
-  }, [answerText]);
-
-  useEffect(() => {
-    setLocalQuestion(questionText);
-  }, [questionText]);
 
   const isReversed = showFirst === ANSWER_FIRST;
 
@@ -227,8 +216,8 @@ const FlipCard = ({ answerText, questionText, showFirst }) => {
           isFlipped={isFlipped}
           duration={250}
           cardStyle={styles.flipCard}
-          flippedText={localAnswer}
-          regularText={localQuestion}
+          flippedText={answerText}
+          regularText={questionText}
           isReversed={isReversed}
         />
       </Pressable>

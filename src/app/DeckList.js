@@ -168,7 +168,7 @@ export const DeckList = () => {
   // load demo data if no data currently saved (checks async storage)
   useEffect(() => {
     const checkData = async () => {
-      const result = await loadDemoData();
+      const result = loadDemoData();
       if (result === true) {
         setReload(true);
       }

@@ -13,7 +13,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const saveTheme = async () => {
-      await setFlag(THEME_KEY, theme);
+      setFlag(THEME_KEY, theme);
     };
     if (theme) {
       saveTheme();
@@ -31,8 +31,8 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const getTheme = async () => {
       try {
-        if (await checkIfExists(THEME_KEY)) {
-          const storedTheme = await getFlag(THEME_KEY);
+        if (checkIfExists(THEME_KEY)) {
+          const storedTheme = getFlag(THEME_KEY);
           setTheme(storedTheme === THEMES.dark ? THEMES.dark : THEMES.light);
         } else {
           // default theme
