@@ -1,15 +1,8 @@
 import { useState } from "react";
 
-import {
-  File,
-  Paths,
-} from "expo-file-system";
+import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import {
-  Alert,
-  Pressable,
-  View,
-} from "react-native";
+import { Alert, Platform, Pressable, View } from "react-native";
 import Toast from "react-native-toast-message";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -31,16 +24,44 @@ const Export = () => {
     // const content = "This is the content of my text file.";
     const content = await getExportData();
     // console.log(">>> content " + JSON.stringify(content, null, 2));
+
+    const filename = `export_${new Date()
+      .toISOString()
+      .replace("T", "_")
+      .replace(/[^0-9_]/g, "")}.txt`; // filename is ymd_hms.txt
+
+    // Web/PWA: no native filesystem — build a Blob and trigger a browser download.
+    if (Platform.OS === "web") {
+      try {
+        const blob = new Blob([content], { type: "text/plain;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        Toast.show({
+          type: "success",
+          text1: "File created",
+        });
+      } catch (error) {
+        console.error("Error writing file:", error);
+        Toast.show({
+          type: "error",
+          text1: "Error writing file",
+        });
+      }
+      setModalVisible(false);
+      return;
+    }
+
+    // native app export
     let file;
     try {
       // export decks as question 1\nanswer1\netc\netc, with 2 blank lines between decks, no titles
-      file = new File(
-        Paths.cache,
-        `export_${new Date()
-          .toISOString()
-          .replace("T", "_")
-          .replace(/[^0-9_]/g, "")}.txt` // filename is ymd_hms.txt
-      );
+      file = new File(Paths.cache, filename);
       if (!file.exists) {
         file.create(); // can throw an error if the file already exists or no permission to create it
         file.write(content);
