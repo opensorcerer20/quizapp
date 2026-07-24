@@ -3,7 +3,7 @@
 **A mobile-first flashcard app built with React Native and Expo.**
 
 [![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/opensorcerer20/quizapp/releases)
-[![PWA](https://img.shields.io/badge/PWA-ready-brightgreen)](https://opensorcerer20.github.io/flashcard_library)
+[![PWA](https://img.shields.io/badge/PWA-ready-brightgreen)](https://theotherjeff.site/flashcard_library/)
 [![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android%20%7C%20Web-lightgrey)](https://expo.dev)
 
 Flashcard Library lets you load question-and-answer decks from CSV or text files, create decks manually in-app, and study them with an animated flip card interface. It runs as a PWA, and native iOS/Android builds are supported via EAS.

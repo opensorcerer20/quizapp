@@ -58,7 +58,7 @@ test('should load review screen', async ({ page }) => {
 });
 
 test('create new card', async ({ page }) => {
-  await page.goto('http://localhost:8081/');
+  await page.goto('/');
 
   await expect(page.getByText('Sample Spanish Deck')).toBeVisible();
   await page
@@ -127,7 +127,7 @@ console.log(`expectedScreenListCount: ${expectedScreenListCount}`);
 });
 */
 test('flip card', async ({ page }) => {
-  await page.goto('http://localhost:8081/');
+  await page.goto('/');
 
   await expect(page.getByText('Sample Spanish Deck')).toBeVisible();
   await page.getByText('Sample Spanish Deck').click();

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Stack } from "expo-router";
 import {
   StyleSheet,
@@ -14,10 +16,15 @@ import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
 } from "../common/constants";
+import { registerServiceWorker } from "../common/registerServiceWorker";
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
 import { TranslationProvider } from "../components/Providers/TranslationProvider";
 
 const RootLayout = () => {
+  useEffect(() => {
+    registerServiceWorker();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>

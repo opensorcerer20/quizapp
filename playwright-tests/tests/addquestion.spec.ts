@@ -11,7 +11,7 @@ test.use({
 });
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:8081/');
+  await page.goto('/');
   await expect(page.getByText('Sample Spanish Deck')).toBeVisible();
 
   // expect(await page
