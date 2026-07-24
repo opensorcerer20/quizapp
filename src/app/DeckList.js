@@ -83,7 +83,7 @@ export const DeckList = () => {
 
   const updateDeckListData = async (newDeckListData) => {
     setDeckListData(newDeckListData);
-    saveDeckListData(newDeckListData);
+    await saveDeckListData(newDeckListData);
   };
 
   const onPressImport = async (type) => {
@@ -158,22 +158,14 @@ export const DeckList = () => {
   }, [reload]);
 
   // load data first time
+  // storage is async, so the demo deck has to be seeded before the list is
+  // read - otherwise the list can resolve empty and show "no decks in memory"
   useEffect(() => {
     const loadData = async () => {
+      await loadDemoData();
       await loadDeckListData();
     };
     loadData();
-  }, []);
-
-  // load demo data if no data currently saved (checks async storage)
-  useEffect(() => {
-    const checkData = async () => {
-      const result = loadDemoData();
-      if (result === true) {
-        setReload(true);
-      }
-    };
-    checkData();
   }, []);
 
   const path = usePathname();

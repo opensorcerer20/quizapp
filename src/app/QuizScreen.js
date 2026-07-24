@@ -32,7 +32,7 @@ const QuizScreen = () => {
     if (deckId) {
       const asyncFunc = async () => {
         // note: tried to move set methods outside, but returning loaddeckdata from this func didnt work
-        const result = loadDeckData(deckId);
+        const result = await loadDeckData(deckId);
         if (Array.isArray(result) && result.length === 2) {
           const [selectedDeck, selectedDeckData] = result;
           setCurrentDeck(selectedDeck);

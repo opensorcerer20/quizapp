@@ -90,6 +90,16 @@ playwright codegen localhost:8081
 
 ---
 
+## Recent Updates
+
+### 1.0.1: Reduce useEffect usage
+
+### 1.0.2: Fix export bug for PWA
+
+### 1.0.3: Migrate LocalStorage to IndexedDB
+
+---
+
 ## Roadmap
 
 ### Proposed Future Features

@@ -10,10 +10,11 @@ const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(null); // set to null to avoid triggering theme change save
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     const saveTheme = async () => {
-      setFlag(THEME_KEY, theme);
+      await setFlag(THEME_KEY, theme);
     };
     if (theme) {
       saveTheme();
@@ -31,12 +32,12 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const getTheme = async () => {
       try {
-        if (checkIfExists(THEME_KEY)) {
-          const storedTheme = getFlag(THEME_KEY);
+        if (await checkIfExists(THEME_KEY)) {
+          const storedTheme = await getFlag(THEME_KEY);
           setTheme(storedTheme === THEMES.dark ? THEMES.dark : THEMES.light);
         } else {
           // default theme
-          if (useColorScheme() === "dark") {
+          if (colorScheme === "dark") {
             setTheme(THEMES.dark);
           } else {
             // light theme

@@ -1,6 +1,6 @@
 {
   "name": "flashcardlibrary",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
@@ -16,6 +16,7 @@
     "@babel/core": "^7.25.2",
     "@expo/metro-runtime": "~6.1.2",
     "@react-native-aria/utils": "^0.2.12",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "babel-preset-expo": "~54.0.0",
@@ -31,6 +32,7 @@
     "expo-router": "~6.0.21",
     "expo-sharing": "~14.0.8",
     "expo-system-ui": "~6.0.9",
+    "idb": "^8.0.3",
     "lodash": "^4.17.21",
     "papaparse": "^5.5.3",
     "playwright": "^1.60.0",

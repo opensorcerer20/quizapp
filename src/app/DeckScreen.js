@@ -35,7 +35,7 @@ const DeckScreen = () => {
   };
 
   // sets either all checkboxes or specific checkbox "disabled" property
-  const onVisibilityClick = (disabledValue, id = null) => {
+  const onVisibilityClick = async (disabledValue, id = null) => {
     let newCurrentDeckData = JSON.parse(JSON.stringify(currentDeckData));
     if (newCurrentDeckData.questions) {
       newCurrentDeckData.questions = newCurrentDeckData.questions.map((questionDatum) => {
@@ -44,7 +44,7 @@ const DeckScreen = () => {
         }
         return questionDatum;
       });
-      saveDeckData(currentDeck.id, newCurrentDeckData);
+      await saveDeckData(currentDeck.id, newCurrentDeckData);
       setCurrentDeckData(newCurrentDeckData);
     }
   };
@@ -62,7 +62,7 @@ const DeckScreen = () => {
         return deck;
       });
 
-      saveDeckListData(newDeckListData);
+      await saveDeckListData(newDeckListData);
       setCurrentDeck(updatedDeck[0]);
       setShowModal(false);
     } else {
@@ -86,7 +86,7 @@ const DeckScreen = () => {
 
   const handleDeleteConfirmClick = async (deleteCardId) => {
     const newQuestions = currentDeckData.questions.filter((question) => question.id !== deleteCardId);
-    updateDeckQuestionData(currentDeck.id, newQuestions);
+    await updateDeckQuestionData(currentDeck.id, newQuestions);
     await loadDeckDataFromStorage();
   };
 

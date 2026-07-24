@@ -5,6 +5,13 @@ export const DECK_QA_KEY = "DECK_QA";
 export const THEME_KEY = "THEME";
 export const RELOAD_LIST = "RELOAD_LIST";
 
+// set once the one-time localStorage -> IndexedDB copy has completed
+export const STORAGE_MIGRATED_KEY = "STORAGE_MIGRATED";
+
+export const DB_NAME = "flashcardlibrary";
+export const DB_VERSION = 1;
+export const DB_STORE = "kv";
+
 export const NEW_QUESTION_ADDED = "NEW_QUESTION_ADDED";
 
 export const MAX_DECKS = 20;
