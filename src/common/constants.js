@@ -1,16 +1,18 @@
 import { Dimensions } from "react-native";
 
-export const DECK_DATA_KEY = "DECK_DATA";
-export const DECK_QA_KEY = "DECK_QA";
-export const THEME_KEY = "THEME";
+// storage keys and IndexedDB identifiers live in a react-native-free module so
+// the tests can import them too; re-exported here for app code
+export {
+  DECK_DATA_KEY,
+  DECK_QA_KEY,
+  THEME_KEY,
+  STORAGE_MIGRATED_KEY,
+  DB_NAME,
+  DB_VERSION,
+  DB_STORE,
+} from "./storageKeys";
+
 export const RELOAD_LIST = "RELOAD_LIST";
-
-// set once the one-time localStorage -> IndexedDB copy has completed
-export const STORAGE_MIGRATED_KEY = "STORAGE_MIGRATED";
-
-export const DB_NAME = "flashcardlibrary";
-export const DB_VERSION = 1;
-export const DB_STORE = "kv";
 
 export const NEW_QUESTION_ADDED = "NEW_QUESTION_ADDED";
 

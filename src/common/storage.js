@@ -1,7 +1,7 @@
 import { openDB } from "idb";
 import { Platform } from "react-native";
 
-import { DB_NAME, DB_STORE, DB_VERSION, STORAGE_MIGRATED_KEY } from "./constants";
+import { DB_NAME, DB_STORE, DB_VERSION, STORAGE_MIGRATED_KEY } from "./storageKeys";
 
 /*
  * Async key/value storage.
