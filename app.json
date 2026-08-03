@@ -8,14 +8,14 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.cocoadroidllc.flashcardlibrary",
+      "bundleIdentifier": "com.opensorcerer20.flashcardlibrary",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
       "icon": "./assets/ios-light.png"
     },
     "android": {
-      "package": "com.cocoadroidllc.flashcardlibrary",
+      "package": "com.opensorcerer20.flashcardlibrary",
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -57,7 +57,7 @@
       }
     },
     "scheme": [
-      "com.cocoadroidllc.flashcardlibrary"
+      "com.opensorcerer20.flashcardlibrary"
     ],
     "experiments": {
       "baseUrl": "/flashcard_library"
