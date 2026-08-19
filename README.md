@@ -4,9 +4,9 @@
 
 [![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/opensorcerer20/quizapp/releases)
 [![PWA](https://img.shields.io/badge/PWA-ready-brightgreen)](https://opensorcerer20.github.io/flashcard_library)
-[![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android%20%7C%20Web-lightgrey)](https://expo.dev)
+[![Platform](https://img.shields.io/badge/platform-Web%20%7C%20PWA-lightgrey)](https://expo.dev)
 
-Flashcard Library lets you load question-and-answer decks from CSV or text files, create decks manually in-app, and study them with an animated flip card interface. It runs as a PWA, and native iOS/Android builds are supported via EAS.
+Flashcard Library lets you load question-and-answer decks from CSV or text files, create decks manually in-app, and study them with an animated flip card interface. It ships as an installable PWA — no account, no install gate, no cost.
 
 ---
 
@@ -15,6 +15,8 @@ Flashcard Library lets you load question-and-answer decks from CSV or text files
 The original idea: someone on a multi-country trip wants to learn a few words in each local language. They export a spreadsheet, load it into the app, and study on the go — no internet required.
 
 Over a year of development, the app grew into a general-purpose study tool. It hit MVP in mid-2025 and was released as a PWA. The codebase is open to contributors who want to help take it further.
+
+Your decks stay on your device. There are no accounts, no backend, no analytics, and no ads.
 
 ---
 
@@ -52,11 +54,10 @@ Install it from your browser for an app-like experience on mobile.
 | UI components | react-native-paper |
 | File access | expo-document-picker, expo-file-system, expo-sharing |
 | CSV parsing | papaparse |
-| Builds | EAS Build (iOS / Android) |
-| Web / PWA | Expo web (single-page, standalone output) |
+| Web / PWA | Expo web (single-page, standalone output), Workbox service worker |
 | Testing | Playwright |
 
-Minimum supported versions: **iOS 17**, **Android API 32**.
+Dependency versions are pinned deliberately so upkeep happens on the project's schedule rather than a platform vendor's.
 
 ---
 
@@ -64,8 +65,7 @@ Minimum supported versions: **iOS 17**, **Android API 32**.
 
 ```bash
 npm install
-npx expo start          # start the dev server (Expo Go or dev build)
-npx expo start --web    # run in browser / PWA mode
+npx expo start --web    # run the app in the browser (PWA mode)
 npx playwright test     # run the E2E test suite
 npx playwright codegen --channel=chrome --device="" --viewport-size="1280,1020" # run big screen codegen
 ```
@@ -345,17 +345,20 @@ Over a year of active development, this project went from a prototype to a fully
 
 ## Contributing
 
-The app is functional and shipped — the next phase is adding features and polishing for eventual app store release. Help is welcome on:
+The app is functional and shipped — the next phase is adding features and polishing the PWA. Help is welcome on:
 
 - Feature development (see the planned features list above)
-- iOS / Android polish and compatibility testing
-- App store submission and maintenance
+- Mobile browser polish and compatibility testing (iOS Safari, Android Chrome)
+- Offline / service worker behavior and install experience
 
 To get involved, open an issue on GitHub or send an email to **opensorcerer20@gmail.com**.
 
 ---
 
 ## FAQ
+
+**Why a PWA instead of an App Store / Play Store release?**
+The app started out headed for the native app stores, and the plan was deliberately dropped. Store distribution obliges ongoing upkeep and re-testing against every OS release — an open-ended commitment for a solo project — and it carries business-entity overhead on top of that. As a PWA, the app runs on pinned versions the project controls, needs far less maintenance, and reaches users from any browser with no store account required and no cost. The repo still contains the native scaffolding from the original plan; it is legacy, not a supported delivery target.
 
 **Why use react-native-paper?**
 TailwindCSS and similar CSS utility libraries don't translate cleanly to React Native. react-native-paper provides a well-maintained Material Design component library that works consistently across iOS, Android, and web. (NativeWind is a viable alternative worth evaluating.)
