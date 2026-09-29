@@ -10,6 +10,7 @@ const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(null); // set to null to avoid triggering theme change save
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     const saveTheme = async () => {
@@ -36,7 +37,7 @@ export const ThemeProvider = ({ children }) => {
           setTheme(storedTheme === THEMES.dark ? THEMES.dark : THEMES.light);
         } else {
           // default theme
-          if (useColorScheme() === "dark") {
+          if (colorScheme === "dark") {
             setTheme(THEMES.dark);
           } else {
             // light theme
@@ -48,7 +49,7 @@ export const ThemeProvider = ({ children }) => {
       }
     };
     getTheme();
-  }, []);
+  }, [colorScheme]);
 
   // return provider, where value are the exportable values and methods that can be used by consumers
   return (

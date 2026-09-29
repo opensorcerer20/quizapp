@@ -10,7 +10,8 @@
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
-    "test:trace": "playwright test --trace on"
+    "test:trace": "playwright test --trace on",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "@babel/core": "^7.25.2",
@@ -50,13 +51,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^9.39.5",
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
     "@types/react": "~19.1.10",
-    "eslint": "^9.21.0",
-    "eslint-plugin-react": "^7.37.4",
-    "globals": "^16.0.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^16.5.0",
     "prettier": "3.5.3",
     "typescript": "~5.9.2"
   },
