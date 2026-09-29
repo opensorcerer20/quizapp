@@ -100,7 +100,7 @@ const loadStorageData = (key) => {
       return JSON.parse(value);
     }
   } catch (e) {
-    console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));
+    console.log(`error loading data: ` + e.message);
   }
 };
 
@@ -113,7 +113,7 @@ export const loadDeckFromStorage = (deckId) => {
       return deck.length > 0 ? deck[0] : [];
     }
   } catch (e) {
-    console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));
+    console.log(`error loading deck list: ` + e.message);
   }
 };
 
@@ -144,7 +144,7 @@ const saveStorageData = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+    console.log(`error saving data: ` + error.message);
   }
 };
 
@@ -153,7 +153,7 @@ export const saveDeckListData = (deckListData) => {
     saveStorageData(DECK_DATA_KEY, deckListData);
     return true;
   } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+    console.log(`error saving data: ` + error.message);
   }
   return false;
 };
@@ -163,7 +163,7 @@ export const saveDeckData = (deckId, deckData) => {
     saveStorageData(DECK_QA_KEY + `_${deckId}`, deckData);
     return true;
   } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+    console.log(`error saving data: ` + error.message);
   }
   return false;
 };
@@ -176,7 +176,7 @@ export const updateDeckQuestionData = (deckId, questions) => {
     }
     return true;
   } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+    console.log(`error saving data: ` + error.message);
   }
   return false;
 };
@@ -190,6 +190,6 @@ export const removeStorageData = (key) => {
     const value = localStorage.removeItem(key);
     return true;
   } catch (e) {
-    console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));
+    console.log(`error removing data: ` + e.message);
   }
 };
