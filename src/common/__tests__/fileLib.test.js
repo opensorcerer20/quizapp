@@ -61,39 +61,17 @@ describe("logStorageError", () => {
     jest.restoreAllMocks();
   });
 
-  it("logs a string id", () => {
-    loadDeckFromStorage("abc123");
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id abc123: getItem failed");
-  });
-
-  it("logs a number id", () => {
-    loadDeckFromStorage(123456);
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id 123456: getItem failed");
-  });
-
-  it("logs a zero id", () => {
-    loadDeckFromStorage(0);
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id 0: getItem failed");
-  });
-
-  it("logs an empty string id", () => {
-    loadDeckFromStorage("");
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id : getItem failed");
-  });
-
-  it("logs no id when the id is omitted", () => {
-    loadDeckFromStorage();
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id: getItem failed");
-  });
-
-  it("logs no id for a null id", () => {
-    loadDeckFromStorage(null);
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id: getItem failed");
-  });
-
-  it("logs no id for an object id", () => {
-    loadDeckFromStorage({ id: 1 });
-    expect(logSpy).toHaveBeenCalledWith("Error loading deck data with id: getItem failed");
+  it.each([
+    { label: "a string id", id: "abc123", expected: " abc123" },
+    { label: "a number id", id: 123456, expected: " 123456" },
+    { label: "a zero id", id: 0, expected: " 0" },
+    { label: "an empty string id", id: "", expected: " " },
+    { label: "an omitted id", id: undefined, expected: "" },
+    { label: "a null id", id: null, expected: "" },
+    { label: "an object id", id: { id: 1 }, expected: "" },
+  ])("logs $label", ({ id, expected }) => {
+    loadDeckFromStorage(id);
+    expect(logSpy).toHaveBeenCalledWith(`Error loading deck data with id${expected}: getItem failed`);
   });
 
   it("does not throw and returns false", () => {
