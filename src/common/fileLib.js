@@ -21,7 +21,7 @@ export const loadDemoData = () => {
       return true;
     }
   } catch (e) {
-    console.log("Error retrieving keys from localStorage:", e);
+    logStorageError("Error retrieving keys from localStorage", e.message);
   }
   return false;
 };
@@ -43,17 +43,22 @@ export const checkIfExists = (key, startsWith = false) => {
     // console.log("result " + JSON.stringify(keys.indexOf(key) > -1));
     return keys.indexOf(key) > -1;
   } catch (e) {
-    console.log("Error retrieving keys from localStorage:", e);
+    logStorageError("Error checking if key exists in localStorage", e.message, key);
   }
   return false;
 };
 
 export const setFlag = (key, value) => {
   if (typeof key !== "string") {
-    console.log("non-string key in setflag: '" + key + "'");
+    console.log("non-string key in setflag: '" + saveStorageData(key, value) + "'");
     return false;
   }
-  saveStorageData(key, value);
+
+  if (saveStorageData(key, value)) {
+    return true;
+  }
+  console.log(`Error saving deck data with id ${key} and value ${value}`);
+  return false;
 };
 
 export const getFlag = (key) => {
@@ -71,7 +76,7 @@ export const getExportData = () => {
   const allDecks = loadAllDecks();
 
   const deckData = allDecks.map((deck) => {
-    const [selectedDeck, selectedDeckData] = loadDeckData(deck.id);
+    const [, selectedDeckData] = loadDeckData(deck.id);
     return { ...selectedDeckData, deck: deck };
   });
 
@@ -100,8 +105,9 @@ const loadStorageData = (key) => {
       return JSON.parse(value);
     }
   } catch (e) {
-    console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));
+    logStorageError("Error loading data with key", e.message, key);
   }
+  return false;
 };
 
 export const loadDeckFromStorage = (deckId) => {
@@ -113,8 +119,9 @@ export const loadDeckFromStorage = (deckId) => {
       return deck.length > 0 ? deck[0] : [];
     }
   } catch (e) {
-    console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));
+    logStorageError("Error loading deck data with id", e.message, deckId);
   }
+  return false;
 };
 
 export const loadDeckData = (deckId) => {
@@ -144,27 +151,24 @@ const saveStorageData = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
-  }
-};
-
-export const saveDeckListData = (deckListData) => {
-  try {
-    saveStorageData(DECK_DATA_KEY, deckListData);
-    return true;
-  } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+    logStorageError("Error saving data with key", error.message, key);
   }
   return false;
 };
 
-export const saveDeckData = (deckId, deckData) => {
-  try {
-    saveStorageData(DECK_QA_KEY + `_${deckId}`, deckData);
+export const saveDeckListData = (deckListData) => {
+  if (saveStorageData(DECK_DATA_KEY, deckListData)) {
     return true;
-  } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
   }
+  console.log("Failed saving deck list data");
+  return false;
+};
+
+export const saveDeckData = (deckId, deckData) => {
+  if (saveStorageData(DECK_QA_KEY + `_${deckId}`, deckData)) {
+    return true;
+  }
+  console.log(`Failed saving deck data with id ${deckId}`);
   return false;
 };
 
@@ -172,11 +176,13 @@ export const updateDeckQuestionData = (deckId, questions) => {
   try {
     const deckData = loadStorageData(DECK_QA_KEY + `_${deckId}`);
     if (deckData) {
-      saveStorageData(DECK_QA_KEY + `_${deckId}`, { ...deckData, questions });
+      if (saveStorageData(DECK_QA_KEY + `_${deckId}`, { ...deckData, questions })) {
+        return true;
+      }
+      console.log(`Failed to update question data for deck id ${deckId}`);
     }
-    return true;
   } catch (error) {
-    console.log(`error saving data with key ${key}, error keys ` + JSON.stringify(Object.keys(error)));
+    logStorageError("Error saving deck data with id", error.message, deckId);
   }
   return false;
 };
@@ -187,9 +193,15 @@ export const removeStorageData = (key) => {
     return false;
   }
   try {
-    const value = localStorage.removeItem(key);
+    localStorage.removeItem(key);
     return true;
   } catch (e) {
-    console.log(`error loading data with key ${key}, error keys ` + JSON.stringify(Object.keys(e)));
+    logStorageError("Error removing data with key", e.message, key);
   }
+  return false;
+};
+
+const logStorageError = (logMessage, errorMessage, id = null) => {
+  const message = logMessage + (typeof id === "string" || typeof id === "number" ? ` ${id}` : "");
+  console.log(`${message}: ` + errorMessage);
 };

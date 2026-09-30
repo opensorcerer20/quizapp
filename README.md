@@ -88,15 +88,11 @@ npx playwright show-trace test-results/my-test/trace.zip
 playwright codegen localhost:8081
 ```
 
-### Android emulator testing
+### Note on emulator testing
 
-```bash
-# generate android files
-npx expo prebuild --clean
+This app is intended as PWA first, so testing a generated app does not fit the intended delivery of this app.
 
-# generate apk for emulator
-npm run android
-```
+For example, running this in an Android emulator will generate errors with localStorage.
 
 ---
 

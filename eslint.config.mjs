@@ -12,6 +12,10 @@ export default defineConfig([
     extends: ["js/recommended"],
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
+  {
+    files: ["**/__tests__/**/*.{js,jsx}", "**/*.test.{js,jsx}"],
+    languageOptions: { globals: { ...globals.jest } },
+  },
   pluginReact.configs.flat.recommended,
   reactHooks.configs.flat.recommended,
   {

@@ -102,7 +102,6 @@ export const globalStyles = {
   fab: {
     position: "absolute",
     right: 0,
-    bottom: 0,
     bottom: 34,
   },
   fabButton: {
