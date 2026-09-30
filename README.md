@@ -88,6 +88,16 @@ npx playwright show-trace test-results/my-test/trace.zip
 playwright codegen localhost:8081
 ```
 
+### Android emulator testing
+
+```bash
+# generate android files
+npx expo prebuild --clean
+
+# generate apk for emulator
+npm run android
+```
+
 ---
 
 ## Roadmap
