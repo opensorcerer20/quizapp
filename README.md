@@ -55,7 +55,7 @@ Install it from your browser for an app-like experience on mobile.
 | File access | expo-document-picker, expo-file-system, expo-sharing |
 | CSV parsing | papaparse |
 | Web / PWA | Expo web (single-page, standalone output), Workbox service worker |
-| Testing | Playwright |
+| Testing | Playwright (E2E), Jest with jest-expo (unit) |
 
 Dependency versions are pinned deliberately so upkeep happens on the project's schedule rather than a platform vendor's.
 
@@ -67,6 +67,7 @@ Dependency versions are pinned deliberately so upkeep happens on the project's s
 npm install
 npx expo start --web    # run the app in the browser (PWA mode)
 npx playwright test     # run the E2E test suite
+npm run test:unit       # run the Jest unit tests
 npx playwright codegen --channel=chrome --device="" --viewport-size="1280,1020" # run big screen codegen
 ```
 
@@ -88,15 +89,28 @@ npx playwright show-trace test-results/my-test/trace.zip
 playwright codegen localhost:8081
 ```
 
-### Android emulator testing
+### Unit tests
+
+Unit tests use Jest with the `jest-expo/web` preset, which runs in jsdom so `localStorage` is available. Jest only looks under `src/`; put test files in a `__tests__` folder next to the code they cover, named `*.test.js`.
 
 ```bash
-# generate android files
-npx expo prebuild --clean
+# Run all unit tests
+npm run test:unit
 
-# generate apk for emulator
-npm run android
+# Run one test file
+npx jest src/common/__tests__/fileLib.test.js
+
+# Re-run tests on file changes
+npx jest --watch
 ```
+
+Note that `npm test` runs Playwright, not Jest.
+
+### Note on emulator testing
+
+This app is intended as PWA first, so testing a generated app does not fit the intended delivery of this app.
+
+For example, running this in an Android emulator will generate errors with localStorage.
 
 ---
 
