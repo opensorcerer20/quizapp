@@ -1,6 +1,6 @@
 import { MAX_QUESTIONS, MIME_TYPE_CSV } from "../../common/constants";
 import { loadAllDecks, saveDeckData, saveDeckListData } from "../../common/fileLib";
-import { getRandomInt, sanitizeAll } from "../../common/util";
+import { getRandomInt, normalizeText } from "../../common/util";
 import { parseStringToColumns } from "./parseCsv";
 
 export const emptyQuestion = {
@@ -70,7 +70,7 @@ export const importNewDeck = async (title, questionData) => {
   const newQuestionArray = getQuestionObjectsFromRawData("text", questionData);
 
   const newDeckName = title;
-  const newDeck = makeNewDeck(newDeckId, sanitizeAll(newDeckName));
+  const newDeck = makeNewDeck(newDeckId, normalizeText(newDeckName));
   const newDeckData = makeNewDeckData(newDeckId, newQuestionArray);
 
   let newDeckListData = deckListData.slice();
@@ -101,7 +101,6 @@ export const getQuestionObjectsFromRawData = (mimeType, rawQuestionData) => {
   // clean input that could have \r\n, remove empty lines
   const splitLines = rawQuestionData.split("\n");
   questions = splitLines.map((datum) => datum.trim()).filter((datum) => datum.length > 0);
-  questions.map((line) => sanitizeAll(line));
 
   // plain text does not require additional processing (at this time)
   if (mimeType === "csv") {
@@ -131,8 +130,8 @@ export const makeQuestionObjects = (questionData) => {
   let questions = [];
   for (let i = 0; i < questionData.length; i += 2) {
     if (questions.length <= MAX_QUESTIONS) {
-      const question = questionData[i];
-      const answer = questionData[i + 1];
+      const question = normalizeText(questionData[i]);
+      const answer = normalizeText(questionData[i + 1]);
       questions.push(makeQuestionObject(questions.length + 1, question, answer));
     }
   }

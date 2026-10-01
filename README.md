@@ -53,7 +53,6 @@ Install it from your browser for an app-like experience on mobile.
 | Navigation | expo-router |
 | UI components | react-native-paper |
 | File access | expo-document-picker, expo-file-system, expo-sharing |
-| CSV parsing | papaparse |
 | Web / PWA | Expo web (single-page, standalone output), Workbox service worker |
 | Testing | Playwright (E2E), Jest with jest-expo (unit) |
 

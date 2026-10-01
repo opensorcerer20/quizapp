@@ -1,5 +1,3 @@
-import sanitizeHtml from "sanitize-html";
-
 import { MAX_CHAR_LIMIT, MAX_CHAR_LIMIT_L, MAX_CHAR_LIMIT_XL, MAX_CHAR_LIMIT_XXL, THEMES } from "./constants";
 import { lightDarkStyles } from "./lib";
 
@@ -71,8 +69,8 @@ export const formatCardText = (text, lineLimitOverride = null) => {
   return textPieces.join("\n");
 };
 
-export const sanitizeAll = (dirty) => {
-  return sanitizeHtml(dirty, { allowedTags: [], allowedAttributes: {} });
+export const normalizeText = (text) => {
+  return text.normalize("NFC").trim();
 };
 
 export const getScheme = (theme) => {
