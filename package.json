@@ -12,7 +12,10 @@
     "test:ui": "playwright test --ui",
     "test:trace": "playwright test --trace on",
     "test:unit": "jest",
-    "lint": "eslint ./src",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "clean": "npx expo prebuild --clean"
   },
   "dependencies": {

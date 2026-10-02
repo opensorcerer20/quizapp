@@ -1,0 +1,11 @@
+docs/260929-issues/
+package-lock.json
+dist/
+coverage/
+temp/
+android/
+ios/
+.expo/
+playwright-report/
+test-results/
+assets/test_decks/
