@@ -92,6 +92,8 @@ playwright codegen localhost:8081
 
 Unit tests use Jest with the `jest-expo/web` preset, which runs in jsdom so `localStorage` is available. Jest only looks under `src/`; put test files in a `__tests__` folder next to the code they cover, named `*.test.js`.
 
+Shared test data lives in `src/__fixtures__/`. For example, `fidelityCases.js` holds the text input cases used by several suites, so reuse it rather than redefining cases.
+
 ```bash
 # Run all unit tests
 npm run test:unit
@@ -361,6 +363,8 @@ Over a year of active development, this project went from a prototype to a fully
 -   [x] check and resolve all @todos
 
 -   [x] set minimum SDK versions (iOS 17, Android API 32)
+
+-   [x] replace HTML sanitization with input normalization (trim + Unicode NFC), see [text input test cases](docs/text-input-test-cases.md)
 
 </details>
 

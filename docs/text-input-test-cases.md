@@ -40,14 +40,15 @@ The cases are defined once in `src/__fixtures__/fidelityCases.js` and used by:
 | `src/app/__tests__/AddQuestion.test.js` | Manual entry: fills the form, submits, and checks what is saved |
 | `src/common/__tests__/fileLib.test.js` | Saving and loading return identical strings |
 | `src/components/Deck/__tests__/DeckScreenItem.test.js` | The card list shows the text literally, creates no `<b>`, `<script>` or `<img>` element, and never calls `alert` |
+| `src/common/__tests__/normalizeText.test.js` | `normalizeText` on its own: every case, plus NFD to NFC, trimming with inner whitespace and line breaks kept, and whitespace-only input |
 
 Run them with `npm run test:unit`.
 
-Until the HTML sanitization is removed, the QuizDeck, AddQuestion and DeckScreenItem suites fail to load. Jest cannot read that library's dependency (htmlparser2), which uses a newer module format. Once it is removed, every case passes except F-08, which passes after NFC normalization is added.
+All cases pass.
 
-## How to implement
+## Implementation
 
-1. Remove the HTML sanitization and its dependency entirely, including every call to it.
-2. Add one function that trims a string and normalizes it to Unicode NFC. It must not escape, encode, decode or remove any other characters.
-3. Apply that function to every question and answer on all three input paths, and run any empty-field checks on the normalized value.
-4. Display user text only as plain text, never as HTML. If user text is ever rendered as HTML in the future, sanitization needs to be reconsidered.
+1. The HTML sanitization (`sanitizeAll` and the `sanitize-html` dependency) was removed, along with every call to it.
+2. `normalizeText` in `src/common/util.js` trims a string and normalizes it to Unicode NFC. It does not escape, encode, decode or remove any other characters.
+3. Every question and answer goes through `normalizeText`. Text and CSV imports are covered in `makeQuestionObjects` in `src/components/Deck/QuizDeck.js`, and manual entry in `handleSubmit` in `src/app/AddQuestion.js`. Deck names from imports also go through it.
+4. User text is displayed only as plain text, never as HTML. If user text is ever rendered as HTML in the future, sanitization needs to be reconsidered.
