@@ -9,7 +9,7 @@ import { FAB } from "react-native-paper";
 import { DECK_QA_KEY, MAX_DECKS, MIME_TYPE_CSV, MIME_TYPE_TEXT, RELOAD_LIST } from "../common/constants";
 import { loadAllDecks, loadDemoData, removeStorageData, saveDeckData, saveDeckListData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
-import { getRandomInt, getScheme, sanitizeAll } from "../common/util";
+import { getRandomInt, getScheme, normalizeText } from "../common/util";
 import AddDeckModal from "../components/AddDeckModal";
 import DeckListItem from "../components/Deck/DeckListItem";
 import { getFileData, makeNewDeck, makeNewDeckData } from "../components/Deck/QuizDeck";
@@ -118,7 +118,7 @@ export const DeckList = () => {
 
     const newQuestionArray = await getFileData(importSource);
     const [newDeckName] = importSource.name.split(".");
-    const newDeck = makeNewDeck(newDeckId, sanitizeAll(newDeckName));
+    const newDeck = makeNewDeck(newDeckId, normalizeText(newDeckName));
     const newDeckData = makeNewDeckData(newDeckId, newQuestionArray);
 
     await onAddDeck(newDeck, newDeckData);

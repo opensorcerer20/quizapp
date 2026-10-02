@@ -1,8 +1,12 @@
+import { fidelityCases } from "../../__fixtures__/fidelityCases";
 import { DECK_QA_KEY } from "../constants";
-import { loadDeckFromStorage, saveDeckData, saveDeckListData, updateDeckQuestionData } from "../fileLib";
-
-// util.js pulls in sanitize-html (ESM), which jest does not transform; fileLib only needs getRandomInt
-jest.mock("../util", () => ({ getRandomInt: jest.fn(() => 123456) }));
+import {
+  loadDeckFromStorage,
+  loadQuestionsFromStorage,
+  saveDeckData,
+  saveDeckListData,
+  updateDeckQuestionData,
+} from "../fileLib";
 
 describe("fileLib storage error handling", () => {
   const deckId = 123456;
@@ -80,5 +84,20 @@ describe("logStorageError", () => {
       result = loadDeckFromStorage(123456);
     }).not.toThrow();
     expect(result).toBe(false);
+  });
+});
+
+describe("storage fidelity", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it.each(fidelityCases)("$id round-trips $expected unchanged", ({ expected }) => {
+    const deckId = 123456;
+    const questions = [{ id: 1, q: expected, a: expected, disabled: false }];
+
+    saveDeckData(deckId, { id: deckId, questions });
+
+    expect(loadQuestionsFromStorage(deckId)).toEqual({ id: deckId, questions });
   });
 });

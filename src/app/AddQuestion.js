@@ -1,36 +1,12 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
-import {
-  router,
-  useLocalSearchParams,
-} from "expo-router";
-import {
-  BackHandler,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { BackHandler, KeyboardAvoidingView, Platform, StyleSheet, TextInput, View } from "react-native";
 
-import {
-  MAX_CHAR_LIMIT,
-  NEW_QUESTION_ADDED,
-} from "../common/constants";
-import {
-  loadDeckFromStorage,
-  loadQuestionsFromStorage,
-  updateDeckQuestionData,
-} from "../common/fileLib";
+import { MAX_CHAR_LIMIT, NEW_QUESTION_ADDED } from "../common/constants";
+import { loadDeckFromStorage, loadQuestionsFromStorage, updateDeckQuestionData } from "../common/fileLib";
 import { globalStyles } from "../common/lib";
-import {
-  getRandomInt,
-  getScheme,
-  sanitizeAll,
-} from "../common/util";
+import { getRandomInt, getScheme, normalizeText } from "../common/util";
 import CancelSubmit from "../components/CancelSubmit";
 import ConfirmModal from "../components/ConfirmModal";
 import DeckTitle from "../components/Deck/DeckTitle";
@@ -58,12 +34,12 @@ const AddQuestion = () => {
       if (currentQuestions) {
         const newQuestion = {
           id: getRandomInt(100000, 999999),
-          q: sanitizeAll(question.trim()),
-          a: sanitizeAll(answer.trim()),
+          q: normalizeText(question),
+          a: normalizeText(answer),
           disabled: false,
         };
 
-        const result = await updateDeckQuestionData(deckId, [...currentQuestions.questions, newQuestion]);
+        const result = updateDeckQuestionData(deckId, [...currentQuestions.questions, newQuestion]);
         if (result) {
           router.setParams(NEW_QUESTION_ADDED, true);
           router.back();
