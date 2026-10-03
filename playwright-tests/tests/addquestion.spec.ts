@@ -1,12 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-test.use({
-  viewport: {
-    height: 1020,
-    width: 1280,
-  },
-});
-
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await expect(page.getByText("Sample Spanish Deck")).toBeVisible();

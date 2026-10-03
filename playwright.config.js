@@ -15,7 +15,7 @@ export default defineConfig({
   reporter: [["html", { open: "never" }]],
   timeout: 15000,
   use: {
-    // Port 8081 is the default port for Expo web
+    // Port 8181 avoids clashing with a dev server on the Expo default of 8081
     baseURL: "http://localhost:8181",
     trace: "on-first-retry",
     // Limit individual actions like .click() or .fill()
@@ -36,24 +36,14 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
-
-    // {
-    //   name: "firefox",
-    //   use: { ...devices["Desktop Firefox"] },
-    // },
-
-    // {
-    //   name: "webkit",
-    //   use: { ...devices["Desktop Safari"] },
-    // },
-    // {
-    //   name: "Mobile Safari",
-    //   use: { ...devices["iPhone 13"] },
-    // },
-    // {
-    //   name: "Mobile Chrome",
-    //   use: { ...devices["Pixel 5"] },
-    // },
+    {
+      name: "Mobile Safari",
+      use: { ...devices["iPhone 13"] },
+    },
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
+    },
   ],
   expect: {
     // Limit web assertions like expect(locator).toBeVisible()
