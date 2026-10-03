@@ -47,14 +47,14 @@ Install it from your browser for an app-like experience on mobile.
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React Native + Expo (~54) |
-| Navigation | expo-router |
-| UI components | react-native-paper |
-| File access | expo-document-picker, expo-file-system, expo-sharing |
-| Web / PWA | Expo web (single-page, standalone output), Workbox service worker |
-| Testing | Playwright (E2E), Jest with jest-expo (unit) |
+| Layer         | Technology                                                        |
+| ------------- | ----------------------------------------------------------------- |
+| Framework     | React Native + Expo (~54)                                         |
+| Navigation    | expo-router                                                       |
+| UI components | react-native-paper                                                |
+| File access   | expo-document-picker, expo-file-system, expo-sharing              |
+| Web / PWA     | Expo web (single-page, standalone output), Workbox service worker |
+| Testing       | Playwright (E2E), Jest with jest-expo (unit)                      |
 
 Dependency versions are pinned deliberately so upkeep happens on the project's schedule rather than a platform vendor's.
 
@@ -141,230 +141,230 @@ Over a year of active development, this project went from a prototype to a fully
 <details>
 <summary><strong>Show full completed roadmap</strong></summary>
 
--   [x] initial development
--   [x] first complete version
--   [x] complete alpha for testing
--   [x] apply alpha testing changes
--   [x] last changes before getting beta testers
--   [x] closed beta testing (started 7/24)
--   [x] set up llc
+- [x] initial development
+- [x] first complete version
+- [x] complete alpha for testing
+- [x] apply alpha testing changes
+- [x] last changes before getting beta testers
+- [x] closed beta testing (started 7/24)
+- [x] set up llc
 
--   [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
--   [x] allow user to choose local file and process (txt only)
--   [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
--   [x] mode select: "continuous (grab bag)"
--   [x] dont change mode unless "Apply" button clicked
--   [x] reset deck when mode changes
+- [x] load local text file, in form of "question\nanswer\nquestion\nanswer"
+- [x] allow user to choose local file and process (txt only)
+- [x] continuous mode: uses grab bag for randomization, always "next" button, never ends
+- [x] mode select: "continuous (grab bag)"
+- [x] dont change mode unless "Apply" button clicked
+- [x] reset deck when mode changes
 
--   [x] file location list
+- [x] file location list
 
-    -   [x] limit to 50 locations
-    -   [x] save file location of load file to local storage
-    -   [x] prevent adding same file twice
-    -   [x] list saved file locations
-    -   [x] load selected file
-    -   [x] allow deleting file (from list of course)
+  - [x] limit to 50 locations
+  - [x] save file location of load file to local storage
+  - [x] prevent adding same file twice
+  - [x] list saved file locations
+  - [x] load selected file
+  - [x] allow deleting file (from list of course)
 
--   [x] hide settings for other modes
+- [x] hide settings for other modes
 
--   [x] move deck functions into QuizScreen and out of App
--   [x] use shift for next question, unit test random sort
--   [x] unit testing and fix issue with next question
+- [x] move deck functions into QuizScreen and out of App
+- [x] use shift for next question, unit test random sort
+- [x] unit testing and fix issue with next question
 
--   [x] allow csv file (good for lists that go `q | a` in rows)
+- [x] allow csv file (good for lists that go `q | a` in rows)
 
-    -   [x] make user pick type of file
-        -   [x] extra FAB visible after pressing plus
-        -   [x] extra FAB invisible when anywhere clicked
-    -   [x] if text, use current code
-    -   [x] if csv, parse according to csv rules
+  - [x] make user pick type of file
+    - [x] extra FAB visible after pressing plus
+    - [x] extra FAB invisible when anywhere clicked
+  - [x] if text, use current code
+  - [x] if csv, parse according to csv rules
 
--   [x] bug: flip card not working
--   [x] bug: grab bag not working; getting full random instead
--   [x] chore: bag resets when empty
--   [x] chore: icon to delete list too small
--   [x] bug: clicking next question when answer showing should reset
--   [x] bug: answer visible when switching to next question
--   [x] bug: delay loading next question
+- [x] bug: flip card not working
+- [x] bug: grab bag not working; getting full random instead
+- [x] chore: bag resets when empty
+- [x] chore: icon to delete list too small
+- [x] bug: clicking next question when answer showing should reset
+- [x] bug: answer visible when switching to next question
+- [x] bug: delay loading next question
 
--   [x] flip card showing outside safe container
--   [x] cant load csv file
--   [x] fix issue with answer showing for next question
--   [x] cut version 0.1 to reorg and clean up
--   [x] make prototype with fake data
+- [x] flip card showing outside safe container
+- [x] cant load csv file
+- [x] fix issue with answer showing for next question
+- [x] cut version 0.1 to reorg and clean up
+- [x] make prototype with fake data
 
--   [x] name of app is "flashcard library"
--   [x] toolbar should show different things, needs adjustment
--   [x] initial working light dark
+- [x] name of app is "flashcard library"
+- [x] toolbar should show different things, needs adjustment
+- [x] initial working light dark
 
--   [x] good ux design
+- [x] good ux design
 
-    -   [x] safeareaview
-    -   [x] use react native paper appbar
-    -   [x] test question line length, limit as needed
-    -   [x] test question length, limit as needed
+  - [x] safeareaview
+  - [x] use react native paper appbar
+  - [x] test question line length, limit as needed
+  - [x] test question length, limit as needed
 
--   [x] light dark in appbar
--   [x] test hardcoded 50 decks
--   [x] save static data to local storage
--   [x] test data load from storage (no app reload / app reload)
--   [x] implement importing list from txt file
--   [x] implement import from CSV
--   [x] limit imports to 50 questions
--   [x] char limit 90
--   [x] change font size based on text length
--   [x] add "sm" text size
--   [x] prev card, start over, grey out buttons
--   [x] "start over" button should reset current deck, not re-scramble
--   [x] store QA data separate from deck list
+- [x] light dark in appbar
+- [x] test hardcoded 50 decks
+- [x] save static data to local storage
+- [x] test data load from storage (no app reload / app reload)
+- [x] implement importing list from txt file
+- [x] implement import from CSV
+- [x] limit imports to 50 questions
+- [x] char limit 90
+- [x] change font size based on text length
+- [x] add "sm" text size
+- [x] prev card, start over, grey out buttons
+- [x] "start over" button should reset current deck, not re-scramble
+- [x] store QA data separate from deck list
 
--   [x] confirm csv import is working
+- [x] confirm csv import is working
 
-    -   [x] no quotes / full quotes / mixed quotes / escaped quotes / bad quotes
-    -   [x] quotes include commas
-    -   [x] support triple quote (from Google Sheets)
-    -   [x] support slashed quote
-    -   [x] confirm on android and ios
-    -   [x] make csv parsing public
+  - [x] no quotes / full quotes / mixed quotes / escaped quotes / bad quotes
+  - [x] quotes include commas
+  - [x] support triple quote (from Google Sheets)
+  - [x] support slashed quote
+  - [x] confirm on android and ios
+  - [x] make csv parsing public
 
--   [x] when adding deck, modal to edit name (use filename as default, without extension)
+- [x] when adding deck, modal to edit name (use filename as default, without extension)
 
-    -   [x] functional modal
-    -   [x] working modal (both add and edit deck)
-    -   [x] polished modal
+  - [x] functional modal
+  - [x] working modal (both add and edit deck)
+  - [x] polished modal
 
--   [x] deck menu (delete, edit name, dot menu)
--   [x] sanitize input
--   [x] issue with android importing csv
+- [x] deck menu (delete, edit name, dot menu)
+- [x] sanitize input
+- [x] issue with android importing csv
 
--   [x] char limit for deck list name
--   [x] save settings (light/dark) to storage and test on android + iphone
--   [x] button to "reverse" values on demand
+- [x] char limit for deck list name
+- [x] save settings (light/dark) to storage and test on android + iphone
+- [x] button to "reverse" values on demand
 
--   [x] bug: loading from memory not working on refresh
--   [x] bug: sometimes "next question" at end ends up as blank card
--   [x] bug: clicking on deck does not load it; uses last deck
--   [x] fab.group causes error with useLatestCallback
+- [x] bug: loading from memory not working on refresh
+- [x] bug: sometimes "next question" at end ends up as blank card
+- [x] bug: clicking on deck does not load it; uses last deck
+- [x] fab.group causes error with useLatestCallback
 
--   [x] iphone (and galaxy) bugs
+- [x] iphone (and galaxy) bugs
 
-    -   [x] next/prev not showing
-    -   [x] text for "swap q&a" not showing
-    -   [x] switch for "swap q&a" colliding with "card x of y"
+  - [x] next/prev not showing
+  - [x] text for "swap q&a" not showing
+  - [x] switch for "swap q&a" colliding with "card x of y"
 
--   [x] test alpha version on android and iphone
+- [x] test alpha version on android and iphone
 
--   [x] alpha bugs/improvements
+- [x] alpha bugs/improvements
 
-    -   [x] deck rename not persisted
-    -   [x] android back button exits app, need react navigation
-    -   [x] list view to enable/disable cards
-    -   [x] disable card in review view
-    -   [x] move "deck list" operations to decklist, out of index
-    -   [x] poker questions bugs (crowded layout, font size changes card size, overflow)
-    -   [x] languages (groundwork)
-    -   [x] deck rename with instructions and shadow visible
-    -   [x] line breaks
-    -   [x] fab visible in review screen
-    -   [x] title bar background
-    -   [x] change "quizapp" to "flashcard library"
-    -   [x] do something about decklist multiple state vars
-    -   [x] decklist menu can go off to the right
-    -   [x] apply light/dark and purple theme throughout
+  - [x] deck rename not persisted
+  - [x] android back button exits app, need react navigation
+  - [x] list view to enable/disable cards
+  - [x] disable card in review view
+  - [x] move "deck list" operations to decklist, out of index
+  - [x] poker questions bugs (crowded layout, font size changes card size, overflow)
+  - [x] languages (groundwork)
+  - [x] deck rename with instructions and shadow visible
+  - [x] line breaks
+  - [x] fab visible in review screen
+  - [x] title bar background
+  - [x] change "quizapp" to "flashcard library"
+  - [x] do something about decklist multiple state vars
+  - [x] decklist menu can go off to the right
+  - [x] apply light/dark and purple theme throughout
 
--   [x] add themes for cards (apply light/dark to card theme)
+- [x] add themes for cards (apply light/dark to card theme)
 
--   [x] allow renaming saved file (modal with edit icon, save/cancel)
+- [x] allow renaming saved file (modal with edit icon, save/cancel)
 
--   [x] last chance before beta
+- [x] last chance before beta
 
-    -   [x] add help menu
-    -   [x] deck name doesn't fit in toolbar — fixed
-    -   [x] test full 20 decks with 50 questions each for memory issues
-    -   [x] make new appbar (back/menu button, modals via callouts)
-    -   [x] bugs: at least 1 test deck for android emulator, full list clips at bottom, simpler color scheme, more spacing between switches
-    -   [x] app icon
+  - [x] add help menu
+  - [x] deck name doesn't fit in toolbar — fixed
+  - [x] test full 20 decks with 50 questions each for memory issues
+  - [x] make new appbar (back/menu button, modals via callouts)
+  - [x] bugs: at least 1 test deck for android emulator, full list clips at bottom, simpler color scheme, more spacing between switches
+  - [x] app icon
 
-    -   [x] very last tasks before beta build
-        -   [x] remove all @todos
-        -   [x] move all "style"s to stylesheets
+  - [x] very last tasks before beta build
+    - [x] remove all @todos
+    - [x] move all "style"s to stylesheets
 
--   [x] add file help (show first time with demo data, accessible from menu)
+- [x] add file help (show first time with demo data, accessible from menu)
 
--   [x] make beta (android, iphone, beta testing via Expo)
+- [x] make beta (android, iphone, beta testing via Expo)
 
--   [x] simple way to create a deck
+- [x] simple way to create a deck
 
-    -   [x] textbox: name of deck
-    -   [x] "textarea" for questions and answers (limit 50)
-    -   [x] reload deck list after adding
-    -   [x] add button to FAB
-    -   [x] help/tutorial
-    -   [x] on back click, confirm leave if there's content
+  - [x] textbox: name of deck
+  - [x] "textarea" for questions and answers (limit 50)
+  - [x] reload deck list after adding
+  - [x] add button to FAB
+  - [x] help/tutorial
+  - [x] on back click, confirm leave if there's content
 
--   [x] delete confirm
+- [x] delete confirm
 
--   [x] closed android beta
+- [x] closed android beta
 
--   [x] beta bugs/improvements
+- [x] beta bugs/improvements
 
-    -   [x] example image for file help doesn't fit
-    -   [x] consolidate modal styles
-    -   [x] make appbar consistent between ios and android
-    -   [x] add cards to deck (fab, screen with blanks, working question add, character limits, cancel/back, modal to leave with content on screen)
-    -   [x] ui consolidation (button style)
-    -   [x] arrows for cards
-    -   [x] keyboard covering textbox
-    -   [x] dismiss ios keyboard by touching screen
+  - [x] example image for file help doesn't fit
+  - [x] consolidate modal styles
+  - [x] make appbar consistent between ios and android
+  - [x] add cards to deck (fab, screen with blanks, working question add, character limits, cancel/back, modal to leave with content on screen)
+  - [x] ui consolidation (button style)
+  - [x] arrows for cards
+  - [x] keyboard covering textbox
+  - [x] dismiss ios keyboard by touching screen
 
-    -   [x] allow commas in csv (custom AI-generated parser)
+  - [x] allow commas in csv (custom AI-generated parser)
 
-    -   [x] deck screen: delete questions for a deck
-    -   [x] move deck list item out of deck list into its own component
+  - [x] deck screen: delete questions for a deck
+  - [x] move deck list item out of deck list into its own component
 
--   [x] beta bugs/improvements (round 2)
+- [x] beta bugs/improvements (round 2)
 
-    -   [x] back up to storage: write to cache, immediately share document (user chooses destination), tested android and ios
-    -   [x] use react native Modal for modals (rename, consistent buttons, bg colors)
+  - [x] back up to storage: write to cache, immediately share document (user chooses destination), tested android and ios
+  - [x] use react native Modal for modals (rename, consistent buttons, bg colors)
 
-    -   [x] deck list
+  - [x] deck list
 
-        -   [x] dark mode odd lighter shade for name and dots — fixed
-        -   [x] slide for view
-        -   [x] slide for delete
+    - [x] dark mode odd lighter shade for name and dots — fixed
+    - [x] slide for view
+    - [x] slide for delete
 
-    -   [x] deck screen
+  - [x] deck screen
 
-        -   [x] slide for delete
-        -   [x] deck rename
+    - [x] slide for delete
+    - [x] deck rename
 
-    -   [x] set up safe insets at top-ish level
-    -   [x] gear background matches deck list item
-    -   [x] MW title on deck list goes outside container — fixed
+  - [x] set up safe insets at top-ish level
+  - [x] gear background matches deck list item
+  - [x] MW title on deck list goes outside container — fixed
 
-    -   [x] review screen: "MW" card goes bigger at bottom — fixed
+  - [x] review screen: "MW" card goes bigger at bottom — fixed
 
-    -   [x] general ui
+  - [x] general ui
 
-        -   [x] eyes for visibility need emphasis
-        -   [x] ios: rename deck popup has transparency — fixed
-        -   [x] FAB covers right side of items — fixed with swipe-to-delete
-        -   [x] fabs: csv option covered, trash hidden, fab distance/shadow inconsistency, replaced fab group with modal
+    - [x] eyes for visibility need emphasis
+    - [x] ios: rename deck popup has transparency — fixed
+    - [x] FAB covers right side of items — fixed with swipe-to-delete
+    - [x] fabs: csv option covered, trash hidden, fab distance/shadow inconsistency, replaced fab group with modal
 
-    -   [x] deck screen item into separate component
+  - [x] deck screen item into separate component
 
--   [x] update all help screens (bigger text, file help renders example text/spreadsheet)
+- [x] update all help screens (bigger text, file help renders example text/spreadsheet)
 
--   [x] slide delete same height as card
--   [x] handle android back button when modal is open (dismiss modal with warning)
+- [x] slide delete same height as card
+- [x] handle android back button when modal is open (dismiss modal with warning)
 
--   [x] set up (but don't implement) language support
+- [x] set up (but don't implement) language support
 
--   [x] check and resolve all @todos
+- [x] check and resolve all @todos
 
--   [x] set minimum SDK versions (iOS 17, Android API 32)
+- [x] set minimum SDK versions (iOS 17, Android API 32)
 
--   [x] replace HTML sanitization with input normalization (trim + Unicode NFC), see [text input test cases](docs/text-input-test-cases.md)
+- [x] replace HTML sanitization with input normalization (trim + Unicode NFC), see [text input test cases](docs/text-input-test-cases.md)
 
 </details>
 
