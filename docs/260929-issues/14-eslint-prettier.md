@@ -26,6 +26,7 @@ ESLint and Prettier are installed, but there is no ESLint config and no `lint` s
 - [ ] Pre commit format hook added and working
 - [ ] All files formatted and committed
 
-### Changelog
+### Changelog (changes after the issue was created)
 
-- Added formatting precommit hook and formatting all docs to issue
+- Added formatting precommit hook and formatting all code to issue
+- eslint-config-expo was vetoed by human in favor of existing eslint.config.mjs
