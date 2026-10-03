@@ -20,3 +20,11 @@ section: Testing and tooling
 - [ ] `npx playwright test` passes with no other dev server running
 - [ ] Tests pass on Chromium, WebKit, and at least one mobile viewport
 - [ ] No commented-out tests remain
+
+### Changelog (changes after the issue was created)
+
+- Line numbers in Problem drifted after issue 14 formatting
+- Missing awaits fixed by hand; `no-floating-promises` enabled for `playwright-tests/` via new `typescript-eslint` dev dependency, which also lints `**/*.ts` (previously ignored)
+- Specs consolidated: duplicate "create new card" removed, review and flip tests merged, add question test split into cancel/discard/submit
+- Desktop WebKit not enabled; Mobile Safari covers WebKit
+- Forced 1280×1020 viewport removed from `addquestion.spec.ts` so mobile projects use device viewports
