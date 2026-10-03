@@ -8,7 +8,7 @@ test.use({
 });
 
 test("test", async ({ page }) => {
-  await page.goto("http://localhost:8081/");
+  await page.goto("/");
   await expect(page.getByText("Sample Spanish Deck")).toBeVisible();
 
   // expect(await page
@@ -17,7 +17,7 @@ test("test", async ({ page }) => {
 
   await page.getByTestId("deck-list").getByTestId("deck-list-item").first().getByTestId("deck-settings-icon").click();
   await expect(page.getByText("Deck: Sample Spanish Deck")).toBeVisible();
-  expect(page.getByTestId("deck-screen-list")).toBeVisible();
+  await expect(page.getByTestId("deck-screen-list")).toBeVisible();
   // expect(page
   //   .getByTestId('deck-screen-list')
   //   .getByTestId('deck-screen-item')).toHaveCount(29);
@@ -32,7 +32,7 @@ test("test", async ({ page }) => {
   await page.getByText("Cancel").click();
   await page.getByRole("dialog").getByText("Cancel").click();
   await expect(page.getByTestId("question-input")).toBeVisible();
-  expect(await page.getByTestId("question-input").inputValue()).toBe("test");
+  await expect(page.getByTestId("question-input")).toHaveValue("test");
 
   await page.getByTestId("cancel").getByText("Cancel").click();
   await page.getByText("Discard", { exact: true }).click();
