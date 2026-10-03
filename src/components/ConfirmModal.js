@@ -1,14 +1,6 @@
-import {
-  Modal,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Modal, Pressable, StyleSheet, View } from "react-native";
 
-import {
-  SAFE_WIDTH,
-  SCREEN_HEIGHT,
-} from "../common/constants";
+import { SAFE_WIDTH, SCREEN_HEIGHT } from "../common/constants";
 import { globalStyles } from "../common/lib";
 import TextNormal from "./TextNormal";
 

@@ -19,7 +19,12 @@ jest.mock("../../components/Providers/ThemeProvider", () => ({ useTheme: () => (
 jest.mock("../../components/Providers/TranslationProvider", () => ({
   useLocale: () => ({ getLocalString: (str) => str }),
 }));
-jest.mock("../../components/ScreenTemplate", () => ({ children }) => children);
+jest.mock(
+  "../../components/ScreenTemplate",
+  () =>
+    ({ children }) =>
+      children
+);
 jest.mock("../../components/Deck/DeckTitle", () => () => null);
 jest.mock("../../components/ConfirmModal", () => () => null);
 

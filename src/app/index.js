@@ -1,5 +1,5 @@
 import { DeckList } from "./DeckList";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 
 const QuizApp = () => {
   // use to clear memory

@@ -1,8 +1,4 @@
-import {
-  Dimensions,
-  Platform,
-  StyleSheet,
-} from "react-native";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 
 import { globalStyles } from "../common/lib";
 import HelpContent, { MODAL_WIDTH } from "./HelpContent";

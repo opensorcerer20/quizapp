@@ -1,19 +1,9 @@
 import { Stack } from "expo-router";
-import {
-  StyleSheet,
-  View,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-} from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import {
-  IS_MOBILE,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-} from "../common/constants";
+import { IS_MOBILE, SCREEN_HEIGHT, SCREEN_WIDTH } from "../common/constants";
 import { ThemeProvider } from "../components/Providers/ThemeProvider";
 import { TranslationProvider } from "../components/Providers/TranslationProvider";
 
