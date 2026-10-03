@@ -32,7 +32,6 @@ const HelpModal = ({ showModal, setShowModal, scheme, helpType }) => {
 const styles = StyleSheet.create({
   helpModal: {
     position: "absolute",
-    borderRadius: 5,
     shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,

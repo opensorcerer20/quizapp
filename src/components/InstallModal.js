@@ -31,7 +31,6 @@ const InstallModal = ({ showModal, setShowModal, scheme }) => {
 const styles = StyleSheet.create({
   modal: {
     position: "absolute",
-    borderRadius: 5,
     shadowColor: globalStyles.bgBlack.backgroundColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,

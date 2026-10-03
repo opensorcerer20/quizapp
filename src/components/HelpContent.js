@@ -141,6 +141,7 @@ const HelpList = (helpType, scheme) => {
 };
 
 const HelpContent = ({ scheme, helpType = "list", setShowModal }) => {
+  const { getLocalString } = useLocale();
   const { title, items } = HelpList(helpType, scheme);
 
   return (
