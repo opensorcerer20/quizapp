@@ -129,7 +129,7 @@ export const makeQuestionObjects = (questionData) => {
   // make {q,a} object array
   let questions = [];
   for (let i = 0; i < questionData.length; i += 2) {
-    if (questions.length <= MAX_QUESTIONS) {
+    if (questions.length < MAX_QUESTIONS) {
       const question = normalizeText(questionData[i]);
       const answer = normalizeText(questionData[i + 1]);
       questions.push(makeQuestionObject(questions.length + 1, question, answer));
