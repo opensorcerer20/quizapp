@@ -6,6 +6,7 @@ import { LANGUAGE_LIBRARY } from "../../common/translation";
 const LocaleContext = createContext(null);
 
 export const TranslationProvider = ({ children }) => {
+  // eslint-disable-next-line no-unused-vars
   const [lang, setLang] = useState("en"); // set to null to avoid triggering theme change save
 
   // useEffect(() => {

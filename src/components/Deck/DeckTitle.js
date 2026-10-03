@@ -1,15 +1,8 @@
-import {
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import {
-  clipWideString,
-  getStrWidth,
-} from "../../common/constants";
+import { clipWideString, getStrWidth } from "../../common/constants";
 import { useLocale } from "../Providers/TranslationProvider";
 import TextNormal from "../TextNormal";
 

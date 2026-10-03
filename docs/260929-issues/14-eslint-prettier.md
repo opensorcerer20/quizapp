@@ -1,5 +1,5 @@
 title: Add ESLint config and lint scripts
-labels: tooling
+labels: cleanup, code-quality, enhancement, tooling
 section: Testing and tooling
 ---
 ### Problem
@@ -13,7 +13,20 @@ ESLint and Prettier are installed, but there is no ESLint config and no `lint` s
 - Add scripts: `lint`, `lint:fix`, and `format:check`.
 - Stop ignoring `.prettierrc.json` in `.gitignore` so contributors get the same formatting.
 
+### Add
+
+- Add formatting hook for git
+- Format all code
+- Confirm no functional changes
+
 ### Done when
 
 - [ ] `npm run lint` passes with zero errors
 - [ ] Remaining warnings are either fixed or listed in a follow-up issue
+- [ ] Pre commit format hook added and working
+- [ ] All files formatted and committed
+
+### Changelog (changes after the issue was created)
+
+- Added formatting precommit hook and formatting all code to issue
+- eslint-config-expo was vetoed by human in favor of existing eslint.config.mjs

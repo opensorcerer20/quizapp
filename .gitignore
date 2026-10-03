@@ -7,7 +7,6 @@ builds/
 .DS_Store
 assets/.DS_Store
 temp/
-.prettierrc.json
 ios/
 dist/
 

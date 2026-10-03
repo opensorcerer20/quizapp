@@ -25,7 +25,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
   ];
 
   const pages = [
-    <View style={{ flexDirection: "column" }}>
+    <View key="txt" style={{ flexDirection: "column" }}>
       <MaterialCommunityIcons
         style={{ flex: 1, marginHorizontal: "auto", marginBottom: 10 }}
         name="text"
@@ -54,7 +54,7 @@ const FileHelpModal = ({ showModal, setShowModal, scheme }) => {
         }}
       />
     </View>,
-    <View style={{ flexDirection: "column" }}>
+    <View key="csv" style={{ flexDirection: "column" }}>
       <MaterialCommunityIcons
         style={{ flex: 1, marginHorizontal: "auto", marginBottom: 10 }}
         name="table"

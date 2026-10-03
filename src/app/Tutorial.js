@@ -1,14 +1,12 @@
 import { useRef, useState } from "react";
 
-import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import { IS_MOBILE, SAFE_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH } from "../common/constants";
 import { getScheme } from "../common/util";
 import { useTheme } from "../components/Providers/ThemeProvider";
-
-const { width } = Dimensions.get("window");
 
 const lightlist = require("../../assets/tutorial/lightlist.png");
 const adddeck = require("../../assets/tutorial/adddeck.png");
@@ -28,6 +26,7 @@ const PAGES = [
 ];
 
 export default function TutorialOrig({ onClose }) {
+  // eslint-disable-next-line no-unused-vars
   const [page, setPage] = useState(0);
   const flatListRef = useRef(null);
   const { theme } = useTheme();

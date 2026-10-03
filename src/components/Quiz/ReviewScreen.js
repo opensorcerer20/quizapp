@@ -80,6 +80,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const onEnableSwitchClick = (id, isNowDisabled) => {
     // avoid issue where there are no questions
     if (currentDeckQuestionData.length > 1) {
@@ -97,6 +98,7 @@ export const ReviewScreen = ({ currentDeck, currentDeckQuestionData, updateQuest
   const currentQuestionStateFilter = currentState?.currentQuestion?.id
     ? currentDeckQuestionData.filter((question) => question.id === currentState.currentQuestion.id)
     : [];
+  // eslint-disable-next-line no-unused-vars
   const currentQuestionState = currentQuestionStateFilter.length === 1 ? currentQuestionStateFilter[0] : null;
 
   // initial run, go ahead and reset question bag

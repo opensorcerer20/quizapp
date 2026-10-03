@@ -1,12 +1,6 @@
 import { useRef } from "react";
 
-import {
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";

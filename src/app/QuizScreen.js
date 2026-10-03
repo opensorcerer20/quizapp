@@ -20,7 +20,7 @@ const QuizScreen = () => {
   const [currentDeck, setCurrentDeck] = useState(null);
   const [currentDeckQuestionData, setCurrentDeckQuestionData] = useState([]);
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const scheme = getScheme(theme);
 
   const updateQuestionData = async (id, newBag) => {

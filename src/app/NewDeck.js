@@ -1,17 +1,7 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import { router } from "expo-router";
-import {
-  BackHandler,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  TextInput,
-} from "react-native";
+import { BackHandler, KeyboardAvoidingView, Platform, StyleSheet, TextInput } from "react-native";
 
 import { SAFE_WIDTH } from "../common/constants";
 import { globalStyles } from "../common/lib";
@@ -65,10 +55,6 @@ const NewDeck = () => {
     }
   };
 
-  const hideKeyboard = () => {
-    Keyboard.dismiss();
-  };
-
   useEffect(() => {
     let subscr;
     if (Platform.OS === "android") {
@@ -93,7 +79,6 @@ const NewDeck = () => {
         style={[styles.container, { flex: 1 }]}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        {/* <Pressable onPress={hideKeyboard} onLongPress={hideKeyboard}> */}
         <TextNormal style={[scheme.txt, { width: SAFE_WIDTH, marginHorizontal: "auto", marginVertical: 16 }]}>
           {getLocalString("Add a short descriptive title for the new deck.")}
         </TextNormal>

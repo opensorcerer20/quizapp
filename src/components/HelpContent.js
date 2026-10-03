@@ -1,8 +1,4 @@
-import {
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -141,6 +137,7 @@ const HelpList = (helpType, scheme) => {
 };
 
 const HelpContent = ({ scheme, helpType = "list", setShowModal }) => {
+  const { getLocalString } = useLocale();
   const { title, items } = HelpList(helpType, scheme);
 
   return (

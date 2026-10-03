@@ -13,7 +13,7 @@ export const StyledSwitch = ({ theme, txtStyle, optionValue = true, onClick, lab
           true: scheme.bgAccent.backgroundColor,
         }}
         ios_backgroundColor={scheme.bgAccent.backgroundColor}
-        thumbColor={!!optionValue ? scheme.txt.color : scheme.txtDisabled.color}
+        thumbColor={optionValue ? scheme.txt.color : scheme.txtDisabled.color}
         onValueChange={onClick}
         value={!!optionValue}
         style={styles.switch}
