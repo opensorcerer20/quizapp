@@ -31,4 +31,5 @@ Missing dependencies (`exhaustive-deps`):
 
 - [ ] `npm run lint` reports zero warnings
 - [ ] The three overrides are removed from `eslint.config.mjs`
+- [ ] Pre-commit ESLint hook (issue 26) fails on warnings (`--max-warnings=0`)
 - [ ] Unit and Playwright tests pass and the app behaves as before
