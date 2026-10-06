@@ -69,12 +69,7 @@ const AddQuestion = () => {
 
   useEffect(() => {
     const asyncFunc = async () => {
-      const result = await loadDeckFromStorage(deckId);
-      if (result) {
-        setCurrentDeck(result);
-      } else {
-        setCurrentDeck(null);
-      }
+      setCurrentDeck((await loadDeckFromStorage(deckId)) || null);
     };
     asyncFunc();
   }, [deckId]);

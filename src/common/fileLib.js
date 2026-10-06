@@ -116,7 +116,7 @@ export const loadDeckFromStorage = (deckId) => {
     if (deckListJson !== null) {
       const deckListData = JSON.parse(deckListJson);
       const deck = deckListData.filter((deck) => deck.id == deckId);
-      return deck.length > 0 ? deck[0] : [];
+      return deck.length > 0 ? deck[0] : false;
     }
   } catch (e) {
     logStorageError("Error loading deck data with id", e.message, deckId);
