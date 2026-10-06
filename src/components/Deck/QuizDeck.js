@@ -120,15 +120,9 @@ export const getQuestionObjectsFromRawData = (mimeType, rawQuestionData) => {
  * @returns
  */
 export const makeQuestionObjects = (questionData) => {
-  // assume even number with question/answer pairs
-  if (questionData.length % 2 === 1) {
-    // pop odd row off of the end
-    questionData.pop();
-  }
-
   // make {q,a} object array
   let questions = [];
-  for (let i = 0; i < questionData.length; i += 2) {
+  for (let i = 0; i + 1 < questionData.length; i += 2) {
     if (questions.length < MAX_QUESTIONS) {
       const question = normalizeText(questionData[i]);
       const answer = normalizeText(questionData[i + 1]);

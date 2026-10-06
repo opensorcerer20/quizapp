@@ -66,6 +66,10 @@ export const formatCardText = (text, lineLimitOverride = null) => {
     failsafe++;
   } while (text.length > 0 && failsafe < 30);
 
+  if (text.length > 0) {
+    textPieces.push("...");
+  }
+
   return textPieces.join("\n");
 };
 

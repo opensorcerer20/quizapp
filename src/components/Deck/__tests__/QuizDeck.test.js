@@ -53,6 +53,14 @@ describe("makeQuestionObjects", () => {
     expect(makeQuestionObjects(["q1", "a1", "q2"])).toEqual([{ id: 1, q: "q1", a: "a1", disabled: false }]);
   });
 
+  it("does not mutate its input", () => {
+    const lines = ["q1", "a1", "q2"];
+
+    makeQuestionObjects(lines);
+
+    expect(lines).toEqual(["q1", "a1", "q2"]);
+  });
+
   it.each([
     { label: "no lines", lines: [] },
     { label: "a single line", lines: ["q1"] },
