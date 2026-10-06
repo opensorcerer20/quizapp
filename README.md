@@ -65,7 +65,7 @@ Dependency versions are pinned deliberately so upkeep happens on the project's s
 ```bash
 npm install
 npx expo start --web    # run the app in the browser (PWA mode)
-npx playwright test     # run the E2E test suite
+npm run test:e2e        # run the Playwright E2E test suite
 npm run test:unit       # run the Jest unit tests
 npx playwright codegen --channel=chrome --device="" --viewport-size="1280,1020" # run big screen codegen
 ```
@@ -103,9 +103,12 @@ npx jest src/common/__tests__/fileLib.test.js
 
 # Re-run tests on file changes
 npx jest --watch
+
+# Run all unit tests with a coverage report (written to coverage/)
+npm run test:coverage
 ```
 
-Note that `npm test` runs Playwright, not Jest.
+There is no `npm test` script. Use `npm run test:unit` for Jest or `npm run test:e2e` for Playwright.
 
 ### Note on emulator testing
 
