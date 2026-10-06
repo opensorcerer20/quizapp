@@ -1,10 +1,15 @@
 import { fidelityCases } from "../../__fixtures__/fidelityCases";
-import { DECK_QA_KEY } from "../constants";
+import { DECK_DATA_KEY, DECK_QA_KEY } from "../constants";
 import {
+  getFlag,
+  loadAllDecks,
+  loadDeckData,
   loadDeckFromStorage,
   loadQuestionsFromStorage,
   saveDeckData,
+  removeStorageData,
   saveDeckListData,
+  setFlag,
   updateDeckQuestionData,
 } from "../fileLib";
 
@@ -99,5 +104,109 @@ describe("storage fidelity", () => {
     saveDeckData(deckId, { id: deckId, questions });
 
     expect(loadQuestionsFromStorage(deckId)).toEqual({ id: deckId, questions });
+  });
+});
+
+describe("storage round-trips", () => {
+  const deckId = 123456;
+  const deck = { id: deckId, name: "Test deck", createdAt: 1 };
+  const questions = [{ id: 1, q: "q1", a: "a1", disabled: false }];
+
+  beforeEach(() => {
+    localStorage.clear();
+    jest.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it("saves and loads the deck list", () => {
+    expect(saveDeckListData([deck])).toBe(true);
+
+    expect(loadAllDecks()).toEqual([deck]);
+    expect(loadDeckFromStorage(deckId)).toEqual(deck);
+  });
+
+  it("loadDeckFromStorage returns false for an id not in the list", () => {
+    saveDeckListData([deck]);
+
+    expect(loadDeckFromStorage(999999)).toBe(false);
+  });
+
+  it("loadDeckFromStorage returns false when there is no deck list", () => {
+    expect(loadDeckFromStorage(deckId)).toBe(false);
+  });
+
+  it("setFlag and getFlag round-trip a value", () => {
+    expect(setFlag("someFlag", { on: true })).toBe(true);
+
+    expect(getFlag("someFlag")).toEqual({ on: true });
+  });
+
+  it("getFlag returns false for a missing key", () => {
+    expect(getFlag("missingFlag")).toBe(false);
+  });
+
+  describe("loadDeckData", () => {
+    it("returns the deck and its question data", () => {
+      saveDeckListData([deck]);
+      saveDeckData(deckId, { id: deckId, questions });
+
+      expect(loadDeckData(deckId)).toEqual([deck, { id: deckId, questions }]);
+    });
+
+    it("returns [null, []] when there is no deck list", () => {
+      saveDeckData(deckId, { id: deckId, questions });
+
+      expect(loadDeckData(deckId)).toEqual([null, []]);
+    });
+
+    it("returns [null, []] when the deck is not in the list", () => {
+      saveDeckListData([{ ...deck, id: 999999 }]);
+      saveDeckData(deckId, { id: deckId, questions });
+
+      expect(loadDeckData(deckId)).toEqual([null, []]);
+    });
+
+    it("returns [null, []] when the deck has no questions", () => {
+      saveDeckListData([deck]);
+      saveDeckData(deckId, { id: deckId, questions: [] });
+
+      expect(loadDeckData(deckId)).toEqual([null, []]);
+    });
+
+    it("returns [null, []] without a deck id", () => {
+      expect(loadDeckData(undefined)).toEqual([null, []]);
+    });
+  });
+
+  describe("removeStorageData", () => {
+    it("removes the key", () => {
+      saveDeckListData([deck]);
+
+      expect(removeStorageData(DECK_DATA_KEY)).toBe(true);
+      expect(localStorage.getItem(DECK_DATA_KEY)).toBeNull();
+    });
+
+    it("returns false when removeItem throws", () => {
+      jest.spyOn(Storage.prototype, "removeItem").mockImplementation(() => {
+        throw new Error("removeItem failed");
+      });
+
+      let result;
+      expect(() => {
+        result = removeStorageData(DECK_DATA_KEY);
+      }).not.toThrow();
+      expect(result).toBe(false);
+    });
+  });
+
+  it.each([
+    { label: "setFlag", call: () => setFlag(1, true) },
+    { label: "getFlag", call: () => getFlag(1) },
+    { label: "removeStorageData", call: () => removeStorageData(1) },
+  ])("$label returns false for a non-string key", ({ call }) => {
+    expect(call()).toBe(false);
   });
 });
