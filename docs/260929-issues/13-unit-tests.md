@@ -23,3 +23,15 @@ Priority targets:
 - [ ] `npm run test:unit` runs and passes
 - [ ] The parser and `QuizDeck.js` helpers have above 90% line coverage
 - [ ] README documents both `test:unit` and `test:e2e`
+
+### Changelog (changes after the issue was created)
+
+- Jest, `jest-expo/web` preset, `test:unit` script, and README unit test section already existed from issues 09–12
+- Coverage target scoped to the named `QuizDeck.js` helpers; `importNewDeck`, `getFileData`, `makeNewDeck`, `makeNewDeckData` untested
+- `test:coverage` script added (report only, no enforced threshold)
+- Code changes outside the original scope, authorized during review:
+  - `formatCardText`: appends a `...` line when the 30-line failsafe drops text
+  - `makeQuestionObjects`: no longer mutates its input; skips a trailing unpaired line
+  - `loadDeckFromStorage`: returns `false` instead of `[]` when the deck id is not in the list, so `loadDeckData` returns `[null, []]` for that case
+  - `AddQuestion.js`: simplified to `loadDeckFromStorage(deckId) || null`
+- Current behavior recorded in tests, not changed: unparseable csv rows become a "Could not parse csv" question; whitespace inside csv quotes is trimmed
